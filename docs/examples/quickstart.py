@@ -11,11 +11,11 @@ from mesh2vec.mesh2vec_cae import Mesh2VecCae
 # %%
 # Load Shell from ANSA
 # -----------------------------------------------------
-from pathlib import Path
-from mesh2vec.mesh2vec_cae import Mesh2VecCae
-m2v = Mesh2VecCae.from_ansa_shell(4,
+m2v = Mesh2VecCae.from_ansa_shell(
+    4,
     Path("../../data/hat/Hatprofile.k"),
-    json_mesh_file=Path("../../data/hat/cached_hat_key.json"))
+    json_mesh_file=Path("../../data/hat/cached_hat_key.json"),
+)
 
 # %%
 #  Add element features
@@ -23,13 +23,14 @@ m2v = Mesh2VecCae.from_ansa_shell(4,
 m2v.add_features_from_ansa(
     ["aspect", "warpage"],
     Path("../../data/hat/Hatprofile.k"),
-    json_mesh_file=Path("../../data/hat/cached_hat_key.json"))
+    json_mesh_file=Path("../../data/hat/cached_hat_key.json"),
+)
 
 
 # %%
 # Aggregate
 # ---------------------------
-m2v.aggregate("aspect", [0,2,3], np.nanmean)
+m2v.aggregate("aspect", [0, 2, 3], np.nanmean)
 
 
 # %%
