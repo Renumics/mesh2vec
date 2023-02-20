@@ -1,0 +1,58 @@
+﻿:mod:`mesh2vec.mesh2vec_cae`.Mesh2VecCae
+===============================================
+
+.. currentmodule:: mesh2vec.mesh2vec_cae
+
+.. autoclass:: Mesh2VecCae
+    :members:
+
+    
+
+    
+    .. rubric:: Methods
+
+    .. autosummary::
+    
+      ~Mesh2VecCae.__init__
+      ~Mesh2VecCae.add_feature_from_d3plot
+      ~Mesh2VecCae.add_features_from_ansa
+      ~Mesh2VecCae.add_features_from_csv
+      ~Mesh2VecCae.add_features_from_dataframe
+      ~Mesh2VecCae.aggregate
+      ~Mesh2VecCae.aggregate_angle_diff
+      ~Mesh2VecCae.aggregate_categorical
+      ~Mesh2VecCae.ajacency_matrix_powers_exclusive
+      ~Mesh2VecCae.available_aggregated_features
+      ~Mesh2VecCae.available_features
+      ~Mesh2VecCae.features
+      ~Mesh2VecCae.from_ansa_shell
+      ~Mesh2VecCae.from_d3plot_shell
+      ~Mesh2VecCae.from_file
+      ~Mesh2VecCae.from_stl_shell
+      ~Mesh2VecCae.get_elements_info
+      ~Mesh2VecCae.get_feature_from_d3plot
+      ~Mesh2VecCae.get_max_distance
+      ~Mesh2VecCae.get_nbh
+      ~Mesh2VecCae.get_visualization_plotly
+      ~Mesh2VecCae.get_visualization_trimesh
+      ~Mesh2VecCae.mesh
+      ~Mesh2VecCae.to_array
+      ~Mesh2VecCae.to_dataframe
+      ~Mesh2VecCae.vtx_ids
+    
+    
+
+    
+    
+    
+
+
+
+
+
+.. minigallery:: mesh2vec.mesh2vec_cae.Mesh2VecCae
+    :add-heading:
+
+.. raw:: html
+
+    <div class="clearer"></div>

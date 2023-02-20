@@ -1,0 +1,47 @@
+﻿:mod:`mesh2vec.mesh2vec_base`.Mesh2VecBase
+=================================================
+
+.. currentmodule:: mesh2vec.mesh2vec_base
+
+.. autoclass:: Mesh2VecBase
+    :members:
+
+    
+
+    
+    .. rubric:: Methods
+
+    .. autosummary::
+    
+      ~Mesh2VecBase.__init__
+      ~Mesh2VecBase.add_features_from_csv
+      ~Mesh2VecBase.add_features_from_dataframe
+      ~Mesh2VecBase.aggregate
+      ~Mesh2VecBase.aggregate_categorical
+      ~Mesh2VecBase.ajacency_matrix_powers_exclusive
+      ~Mesh2VecBase.available_aggregated_features
+      ~Mesh2VecBase.available_features
+      ~Mesh2VecBase.features
+      ~Mesh2VecBase.from_file
+      ~Mesh2VecBase.get_max_distance
+      ~Mesh2VecBase.get_nbh
+      ~Mesh2VecBase.to_array
+      ~Mesh2VecBase.to_dataframe
+      ~Mesh2VecBase.vtx_ids
+    
+    
+
+    
+    
+    
+
+
+
+
+
+.. minigallery:: mesh2vec.mesh2vec_base.Mesh2VecBase
+    :add-heading:
+
+.. raw:: html
+
+    <div class="clearer"></div>
