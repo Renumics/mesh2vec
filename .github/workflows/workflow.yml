@@ -150,7 +150,8 @@ jobs:
 
 
   release-docs:
-    needs: prepare-linux
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: [ check-format, build, unit-tests, doctest, docs, audit, pylint ]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -189,7 +190,6 @@ jobs:
     - name: Publish package to TestPyPI
       uses: pypa/gh-action-pypi-publish@release/v1
       with:
-        password: ${{ secrets.TEST_PYPI_API_TOKEN }}
-        repository_url: https://test.pypi.org/legacy/
+        password: ${{ secrets.PYPI_API_TOKEN }}
 
 
