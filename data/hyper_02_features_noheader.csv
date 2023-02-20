@@ -1,0 +1,15 @@
+vtx00, True, True, 0, 0.0
+vtx01, False, False, 1, 1.0
+vtx02, True, False, 4, 1.4142135623730951
+vtx03, False, True, 9, 1.7320508075688772
+vtx04, True, False, 16, 2.0
+vtx05, False, False, 25, 2.23606797749979
+vtx06, True, True, 36, 2.449489742783178
+vtx07, False, False, 49, 2.6457513110645907
+vtx08, True, False, 64, 2.8284271247461903
+vtx09, False, True, 81, 3.0
+vtx10, True, False, 100, 3.1622776601683795
+vtx11, False, False, 121, 3.3166247903554
+vtx12, True, True, 144, 3.4641016151377544
+vtx13, False, False, 169, 3.605551275463989
+vtx14, True, False, 196, 3.7416573867739413

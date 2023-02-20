@@ -1,0 +1,6 @@
+edge1: vtx00,vtx01,vtx07,vtx11
+edge2: vtx02,vtx04,vtx06,vtx08,vtx10,vtx12
+edge3: vtx03,vtx06,vtx09,vtx12
+edge4: vtx04,vtx08,vtx12
+edge5: vtx05,vtx10
+edge6: vtx06,vtx12

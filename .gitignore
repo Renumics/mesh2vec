@@ -1,0 +1,7 @@
+/.idea/
+/build/
+/dist/
+/docs/source/generated*
+__pycache__
+/data/tmp_*
+/data/*internal*

@@ -1,0 +1,65 @@
+[tool.poetry]
+name = "mesh2vec"
+version = "0.0.2"
+authors = ["Markus Stoll <markus.stoll@renumics.com>"]
+packages = [
+    { include = "mesh2vec" }
+]
+readme = "README.md"
+description = "mesh2vec"
+
+
+[tool.poetry.dependencies]
+python = ">=3.8, <3.12"
+scipy = "^1.9.1"
+pandas = "^1.4.4"
+trimesh = "^3.14.1"
+pyglet = "^1.5.26"
+lasso-python = "^1.5.2.post1"
+networkx = "^2.8.6"
+loguru = "^0.6.0"
+notebook = "^6.5.2"
+plotly = "^5.11.0"
+joblib = "^1.2.0"
+pillow = "^9.3.0"
+py = "^1.11.0"
+cleo = "^2.0.1"
+werkzeug = "^2.2.3"
+ipython = "^8.10.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "^7.2"
+black = "^22.8.0"
+
+[tool.poetry.group.dev.dependencies]
+sphinx = "^5.1.1"
+sphinx-autobuild = "^2021.3.14"
+sphinx-rtd-theme = "^1.0.0"
+sphinx-gallery = "^0.11.1"
+pylint = "^2.15.2"
+mypy = "^0.971"
+check-wheel-contents = "^0.3.4"
+pip-audit = "^2.4.4"
+
+[tool.poetry-dynamic-versioning]
+enable = true
+dirty = true
+
+[tool.black]
+line-length = 98
+
+[tool.pylint.format]
+max-line-length = 98
+good-names = "f,i,j,k,x,y,z,w,up,ex,db,df,v1,v2,e,v,hg,N"
+
+[tool.pylint.similarities]
+ignore-imports = true
+min-similarity-lines= 4
+
+[tool.mypy]
+ignore_missing_imports = true
+disallow_untyped_defs = true
+
+[build-system]
+requires = ["poetry-core>=1.2.2", "poetry-dynamic-versioning"]
+build-backend = "poetry_dynamic_versioning.backend"
