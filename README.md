@@ -61,14 +61,10 @@ m2v.to_dataframe()
 ```
 ![data frame with feature vectors](docs/source/_static/m2v.to_df.png)
 
-### Optional. Visualize a single aggregated feature on mesh
+### Optional: Visualize a single aggregated feature on mesh
 ```python
 m2v.get_visualization_plotly("aspect-nanmean-2")
 ```
 ![3d mesh plot of agggredated](docs/source/_static/hat_aspect_3_plot.png)
 
-
-Documentation
----------------
-[Latest Documentation](https://renumics.github.io/mesh2vec/)
 
