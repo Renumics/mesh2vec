@@ -3,11 +3,11 @@ name: Pylint
 on: [push]
 
 jobs:
-  prepare-envs:
+  prepare-linux:
     strategy:
       matrix:
         python-version: ["3.8", "3.11"]
-        os-version: [ "windows-latest", "ubuntu-latest" ]
+        os-version: ["ubuntu-latest" ]
     runs-on: ${{ matrix.os-version }}
     steps:
       - uses: actions/checkout@v3
@@ -17,8 +17,23 @@ jobs:
           os: ${{ matrix.os-version }}
           python-version: ${{ matrix.python-version }}
 
+  prepare-win:
+    strategy:
+      matrix:
+        python-version: [ "3.8", "3.11" ]
+        os-version: [ "windows-latest" ]
+    runs-on: ${{ matrix.os-version }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup CI
+        uses: './.github/actions/ci-setup'
+        with:
+          os: ${{ matrix.os-version }}
+          python-version: ${{ matrix.python-version }}
+
+
   check-format:
-    needs: prepare-envs
+    needs: prepare-linux
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -32,7 +47,7 @@ jobs:
           poetry run black --check mesh2vec tests scripts docs docs/examples
 
   pylint:
-    needs: prepare-envs
+    needs: prepare-linux
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -46,7 +61,7 @@ jobs:
         poetry run pylint mesh2vec tests scripts docs/examples
 
   audit:
-    needs: prepare-envs
+    needs: [prepare-linux, prepare-win]
     strategy:
       matrix:
         python-version: ["3.8", "3.11"]
@@ -64,7 +79,7 @@ jobs:
         poetry run pip-audit --ignore-vuln GHSA-w596-4wvx-j9j6
 
   docs:
-    needs: prepare-envs
+    needs: prepare-linux
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -78,7 +93,7 @@ jobs:
         poetry run sphinx-build docs/source build/documentation/ -W -b html
 
   doctest:
-    needs: prepare-envs
+    needs: [prepare-linux, prepare-win]
     strategy:
       matrix:
         python-version: ["3.8", "3.11"]
@@ -96,7 +111,7 @@ jobs:
         poetry run sphinx-build docs/source build/documentation/ -W -b html # autodocs contain tests && poetry run sphinx-build docs/source build/documentation/ -W -b doctest
 
   unit-tests:
-    needs: prepare-envs
+    needs: [prepare-linux, prepare-win]
     strategy:
       matrix:
         python-version: ["3.8", "3.11"]
@@ -114,7 +129,7 @@ jobs:
         poetry run pytest tests
 
   build:
-    needs: prepare-envs
+    needs: prepare-linux
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -134,7 +149,7 @@ jobs:
 
 
   release-docs:
-    needs: prepare-envs
+    needs: prepare-linux
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
