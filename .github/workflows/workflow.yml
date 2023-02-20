@@ -162,15 +162,11 @@ jobs:
     - name: build docs
       run: |
         poetry run sphinx-build docs/source build/documentation/ -W -b html
-    - name: get version
-      id: get_version
-      run: echo "version=$(python setup.py --version)" >> "$GITHUB_OUTPUT"
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./build/documentation/
-        destination_dir: steps.get_version.outputs.version
 
   release:
     if: startsWith(github.ref, 'refs/tags/v')
