@@ -1,6 +1,7 @@
-name: Pylint
-
+name: mesh2vev
 on: [push]
+permissions:
+  contents: write
 
 jobs:
   prepare-linux:
