@@ -13,7 +13,7 @@ Quickstart
  	<a href="https://github.com/renumics/mesh2vec"><img src="https://img.shields.io/pypi/wheel/renumics-mesh2vec" height="20"/></a>   
 </p>
 <h3 align="center">
-   <a href="https://renumics.github.io/mesh2vec/"><b>Latest Documentation</b></a> &bull;  
+   <a href="https://renumics.github.io/mesh2vec/"><b>Latest Documentation</b></a>
 </h3>
 
 ## 🚀 Introduction
@@ -30,6 +30,7 @@ It utilizes various metrics of elements and their surrounding neighborhood to ag
 ```bash
 pip install mesh2vec
 ```
+3. Please make sure you have an environment variable ANSA_EXECUTABLE set pointing to your ANSA executable to use ANSA depended features like shell and feature import.
 
 ### Load Mesh
 ```python
