@@ -17,6 +17,7 @@ to use ANSA depended features like shell and feature import.
 
    api
    generated_examples/index
+   customize_ansa_script
 
 
 

@@ -62,6 +62,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../generated_examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../customize_ansa_script.html">Customize Ansa Script</a></li>
 </ul>
 
         </div>
@@ -249,7 +250,7 @@ nodes as hyperedges, and adjacent elements as  hypervertices.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="mesh2vec.mesh2vec_cae.Mesh2VecCae.from_ansa_shell">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_ansa_shell</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ansafile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">partid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">json_mesh_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ansa_executable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_cae.Mesh2VecCae.from_ansa_shell" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_ansa_shell</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ansafile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">partid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">json_mesh_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ansa_executable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ansa_script</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_cae.Mesh2VecCae.from_ansa_shell" title="Permalink to this definition"></a></dt>
 <dd><p>Read the given ANSA file and use the shell elements corresponding with <code class="docutils literal notranslate"><span class="pre">partid</span></code> to
 generate a hypergraph, using CAE nodes as hyperedges, and adjacent elements as
 hypervertices. This is a simple wrapper around an ANSA Python script that generates
@@ -260,6 +261,8 @@ For now, this function is only guaranteed
 to work with shell meshes for LSDYNA. Each element gets a unique internal ID consisting
 of its element ID (which may be not unique), and a unique hash value.</p>
 <p>Path to ANSA executable can also be provided in environment var: ANSA_EXECUTABLE</p>
+<p>You can use a customized script to include more features ansa_script
+(see <a class="reference internal" href="../customize_ansa_script.html#id1"><span class="std std-ref">Customize Ansa script</span></a>)</p>
 <p class="rubric">Example</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">mesh2vec.mesh2vec_cae</span> <span class="kn">import</span> <span class="n">Mesh2VecCae</span>
@@ -278,6 +281,7 @@ of its element ID (which may be not unique), and a unique hash value.</p>
 <li><p><strong>partid</strong> (<em>str</em>) – </p></li>
 <li><p><strong>json_mesh_file</strong> (<em>Optional</em><em>[</em><em>Path</em><em>]</em>) – </p></li>
 <li><p><strong>ansa_executable</strong> (<em>Optional</em><em>[</em><em>Path</em><em>]</em>) – </p></li>
+<li><p><strong>ansa_script</strong> (<em>Optional</em><em>[</em><em>Path</em><em>]</em>) – </p></li>
 <li><p><strong>verbose</strong> (<em>bool</em>) – </p></li>
 </ul>
 </dd>
@@ -336,10 +340,12 @@ vertices with</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="mesh2vec.mesh2vec_cae.Mesh2VecCae.add_features_from_ansa">
-<span class="sig-name descname"><span class="pre">add_features_from_ansa</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">features</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ansafile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">json_mesh_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ansa_executable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_cae.Mesh2VecCae.add_features_from_ansa" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">add_features_from_ansa</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">features</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ansafile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">json_mesh_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ansa_executable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ansa_script</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_cae.Mesh2VecCae.add_features_from_ansa" title="Permalink to this definition"></a></dt>
 <dd><p>Add values derived or calculated from ANSA shell elements (currently restricted to
 LSDYNA models) for each element.</p>
 <p>Path to ANSA executable can also be provided in environment var: ANSA_EXECUTABLE</p>
+<p>You can use a customized script to include more features ansa_script
+(see <a class="reference internal" href="../customize_ansa_script.html#id1"><span class="std std-ref">Customize Ansa script</span></a>)</p>
 <p><code class="docutils literal notranslate"><span class="pre">features</span></code> is a subset of:</p>
 <blockquote>
 <div><ul class="simple">
@@ -374,6 +380,7 @@ LSDYNA models) for each element.</p>
 <li><p><strong>ansafile</strong> (<em>Optional</em><em>[</em><em>Path</em><em>]</em>) – </p></li>
 <li><p><strong>json_mesh_file</strong> (<em>Optional</em><em>[</em><em>Path</em><em>]</em>) – </p></li>
 <li><p><strong>ansa_executable</strong> (<em>Optional</em><em>[</em><em>Path</em><em>]</em>) – </p></li>
+<li><p><strong>ansa_script</strong> (<em>Optional</em><em>[</em><em>Path</em><em>]</em>) – </p></li>
 <li><p><strong>verbose</strong> (<em>bool</em>) – </p></li>
 </ul>
 </dd>
