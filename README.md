@@ -31,6 +31,7 @@ It utilizes various metrics of elements and their surrounding neighborhood to ag
 pip install mesh2vec
 ```
 3. Please make sure you have an environment variable ANSA_EXECUTABLE set pointing to your ANSA executable to use ANSA depended features like shell and feature import.
+4. You may temporarily need to set an environment variable SKLEARN_ALLOW_DEPRECATED_SKLEARN_PACKAGE_INSTALL=True.
 
 ### Load Mesh
 ```python
