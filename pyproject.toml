@@ -15,7 +15,7 @@ scipy = "^1.9.1"
 pandas = "^1.4.4"
 trimesh = "^3.14.1"
 pyglet = "^1.5.26"
-lasso-python = "^1.5.2.post1"
+lasso-python = { git = "https://github.com/open-lasso-python/lasso-python.git", rev = "db1e5a5" }
 networkx = "^2.8.6"
 loguru = "^0.6.0"
 notebook = "^6.5.2"
