@@ -7,7 +7,7 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = "Mesh2vec"
-copyright = "2022, Renumics GmbH"
+copyright = "2023, Renumics GmbH"
 author = "Renumics GmbH"
 from sphinx_gallery.sorting import FileNameSortKey
 
