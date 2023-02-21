@@ -84,6 +84,23 @@ Below is a gallery of examples.
 
 .. raw:: html
 
+    <div class="sphx-glr-thumbcontainer" tooltip="Quick Start Example">
+
+.. only:: html
+
+  .. image:: /generated_examples/images/thumb/sphx_glr_quickstart_thumb.png
+    :alt: Quick Start Example
+
+  :ref:`sphx_glr_generated_examples_quickstart.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Quick Start Example</div>
+    </div>
+
+
+.. raw:: html
+
     </div>
 
 
@@ -94,6 +111,7 @@ Below is a gallery of examples.
    /generated_examples/aggregate_warpage
    /generated_examples/plot_neighbor_distances
    /generated_examples/plot_stress
+   /generated_examples/quickstart
 
 
 .. only:: html

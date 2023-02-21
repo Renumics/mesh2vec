@@ -5,14 +5,16 @@
 
 Computation times
 =================
-**00:06.905** total execution time for **generated_examples** files:
+**00:09.593** total execution time for **generated_examples** files:
 
 +------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_generated_examples_plot_stress.py` (``plot_stress.py``)                         | 00:02.179 | 0.0 MB |
+| :ref:`sphx_glr_generated_examples_quickstart.py` (``quickstart.py``)                           | 00:02.444 | 0.0 MB |
 +------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_generated_examples_aggregate_warpage.py` (``aggregate_warpage.py``)             | 00:01.717 | 0.0 MB |
+| :ref:`sphx_glr_generated_examples_plot_stress.py` (``plot_stress.py``)                         | 00:02.283 | 0.0 MB |
 +------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_generated_examples_aggregate_categorical.py` (``aggregate_categorical.py``)     | 00:01.605 | 0.0 MB |
+| :ref:`sphx_glr_generated_examples_aggregate_warpage.py` (``aggregate_warpage.py``)             | 00:01.770 | 0.0 MB |
 +------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_generated_examples_plot_neighbor_distances.py` (``plot_neighbor_distances.py``) | 00:01.404 | 0.0 MB |
+| :ref:`sphx_glr_generated_examples_aggregate_categorical.py` (``aggregate_categorical.py``)     | 00:01.583 | 0.0 MB |
++------------------------------------------------------------------------------------------------+-----------+--------+
+| :ref:`sphx_glr_generated_examples_plot_neighbor_distances.py` (``plot_neighbor_distances.py``) | 00:01.513 | 0.0 MB |
 +------------------------------------------------------------------------------------------------+-----------+--------+
