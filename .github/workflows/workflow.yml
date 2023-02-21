@@ -79,20 +79,6 @@ jobs:
       run: |
         poetry run pip-audit --ignore-vuln GHSA-w596-4wvx-j9j6
 
-  docs:
-    needs: prepare-linux
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-    - name: Setup CI
-      uses: './.github/actions/ci-setup'
-      with:
-        os: "ubuntu-latest"
-        python-version: "3.9"
-    - name: build docs
-      run: |
-        poetry run sphinx-build docs/source build/documentation/ -W -b html
-
   doctest:
     needs: [prepare-linux, prepare-win]
     strategy:
@@ -129,6 +115,25 @@ jobs:
       run: |
         poetry run pytest tests
 
+  docs:
+    needs: prepare-linux
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup CI
+      uses: './.github/actions/ci-setup'
+      with:
+        os: "ubuntu-latest"
+        python-version: "3.9"
+    - name: build docs
+      run: |
+        poetry run sphinx-build docs/source build/documentation/ -W -b html
+    - name: Store docs
+      uses: actions/upload-artifact@v3
+      with:
+        name: docs
+        path: build/documentation/
+
   build:
     needs: prepare-linux
     runs-on: ubuntu-latest
@@ -146,11 +151,11 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: dist
-        path: dist
+        path: dist/
 
 
   release-docs:
-    if: startsWith(github.ref, 'refs/tags/v')
+    #if: startsWith(github.ref, 'refs/tags/v')
     needs: [ check-format, build, unit-tests, doctest, docs, audit, pylint ]
     runs-on: ubuntu-latest
     steps:
@@ -163,6 +168,10 @@ jobs:
     - name: build docs
       run: |
         poetry run sphinx-build docs/source build/documentation/ -W -b html
+    - name: Download docs
+      uses: actions/download-artifact@v3
+      with:
+        name: docs
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
       with:
@@ -170,7 +179,7 @@ jobs:
         publish_dir: ./build/documentation/
 
   release:
-    if: startsWith(github.ref, 'refs/tags/v')
+    #if: startsWith(github.ref, 'refs/tags/v')
     needs: [check-format, build, unit-tests, doctest, docs, audit, pylint]
     runs-on: ubuntu-latest
     steps:
