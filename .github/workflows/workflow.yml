@@ -169,6 +169,7 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: docs
+        path: build/documentation/
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
       with:
@@ -190,6 +191,7 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: dist
+        path: dist/
     - name: Publish package to TestPyPI
       uses: pypa/gh-action-pypi-publish@release/v1
       with:
