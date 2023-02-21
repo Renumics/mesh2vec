@@ -36,6 +36,8 @@ runs:
            poetry.lock
          key: poetry-${{ inputs.os }}-${{ inputs.python-version }}-${{ hashFiles('**/poetry.lock') }}-${{ hashFiles('.github/workflows/*.yml') }}
      - name: Install dependencies
+       env:
+          SKLEARN_ALLOW_DEPRECATED_SKLEARN_PACKAGE_INSTALL: true
        if: steps.poetry-cache.outputs.cache-hit != 'true'
        run: poetry install
        shell: bash
