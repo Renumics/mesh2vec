@@ -155,7 +155,7 @@ jobs:
 
 
   release-docs:
-    #if: startsWith(github.ref, 'refs/tags/v')
+    if: startsWith(github.ref, 'refs/tags/v')
     needs: [ check-format, build, unit-tests, doctest, docs, audit, pylint ]
     runs-on: ubuntu-latest
     steps:
@@ -177,7 +177,7 @@ jobs:
         publish_dir: ./build/documentation/
 
   release:
-    #if: startsWith(github.ref, 'refs/tags/v')
+    if: startsWith(github.ref, 'refs/tags/v')
     needs: [check-format, build, unit-tests, doctest, docs, audit, pylint]
     runs-on: ubuntu-latest
     steps:
