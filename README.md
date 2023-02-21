@@ -9,8 +9,8 @@ Quickstart
 
 <p align="center">
 	<a href="https://github.com/renumics/mesh2vec"><img src="https://img.shields.io/github/license/renumics/mesh2vec" height="20"/></a>    
- 	<a href="https://github.com/renumics/mesh2vec"><img src="https://img.shields.io/pypi/pyversions/renumics-mesh2vec" height="20"/></a>   
- 	<a href="https://github.com/renumics/mesh2vec"><img src="https://img.shields.io/pypi/wheel/renumics-mesh2vec" height="20"/></a>   
+ 	<a href="https://github.com/renumics/mesh2vec"><img src="https://img.shields.io/pypi/pyversions/mesh2vec" height="20"/></a>   
+ 	<a href="https://github.com/renumics/mesh2vec"><img src="https://img.shields.io/pypi/wheel/mesh2vec" height="20"/></a>   
 </p>
 <h3 align="center">
    <a href="https://renumics.github.io/mesh2vec/"><b>Latest Documentation</b></a>

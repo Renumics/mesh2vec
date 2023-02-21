@@ -125,6 +125,7 @@ class Mesh2VecCae(Mesh2VecBase):
         partid: str = "",
         json_mesh_file: Optional[Path] = None,
         ansa_executable: Optional[Path] = None,
+        ansa_script: Optional[Path] = None,
         verbose: bool = False,
     ) -> "Mesh2VecCae":
         """
@@ -140,6 +141,9 @@ class Mesh2VecCae(Mesh2VecBase):
 
         Path to ANSA executable can also be provided in environment var: ANSA_EXECUTABLE
 
+        You can use a customized script to include more features ansa_script
+        (see :ref:`Customize Ansa script<customize_ansa_script>`)
+
 
         Example:
             >>> from pathlib import Path
@@ -154,7 +158,7 @@ class Mesh2VecCae(Mesh2VecBase):
             os.environ["ANSA_EXECUTABLE"] = str(ansa_executable)
 
         elements, nodes = Mesh2VecCae._read_ansafile(
-            ansafile, json_mesh_file, verbose=verbose, partid=partid
+            ansafile, json_mesh_file, verbose=verbose, partid=partid, ansa_script=ansa_script
         )
         mesh = CaeShellMesh.from_ansa_json(elements, nodes)
 
@@ -230,6 +234,7 @@ class Mesh2VecCae(Mesh2VecBase):
         ansafile: Optional[Path],
         json_mesh_file: Optional[Path] = None,
         ansa_executable: Optional[Path] = None,
+        ansa_script: Optional[Path] = None,
         verbose: bool = False,
     ) -> None:
         """
@@ -237,6 +242,10 @@ class Mesh2VecCae(Mesh2VecBase):
         LSDYNA models) for each element.
 
         Path to ANSA executable can also be provided in environment var: ANSA_EXECUTABLE
+
+        You can use a customized script to include more features ansa_script
+        (see :ref:`Customize Ansa script<customize_ansa_script>`)
+
 
         ``features`` is a subset of:
 
@@ -277,7 +286,7 @@ class Mesh2VecCae(Mesh2VecBase):
 
         if any(feature in okay_ansa for feature in features):
             elements, nodes = Mesh2VecCae._read_ansafile(
-                ansafile, json_mesh_file, verbose=verbose
+                ansafile, json_mesh_file, verbose=verbose, ansa_script=ansa_script
             )
             mesh = CaeShellMesh.from_ansa_json(elements, nodes)
 
@@ -663,9 +672,19 @@ class Mesh2VecCae(Mesh2VecBase):
         json_mesh_file: Optional[Path],
         verbose: bool,
         partid: str = "",
+        ansa_script: Optional[Path] = None,
     ) -> Tuple[List[Dict], List[Dict]]:
-        src_folder = os.path.abspath(os.path.dirname(__file__))
         ansa_path = os.getenv("ANSA_EXECUTABLE")
+
+        if ansa_script is not None:
+            if not ansa_script.exists():
+                raise FileNotFoundError(
+                    f"Ansa Script was not found at '{ansa_script}' from current "
+                    f"directory '{os.getcwd() }'"
+                )
+        else:
+            src_folder = os.path.abspath(os.path.dirname(__file__))
+            ansa_script = f"{src_folder}/templates/ansa.py"
 
         with TemporaryDirectory() as tmp_folder:
             if json_mesh_file is None:
@@ -685,7 +704,7 @@ class Mesh2VecCae(Mesh2VecBase):
                     "-b",
                     "-foregr",
                     "-execpy",
-                    f"load_script: '{src_folder}/templates/make_hg.py'",
+                    f"load_script: '{ansa_script}",
                     "-execpy",
                     f"make_hg('{ansafile}', '{output_path}', '{partid}')",
                 ]
