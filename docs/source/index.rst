@@ -6,7 +6,7 @@
 Welcome to mesh2vec's documentation!
 =====================================
 
-Check out the examples to make your first steps.
+Check out the `Quickstart <https://github.com/Renumics/mesh2vec>`_ to make your first steps.
 
 Please make sure you have an environment variable `ANSA_EXECUTABLE` set pointing to your ANSA executable
 to use ANSA depended features like shell and feature import.
