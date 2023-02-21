@@ -165,9 +165,6 @@ jobs:
       with:
         os: "ubuntu-latest"
         python-version: "3.9"
-    - name: build docs
-      run: |
-        poetry run sphinx-build docs/source build/documentation/ -W -b html
     - name: Download docs
       uses: actions/download-artifact@v3
       with:
@@ -189,9 +186,6 @@ jobs:
       with:
         os: "ubuntu-latest"
         python-version: "3.9"
-    - name: build wheels
-      run: |
-        poetry build -f wheel -vvv && poetry run check-wheel-contents dist/
     - name: Download wheels
       uses: actions/download-artifact@v3
       with:
