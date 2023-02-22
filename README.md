@@ -5,7 +5,7 @@ Quickstart
 -----------
 
 <h1 align="center">mesh2vec</h1>
-<p align="center">Turn CAE Mesh Data Into Vectors</p>
+<p align="center">Turn CAE Mesh Data Into Element Feature Vectors</p>
 
 <p align="center">
 	<a href="https://github.com/renumics/mesh2vec"><img src="https://img.shields.io/github/license/renumics/mesh2vec" height="20"/></a>    
@@ -17,8 +17,8 @@ Quickstart
 </h3>
 
 ## 🚀 Introduction
-Mesh2vec is a tool that facilitates the import of Computer-Aided Engineering (CAE) mesh data from [LS-DYNA](https://www.ansys.com/de-de/products/structures/ansys-ls-dyna) .
-It utilizes various metrics of elements and their surrounding neighborhood to aggregate feature vectors for each element.
+Mesh2vec is a tool that facilitates the import of Computer-Aided Engineering (CAE) mesh data from [LS-DYNA](https://www.ansys.com/de-de/products/structures/ansys-ls-dyna).
+It utilizes various quality metrics of elements and their surrounding neighborhood to aggregate feature vectors for each element. These feature vectors are of equal length and can be effectively utilized as inputs for machine learning methods. This represents a simpler and more efficient alternative to traditional mesh and graph-based approaches for automatic mesh quality analysis.
 
 ## ⏱️ Quickstart
 
