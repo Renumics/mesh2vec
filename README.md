@@ -5,7 +5,7 @@ Quickstart
 -----------
 
 <h1 align="center">mesh2vec</h1>
-<p align="center">Turn CAE Mesh Data Into Element Feature Vectors</p>
+<p align="center">Turn CAE mesh data into aggregated element feature vectors for ML</p>
 
 <p align="center">
 	<a href="https://github.com/renumics/mesh2vec"><img src="https://img.shields.io/github/license/renumics/mesh2vec" height="20"/></a>    
