@@ -5,3 +5,6 @@
 __pycache__
 /data/tmp_*
 /data/*internal*
+.DS_Store
+.venv/
+.ipynb_checkpoints
