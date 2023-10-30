@@ -1,771 +1,726 @@
-         265989 function calls (259137 primitive calls) in 7.785 seconds
+         1107221 function calls (1078620 primitive calls) in 47.052 seconds
 
    Ordered by: cumulative time
 
    ncalls  tottime  percall  cumtime  percall filename:lineno(function)
-        2    0.000    0.000    7.804    3.902 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/IPython/core/interactiveshell.py:3490(run_code)
-        2    0.000    0.000    7.804    3.902 {built-in method builtins.exec}
-        1    0.001    0.001    7.792    7.792 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/mesh2vec/mesh2vec_cae.py:121(from_ansa_shell)
-        1    0.010    0.010    7.727    7.727 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/mesh2vec/mesh2vec_cae.py:32(__init__)
-        1    0.006    0.006    7.696    7.696 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/mesh2vec/mesh2vec_base.py:34(__init__)
-        1    0.493    0.493    7.652    7.652 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/mesh2vec/helpers.py:8(calc_adjacencies)
-      209    3.239    0.015    3.239    0.015 {built-in method numpy.array}
-       24    0.000    0.000    3.192    0.133 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_base.py:620(__matmul__)
-       24    0.000    0.000    3.192    0.133 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_base.py:505(_mul_dispatch)
-       24    0.001    0.000    3.191    0.133 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_compressed.py:506(_mul_sparse_matrix)
-       24    2.098    0.087    2.098    0.087 {built-in method scipy.sparse._sparsetools.csr_matmat}
-       24    1.085    0.045    1.085    0.045 {built-in method scipy.sparse._sparsetools.csr_matmat_maxnnz}
-       25    0.000    0.000    0.645    0.026 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_base.py:477(__sub__)
-       25    0.002    0.000    0.644    0.026 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_compressed.py:361(_sub_sparse)
-       25    0.001    0.000    0.642    0.026 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_compressed.py:1237(_binopt)
-       25    0.615    0.025    0.615    0.025 {built-in method scipy.sparse._sparsetools.csr_minus_csr}
-        5    0.000    0.000    0.087    0.017 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/lib/arraysetops.py:138(unique)
-        5    0.002    0.000    0.084    0.017 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/lib/arraysetops.py:323(_unique1d)
-        5    0.080    0.016    0.080    0.016 {method 'sort' of 'numpy.ndarray' objects}
-        1    0.000    0.000    0.035    0.035 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/mesh2vec/mesh2vec_cae.py:669(_read_ansafile)
-        1    0.000    0.000    0.032    0.032 /usr/lib/python3.10/json/__init__.py:299(loads)
-        1    0.000    0.000    0.032    0.032 /usr/lib/python3.10/json/decoder.py:332(decode)
-        1    0.032    0.032    0.032    0.032 /usr/lib/python3.10/json/decoder.py:343(raw_decode)
-  101/100    0.001    0.000    0.030    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_compressed.py:25(__init__)
-      101    0.001    0.000    0.024    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_compressed.py:135(check_format)
-        1    0.000    0.000    0.023    0.023 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/mesh2vec/mesh_features.py:223(from_ansa_json)
-      126    0.001    0.000    0.020    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_compressed.py:1167(prune)
-      252    0.000    0.000    0.018    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/_lib/_util.py:144(_prune_array)
-       53    0.018    0.000    0.018    0.000 {method 'copy' of 'numpy.ndarray' objects}
-        1    0.012    0.012    0.015    0.015 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/mesh2vec/mesh2vec_cae.py:79(<dictcomp>)
-        1    0.003    0.003    0.013    0.013 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/mesh2vec/mesh2vec_exceptions.py:52(check_vtx_ids)
-        1    0.003    0.003    0.013    0.013 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/mesh2vec/mesh2vec_exceptions.py:33(check_hyper_edges)
-     6684    0.004    0.000    0.011    0.000 {built-in method builtins.all}
-        1    0.002    0.002    0.010    0.010 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/mesh2vec/mesh_features.py:235(<listcomp>)
-     6667    0.004    0.000    0.008    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/mesh2vec/mesh2vec_base.py:81(<genexpr>)
-      232    0.002    0.000    0.008    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_base.py:1269(_get_index_dtype)
-   126052    0.007    0.000    0.007    0.000 {method 'append' of 'list' objects}
-    32266    0.005    0.000    0.006    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/mesh2vec/mesh2vec_exceptions.py:42(<genexpr>)
-      232    0.004    0.000    0.006    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_sputils.py:147(get_index_dtype)
-        6    0.000    0.000    0.005    0.001 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/frame.py:609(__init__)
-        4    0.000    0.000    0.005    0.001 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/construction.py:423(dict_to_mgr)
-     6666    0.005    0.000    0.005    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/mesh2vec/mesh2vec_base.py:84(<listcomp>)
-       14    0.000    0.000    0.004    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/construction.py:493(sanitize_array)
-        4    0.000    0.000    0.004    0.001 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/construction.py:100(arrays_to_mgr)
-  6730/64    0.002    0.000    0.003    0.000 {built-in method builtins.max}
-     6668    0.003    0.000    0.003    0.000 {method 'tolist' of 'numpy.ndarray' objects}
-40254/40246    0.003    0.000    0.003    0.000 {built-in method builtins.isinstance}
-       22    0.003    0.000    0.003    0.000 {built-in method numpy.asanyarray}
-        7    0.000    0.000    0.003    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/cast.py:120(maybe_convert_platform)
-     6667    0.002    0.000    0.003    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/mesh2vec/helpers.py:21(<genexpr>)
-        4    0.000    0.000    0.003    0.001 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/construction.py:588(_homogenize)
-        1    0.000    0.000    0.003    0.003 /usr/lib/python3.10/pathlib.py:1129(read_text)
-        1    0.001    0.001    0.002    0.002 {method 'read' of '_io.TextIOWrapper' objects}
-       19    0.002    0.000    0.002    0.000 {pandas._libs.lib.maybe_convert_objects}
-        2    0.000    0.000    0.002    0.001 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/frame.py:3955(__setitem__)
-        2    0.000    0.000    0.002    0.001 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/frame.py:4164(_set_item)
-      3/2    0.000    0.000    0.002    0.001 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/util/_decorators.py:323(wrapper)
-        1    0.001    0.001    0.002    0.002 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/mesh2vec/mesh_features.py:230(<listcomp>)
-        5    0.002    0.000    0.002    0.000 {method 'flatten' of 'numpy.ndarray' objects}
+        2    0.000    0.000   47.293   23.646 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/IPython/core/interactiveshell.py:3490(run_code)
+        2    0.000    0.000   47.292   23.646 {built-in method builtins.exec}
+        1    0.004    0.004   47.137   47.137 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/mesh2vec/mesh2vec_cae.py:121(from_ansa_shell)
+        1    0.044    0.044   46.760   46.760 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/mesh2vec/mesh2vec_cae.py:32(__init__)
+        1    0.095    0.095   46.637   46.637 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/mesh2vec/mesh2vec_base.py:34(__init__)
+        1    2.928    2.928   46.387   46.387 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/mesh2vec/helpers.py:8(calc_adjacencies)
+       24    0.000    0.000   19.785    0.824 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_base.py:620(__matmul__)
+       24    0.000    0.000   19.785    0.824 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_base.py:505(_mul_dispatch)
+       24    0.001    0.000   19.784    0.824 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_compressed.py:506(_mul_sparse_matrix)
+      209   19.751    0.095   19.751    0.095 {built-in method numpy.array}
+       24   13.078    0.545   13.078    0.545 {built-in method scipy.sparse._sparsetools.csr_matmat}
+       24    6.696    0.279    6.696    0.279 {built-in method scipy.sparse._sparsetools.csr_matmat_maxnnz}
+       25    0.000    0.000    3.517    0.141 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_base.py:477(__sub__)
+       25    0.004    0.000    3.516    0.141 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_compressed.py:361(_sub_sparse)
+       25    0.001    0.000    3.512    0.140 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_compressed.py:1237(_binopt)
+       25    3.306    0.132    3.306    0.132 {built-in method scipy.sparse._sparsetools.csr_minus_csr}
+        5    0.000    0.000    0.415    0.083 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/lib/arraysetops.py:138(unique)
+        5    0.008    0.002    0.403    0.081 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/lib/arraysetops.py:323(_unique1d)
+        5    0.390    0.078    0.390    0.078 {method 'sort' of 'numpy.ndarray' objects}
+  101/100    0.001    0.000    0.211    0.002 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_compressed.py:25(__init__)
+      101    0.001    0.000    0.203    0.002 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_compressed.py:135(check_format)
+      126    0.001    0.000    0.199    0.002 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_compressed.py:1167(prune)
+       53    0.198    0.004    0.198    0.004 {method 'copy' of 'numpy.ndarray' objects}
+      252    0.000    0.000    0.197    0.001 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/_lib/_util.py:144(_prune_array)
+        1    0.000    0.000    0.194    0.194 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/mesh2vec/mesh2vec_cae.py:669(_read_ansafile)
+        1    0.000    0.000    0.183    0.183 /usr/lib/python3.10/json/__init__.py:299(loads)
+        1    0.000    0.000    0.183    0.183 /usr/lib/python3.10/json/decoder.py:332(decode)
+        1    0.183    0.183    0.183    0.183 /usr/lib/python3.10/json/decoder.py:343(raw_decode)
+        1    0.002    0.002    0.155    0.155 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/mesh2vec/mesh_features.py:223(from_ansa_json)
+        1    0.012    0.012    0.099    0.099 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/mesh2vec/mesh_features.py:235(<listcomp>)
+        1    0.047    0.047    0.059    0.059 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/mesh2vec/mesh2vec_cae.py:79(<dictcomp>)
+        1    0.016    0.016    0.057    0.057 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/mesh2vec/mesh2vec_exceptions.py:33(check_hyper_edges)
+        1    0.015    0.015    0.053    0.053 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/mesh2vec/mesh2vec_exceptions.py:52(check_vtx_ids)
+    28553    0.017    0.000    0.049    0.000 {built-in method builtins.all}
+    28536    0.017    0.000    0.039    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/mesh2vec/mesh2vec_base.py:81(<genexpr>)
+   555553    0.030    0.000    0.030    0.000 {method 'append' of 'list' objects}
+   140377    0.021    0.000    0.027    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/mesh2vec/mesh2vec_exceptions.py:42(<genexpr>)
+    28535    0.022    0.000    0.022    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/mesh2vec/mesh2vec_base.py:84(<listcomp>)
+        6    0.000    0.000    0.017    0.003 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/frame.py:609(__init__)
+        4    0.001    0.000    0.017    0.004 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/construction.py:423(dict_to_mgr)
+ 28599/64    0.007    0.000    0.016    0.000 {built-in method builtins.max}
+       14    0.001    0.000    0.015    0.001 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/construction.py:493(sanitize_array)
+        4    0.000    0.000    0.014    0.004 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/construction.py:100(arrays_to_mgr)
+    28537    0.014    0.000    0.014    0.000 {method 'tolist' of 'numpy.ndarray' objects}
+    28536    0.009    0.000    0.014    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/mesh2vec/helpers.py:21(<genexpr>)
+       22    0.013    0.001    0.013    0.001 {built-in method numpy.asanyarray}
+        7    0.000    0.000    0.012    0.002 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/cast.py:120(maybe_convert_platform)
+        4    0.001    0.000    0.011    0.003 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/construction.py:588(_homogenize)
+169951/169943    0.010    0.000    0.010    0.000 {built-in method builtins.isinstance}
+        1    0.000    0.000    0.010    0.010 /usr/lib/python3.10/pathlib.py:1129(read_text)
+        1    0.006    0.006    0.010    0.010 {method 'read' of '_io.TextIOWrapper' objects}
+      232    0.002    0.000    0.009    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_base.py:1269(_get_index_dtype)
+        1    0.007    0.007    0.008    0.008 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/mesh2vec/mesh_features.py:230(<listcomp>)
+       19    0.008    0.000    0.008    0.000 {pandas._libs.lib.maybe_convert_objects}
+      232    0.004    0.000    0.007    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_sputils.py:147(get_index_dtype)
+        1    0.006    0.006    0.006    0.006 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/mesh2vec/mesh_features.py:229(<listcomp>)
+        1    0.006    0.006    0.006    0.006 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/mesh2vec/mesh_features.py:228(<listcomp>)
+    28023    0.004    0.000    0.006    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/mesh2vec/mesh2vec_exceptions.py:54(<genexpr>)
+        2    0.000    0.000    0.005    0.003 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/frame.py:3955(__setitem__)
+        1    0.000    0.000    0.005    0.005 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/mesh2vec/mesh2vec_cae.py:168(<dictcomp>)
+        2    0.005    0.003    0.005    0.003 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/mesh2vec/mesh2vec_cae.py:168(<listcomp>)
+        2    0.000    0.000    0.005    0.003 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/frame.py:4164(_set_item)
+       11    0.005    0.000    0.005    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/cast.py:1763(construct_1d_object_array_from_listlike)
+        1    0.005    0.005    0.005    0.005 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/mesh2vec/mesh_features.py:226(<listcomp>)
+        2    0.000    0.000    0.005    0.002 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/frame.py:4892(_sanitize_column)
+        1    0.000    0.000    0.004    0.004 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/mesh2vec/mesh_features.py:150(__init__)
+        1    0.004    0.004    0.004    0.004 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/mesh2vec/mesh2vec_exceptions.py:57(<listcomp>)
+        5    0.004    0.001    0.004    0.001 {method 'flatten' of 'numpy.ndarray' objects}
+        1    0.000    0.000    0.004    0.004 /usr/lib/python3.10/codecs.py:319(decode)
+        1    0.004    0.004    0.004    0.004 {built-in method _codecs.utf_8_decode}
+      3/2    0.000    0.000    0.003    0.002 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/util/_decorators.py:323(wrapper)
+        4    0.000    0.000    0.003    0.001 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:2182(create_block_manager_from_column_arrays)
+        1    0.003    0.003    0.003    0.003 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/mesh2vec/mesh_features.py:227(<dictcomp>)
+        1    0.003    0.003    0.003    0.003 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/mesh2vec/mesh2vec_base.py:74(<dictcomp>)
+        1    0.003    0.003    0.003    0.003 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/mesh2vec/mesh2vec_cae.py:171(<listcomp>)
+        2    0.000    0.000    0.002    0.001 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_coo.py:380(tocsr)
+        1    0.000    0.000    0.002    0.002 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/mesh2vec/mesh_features.py:119(_make_ids_unique)
       201    0.002    0.000    0.002    0.000 {built-in method numpy.empty}
-      464    0.001    0.000    0.001    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/getlimits.py:685(__init__)
-        1    0.000    0.000    0.001    0.001 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/mesh2vec/mesh_features.py:150(__init__)
-     6401    0.001    0.000    0.001    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/mesh2vec/mesh2vec_exceptions.py:54(<genexpr>)
-        1    0.001    0.001    0.001    0.001 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/mesh2vec/mesh_features.py:229(<listcomp>)
-     12/8    0.000    0.000    0.001    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:430(__new__)
-        1    0.001    0.001    0.001    0.001 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/mesh2vec/mesh_features.py:226(<listcomp>)
+        1    0.000    0.000    0.002    0.002 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/ops/common.py:57(new_method)
+        1    0.000    0.000    0.002    0.002 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/arraylike.py:40(__eq__)
+        1    0.000    0.000    0.002    0.002 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/series.py:6233(_cmp_method)
+        2    0.002    0.001    0.002    0.001 {built-in method scipy.sparse._sparsetools.coo_tocsr}
+        4    0.000    0.000    0.002    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:2253(_form_blocks)
+        2    0.000    0.000    0.002    0.001 /usr/lib/python3.10/codeop.py:117(__call__)
+        2    0.002    0.001    0.002    0.001 {built-in method builtins.compile}
+     12/8    0.000    0.000    0.002    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:430(__new__)
+        1    0.000    0.000    0.002    0.002 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/ops/array_ops.py:231(comparison_op)
+      464    0.002    0.000    0.002    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/getlimits.py:685(__init__)
+        1    0.000    0.000    0.002    0.002 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/ops/array_ops.py:60(comp_method_OBJECT_ARRAY)
+        1    0.002    0.002    0.002    0.002 {pandas._libs.ops.vec_compare}
+        1    0.000    0.000    0.002    0.002 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/frame.py:5251(drop)
+        1    0.000    0.000    0.002    0.002 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/generic.py:4475(drop)
+        1    0.000    0.000    0.002    0.002 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/generic.py:4512(_drop_axis)
+    28029    0.002    0.000    0.002    0.000 {method 'keys' of 'dict' objects}
+        1    0.000    0.000    0.002    0.002 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/reshape/concat.py:146(concat)
+        2    0.000    0.000    0.001    0.001 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_coo.py:132(__init__)
       104    0.001    0.000    0.001    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_sputils.py:294(check_shape)
-        1    0.001    0.001    0.001    0.001 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/mesh2vec/mesh_features.py:228(<listcomp>)
-        1    0.000    0.000    0.001    0.001 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/frame.py:5251(drop)
-        1    0.000    0.000    0.001    0.001 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/generic.py:4475(drop)
-        2    0.000    0.000    0.001    0.001 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/frame.py:4892(_sanitize_column)
-        1    0.000    0.000    0.001    0.001 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/generic.py:4512(_drop_axis)
-        1    0.001    0.001    0.001    0.001 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/mesh2vec/mesh2vec_exceptions.py:57(<listcomp>)
-        1    0.000    0.000    0.001    0.001 /usr/lib/python3.10/codecs.py:319(decode)
-        1    0.000    0.000    0.001    0.001 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/mesh2vec/mesh2vec_cae.py:168(<dictcomp>)
-        2    0.001    0.000    0.001    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/mesh2vec/mesh2vec_cae.py:168(<listcomp>)
-        1    0.001    0.001    0.001    0.001 {built-in method _codecs.utf_8_decode}
+        1    0.000    0.000    0.001    0.001 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/reshape/concat.py:565(get_result)
        73    0.000    0.000    0.001    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_sputils.py:211(isscalarlike)
-       11    0.001    0.000    0.001    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/cast.py:1763(construct_1d_object_array_from_listlike)
-        2    0.000    0.000    0.001    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/frame.py:4139(_set_item_mgr)
+        1    0.000    0.000    0.001    0.001 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/concat.py:176(concatenate_managers)
+       19    0.001    0.000    0.001    0.000 {method 'reduce' of 'numpy.ufunc' objects}
+        2    0.000    0.000    0.001    0.001 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_coo.py:273(_check)
+        4    0.000    0.000    0.001    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:1864(_consolidate_inplace)
+       13    0.000    0.000    0.001    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/construction.py:713(_sanitize_str_dtypes)
+        1    0.000    0.000    0.001    0.001 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:689(reindex_indexer)
+        1    0.000    0.000    0.001    0.001 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:2319(_consolidate)
+        1    0.000    0.000    0.001    0.001 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:774(_slice_take_blocks_ax0)
+        2    0.001    0.000    0.001    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:2361(_merge_blocks)
+        6    0.001    0.000    0.001    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:2305(_stack_arrays)
+        4    0.000    0.000    0.001    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/blocks.py:861(take_nd)
+       73    0.000    0.000    0.001    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/numeric.py:1855(isscalar)
+        6    0.000    0.000    0.001    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/array_algos/take.py:57(take_nd)
+       52    0.000    0.000    0.001    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_base.py:343(asformat)
         1    0.000    0.000    0.001    0.001 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/mesh2vec/mesh2vec_exceptions.py:11(check_distance_init_arg)
         1    0.000    0.000    0.001    0.001 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/loguru/_logger.py:1983(warning)
         1    0.000    0.000    0.001    0.001 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/loguru/_logger.py:1847(_log)
-        1    0.001    0.001    0.001    0.001 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/mesh2vec/mesh_features.py:227(<dictcomp>)
-        2    0.000    0.000    0.001    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_coo.py:380(tocsr)
-        2    0.000    0.000    0.001    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:1394(insert)
-        1    0.000    0.000    0.001    0.001 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/reshape/concat.py:146(concat)
-        1    0.000    0.000    0.001    0.001 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/loguru/_handler.py:98(emit)
-        4    0.000    0.000    0.001    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:708(_with_infer)
-        4    0.000    0.000    0.001    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:2182(create_block_manager_from_column_arrays)
-       73    0.000    0.000    0.001    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/numeric.py:1855(isscalar)
-        2    0.000    0.000    0.001    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:6844(insert)
-        1    0.000    0.000    0.001    0.001 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/ops/common.py:57(new_method)
-        1    0.001    0.001    0.001    0.001 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/mesh2vec/mesh2vec_base.py:74(<dictcomp>)
-       50    0.000    0.000    0.001    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_compressed.py:124(_set_self)
-        1    0.000    0.000    0.001    0.001 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/arraylike.py:40(__eq__)
-        1    0.000    0.000    0.001    0.001 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/series.py:6233(_cmp_method)
-        1    0.000    0.000    0.001    0.001 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/loguru/_simple_sinks.py:15(write)
-        1    0.000    0.000    0.001    0.001 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/mesh2vec/mesh_features.py:119(_make_ids_unique)
-        2    0.000    0.000    0.001    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_coo.py:132(__init__)
-        1    0.000    0.000    0.001    0.001 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:689(reindex_indexer)
-        1    0.000    0.000    0.001    0.001 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/ipykernel/iostream.py:563(flush)
-        1    0.000    0.000    0.001    0.001 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:774(_slice_take_blocks_ax0)
-       52    0.000    0.000    0.001    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_base.py:343(asformat)
+        6    0.000    0.000    0.001    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/array_algos/take.py:120(_take_nd_ndarray)
+        6    0.000    0.000    0.001    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/_asarray.py:27(require)
       586    0.000    0.000    0.001    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_base.py:286(nnz)
-        1    0.000    0.000    0.001    0.001 /usr/lib/python3.10/threading.py:589(wait)
-        1    0.000    0.000    0.001    0.001 /usr/lib/python3.10/threading.py:288(wait)
-        8    0.001    0.000    0.001    0.000 {method 'acquire' of '_thread.lock' objects}
         1    0.000    0.000    0.001    0.001 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_base.py:949(tocsr)
+       50    0.000    0.000    0.001    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_compressed.py:124(_set_self)
+        2    0.000    0.000    0.001    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/frame.py:4139(_set_item_mgr)
+        6    0.000    0.000    0.001    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/_asarray.py:108(<setcomp>)
+        8    0.000    0.000    0.001    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:7396(_maybe_cast_data_without_dtype)
+        6    0.001    0.000    0.001    0.000 {method 'upper' of 'str' objects}
+       10    0.000    0.000    0.001    0.000 {method 'max' of 'numpy.ndarray' objects}
+        1    0.000    0.000    0.001    0.001 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/loguru/_handler.py:98(emit)
+       10    0.000    0.000    0.001    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/_methods.py:39(_amax)
+        2    0.000    0.000    0.001    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:1394(insert)
       235    0.000    0.000    0.001    0.000 <frozen importlib._bootstrap>:404(parent)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/reshape/concat.py:389(__init__)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/mesh2vec/mesh2vec_cae.py:171(<listcomp>)
-       94    0.000    0.000    0.000    0.000 /usr/lib/python3.10/abc.py:117(__instancecheck__)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/ops/array_ops.py:231(comparison_op)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/ops/array_ops.py:60(comp_method_OBJECT_ARRAY)
-        1    0.000    0.000    0.000    0.000 {pandas._libs.ops.vec_compare}
-        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/tempfile.py:956(__init__)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:6901(drop)
-        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:3888(get_indexer)
-        2    0.000    0.000    0.000    0.000 {built-in method scipy.sparse._sparsetools.coo_tocsr}
-        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:2253(_form_blocks)
-        6    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/array_algos/take.py:57(take_nd)
-     6407    0.000    0.000    0.000    0.000 {method 'keys' of 'dict' objects}
-      104    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_data.py:20(__init__)
-        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/blocks.py:861(take_nd)
-       19    0.000    0.000    0.000    0.000 {method 'reduce' of 'numpy.ufunc' objects}
-        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_coo.py:273(_check)
-       94    0.000    0.000    0.000    0.000 {built-in method _abc._abc_instancecheck}
-        6    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/array_algos/take.py:120(_take_nd_ndarray)
-        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/tempfile.py:483(mkdtemp)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_dia.py:393(tocoo)
-        8    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:7396(_maybe_cast_data_without_dtype)
-1711/1658    0.000    0.000    0.000    0.000 {built-in method builtins.len}
+        4    0.000    0.000    0.001    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:708(_with_infer)
+        1    0.000    0.000    0.001    0.001 /usr/lib/python3.10/tempfile.py:956(__init__)
+        1    0.000    0.000    0.001    0.001 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/loguru/_simple_sinks.py:15(write)
+        1    0.000    0.000    0.001    0.001 /usr/lib/python3.10/tempfile.py:483(mkdtemp)
+        1    0.000    0.000    0.001    0.001 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_dia.py:393(tocoo)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/ipykernel/iostream.py:563(flush)
       578    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_compressed.py:107(_getnnz)
-        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:1864(_consolidate_inplace)
-       13    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/construction.py:713(_sanitize_str_dtypes)
+        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:6844(insert)
         1    0.000    0.000    0.000    0.000 {built-in method posix.mkdir}
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/reshape/concat.py:565(get_result)
-      232    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/getlimits.py:696(min)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:6032(get_indexer_for)
+      104    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_data.py:20(__init__)
+        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/threading.py:589(wait)
+        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/threading.py:288(wait)
+        8    0.000    0.000    0.000    0.000 {method 'acquire' of '_thread.lock' objects}
+        1    0.000    0.000    0.000    0.000 {pandas._libs.algos.take_2d_axis0_object_object}
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:6901(drop)
+1691/1640    0.000    0.000    0.000    0.000 {built-in method builtins.len}
+        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:3888(get_indexer)
+        6    0.000    0.000    0.000    0.000 {method 'min' of 'numpy.ndarray' objects}
+        6    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/_methods.py:43(_amin)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/reshape/concat.py:389(__init__)
+       94    0.000    0.000    0.000    0.000 /usr/lib/python3.10/abc.py:117(__instancecheck__)
         1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/reshape/concat.py:631(_get_new_axes)
-        4    0.000    0.000    0.000    0.000 /usr/lib/python3.10/warnings.py:130(filterwarnings)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/shape_base.py:219(vstack)
         1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/reshape/concat.py:633(<listcomp>)
        13    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/common.py:235(asarray_tuplesafe)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/concat.py:176(concatenate_managers)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:2319(_consolidate)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:6032(get_indexer_for)
+      778    0.000    0.000    0.000    0.000 {built-in method numpy.asarray}
       312    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_sputils.py:307(<genexpr>)
+      232    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/getlimits.py:696(min)
+      104    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_base.py:108(__init__)
+        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_compressed.py:1110(sum_duplicates)
+        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_compressed.py:1080(__get_has_canonical_format)
+        2    0.000    0.000    0.000    0.000 {built-in method scipy.sparse._sparsetools.csr_has_canonical_format}
+      232    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/getlimits.py:709(max)
+       51    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_sputils.py:22(upcast)
         1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/pathlib.py:1111(open)
         1    0.000    0.000    0.000    0.000 {built-in method io.open}
-        4    0.000    0.000    0.000    0.000 /usr/lib/python3.10/re.py:249(compile)
-        4    0.000    0.000    0.000    0.000 /usr/lib/python3.10/re.py:288(_compile)
-      778    0.000    0.000    0.000    0.000 {built-in method numpy.asarray}
-       51    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_sputils.py:22(upcast)
-      104    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_base.py:108(__init__)
-     67/9    0.000    0.000    0.000    0.000 /usr/lib/python3.10/abc.py:121(__subclasscheck__)
-       10    0.000    0.000    0.000    0.000 {method 'max' of 'numpy.ndarray' objects}
-     67/9    0.000    0.000    0.000    0.000 {built-in method _abc._abc_subclasscheck}
-        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:2361(_merge_blocks)
-        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/sre_compile.py:783(compile)
-       10    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/_methods.py:39(_amax)
-        6    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:2305(_stack_arrays)
-      107    0.000    0.000    0.000    0.000 {built-in method builtins.any}
         2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/frame.py:3758(__getitem__)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/reshape/concat.py:648(_get_concat_axis)
-        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/tempfile.py:1007(__exit__)
       151    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_base.py:1461(issparse)
-        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/tempfile.py:1010(cleanup)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/reshape/concat.py:648(_get_concat_axis)
         1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/reshape/concat.py:708(_concat_indexes)
-       10    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:5254(__contains__)
         1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:5377(append)
-      232    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/getlimits.py:709(max)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:5407(_concat)
-      171    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/generic.py:45(_instancecheck)
-        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/tempfile.py:965(_rmtree)
-        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/shutil.py:688(rmtree)
-      575    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_base.py:1331(<lambda>)
        19    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/numeric.py:274(full)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:5407(_concat)
+       10    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:5254(__contains__)
+      107    0.000    0.000    0.000    0.000 {built-in method builtins.any}
        13    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:7277(ensure_index)
       235    0.000    0.000    0.000    0.000 {method 'rpartition' of 'str' objects}
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/series.py:3194(_construct_result)
-      310    0.000    0.000    0.000    0.000 {built-in method builtins.getattr}
-        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/frame.py:4274(_get_item_cache)
         2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:6576(_maybe_cast_listlike_indexer)
+      575    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_base.py:1331(<lambda>)
+      171    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/generic.py:45(_instancecheck)
+       94    0.000    0.000    0.000    0.000 {built-in method _abc._abc_instancecheck}
+        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/tempfile.py:1007(__exit__)
+        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/tempfile.py:1010(cleanup)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/series.py:3194(_construct_result)
+        1    0.000    0.000    0.000    0.000 {pandas._libs.algos.take_2d_axis1_object_object}
+        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/frame.py:4274(_get_item_cache)
         7    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/_config/config.py:262(__call__)
         3    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/series.py:342(__init__)
-        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_compressed.py:1110(sum_duplicates)
-        7    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/_config/config.py:134(_get_option)
-        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/frame.py:3703(_ixs)
-       54    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_sputils.py:238(isshape)
         1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_construct.py:229(eye)
-        6    0.000    0.000    0.000    0.000 {method 'min' of 'numpy.ndarray' objects}
-        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_compressed.py:1080(__get_has_canonical_format)
-        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/numeric.py:1393(moveaxis)
-        1    0.000    0.000    0.000    0.000 {method 'format_map' of 'str' objects}
-        6    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/_methods.py:43(_amin)
+       54    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_sputils.py:238(isshape)
+        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/tempfile.py:965(_rmtree)
+        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/frame.py:3703(_ixs)
+        7    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/_config/config.py:134(_get_option)
+        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/shutil.py:688(rmtree)
         2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexing.py:2488(convert_to_index_sliceable)
-        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/lib/function_base.py:5368(insert)
+        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/numeric.py:1393(moveaxis)
+      310    0.000    0.000    0.000    0.000 {built-in method builtins.getattr}
+        1    0.000    0.000    0.000    0.000 {method 'format_map' of 'str' objects}
         1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/reshape/concat.py:638(_get_comb_axis)
-        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/sre_parse.py:944(parse)
+        8    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:588(_dtype_to_subclass)
         1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/api.py:78(get_objs_combined_axis)
+        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/lib/function_base.py:5368(insert)
         1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/loguru/_datetime.py:13(__format__)
         1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/api.py:122(_get_combined_index)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_construct.py:26(spdiags)
-        2    0.000    0.000    0.000    0.000 {built-in method scipy.sparse._sparsetools.csr_has_canonical_format}
-        1    0.000    0.000    0.000    0.000 {pandas._libs.algos.take_2d_axis0_object_object}
-        8    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:588(_dtype_to_subclass)
-        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/sre_parse.py:436(_parse_sub)
-        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/construction.py:481(<listcomp>)
-        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/fromnumeric.py:71(_wrapreduction)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_dia.py:89(__init__)
-        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/construction.py:627(_extract_index)
-        2    0.000    0.000    0.000    0.000 /usr/lib/python3.10/codeop.py:117(__call__)
-      103    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_sputils.py:93(to_native)
-        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/sre_parse.py:494(_parse)
-      171    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/generic.py:40(_check)
-       14    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/_dtype.py:346(_name_get)
-        7    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/common.py:303(maybe_iterable_to_list)
-        7    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/_config/config.py:116(_get_single_key)
-        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/sre_compile.py:622(_code)
       298    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_base.py:296(format)
-       15    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/construction.py:399(extract_array)
-        2    0.000    0.000    0.000    0.000 {built-in method builtins.compile}
-        6    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/array_algos/take.py:326(_get_take_nd_function)
-      255    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/multiarray.py:503(can_cast)
-       51    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/common.py:1591(_is_dtype_type)
-        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:6285(_should_compare)
-       13    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:7372(maybe_extract_name)
-      312    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_sputils.py:312(<genexpr>)
-        5    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/cast.py:1178(maybe_infer_to_datetimelike)
-        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:881(_engine)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/fromnumeric.py:2979(prod)
-        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/array_algos/take.py:288(_get_take_nd_function_cached)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/concat.py:199(<listcomp>)
-        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/concat.py:278(_get_mgr_concatenation_plan)
-       73    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_sputils.py:267(isdense)
-       16    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/common.py:1246(is_float_dtype)
-        9    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/generic.py:259(__init__)
-       13    0.000    0.000    0.000    0.000 /usr/lib/python3.10/warnings.py:181(_add_filter)
-        6    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/_asarray.py:27(require)
-        9    0.000    0.000    0.000    0.000 /usr/lib/python3.10/warnings.py:165(simplefilter)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/ipykernel/iostream.py:626(write)
-        8    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/numeric.py:1330(normalize_axis_tuple)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/shape_base.py:219(vstack)
-        3    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/ipykernel/iostream.py:259(schedule)
-        5    0.000    0.000    0.000    0.000 {built-in method builtins.sorted}
-        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:1455(_insert_update_blklocs_and_blknos)
-        5    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/generic.py:5844(__finalize__)
-        2    0.000    0.000    0.000    0.000 /usr/lib/python3.10/pathlib.py:957(__new__)
-        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/blocks.py:200(fill_value)
-        5    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/mesh2vec/mesh2vec_cae.py:95(<genexpr>)
-      101    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_data.py:23(_get_dtype)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/api.py:204(union_indexes)
-      2/1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/sre_compile.py:87(_compile)
-       82    0.000    0.000    0.000    0.000 {built-in method builtins.hash}
-      352    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_csr.py:236(_swap)
-        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:3975(_get_indexer)
-        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:2421(is_boolean)
-        1    0.000    0.000    0.000    0.000 {built-in method posix.rmdir}
-       58    0.000    0.000    0.000    0.000 {method 'get' of 'dict' objects}
-        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/frame.py:4257(_box_col_values)
-        2    0.000    0.000    0.000    0.000 /usr/lib/python3.10/pathlib.py:589(_from_parts)
-        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:1129(iget)
-        3    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:2745(inferred_type)
-        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/missing.py:645(na_value_for_dtype)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/ipykernel/iostream.py:548(_schedule_flush)
-      216    0.000    0.000    0.000    0.000 {built-in method _operator.index}
-        3    0.000    0.000    0.000    0.000 {method '_rebuild_blknos_and_blklocs' of 'pandas._libs.internals.BlockManager' objects}
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/lib/arraysetops.py:310(reshape_uniq)
-        5    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/missing.py:108(isna)
-        6    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/construction.py:744(_try_cast)
-        6    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:2324(<lambda>)
-        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/lib/function_base.py:5562(append)
-       13    0.000    0.000    0.000    0.000 /usr/lib/python3.10/warnings.py:458(__enter__)
-        3    0.000    0.000    0.000    0.000 {pandas._libs.lib.infer_dtype}
-        6    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/array_algos/take.py:554(_take_preprocess_indexer_and_fill_value)
-        1    0.000    0.000    0.000    0.000 {pandas._libs.algos.take_2d_axis1_object_object}
-        9    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:690(_simple_new)
-        3    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/blocks.py:160(_consolidate_key)
-        7    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/base.py:54(shape)
-       10    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/base.py:286(is_dtype)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/loguru/_datetime.py:81(aware_now)
-        6    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:5116(_get_engine_target)
-        7    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/_config/config.py:650(_warn_if_deprecated)
-        2    0.000    0.000    0.000    0.000 /usr/lib/python3.10/pathlib.py:569(_parse_args)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_construct.py:26(spdiags)
+      103    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_sputils.py:93(to_native)
         2    0.000    0.000    0.000    0.000 {pandas._libs.algos.take_2d_axis1_int64_int64}
-        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/pathlib.py:1285(exists)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_dia.py:89(__init__)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/cast.py:1673(construct_1d_arraylike_from_scalar)
+        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/construction.py:627(_extract_index)
+      171    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/generic.py:40(_check)
+        7    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/_config/config.py:116(_get_single_key)
+        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:881(_engine)
+        4    0.000    0.000    0.000    0.000 /usr/lib/python3.10/warnings.py:130(filterwarnings)
+        9    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/generic.py:259(__init__)
+       51    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/common.py:1591(_is_dtype_type)
+       13    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:7372(maybe_extract_name)
+       15    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/construction.py:399(extract_array)
+        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:6285(_should_compare)
+        5    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/cast.py:1178(maybe_infer_to_datetimelike)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/concat.py:199(<listcomp>)
+       73    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_sputils.py:267(isdense)
+       13    0.000    0.000    0.000    0.000 /usr/lib/python3.10/warnings.py:181(_add_filter)
+        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/fromnumeric.py:71(_wrapreduction)
+        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/concat.py:278(_get_mgr_concatenation_plan)
+        9    0.000    0.000    0.000    0.000 /usr/lib/python3.10/warnings.py:165(simplefilter)
+       16    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/common.py:1246(is_float_dtype)
+      312    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_sputils.py:312(<genexpr>)
+        5    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/mesh2vec/mesh2vec_cae.py:95(<genexpr>)
+      238    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/multiarray.py:503(can_cast)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/lib/arraysetops.py:310(reshape_uniq)
+        8    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/numeric.py:1330(normalize_axis_tuple)
+        2    0.000    0.000    0.000    0.000 /usr/lib/python3.10/pathlib.py:957(__new__)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/ipykernel/iostream.py:626(write)
+        5    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/generic.py:5844(__finalize__)
+        5    0.000    0.000    0.000    0.000 {built-in method builtins.sorted}
+        3    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/ipykernel/iostream.py:259(schedule)
+        2    0.000    0.000    0.000    0.000 /usr/lib/python3.10/pathlib.py:589(_from_parts)
+        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/construction.py:481(<listcomp>)
+        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:1455(_insert_update_blklocs_and_blknos)
+       80    0.000    0.000    0.000    0.000 {built-in method builtins.hash}
+        3    0.000    0.000    0.000    0.000 {method '_rebuild_blknos_and_blklocs' of 'pandas._libs.internals.BlockManager' objects}
+        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:1129(iget)
+      216    0.000    0.000    0.000    0.000 {built-in method _operator.index}
+      352    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_csr.py:236(_swap)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/api.py:204(union_indexes)
+        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/blocks.py:200(fill_value)
+        1    0.000    0.000    0.000    0.000 {method 'fill' of 'numpy.ndarray' objects}
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/fromnumeric.py:2979(prod)
+        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:2421(is_boolean)
+        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/frame.py:4257(_box_col_values)
+        7    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/base.py:54(shape)
+        7    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/common.py:303(maybe_iterable_to_list)
+        3    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:2745(inferred_type)
+      101    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_data.py:23(_get_dtype)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/ipykernel/iostream.py:548(_schedule_flush)
+        6    0.000    0.000    0.000    0.000 {built-in method builtins.next}
+        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/missing.py:645(na_value_for_dtype)
+        2    0.000    0.000    0.000    0.000 /usr/lib/python3.10/pathlib.py:569(_parse_args)
+        6    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:2324(<lambda>)
+        1    0.000    0.000    0.000    0.000 {built-in method posix.rmdir}
+       13    0.000    0.000    0.000    0.000 /usr/lib/python3.10/warnings.py:458(__enter__)
+        6    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/construction.py:744(_try_cast)
+       54    0.000    0.000    0.000    0.000 {method 'get' of 'dict' objects}
+        6    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:5116(_get_engine_target)
+        3    0.000    0.000    0.000    0.000 {pandas._libs.lib.infer_dtype}
+        3    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/blocks.py:160(_consolidate_key)
+        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/lib/function_base.py:5562(append)
+        6    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/_dtype.py:346(_name_get)
+        6    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:997(__init__)
+       10    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/blocks.py:2120(get_block_type)
+        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:3975(_get_indexer)
         1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/range.py:458(copy)
-        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/shutil.py:627(_rmtree_safe_fd)
+        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/generic.py:4137(_check_setitem_copy)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/common.py:268(index_labels_to_array)
+        9    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:690(_simple_new)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/loguru/_datetime.py:81(aware_now)
         1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:3241(union)
         2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:1445(_insert_update_mgr_locs)
-        8    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/common.py:501(is_categorical_dtype)
-        5    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/missing.py:191(_isna)
-        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/pathlib.py:1092(stat)
-        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:4020(_check_indexing_method)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/cast.py:1673(construct_1d_arraylike_from_scalar)
-       24    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/common.py:1487(is_ea_or_datetimelike_dtype)
-        2    0.000    0.000    0.000    0.000 {method 'get_indexer' of 'pandas._libs.index.IndexEngine' objects}
-       14    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/_dtype.py:330(_name_includes_bit_suffix)
+        3    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/blocks.py:2161(new_block_2d)
+       10    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/base.py:286(is_dtype)
+        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/shutil.py:627(_rmtree_safe_fd)
+        9    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/common.py:566(require_length_match)
+        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/pathlib.py:1285(exists)
+        6    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:172(blknos)
         1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/concat.py:71(concat_compat)
-        7    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/numerictypes.py:357(issubdtype)
-        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/generic.py:4137(_check_setitem_copy)
-        1    0.000    0.000    0.000    0.000 {built-in method posix.stat}
-        6    0.000    0.000    0.000    0.000 {built-in method builtins.next}
-       10    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/blocks.py:2120(get_block_type)
+       24    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/common.py:1487(is_ea_or_datetimelike_dtype)
         1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:6804(delete)
+        8    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/common.py:501(is_categorical_dtype)
+        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:4020(_check_indexing_method)
+        4    0.000    0.000    0.000    0.000 /usr/lib/python3.10/re.py:249(compile)
+       12    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/common.py:162(is_object_dtype)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/numeric.py:136(ones)
+       13    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/construction.py:676(_sanitize_ndim)
+        6    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/generic.py:5904(__setattr__)
+        7    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/_config/config.py:650(_warn_if_deprecated)
+        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/pathlib.py:1092(stat)
+       12    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:1053(_handle_fromlist)
+        3    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/zmq/sugar/socket.py:545(send)
         4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:1846(is_consolidated)
         2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:5464(equals)
-        5    0.000    0.000    0.000    0.000 {pandas._libs.lib.infer_datetimelike_array}
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/fromnumeric.py:2421(all)
-        6    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:172(blknos)
-        6    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/generic.py:5904(__setattr__)
-        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/sre_compile.py:560(_compile_info)
+        3    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/missing.py:108(isna)
         4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/api.py:384(default_index)
-       12    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/common.py:162(is_object_dtype)
-        3    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/zmq/sugar/socket.py:545(send)
-       13    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/construction.py:676(_sanitize_ndim)
-        6    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:997(__init__)
-        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/cast.py:527(maybe_promote)
-      131    0.000    0.000    0.000    0.000 {built-in method builtins.issubclass}
-        7    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/_config/config.py:597(_get_root)
-        9    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/common.py:585(is_dtype_equal)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/common.py:268(index_labels_to_array)
-        3    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/blocks.py:2161(new_block_2d)
-        9    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/common.py:566(require_length_match)
-        8    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/common.py:790(is_unsigned_integer_dtype)
-        2    0.000    0.000    0.000    0.000 {method 'view' of 'numpy.ndarray' objects}
-       12    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:1053(_handle_fromlist)
-        2    0.000    0.000    0.000    0.000 /usr/lib/python3.10/pathlib.py:56(parse_parts)
-       32    0.000    0.000    0.000    0.000 {pandas._libs.lib.is_list_like}
-       13    0.000    0.000    0.000    0.000 {method 'remove' of 'list' objects}
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/cast.py:566(_maybe_promote_cached)
-        5    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/series.py:708(_values)
-        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:1854(_consolidate_check)
-       21    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/base.py:56(<genexpr>)
-        3    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/missing.py:699(is_valid_na_for_dtype)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/cast.py:574(_maybe_promote)
-        3    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/ops/common.py:77(get_op_result_name)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:1934(from_array)
-        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/_ufunc_config.py:33(seterr)
-        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/tempfile.py:292(__next__)
         1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:1040(_verify_integrity)
-       14    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/_config/config.py:611(_get_deprecated_option)
-        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/weakref.py:569(__init__)
+        7    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/_config/config.py:597(_get_root)
+        2    0.000    0.000    0.000    0.000 /usr/lib/python3.10/pathlib.py:56(parse_parts)
+        5    0.000    0.000    0.000    0.000 {pandas._libs.lib.infer_datetimelike_array}
        29    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/range.py:946(__len__)
-        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/common.py:463(is_interval_dtype)
-        4    0.000    0.000    0.000    0.000 {method 'strftime' of 'datetime.date' objects}
-        2    0.000    0.000    0.000    0.000 /usr/lib/python3.10/calendar.py:60(__getitem__)
-        5    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/range.py:173(_simple_new)
-       15    0.000    0.000    0.000    0.000 {pandas._libs.lib.is_scalar}
-       23    0.000    0.000    0.000    0.000 /usr/lib/python3.10/sre_parse.py:255(get)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/missing.py:268(_isna_array)
-       13    0.000    0.000    0.000    0.000 /usr/lib/python3.10/warnings.py:477(__exit__)
+       21    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/base.py:56(<genexpr>)
+        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/tempfile.py:292(__next__)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/fromnumeric.py:2421(all)
+        4    0.000    0.000    0.000    0.000 /usr/lib/python3.10/re.py:288(_compile)
+        1    0.000    0.000    0.000    0.000 {built-in method posix.stat}
+       13    0.000    0.000    0.000    0.000 {method 'remove' of 'list' objects}
+        9    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/common.py:585(is_dtype_equal)
+        3    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/missing.py:191(_isna)
+        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/_ufunc_config.py:33(seterr)
+        8    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/common.py:790(is_unsigned_integer_dtype)
         1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/_internal.py:436(_promote_fields)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/_ufunc_config.py:430(__enter__)
-       13    0.000    0.000    0.000    0.000 /usr/lib/python3.10/warnings.py:437(__init__)
-       18    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/construction.py:461(ensure_wrapped_if_datetimelike)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/lib/function_base.py:5172(delete)
-       47    0.000    0.000    0.000    0.000 {built-in method builtins.hasattr}
-      9/8    0.000    0.000    0.000    0.000 {method 'format' of 'str' objects}
-        7    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:2237(_grouping_func)
-       14    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/numerictypes.py:283(issubclass_)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/series.py:565(_set_axis)
-        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:2398(_fast_count_smallints)
-        8    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/common.py:736(is_signed_integer_dtype)
-        8    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_coo.py:247(_getnnz)
-       28    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/common.py:148(<lambda>)
-        2    0.000    0.000    0.000    0.000 {pandas._libs.algos.take_1d_int64_int64}
-       19    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/inference.py:325(is_hashable)
-        1    0.000    0.000    0.000    0.000 {method 'sub' of 're.Pattern' objects}
-        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/posixpath.py:377(abspath)
-        1    0.000    0.000    0.000    0.000 {built-in method posix.open}
-        3    0.000    0.000    0.000    0.000 /usr/lib/python3.10/pathlib.py:621(__str__)
-        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:3754(get_loc)
-        9    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/flags.py:49(__init__)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/numeric.py:136(ones)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/blocks.py:2172(new_block)
-        6    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/_asarray.py:108(<setcomp>)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/fromnumeric.py:1025(argsort)
-        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/dtypes.py:1247(is_dtype)
-      2/1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/sre_parse.py:175(getwidth)
-        8    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/numeric.py:1380(<listcomp>)
-        1    0.000    0.000    0.000    0.000 {built-in method posix.lstat}
-        1    0.000    0.000    0.000    0.000 {method 'any' of 'numpy.ndarray' objects}
-        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:5304(__getitem__)
-        9    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/blocks.py:236(make_block_same_class)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/missing.py:309(_isna_string_dtype)
-        3    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:2381(is_unique)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:1752(_validate_names)
-        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/blocks.py:2091(maybe_coerce_values)
-        5    0.000    0.000    0.000    0.000 {built-in method builtins.sum}
-        5    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/common.py:684(is_integer_dtype)
-        3    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/series.py:661(name)
+       14    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/_config/config.py:611(_get_deprecated_option)
+        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:1854(_consolidate_check)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:1934(from_array)
         1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/lib/shape_base.py:1185(tile)
-        2    0.000    0.000    0.000    0.000 /usr/lib/python3.10/contextlib.py:279(helper)
-        4    0.000    0.000    0.000    0.000 /usr/lib/python3.10/threading.py:1169(is_alive)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/generic.py:1390(_indexed_same)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:1860(<listcomp>)
-        1    0.000    0.000    0.000    0.000 {method 'fill' of 'numpy.ndarray' objects}
-        3    0.000    0.000    0.000    0.000 /usr/lib/python3.10/_collections_abc.py:262(__subclasshook__)
-        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/random.py:506(choices)
-        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/weakref.py:593(detach)
-        1    0.000    0.000    0.000    0.000 {method '__exit__' of '_io._IOBase' objects}
-       24    0.000    0.000    0.000    0.000 /usr/lib/python3.10/sre_parse.py:234(__next)
-        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:7456(unpack_nested_dtype)
-        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/fromnumeric.py:1768(ravel)
-        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:6205(_maybe_promote)
-       29    0.000    0.000    0.000    0.000 /usr/lib/python3.10/sre_parse.py:165(__getitem__)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_base.py:86(_csr_container)
-        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/common.py:1725(validate_all_hashable)
-       18    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:925(__len__)
-        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/threading.py:545(__init__)
-        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/inference.py:266(is_dict_like)
-       24    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_csr.py:169(tocsr)
-        6    0.000    0.000    0.000    0.000 {method 'reshape' of 'numpy.ndarray' objects}
+      106    0.000    0.000    0.000    0.000 {built-in method builtins.issubclass}
+        3    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/ops/common.py:77(get_op_result_name)
+       32    0.000    0.000    0.000    0.000 {pandas._libs.lib.is_list_like}
         1    0.000    0.000    0.000    0.000 {built-in method numpy.arange}
-       20    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/common.py:1556(get_dtype)
-       23    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/common.py:156(<lambda>)
-        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/traitlets/traitlets.py:708(__get__)
-        3    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_sputils.py:216(isintlike)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/reshape/concat.py:476(<listcomp>)
-        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/series.py:1267(_set_as_cached)
-        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/blocks.py:2266(ensure_block_shape)
+        2    0.000    0.000    0.000    0.000 {method 'view' of 'numpy.ndarray' objects}
+       18    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/construction.py:461(ensure_wrapped_if_datetimelike)
+        7    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:2237(_grouping_func)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/_ufunc_config.py:430(__enter__)
+        1    0.000    0.000    0.000    0.000 {method '__exit__' of '_io._IOBase' objects}
+       47    0.000    0.000    0.000    0.000 {built-in method builtins.hasattr}
+       13    0.000    0.000    0.000    0.000 /usr/lib/python3.10/warnings.py:437(__init__)
+       19    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/inference.py:325(is_hashable)
+        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/posixpath.py:377(abspath)
+        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:3754(get_loc)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/lib/function_base.py:5172(delete)
+        2    0.000    0.000    0.000    0.000 {method 'get_indexer' of 'pandas._libs.index.IndexEngine' objects}
+        9    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/flags.py:49(__init__)
+       13    0.000    0.000    0.000    0.000 /usr/lib/python3.10/warnings.py:477(__exit__)
+        2    0.000    0.000    0.000    0.000 /usr/lib/python3.10/calendar.py:60(__getitem__)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_base.py:86(_csr_container)
+        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/common.py:463(is_interval_dtype)
+        5    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/range.py:173(_simple_new)
+        4    0.000    0.000    0.000    0.000 {method 'strftime' of 'datetime.date' objects}
+        9    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/blocks.py:236(make_block_same_class)
+        8    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/common.py:736(is_signed_integer_dtype)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/blocks.py:2172(new_block)
+        3    0.000    0.000    0.000    0.000 /usr/lib/python3.10/pathlib.py:621(__str__)
+        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/blocks.py:2091(maybe_coerce_values)
+       28    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/common.py:148(<lambda>)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/series.py:565(_set_axis)
+        3    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/numerictypes.py:357(issubdtype)
+        3    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:2381(is_unique)
+        1    0.000    0.000    0.000    0.000 {method 'sub' of 're.Pattern' objects}
+        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/random.py:506(choices)
+        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:2398(_fast_count_smallints)
+        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/missing.py:699(is_valid_na_for_dtype)
+        8    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_coo.py:247(_getnnz)
+        2    0.000    0.000    0.000    0.000 /usr/lib/python3.10/contextlib.py:139(__exit__)
+        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/inference.py:266(is_dict_like)
+        5    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/common.py:684(is_integer_dtype)
+        6    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/array_algos/take.py:554(_take_preprocess_indexer_and_fill_value)
+        1    0.000    0.000    0.000    0.000 {method 'any' of 'numpy.ndarray' objects}
+       18    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:925(__len__)
+        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:5304(__getitem__)
+        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/dtypes.py:1247(is_dtype)
+        1    0.000    0.000    0.000    0.000 {built-in method posix.lstat}
+        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/common.py:362(apply_if_callable)
+        5    0.000    0.000    0.000    0.000 {built-in method builtins.sum}
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/generic.py:1390(_indexed_same)
+        6    0.000    0.000    0.000    0.000 {method 'reshape' of 'numpy.ndarray' objects}
+      5/4    0.000    0.000    0.000    0.000 {method 'format' of 'str' objects}
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/fromnumeric.py:1025(argsort)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:1752(_validate_names)
+        2    0.000    0.000    0.000    0.000 /usr/lib/python3.10/contextlib.py:279(helper)
+        3    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/series.py:661(name)
+        8    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/numeric.py:1380(<listcomp>)
         6    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/concat.py:705(_combine_concat_plans)
-        3    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/ops/common.py:99(_maybe_match_name)
-        6    0.000    0.000    0.000    0.000 /usr/lib/python3.10/_collections_abc.py:78(_check_methods)
-       28    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/common.py:146(classes)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/fromnumeric.py:53(_wrapfunc)
         1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/_methods.py:55(_any)
-        7    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/_config/config.py:579(_select_options)
         1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/posixpath.py:338(normpath)
-        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/generic.py:1392(<genexpr>)
-        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/enum.py:986(__and__)
-        5    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:2069(internal_values)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/base.py:742(__iter__)
-        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/os.py:772(getenv)
-        1    0.000    0.000    0.000    0.000 {built-in method now}
-       53    0.000    0.000    0.000    0.000 /usr/lib/python3.10/_collections_abc.py:409(__subclasshook__)
-        1    0.000    0.000    0.000    0.000 {built-in method posix.scandir}
-        5    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:2783(_is_multi)
-        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:6303(_is_comparable_dtype)
-        2    0.000    0.000    0.000    0.000 /usr/lib/python3.10/pathlib.py:631(__fspath__)
-        2    0.000    0.000    0.000    0.000 /usr/lib/python3.10/contextlib.py:130(__enter__)
+        3    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_sputils.py:216(isintlike)
         1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/frozen.py:70(__getitem__)
+        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/series.py:1267(_set_as_cached)
+        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/common.py:1725(validate_all_hashable)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:1860(<listcomp>)
+        2    0.000    0.000    0.000    0.000 /usr/lib/python3.10/pathlib.py:631(__fspath__)
+        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/blocks.py:2266(ensure_block_shape)
+        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/fromnumeric.py:1768(ravel)
+        5    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/series.py:708(_values)
+        4    0.000    0.000    0.000    0.000 /usr/lib/python3.10/threading.py:1169(is_alive)
+        7    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/_config/config.py:579(_select_options)
+        6    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/_dtype.py:330(_name_includes_bit_suffix)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/missing.py:268(_isna_array)
+       28    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/common.py:146(classes)
+        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/traitlets/traitlets.py:708(__get__)
+       23    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/common.py:156(<lambda>)
+        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/threading.py:545(__init__)
+        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:7456(unpack_nested_dtype)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/fromnumeric.py:53(_wrapfunc)
+        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:6205(_maybe_promote)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/reshape/concat.py:476(<listcomp>)
+       13    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/construction.py:733(_maybe_repeat)
+        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/generic.py:1392(<genexpr>)
+        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/weakref.py:593(detach)
+        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/frame.py:1498(__len__)
+       20    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/common.py:1556(get_dtype)
+        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/posixpath.py:150(dirname)
+        2    0.000    0.000    0.000    0.000 /usr/lib/python3.10/contextlib.py:130(__enter__)
+        3    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/ops/common.py:99(_maybe_match_name)
         1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:3737(_convert_can_do_setop)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/_ufunc_config.py:435(__exit__)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/base.py:742(__iter__)
+        2    0.000    0.000    0.000    0.000 /usr/lib/python3.10/contextlib.py:102(__init__)
+        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/random.py:519(<listcomp>)
+        5    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:2783(_is_multi)
+        4    0.000    0.000    0.000    0.000 /usr/lib/python3.10/types.py:176(__get__)
+        6    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/numerictypes.py:283(issubclass_)
+       10    0.000    0.000    0.000    0.000 {method 'split' of 'str' objects}
+        5    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/generic.py:564(_get_axis)
+        5    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:2069(internal_values)
+       24    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_csr.py:169(tocsr)
+        1    0.000    0.000    0.000    0.000 {built-in method posix.open}
+        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/os.py:772(getenv)
+        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/tempfile.py:253(_sanitize_params)
+       17    0.000    0.000    0.000    0.000 {method 'insert' of 'list' objects}
+        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:6303(_is_comparable_dtype)
+       10    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/common.py:1420(is_1d_only_ea_dtype)
+        2    0.000    0.000    0.000    0.000 {method 'match' of 're.Pattern' objects}
+        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_sputils.py:135(getdata)
+        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/weakref.py:569(__init__)
+        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/IPython/core/compilerop.py:180(extra_flags)
+        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/common.py:1278(is_bool_dtype)
+        5    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/flags.py:85(allows_duplicate_labels)
+       16    0.000    0.000    0.000    0.000 {built-in method __new__ of type object at 0x55eceb2b19a0}
        14    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:870(_reset_identity)
         1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/posixpath.py:140(basename)
-        2    0.000    0.000    0.000    0.000 /usr/lib/python3.10/contextlib.py:102(__init__)
-        5    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/generic.py:564(_get_axis)
-        5    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/lib/arraysetops.py:125(_unpack_tuple)
-        8    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/generic.py:640(_info_axis)
-       13    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/construction.py:733(_maybe_repeat)
-        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_sputils.py:135(getdata)
-        3    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:1891(__init__)
-        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/common.py:1278(is_bool_dtype)
-       22    0.000    0.000    0.000    0.000 /usr/lib/python3.10/sre_parse.py:173(append)
-        2    0.000    0.000    0.000    0.000 /usr/lib/python3.10/calendar.py:79(__getitem__)
-        4    0.000    0.000    0.000    0.000 /usr/lib/python3.10/types.py:176(__get__)
-        2    0.000    0.000    0.000    0.000 /usr/lib/python3.10/contextlib.py:139(__exit__)
-       16    0.000    0.000    0.000    0.000 {built-in method __new__ of type object at 0x56520b12d9a0}
-        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/random.py:519(<listcomp>)
-       10    0.000    0.000    0.000    0.000 {method 'split' of 'str' objects}
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/_ufunc_config.py:435(__exit__)
-        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/_internal.py:525(_view_is_safe)
-       17    0.000    0.000    0.000    0.000 {method 'insert' of 'list' objects}
-        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/_collections_abc.py:821(get)
-        2    0.000    0.000    0.000    0.000 {method 'match' of 're.Pattern' objects}
-        1    0.000    0.000    0.000    0.000 {method 'timetuple' of 'datetime.datetime' objects}
-        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/frame.py:1498(__len__)
-        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/tempfile.py:253(_sanitize_params)
-        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/threading.py:236(__init__)
-        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/posixpath.py:71(join)
-        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/generic.py:1967(keys)
-        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/shape_base.py:81(atleast_2d)
-       30    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:5090(_values)
-        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/posixpath.py:150(dirname)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_matrix.py:16(_coo_container)
-       10    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/common.py:1420(is_1d_only_ea_dtype)
-        4    0.000    0.000    0.000    0.000 {method 'transpose' of 'numpy.ndarray' objects}
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:2752(_is_all_dates)
-        5    0.000    0.000    0.000    0.000 {pandas._libs.algos.ensure_object}
+        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:5204(_validate_fill_value)
+        2    0.000    0.000    0.000    0.000 {pandas._libs.algos.take_1d_int64_int64}
         4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/common.py:1751(pandas_dtype)
-        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/posixpath.py:117(splitext)
-        7    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/_config/config.py:638(_translate_key)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:3198(_get_reconciled_name_object)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:830(_rename)
-        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/common.py:1204(is_numeric_dtype)
+        8    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/generic.py:640(_info_axis)
+        3    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:1891(__init__)
        43    0.000    0.000    0.000    0.000 /usr/lib/python3.10/typing.py:1737(cast)
        39    0.000    0.000    0.000    0.000 {built-in method _warnings._filters_mutated}
+        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/shape_base.py:81(atleast_2d)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/missing.py:309(_isna_string_dtype)
+        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/_collections_abc.py:821(get)
+        1    0.000    0.000    0.000    0.000 {built-in method now}
+        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/generic.py:1967(keys)
+        2    0.000    0.000    0.000    0.000 /usr/lib/python3.10/calendar.py:79(__getitem__)
+        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/_ufunc_config.py:132(geterr)
+        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/frame.py:4234(_ensure_valid_index)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:2752(_is_all_dates)
+        1    0.000    0.000    0.000    0.000 /tmp/ipykernel_28415/2631849376.py:1(<module>)
+        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/threading.py:236(__init__)
+        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/posixpath.py:71(join)
+        5    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/lib/arraysetops.py:125(_unpack_tuple)
+        1    0.000    0.000    0.000    0.000 {method 'timetuple' of 'datetime.datetime' objects}
+        7    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/_config/config.py:638(_translate_key)
+        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/frame.py:874(shape)
+        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/construction.py:231(mgr_to_mgr)
+        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/posixpath.py:117(splitext)
+        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/_internal.py:525(_view_is_safe)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_matrix.py:16(_coo_container)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/api.py:108(_get_distinct_objs)
+        9    0.000    0.000    0.000    0.000 {method 'astype' of 'numpy.ndarray' objects}
+       11    0.000    0.000    0.000    0.000 {pandas._libs.lib.is_scalar}
+        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/common.py:1204(is_numeric_dtype)
+        4    0.000    0.000    0.000    0.000 {method 'transpose' of 'numpy.ndarray' objects}
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:3198(_get_reconciled_name_object)
+       23    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/common.py:151(classes_and_not_datetimelike)
+        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/blocks.py:2250(extend_blocks)
         1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/lib/arraysetops.py:289(<listcomp>)
-        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:5204(_validate_fill_value)
+       20    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/multiarray.py:1080(copyto)
+       30    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:5090(_values)
+        4    0.000    0.000    0.000    0.000 /usr/lib/python3.10/threading.py:1102(_wait_for_tstate_lock)
+        4    0.000    0.000    0.000    0.000 {built-in method builtins.callable}
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:830(_rename)
         1    0.000    0.000    0.000    0.000 {method 'argsort' of 'numpy.ndarray' objects}
         5    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/common.py:1154(needs_i8_conversion)
-        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/frame.py:874(shape)
-        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/_ufunc_config.py:132(geterr)
-       23    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/common.py:151(classes_and_not_datetimelike)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/api.py:108(_get_distinct_objs)
-        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/common.py:362(apply_if_callable)
-        1    0.000    0.000    0.000    0.000 /tmp/ipykernel_16169/2440128879.py:1(<module>)
-        4    0.000    0.000    0.000    0.000 /usr/lib/python3.10/threading.py:1102(_wait_for_tstate_lock)
-        8    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/series.py:611(name)
-        8    0.000    0.000    0.000    0.000 {built-in method numpy.core._multiarray_umath.normalize_axis_index}
-        7    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/loguru/_datetime.py:72(get)
-        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/os.py:675(__getitem__)
-       14    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/_dtype.py:24(_kind_name)
-        5    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/flags.py:85(allows_duplicate_labels)
-        9    0.000    0.000    0.000    0.000 {method 'astype' of 'numpy.ndarray' objects}
-        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/blocks.py:2250(extend_blocks)
-       20    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/multiarray.py:1080(copyto)
-        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/IPython/core/compilerop.py:180(extra_flags)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/range.py:453(_view)
-        8    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/common.py:1744(<genexpr>)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_matrix.py:26(_csr_container)
-        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/construction.py:482(<listcomp>)
+        6    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/array_algos/take.py:326(_get_take_nd_function)
         1    0.000    0.000    0.000    0.000 {built-in method time.localtime}
-        2    0.000    0.000    0.000    0.000 /usr/lib/python3.10/enum.py:359(__call__)
-        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/frame.py:4234(_ensure_valid_index)
-        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_sputils.py:109(getdtype)
+        7    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/loguru/_datetime.py:72(get)
+        8    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/series.py:611(name)
+        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/os.py:675(__getitem__)
+        8    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/common.py:1744(<genexpr>)
+        1    0.000    0.000    0.000    0.000 {built-in method posix.scandir}
+        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/tempfile.py:281(rng)
+        6    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/inference.py:292(<genexpr>)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/shape_base.py:23(atleast_1d)
         2    0.000    0.000    0.000    0.000 /usr/lib/python3.10/pathlib.py:608(_format_parsed_parts)
-        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/range.py:541(equals)
-       10    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/generic.py:550(_get_axis_number)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:228(set_axis)
-        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_compressed.py:1102(__set_has_canonical_format)
-        3    0.000    0.000    0.000    0.000 /usr/lib/python3.10/_collections_abc.py:381(__subclasshook__)
-        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/codecs.py:309(__init__)
-        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/multiprocessing/process.py:234(ident)
         8    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:555(<genexpr>)
-        7    0.000    0.000    0.000    0.000 {method 'ravel' of 'numpy.ndarray' objects}
+        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_sputils.py:109(getdtype)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:1061(from_blocks)
+        4    0.000    0.000    0.000    0.000 /usr/lib/python3.10/posixpath.py:41(_get_sep)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/range.py:453(_view)
+        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/range.py:541(equals)
+        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/construction.py:482(<listcomp>)
+        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/codecs.py:309(__init__)
         2    0.000    0.000    0.000    0.000 /usr/lib/python3.10/threading.py:1430(current_thread)
         6    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:1042(<genexpr>)
-        7    0.000    0.000    0.000    0.000 {pandas._libs.lib.is_iterator}
-        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/tempfile.py:281(rng)
-        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/sre_parse.py:225(__init__)
-        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/construction.py:488(<listcomp>)
-        4    0.000    0.000    0.000    0.000 /usr/lib/python3.10/posixpath.py:41(_get_sep)
-        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexing.py:2656(check_deprecated_indexers)
-        6    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/inference.py:292(<genexpr>)
-        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/construction.py:231(mgr_to_mgr)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_matrix.py:26(_csr_container)
+       10    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/generic.py:550(_get_axis_number)
         2    0.000    0.000    0.000    0.000 {method 'timestamp' of 'datetime.datetime' objects}
-        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/common.py:151(cast_scalar_indexer)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/shape_base.py:23(atleast_1d)
-        4    0.000    0.000    0.000    0.000 {built-in method pandas._libs.missing.checknull}
-        8    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:574(_ensure_array)
-        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/traitlets/traitlets.py:624(get)
-       20    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/blocks.py:213(mgr_locs)
-        9    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:1435(<genexpr>)
-        3    0.000    0.000    0.000    0.000 {built-in method posix.getpid}
-        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/range.py:353(dtype)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/api.py:328(_sanitize_and_check)
-        4    0.000    0.000    0.000    0.000 {method 'get_loc' of 'pandas._libs.index.IndexEngine' objects}
-       21    0.000    0.000    0.000    0.000 {built-in method _sre.unicode_iscased}
-        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/missing.py:460(array_equivalent)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/common.py:192(all_none)
-        6    0.000    0.000    0.000    0.000 {built-in method builtins.min}
         3    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/concat.py:113(<genexpr>)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/loguru/_recattrs.py:16(__format__)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:2372(<listcomp>)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:3731(_assert_can_do_setop)
-        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/tempfile.py:1001(__repr__)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:1061(from_blocks)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/blocks.py:2186(check_ndim)
-       19    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:1734(name)
-        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/posixpath.py:60(isabs)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/api.py:104(<listcomp>)
-        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/tempfile.py:436(gettempdir)
-        1    0.000    0.000    0.000    0.000 {built-in method posix.fstat}
-        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/generic.py:570(_get_block_manager_axis)
-        5    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/lib/arraysetops.py:133(_unique_dispatcher)
-        5    0.000    0.000    0.000    0.000 {method 'add' of 'pandas._libs.internals.BlockPlacement' objects}
-        8    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:2433(_using_copy_on_write)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/ops/dispatch.py:13(should_extension_dispatch)
-        3    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/ipykernel/iostream.py:137(_event_pipe)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/base.py:58(_validate_set_axis)
-        5    0.000    0.000    0.000    0.000 {method 'startswith' of 'str' objects}
-        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/sre_compile.py:485(_get_literal_prefix)
-        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/genericpath.py:121(_splitext)
-        5    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/concat.py:354(__init__)
-       21    0.000    0.000    0.000    0.000 {built-in method builtins.ord}
-        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/missing.py:910(clean_reindex_fill_method)
-        2    0.000    0.000    0.000    0.000 {built-in method numpy.seterrobj}
-       11    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_matrix.py:90(get_shape)
-        6    0.000    0.000    0.000    0.000 {method 'upper' of 'str' objects}
-        1    0.000    0.000    0.000    0.000 {method 'replace' of 'datetime.datetime' objects}
-        8    0.000    0.000    0.000    0.000 {built-in method sys.intern}
-        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:413(_engine_type)
-        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/os.py:755(encode)
-        6    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:188(blklocs)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/reshape/concat.py:682(<listcomp>)
-        1    0.000    0.000    0.000    0.000 {built-in method posix.close}
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/cast.py:714(_ensure_dtype_type)
         2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/IPython/core/interactiveshell.py:3442(compare)
-        4    0.000    0.000    0.000    0.000 /usr/lib/python3.10/sre_parse.py:161(__len__)
+       20    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/blocks.py:213(mgr_locs)
+        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/multiprocessing/process.py:234(ident)
+        8    0.000    0.000    0.000    0.000 {built-in method sys.intern}
+        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexing.py:2656(check_deprecated_indexers)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/common.py:192(all_none)
+        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/range.py:353(dtype)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/blocks.py:2186(check_ndim)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:228(set_axis)
+        9    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:1435(<genexpr>)
+        5    0.000    0.000    0.000    0.000 {method 'add' of 'pandas._libs.internals.BlockPlacement' objects}
+        4    0.000    0.000    0.000    0.000 {method 'get_loc' of 'pandas._libs.index.IndexEngine' objects}
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/ops/dispatch.py:13(should_extension_dispatch)
+        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/posixpath.py:60(isabs)
+        3    0.000    0.000    0.000    0.000 {built-in method posix.getpid}
+        8    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:574(_ensure_array)
+        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/construction.py:488(<listcomp>)
+        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/tempfile.py:1001(__repr__)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/api.py:328(_sanitize_and_check)
+        8    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:2433(_using_copy_on_write)
+        5    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/lib/arraysetops.py:133(_unique_dispatcher)
+        7    0.000    0.000    0.000    0.000 {method 'ravel' of 'numpy.ndarray' objects}
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/api.py:104(<listcomp>)
+        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/missing.py:460(array_equivalent)
+        8    0.000    0.000    0.000    0.000 {built-in method numpy.core._multiarray_umath.normalize_axis_index}
+        2    0.000    0.000    0.000    0.000 {built-in method pandas._libs.missing.checknull}
+        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/cast.py:527(maybe_promote)
+        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:413(_engine_type)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:2372(<listcomp>)
+       19    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:1734(name)
+        2    0.000    0.000    0.000    0.000 {built-in method numpy.seterrobj}
         2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/blocks.py:827(iget)
-        2    0.000    0.000    0.000    0.000 {method 'nonzero' of 'numpy.ndarray' objects}
-        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/sre_compile.py:447(_simple)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/shape_base.py:215(_vhstack_dispatcher)
+        5    0.000    0.000    0.000    0.000 {method 'startswith' of 'str' objects}
         1    0.000    0.000    0.000    0.000 {built-in method numpy.zeros}
-        6    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/blocks.py:500(dtype)
+        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/traitlets/traitlets.py:624(get)
+        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/common.py:151(cast_scalar_indexer)
+        5    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/concat.py:354(__init__)
         2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/cast.py:1422(sanitize_to_nanoseconds)
-        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/common.py:1433(is_extension_array_dtype)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/ipykernel/iostream.py:521(_is_master_process)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:2407(_preprocess_slice_or_indexer)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/generic.py:558(_get_axis_name)
-        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/fromnumeric.py:72(<dictcomp>)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/concat.py:103(<listcomp>)
+        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/tempfile.py:436(gettempdir)
+        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_compressed.py:1102(__set_has_canonical_format)
+        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/genericpath.py:121(_splitext)
         3    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/generic.py:5881(<genexpr>)
-        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:839(is_)
-        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/concat.py:110(<genexpr>)
-        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/IPython/core/interactiveshell.py:1231(user_global_ns)
-        2    0.000    0.000    0.000    0.000 {pandas._libs.internals.get_blkno_placements}
-        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/numeric.py:1455(<listcomp>)
-        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:1820(_get_names)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/common.py:1048(is_numeric_v_string_like)
-        6    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/generic.py:332(attrs)
-        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/sre_compile.py:516(_get_charset_prefix)
-        7    0.000    0.000    0.000    0.000 {method 'items' of 'dict' objects}
-        3    0.000    0.000    0.000    0.000 /usr/lib/python3.10/threading.py:1145(ident)
-        8    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:241(disallow_kwargs)
-        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/frame.py:857(axes)
-        6    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/generic.py:664(ndim)
-        4    0.000    0.000    0.000    0.000 {method 'join' of 'str' objects}
-       11    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/generic.py:353(flags)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/util/_validators.py:226(validate_bool_kwarg)
-        2    0.000    0.000    0.000    0.000 /usr/lib/python3.10/enum.py:678(__new__)
+        3    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/ipykernel/iostream.py:137(_event_pipe)
+        1    0.000    0.000    0.000    0.000 {built-in method posix.fstat}
+        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/missing.py:910(clean_reindex_fill_method)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:3731(_assert_can_do_setop)
         4    0.000    0.000    0.000    0.000 /usr/lib/python3.10/enum.py:801(value)
-        3    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:233(is_single_block)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/api.py:280(<listcomp>)
-        9    0.000    0.000    0.000    0.000 {pandas._libs.algos.ensure_platform_int}
-        7    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/multiarray.py:153(concatenate)
-        6    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:986(dtype)
-        3    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/fromnumeric.py:3176(ndim)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/concat.py:246(_maybe_reindex_columns_na_proxy)
-        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/sre_parse.py:76(__init__)
-        4    0.000    0.000    0.000    0.000 {method 'rfind' of 'str' objects}
-        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/sre_parse.py:928(fix_flags)
-       19    0.000    0.000    0.000    0.000 {built-in method _sre.unicode_tolower}
-        1    0.000    0.000    0.000    0.000 {built-in method _sre.compile}
-       10    0.000    0.000    0.000    0.000 {built-in method posix.fspath}
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/construction.py:861(is_empty_data)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:5402(<setcomp>)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/common.py:1048(is_numeric_v_string_like)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:2407(_preprocess_slice_or_indexer)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/loguru/_recattrs.py:16(__format__)
+        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/generic.py:570(_get_block_manager_axis)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/shape_base.py:215(_vhstack_dispatcher)
+        1    0.000    0.000    0.000    0.000 {built-in method posix.close}
+        2    0.000    0.000    0.000    0.000 {pandas._libs.internals.get_blkno_placements}
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/base.py:58(_validate_set_axis)
         1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/threading.py:267(__exit__)
-        2    0.000    0.000    0.000    0.000 /usr/lib/python3.10/sre_parse.py:112(__init__)
-        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/threading.py:264(__enter__)
-        5    0.000    0.000    0.000    0.000 {method 'copy' of 'dict' objects}
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/_ufunc_config.py:426(__init__)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/cast.py:756(infer_dtype_from_scalar)
-        2    0.000    0.000    0.000    0.000 /usr/lib/python3.10/sre_compile.py:619(isstring)
-        6    0.000    0.000    0.000    0.000 {pandas._libs.lib.item_from_zerodim}
-        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/numeric.py:1389(_moveaxis_dispatcher)
-        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/genericpath.py:87(samestat)
-        2    0.000    0.000    0.000    0.000 /usr/lib/python3.10/sre_compile.py:477(_get_iscased)
-        6    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/flags.py:53(allows_duplicate_labels)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/generic.py:5888(__getattr__)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/shape_base.py:207(_arrays_for_stack_dispatcher)
-        2    0.000    0.000    0.000    0.000 /usr/lib/python3.10/sre_parse.py:287(tell)
-        3    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/concat.py:117(<genexpr>)
-        1    0.000    0.000    0.000    0.000 {method '__format__' of 'str' objects}
-        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/tempfile.py:224(_infer_return_type)
-        3    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:238(items)
+        6    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/_dtype.py:24(_kind_name)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/generic.py:558(_get_axis_name)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/reshape/concat.py:682(<listcomp>)
+        6    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/generic.py:664(ndim)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/util/_validators.py:226(validate_bool_kwarg)
+        1    0.000    0.000    0.000    0.000 {method 'replace' of 'datetime.datetime' objects}
+        8    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:241(disallow_kwargs)
+        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/numeric.py:1455(<listcomp>)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/ipykernel/iostream.py:521(_is_master_process)
+        5    0.000    0.000    0.000    0.000 {pandas._libs.algos.ensure_object}
+       11    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_matrix.py:90(get_shape)
+        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/os.py:755(encode)
+        4    0.000    0.000    0.000    0.000 {method 'join' of 'str' objects}
+        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/common.py:1433(is_extension_array_dtype)
+        2    0.000    0.000    0.000    0.000 {method 'nonzero' of 'numpy.ndarray' objects}
+        7    0.000    0.000    0.000    0.000 {pandas._libs.lib.is_iterator}
+        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/fromnumeric.py:72(<dictcomp>)
+        6    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/generic.py:332(attrs)
         4    0.000    0.000    0.000    0.000 {built-in method numpy.geterrobj}
-        7    0.000    0.000    0.000    0.000 {method 'group' of 're.Match' objects}
+        6    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/blocks.py:500(dtype)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/concat.py:103(<listcomp>)
+       11    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/generic.py:353(flags)
+        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/concat.py:110(<genexpr>)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:5402(<setcomp>)
+        3    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/fromnumeric.py:3176(ndim)
+        4    0.000    0.000    0.000    0.000 {method 'rfind' of 'str' objects}
+        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:1820(_get_names)
+        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/frame.py:857(axes)
+        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/threading.py:264(__enter__)
+        6    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:188(blklocs)
+        7    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/multiarray.py:153(concatenate)
+        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/tempfile.py:224(_infer_return_type)
+        3    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:233(is_single_block)
+        6    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:986(dtype)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/construction.py:861(is_empty_data)
+       10    0.000    0.000    0.000    0.000 {built-in method posix.fspath}
+        6    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/flags.py:53(allows_duplicate_labels)
+        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/IPython/core/interactiveshell.py:1231(user_global_ns)
+        9    0.000    0.000    0.000    0.000 {pandas._libs.algos.ensure_platform_int}
+        6    0.000    0.000    0.000    0.000 {method 'items' of 'dict' objects}
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/shape_base.py:207(_arrays_for_stack_dispatcher)
+        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:839(is_)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/concat.py:246(_maybe_reindex_columns_na_proxy)
+        6    0.000    0.000    0.000    0.000 {pandas._libs.lib.item_from_zerodim}
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/cast.py:756(infer_dtype_from_scalar)
         2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/generic.py:5876(<genexpr>)
-        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/threading.py:273(_release_save)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/loguru/_recattrs.py:23(__init__)
-        3    0.000    0.000    0.000    0.000 {method 'item' of 'numpy.ndarray' objects}
-        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/multiarray.py:85(empty_like)
-        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/concat.py:92(is_nonempty)
-        2    0.000    0.000    0.000    0.000 /usr/lib/python3.10/sre_parse.py:82(groups)
-        5    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/blocks.py:823(shape)
-        4    0.000    0.000    0.000    0.000 {built-in method builtins.callable}
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/common.py:537(is_string_or_object_np_dtype)
-        3    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:2009(_block)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:5411(<listcomp>)
-        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/cast.py:1931(np_can_hold_element)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/loguru/_recattrs.py:8(__init__)
-        5    0.000    0.000    0.000    0.000 {pandas._libs.lib.is_integer}
-        8    0.000    0.000    0.000    0.000 {method 'random' of '_random.Random' objects}
-        2    0.000    0.000    0.000    0.000 /usr/lib/python3.10/pathlib.py:239(splitroot)
-        1    0.000    0.000    0.000    0.000 {built-in method builtins.divmod}
-        5    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/common.py:196(<genexpr>)
-        2    0.000    0.000    0.000    0.000 {built-in method numpy.promote_types}
-        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/os.py:817(fsdecode)
-        2    0.000    0.000    0.000    0.000 {method 'end' of 're.Match' objects}
-        2    0.000    0.000    0.000    0.000 {method 'values' of 'collections.OrderedDict' objects}
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/common.py:178(not_none)
-        5    0.000    0.000    0.000    0.000 {method 'pop' of 'dict' objects}
-        1    0.000    0.000    0.000    0.000 {built-in method sys._getframe}
-        2    0.000    0.000    0.000    0.000 {built-in method _thread.allocate_lock}
-        4    0.000    0.000    0.000    0.000 {built-in method builtins.id}
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/reshape/concat.py:625(_get_result_dim)
-        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/missing.py:107(clean_fill_method)
-        5    0.000    0.000    0.000    0.000 {pandas._libs.lib.is_float}
-        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/threading.py:279(_is_owned)
-        8    0.000    0.000    0.000    0.000 {built-in method math.floor}
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/api.py:349(<setcomp>)
-        4    0.000    0.000    0.000    0.000 /usr/lib/python3.10/threading.py:553(is_set)
-        3    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:6193(_index_as_unique)
-        2    0.000    0.000    0.000    0.000 /usr/lib/python3.10/sre_parse.py:250(match)
-        3    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/fromnumeric.py:3172(_ndim_dispatcher)
-        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_compressed.py:1142(__set_sorted)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/concat.py:108(<setcomp>)
-        2    0.000    0.000    0.000    0.000 {method 'values' of 'dict' objects}
-        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/multiarray.py:669(result_type)
-        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/codecs.py:260(__init__)
-        3    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/common.py:182(<genexpr>)
         1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/threading.py:276(_acquire_restore)
-        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/fromnumeric.py:1764(_ravel_dispatcher)
+        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/cast.py:1931(np_can_hold_element)
+        3    0.000    0.000    0.000    0.000 {method 'item' of 'numpy.ndarray' objects}
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/api.py:280(<listcomp>)
+        5    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/blocks.py:823(shape)
+        3    0.000    0.000    0.000    0.000 /usr/lib/python3.10/threading.py:1145(ident)
+        5    0.000    0.000    0.000    0.000 {method 'copy' of 'dict' objects}
+        2    0.000    0.000    0.000    0.000 /usr/lib/python3.10/pathlib.py:239(splitroot)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/generic.py:5888(__getattr__)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/loguru/_recattrs.py:23(__init__)
+        2    0.000    0.000    0.000    0.000 {method 'values' of 'collections.OrderedDict' objects}
+        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/threading.py:273(_release_save)
+        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/os.py:817(fsdecode)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/_ufunc_config.py:426(__init__)
+        3    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/concat.py:117(<genexpr>)
+        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/numeric.py:1389(_moveaxis_dispatcher)
+        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/concat.py:92(is_nonempty)
+        3    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:238(items)
+        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/genericpath.py:87(samestat)
+        7    0.000    0.000    0.000    0.000 {method 'group' of 're.Match' objects}
         2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/frame.py:600(_constructor)
-        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/lib/function_base.py:5558(_append_dispatcher)
-        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:6569(_maybe_cast_indexer)
+        1    0.000    0.000    0.000    0.000 {method '__format__' of 'str' objects}
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:5411(<listcomp>)
+        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/missing.py:107(clean_fill_method)
+        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/threading.py:279(_is_owned)
+        8    0.000    0.000    0.000    0.000 {method 'random' of '_random.Random' objects}
+        2    0.000    0.000    0.000    0.000 {method 'end' of 're.Match' objects}
+        1    0.000    0.000    0.000    0.000 {built-in method builtins.divmod}
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/loguru/_recattrs.py:8(__init__)
+        1    0.000    0.000    0.000    0.000 {built-in method sys._getframe}
+        2    0.000    0.000    0.000    0.000 {method 'values' of 'dict' objects}
+        4    0.000    0.000    0.000    0.000 {built-in method builtins.id}
+        3    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:2009(_block)
+        5    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/common.py:196(<genexpr>)
+        8    0.000    0.000    0.000    0.000 {built-in method math.floor}
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/common.py:537(is_string_or_object_np_dtype)
+        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/codecs.py:260(__init__)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/reshape/concat.py:625(_get_result_dim)
+        3    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:6193(_index_as_unique)
         1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/concat.py:109(<setcomp>)
-        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/multiprocessing/process.py:37(current_process)
-        2    0.000    0.000    0.000    0.000 {built-in method sys.audit}
-        1    0.000    0.000    0.000    0.000 {method 'get' of '_contextvars.ContextVar' objects}
-        4    0.000    0.000    0.000    0.000 {method 'add' of 'set' objects}
-        4    0.000    0.000    0.000    0.000 {method 'append' of 'collections.deque' objects}
-        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/multiarray.py:892(bincount)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/reshape/concat.py:701(_maybe_check_integrity)
-        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/tempfile.py:368(_get_candidate_names)
+        4    0.000    0.000    0.000    0.000 /usr/lib/python3.10/threading.py:553(is_set)
         2    0.000    0.000    0.000    0.000 {method 'endswith' of 'str' objects}
-        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/lib/shape_base.py:1257(<genexpr>)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:2381(<listcomp>)
-        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/lib/function_base.py:5364(_insert_dispatcher)
-        1    0.000    0.000    0.000    0.000 {method 'write' of '_io.StringIO' objects}
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/loguru/_recattrs.py:37(__init__)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/loguru/_recattrs.py:51(__init__)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:3209(_validate_sort_keyword)
-        3    0.000    0.000    0.000    0.000 {pandas._libs.lib.is_bool}
-        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/multiprocessing/process.py:99(_check_closed)
-        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/shape_base.py:77(_atleast_2d_dispatcher)
-        1    0.000    0.000    0.000    0.000 {method '__exit__' of 'posix.ScandirIterator' objects}
-        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/tempfile.py:424(_gettempdir)
-        2    0.000    0.000    0.000    0.000 {built-in method _thread.get_ident}
-        1    0.000    0.000    0.000    0.000 {method 'total_seconds' of 'datetime.timedelta' objects}
-        1    0.000    0.000    0.000    0.000 {method 'items' of 'collections.OrderedDict' objects}
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/fromnumeric.py:2974(_prod_dispatcher)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/lib/shape_base.py:1181(_tile_dispatcher)
-        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/base.py:324(ndim)
-        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/threading.py:1129(name)
-        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+        2    0.000    0.000    0.000    0.000 {built-in method numpy.promote_types}
+        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/lib/function_base.py:5558(_append_dispatcher)
+        2    0.000    0.000    0.000    0.000 {built-in method _thread.allocate_lock}
+        1    0.000    0.000    0.000    0.000 {method 'get' of '_contextvars.ContextVar' objects}
+        5    0.000    0.000    0.000    0.000 {method 'pop' of 'dict' objects}
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/api.py:349(<setcomp>)
+        2    0.000    0.000    0.000    0.000 {built-in method sys.audit}
+        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:6569(_maybe_cast_indexer)
         2    0.000    0.000    0.000    0.000 {built-in method io.text_encoding}
-        1    0.000    0.000    0.000    0.000 {method '__exit__' of '_thread.RLock' objects}
-        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/sre_parse.py:169(__setitem__)
+        4    0.000    0.000    0.000    0.000 {pandas._libs.lib.is_integer}
+        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/lib/shape_base.py:1257(<genexpr>)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/loguru/_recattrs.py:51(__init__)
+        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/multiprocessing/process.py:99(_check_closed)
+        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/scipy/sparse/_compressed.py:1142(__set_sorted)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/common.py:178(not_none)
+        3    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/fromnumeric.py:3172(_ndim_dispatcher)
+        3    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/common.py:182(<genexpr>)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/internals/managers.py:2381(<listcomp>)
+        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/multiarray.py:85(empty_like)
+        1    0.000    0.000    0.000    0.000 {method 'write' of '_io.StringIO' objects}
+        4    0.000    0.000    0.000    0.000 {method 'add' of 'set' objects}
+        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/lib/function_base.py:5364(_insert_dispatcher)
+        4    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/fromnumeric.py:1764(_ravel_dispatcher)
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/multiarray.py:892(bincount)
+        4    0.000    0.000    0.000    0.000 {pandas._libs.lib.is_float}
+        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/tempfile.py:1004(__enter__)
+        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/multiprocessing/process.py:37(current_process)
+        2    0.000    0.000    0.000    0.000 {built-in method _thread.get_ident}
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/concat.py:108(<setcomp>)
+        1    0.000    0.000    0.000    0.000 {built-in method builtins.min}
+        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/threading.py:1129(name)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:3209(_validate_sort_keyword)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/lib/shape_base.py:1181(_tile_dispatcher)
+        1    0.000    0.000    0.000    0.000 {method 'total_seconds' of 'datetime.timedelta' objects}
+        4    0.000    0.000    0.000    0.000 {method 'append' of 'collections.deque' objects}
+        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/shape_base.py:77(_atleast_2d_dispatcher)
+        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/multiprocessing/process.py:189(name)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/reshape/concat.py:701(_maybe_check_integrity)
         2    0.000    0.000    0.000    0.000 {method 'reverse' of 'list' objects}
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/lib/function_base.py:5168(_delete_dispatcher)
+        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/tempfile.py:368(_get_candidate_names)
         2    0.000    0.000    0.000    0.000 {method '__exit__' of '_thread.lock' objects}
         1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/dtypes/concat.py:116(<setcomp>)
-        1    0.000    0.000    0.000    0.000 {method 'tzname' of 'datetime.timezone' objects}
-        1    0.000    0.000    0.000    0.000 {built-in method atexit.register}
-        1    0.000    0.000    0.000    0.000 {built-in method numpy.ascontiguousarray}
         1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/series.py:546(_constructor)
-        1    0.000    0.000    0.000    0.000 {method 'encode' of 'str' objects}
-        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/multiprocessing/process.py:189(name)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/fromnumeric.py:2416(_all_dispatcher)
-        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:728(_constructor)
         1    0.000    0.000    0.000    0.000 {method 'rstrip' of 'str' objects}
-        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/tempfile.py:1004(__enter__)
+        2    0.000    0.000    0.000    0.000 {pandas._libs.lib.is_bool}
+        1    0.000    0.000    0.000    0.000 {built-in method builtins.abs}
+        1    0.000    0.000    0.000    0.000 /usr/lib/python3.10/tempfile.py:424(_gettempdir)
+        1    0.000    0.000    0.000    0.000 {method 'encode' of 'str' objects}
+        1    0.000    0.000    0.000    0.000 {method '__exit__' of '_thread.RLock' objects}
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/fromnumeric.py:2974(_prod_dispatcher)
+        1    0.000    0.000    0.000    0.000 {method 'items' of 'collections.OrderedDict' objects}
+        2    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/base.py:324(ndim)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/lib/function_base.py:5168(_delete_dispatcher)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/fromnumeric.py:2416(_all_dispatcher)
+        1    0.000    0.000    0.000    0.000 {method 'tzname' of 'datetime.timezone' objects}
+        1    0.000    0.000    0.000    0.000 {built-in method numpy.ascontiguousarray}
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/loguru/_recattrs.py:37(__init__)
+        1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/base.py:728(_constructor)
+        1    0.000    0.000    0.000    0.000 {method '__exit__' of 'posix.ScandirIterator' objects}
         1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/fromnumeric.py:1021(_argsort_dispatcher)
         1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/pandas/core/indexes/api.py:281(<listcomp>)
-        1    0.000    0.000    0.000    0.000 {method 'release' of '_thread.lock' objects}
         1    0.000    0.000    0.000    0.000 {method '__enter__' of '_thread.lock' objects}
-        1    0.000    0.000    0.000    0.000 {built-in method builtins.abs}
+        1    0.000    0.000    0.000    0.000 {method 'release' of '_thread.lock' objects}
         1    0.000    0.000    0.000    0.000 {method 'utcoffset' of 'datetime.timezone' objects}
         1    0.000    0.000    0.000    0.000 /home/soeren/mesh2vec/.venv/lib/python3.10/site-packages/numpy/core/shape_base.py:19(_atleast_1d_dispatcher)
-        1    0.000    0.000    0.000    0.000 {function FrozenList.__getitem__ at 0x7f0ed407d5a0}
+        1    0.000    0.000    0.000    0.000 {function FrozenList.__getitem__ at 0x7fddbdab1510}
 
 
