@@ -2,7 +2,7 @@
 from typing import OrderedDict, List, Tuple, Dict
 
 import numpy as np
-from scipy.sparse import csr_array, coo_array, eye, csr_matrix, lil_matrix
+from scipy.sparse import csr_array, coo_array, eye, csr_matrix, lil_matrix, coo_matrix
 import igraph as ip
 from abc import ABC, abstractmethod
 import time
@@ -103,48 +103,26 @@ class BFSAdjacency(AbstractAdjacencyStrategy):
         # General idea: BFS for each vertex for each depth #
         ####################################################
 
-        # convert once instead of every time in loop
-        vertices = [int(vertice) for vertice in hyper_edges_idx.keys()]
-
         for depth in range(2, max_distance + 1):
+
             adjacency_matrix = lil_matrix((n_vtx, n_vtx))
-            # grab the last cumulative matrix that we calculated as our base; LIL are more efficient than csr matrices
-            cumulative_matrix = adjacency_matrix_powers[depth - 1].tolil()
+            cumulative_matrix = lil_matrix((n_vtx, n_vtx))
             print("HAHA")
-            for vertex in vertices:
-                queue = [vertex]
-                visited = set()
-                current_depth = 0
 
-                while queue and current_depth <= depth:
-                    next_level = set()
-                    for v in queue:
-                        if v not in visited:
-                            visited.add(v)
-                            adjacency_matrix[vertex, v] = 1
-                            cumulative_matrix[vertex, v] = 1
-                            neighbors = graph.neighbors(v)
-                            next_level.update(neighbors)
-                    queue = list(next_level)
-                    current_depth += 1
+            for vertex in graph.vs.indices:
+                exclusive_neighborhood = graph.neighborhood(vertices=vertex, mindist=depth, order=depth)
+                inclusive_neighborhood = graph.neighborhood(vertices=vertex, order=depth)
+                adjacency_matrix[vertex, exclusive_neighborhood] = 1
+                cumulative_matrix[vertex, inclusive_neighborhood] = 1 
             print("BOO")
-            # convert powers matrix from previous depth from lil to csr, as we will not look at it anymore
-            adjacency_matrix_powers[depth - 1] = adjacency_matrix_powers[depth - 1].tocsr() - csr_matrix(eye(n_vtx, dtype=int))
 
-            print("LAUTRE")
-            # add adjacency matrix for specific depth
-            lil_result = adjacency_matrix - lil_matrix(eye(n_vtx, dtype=int))
-            adjacency_matrix_powers_exclusive[depth] = csr_matrix(lil_result)
 
-            print("HAMBURG")
-            # add cumulative to powers, not in csr yet; we need to use it in the next iteration
-            adjacency_matrix_powers[depth] = cumulative_matrix
+            adjacency_matrix_powers_exclusive[depth] = (adjacency_matrix - csr_matrix(eye(n_vtx, dtype=int))).tocsr().toarray()
+            adjacency_matrix_powers[depth] = (cumulative_matrix - csr_matrix(eye(n_vtx, dtype=int))).tocsr().toarray()
 
             print("POWERS BEGINNING ", str(depth), " : ", adjacency_matrix_powers)
             print("POWERS EXCLUSIVE", str(depth), " : ", adjacency_matrix_powers_exclusive)
 
-        # convert last cumulative matrix to CSR
-        # adjacency_matrix_powers[max_distance] = csr_matrix(adjacency_matrix_powers[depth - 1]) - csr_matrix(eye(n_vtx, dtype=int))
         print("THIS TOOK: ", time.time() - timer)
 
         return adjacency_matrix_powers, adjacency_matrix_powers_exclusive
