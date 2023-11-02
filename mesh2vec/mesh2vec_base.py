@@ -11,7 +11,7 @@ from scipy.sparse import csr_array
 # noinspection PyProtectedMember
 from pandas.api.types import is_string_dtype
 
-from mesh2vec.helpers import calc_adjacencies
+from mesh2vec.helpers import MatMulAdjacency, BFSAdjacency
 from mesh2vec.mesh2vec_exceptions import (
     check_distance_init_arg,
     check_distance_arg,
@@ -86,9 +86,18 @@ class Mesh2VecBase:
             for h_edge_id, vtx_ids in self._hyper_edges.items()
         )
 
-        self._adjacency_matrix_powers, self._adjacency_matrix_powers_exclusive = calc_adjacencies(
-            hyper_edges_idx, distance
-        )
+        # choose between BFSAdjacency and MatMulAdjacency
+        calc_strategy1 = MatMulAdjacency()
+        calc_strategy2 = BFSAdjacency()
+        (
+            self._adjacency_matrix_powers,
+            self._adjacency_matrix_powers_exclusive,
+        ) = calc_strategy1.calc_adjacencies(hyper_edges_idx, distance)
+        print("NEW STRATEGY")
+        (
+            self._adjacency_matrix_powers1,
+            self._adjacency_matrix_powers_exclusive1,
+        ) = calc_strategy2.calc_adjacencies(hyper_edges_idx, distance)
 
     @staticmethod
     def from_file(hg_file: Path, distance: int) -> "Mesh2VecBase":
