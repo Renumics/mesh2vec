@@ -99,8 +99,14 @@ class Mesh2VecBase:
             self._adjacency_matrix_powers_exclusive1,
         ) = calc_strategy2.calc_adjacencies(hyper_edges_idx, distance)
 
-        print("Test auf Gleichheit: ", self._adjacency_matrix_powers == self._adjacency_matrix_powers1)
-        print("Test auf Gleichheit: ", self._adjacency_matrix_powers_exclusive == self._adjacency_matrix_powers_exclusive1)
+        print(
+            "Test auf Gleichheit: ",
+            self._adjacency_matrix_powers == self._adjacency_matrix_powers1,
+        )
+        print(
+            "Test auf Gleichheit: ",
+            self._adjacency_matrix_powers_exclusive == self._adjacency_matrix_powers_exclusive1,
+        )
 
     @staticmethod
     def from_file(hg_file: Path, distance: int) -> "Mesh2VecBase":
