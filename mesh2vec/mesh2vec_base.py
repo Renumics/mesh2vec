@@ -11,7 +11,7 @@ from scipy.sparse import csr_array
 # noinspection PyProtectedMember
 from pandas.api.types import is_string_dtype
 
-from mesh2vec.helpers import MatMulAdjacency, BFSAdjacency
+from mesh2vec.helpers import MatMulAdjacency, AbstractAdjacencyStrategy
 from mesh2vec.mesh2vec_exceptions import (
     check_distance_init_arg,
     check_distance_arg,
@@ -36,6 +36,7 @@ class Mesh2VecBase:
         distance: int,
         hyper_edges: Dict[str, List[str]],
         vtx_ids: Optional[List[str]] = None,
+        calc_strategy: AbstractAdjacencyStrategy = None,
     ):
         r"""
         Create neighborhood sets on a hypergraph.
@@ -49,6 +50,7 @@ class Mesh2VecBase:
             hyper_edges: edge->connected vertices
             vtx_ids: provide a list of all vertices to control inernal order of vertices
                 (features, aggregated feature)
+            calc_strategy: choose the algorithm to calculate adjacencies
 
         Example:
             >>> from mesh2vec.mesh2vec_base import Mesh2VecBase
@@ -85,28 +87,13 @@ class Mesh2VecBase:
             )
             for h_edge_id, vtx_ids in self._hyper_edges.items()
         )
-
-        # choose between BFSAdjacency and MatMulAdjacency
-        calc_strategy1 = MatMulAdjacency()
-        calc_strategy2 = BFSAdjacency()
+        if calc_strategy is None:
+            calc_strategy = MatMulAdjacency()
+        self._calc_strategy = calc_strategy
         (
             self._adjacency_matrix_powers,
             self._adjacency_matrix_powers_exclusive,
-        ) = calc_strategy1.calc_adjacencies(hyper_edges_idx, distance)
-        print("NEW STRATEGY")
-        (
-            self._adjacency_matrix_powers1,
-            self._adjacency_matrix_powers_exclusive1,
-        ) = calc_strategy2.calc_adjacencies(hyper_edges_idx, distance)
-
-        print(
-            "Test auf Gleichheit: ",
-            self._adjacency_matrix_powers == self._adjacency_matrix_powers1,
-        )
-        print(
-            "Test auf Gleichheit: ",
-            self._adjacency_matrix_powers_exclusive == self._adjacency_matrix_powers_exclusive1,
-        )
+        ) = self._calc_strategy.calc_adjacencies(hyper_edges_idx, distance)
 
     @staticmethod
     def from_file(hg_file: Path, distance: int) -> "Mesh2VecBase":
@@ -180,9 +167,10 @@ class Mesh2VecBase:
         if dist == 0:
             return [vtx]
 
-        vertices_idx = self._adjacency_matrix_powers_exclusive[dist][
-            [self._vtx_ids_to_idx[vtx]], :
-        ].indices
+        vertices_idx = self._calc_strategy.get_neighbors_exclusive(dist, self._vtx_ids_to_idx[vtx]).indices
+        #vertices_idx = self._adjacency_matrix_powers_exclusive[dist][
+        #    [self._vtx_ids_to_idx[vtx]], :
+        #].indices
         return [self._vtx_idx_to_ids[i] for i in vertices_idx]
 
     def aggregate_categorical(
@@ -334,7 +322,8 @@ class Mesh2VecBase:
             return [[feature] for feature in features]
 
         neighborhoods = [
-            self._adjacency_matrix_powers_exclusive[dist][[i], :].indices
+            # self._adjacency_matrix_powers_exclusive[dist][[i], :].indices
+            self._calc_strategy.get_neighbors_exclusive(dist, i).indices
             for i in range(len(self._features))
         ]
         values = [features[neighborhood] for neighborhood in neighborhoods]

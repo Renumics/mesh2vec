@@ -9,3 +9,4 @@ __pycache__
 .venv/
 .ipynb_checkpoints
 data/mb_private_data
+plot_mb*

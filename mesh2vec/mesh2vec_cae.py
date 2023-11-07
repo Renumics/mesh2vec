@@ -14,6 +14,7 @@ from lasso.dyna import D3plot, ArrayType
 import plotly.graph_objects as go
 
 from mesh2vec import mesh_features
+from mesh2vec.helpers import AbstractAdjacencyStrategy
 from mesh2vec.mesh_features import CaeShellMesh, is_tri, num_border, midpoint
 from mesh2vec.mesh2vec_base import Mesh2VecBase
 from mesh2vec.mesh2vec_exceptions import check_feature_available, AnsaNotFoundException
@@ -34,6 +35,7 @@ class Mesh2VecCae(Mesh2VecBase):
         distance: int,
         mesh: CaeShellMesh,
         mesh_info: pd.DataFrame,
+        calc_strategy: AbstractAdjacencyStrategy = None,
     ) -> None:
         # pylint: disable=line-too-long
         """
@@ -44,6 +46,7 @@ class Mesh2VecCae(Mesh2VecBase):
             mesh: points, point_ids/uids, connectivity and element_ids/uids
             mesh_info: additional info about the elements in mesh (same order is required)
                 columns "part_name", "part_id", "file_path", "element_id" are required
+            calc_strategy: choose the algorithm to calculate adjacencies
 
         Example:
             >>> import numpy as np
@@ -83,7 +86,12 @@ class Mesh2VecCae(Mesh2VecBase):
 
         hyper_vtx_ids = mesh.element_uid
 
-        super().__init__(distance, points_to_faces_str, vtx_ids=hyper_vtx_ids.tolist())
+        super().__init__(
+            distance,
+            points_to_faces_str,
+            vtx_ids=hyper_vtx_ids.tolist(),
+            calc_strategy=calc_strategy,
+        )
         self._mesh = mesh
         self._element_info = pd.DataFrame(
             {
@@ -127,6 +135,7 @@ class Mesh2VecCae(Mesh2VecBase):
         ansa_executable: Optional[Path] = None,
         ansa_script: Optional[Path] = None,
         verbose: bool = False,
+        calc_strategy: AbstractAdjacencyStrategy = None,
     ) -> "Mesh2VecCae":
         """
         Read the given ANSA file and use the shell elements corresponding with ``partid`` to
@@ -170,7 +179,7 @@ class Mesh2VecCae(Mesh2VecBase):
         )
         element_info["part_id"] = [element["__part__"] for element in elements]
         element_info["file_path"] = str(ansafile)
-        return Mesh2VecCae(distance, mesh, element_info)
+        return Mesh2VecCae(distance, mesh, element_info, calc_strategy)
 
     @staticmethod
     def from_d3plot_shell(distance: int, d3plot: Path, partid: str = None) -> "Mesh2VecCae":
