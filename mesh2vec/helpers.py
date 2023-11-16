@@ -1,9 +1,11 @@
 """helper functions"""
 from typing import OrderedDict, List, Tuple, Dict
-
+from numba import njit
 import numpy as np
+from collections import deque
 from scipy.sparse import csr_array, coo_array, eye
 import igraph as ip
+import itertools
 from abc import ABC, abstractmethod
 
 """
@@ -11,14 +13,69 @@ Use strategy to implement multiple adjacency finding algorithms
 """
 
 
+@njit(parallel=True, fastmath=True)
+def numba_compute(adj_list, depth):
+    # prevent recalculating length
+    num_vertices = len(adj_list)
+    # "adjacency" list: position in aray -> node id, values: reachable nodes for depth
+    # lists instead of sets due to numba compatibility
+    reachable_nodes = [np.empty(0, dtype=np.int64) for _ in prange(num_vertices)]
+
+    for start_vertex in prange(num_vertices):
+        visited = np.zeros(num_vertices, dtype=np.bool_)
+        visited[start_vertex] = True
+
+        queue = np.zeros(num_vertices, dtype=np.int64)
+        front, rear = -1, -1
+
+        queue[0] = start_vertex
+        rear += 1
+
+        current_depth = 1
+
+        while front != rear and current_depth <= depth:
+            front += 1
+            current_vertex = queue[front]
+
+            for neighbor in adj_list[current_vertex]:
+                if not visited[neighbor]:
+                    visited[neighbor] = True
+                    # list in list append not supported in numba
+                    reachable_nodes[start_vertex] = np.append(
+                        reachable_nodes[start_vertex], neighbor
+                    )
+
+                    if current_depth < depth:
+                        queue[rear] = neighbor
+                        rear += 1
+
+            if front == rear - 1:
+                current_depth += 1
+
+    return reachable_nodes
+
+
 class AbstractAdjacencyStrategy(ABC):
     def __init__(self):
-        self.__adjacency_matrix_powers = None
-        self.__adjacency_matrix_powers_exclusive = None
-    
+        self.adjacency_matrix_powers = None
+        self.adjacency_matrix_powers_exclusive = None
+        self.idx_conversion = None
+        self.id_conversion = None
+
     def set_matrices(self, matrix_powers, matrix_powers_exclusive):
-        self.__adjacency_matrix_powers = matrix_powers
-        self.__adjacency_matrix_powers_exclusive = matrix_powers_exclusive
+        self.adjacency_matrix_powers = matrix_powers
+        self.adjacency_matrix_powers_exclusive = matrix_powers_exclusive
+
+    def set_idx_conversion(self, translation: OrderedDict):
+        # key -> vtx_id, value -> index
+        print(
+            list(translation.keys())[0], "translates to", translation[list(translation.keys())[0]]
+        )
+        self.idx_conversion = translation
+
+    def set_id_conversion(self, translation: OrderedDict):
+        # key -> vtx_idx, value -> vtx_id
+        self.id_conversion = translation
 
     @abstractmethod
     def calc_adjacencies(
@@ -27,7 +84,9 @@ class AbstractAdjacencyStrategy(ABC):
         pass
 
     @abstractmethod
-    def get_neighbors_exclusive(self, distance: int, vtx_id: int) -> List[int]:
+    def get_neighbors_exclusive(
+        self, distance: int, vtx_id: int, transformation: bool = True
+    ) -> List[int]:
         pass
 
 
@@ -69,10 +128,22 @@ class MatMulAdjacency(AbstractAdjacencyStrategy):
 
         self.set_matrices(adjacency_matrix_powers, adjacency_matrix_powers_exclusive)
         return adjacency_matrix_powers, adjacency_matrix_powers_exclusive
-    
-    def get_neighbors_exclusive(self, distance: int, vtx_id: int) -> List[int]:
-        return self.__adjacency_matrix_powers_exclusive[distance][vtx_id]
-    
+
+    def get_neighbors_exclusive(
+        self, distance: int, vtx_id: int, transformation: bool = True
+    ) -> List[int]:
+        row_index = self.idx_conversion[vtx_id]
+        # get the indices;
+        selected_row = self.adjacency_matrix_powers_exclusive[distance][[row_index], :]
+        # nonzero returns a tuple of ([row], [columns]); since we already selected the correct row:
+        # look at columns (= vtx_indices)
+        nonzero_indices = selected_row.nonzero()[1]
+        if transformation:
+            # convert to vtx_ids
+            nonzero_ids = [self.id_conversion[index] for index in nonzero_indices]
+            return nonzero_ids
+        return nonzero_indices
+
     def __str__(self) -> str:
         return "MatMulAdjacency"
 
@@ -84,13 +155,12 @@ class BFSAdjacency(AbstractAdjacencyStrategy):
     def calc_adjacencies(
         self, hyper_edges_idx: OrderedDict[str, List[int]], max_distance: int
     ) -> Tuple[Dict[int, csr_array], Dict[int, csr_array]]:
-
         adjacency_list = []
         for vtxs in hyper_edges_idx.values():
             for vtx_a in vtxs:
                 for vtx_b in vtxs:
                     adjacency_list.append([vtx_a, vtx_b])
-        adjacency_list_np = np.unique(np.array(adjacency_list), axis=0)
+        adjacency_list_np: np.ndarray = np.unique(np.array(adjacency_list), axis=0)
 
         graph = ip.Graph(adjacency_list_np)
 
@@ -109,9 +179,104 @@ class BFSAdjacency(AbstractAdjacencyStrategy):
 
         self.set_matrices(adjacency_list_inclusive, adjacency_list_exclusive)
         return adjacency_list_inclusive, adjacency_list_exclusive
-    
+
     def get_neighbors_exclusive(self, distance: int, vtx_id: int) -> List[int]:
-        return self.__adjacency_matrix_powers_exclusive[distance][vtx_id]
-    
+        # TODO CONVERSION
+        return self.adjacency_matrix_powers_exclusive[distance][self.idx_conversion[vtx_id]]
+
     def __str__(self) -> str:
         return "BFSAdjacency"
+
+
+class BFSNumba(AbstractAdjacencyStrategy):
+    def __init__(self):
+        super().__init__()
+
+    def get_neighbors_exclusive(self, distance: int, vtx_id: int) -> List[int]:
+        # TODO CONVERSION
+        return self.adjacency_matrix_powers_exclusive[distance][self.idx_conversion[vtx_id]]
+
+    def __str__(self) -> str:
+        return "BFSNumba"
+
+    def calc_adjacencies(
+        self, hyper_edges_idx: OrderedDict[str, List[int]], max_distance: int
+    ) -> Tuple[Dict[int, csr_array], Dict[int, csr_array]]:
+        adjacency_list = []
+        for vtxs in hyper_edges_idx.values():
+            for vtx_a in vtxs:
+                for vtx_b in vtxs:
+                    adjacency_list.append([vtx_a, vtx_b])
+
+        adjacency_list_np = np.unique(np.array(adjacency_list), axis=0)
+        adjacency_list_inclusive = {1: np.array([1, 2, 3])}
+        adjacency_list_exclusive = adjacency_list_inclusive
+        numba_compute(adjacency_list_np, 20)
+        return adjacency_list_inclusive, adjacency_list_exclusive
+
+
+class PurePythonBFS(AbstractAdjacencyStrategy):
+    def __init__(self):
+        super().__init__()
+
+    def __str__(self) -> str:
+        return "PurePythonBFS"
+
+    def get_neighbors_exclusive(self, distance: int, vtx_id: int) -> List[int]:
+        row_index = self.idx_conversion[vtx_id]
+        print(self.adjacency_matrix_powers_exclusive[row_index])
+        idx_list = self.adjacency_matrix_powers_exclusive[row_index][distance]
+        return [self.id_conversion[idx] for idx in idx_list]
+
+    def get_neighbors_inclusive(self, distance: int, vtx_id: int) -> List[int]:
+        # join all sublists of neighbors into one
+        row_index = self.idx_conversion[vtx_id]
+        row_index = vtx_id
+        idx_list = itertools.chain(self.adjacency_matrix_powers_exclusive[row_index][:distance])
+        return [self.id_conversion[index] for index in idx_list]
+
+    def calc_adjacencies(
+        self, hyper_edges_idx: OrderedDict[str, List[int]], max_distance: int
+    ) -> Tuple[List[List[int]], List[List[int]]]:
+        # hyper_edges keys are still in id format, while values are in index format
+        vertices = [self.idx_conversion[v_id] for v_id in list(hyper_edges_idx.keys())]
+
+        # each vertex has a list of lists where the index of the list corresponds to the depth of its contained neighbors
+        # e.g.: neighbor 300 at depth 2, neighbor 400 at depth 1 with max_distance 3 -> [[400], [300], []]
+        neighbors_at_depth = {vertex: [[] for _ in range(max_distance)] for vertex in vertices}
+
+        # for each vertex, do bfs separately
+        for start_vertex in vertices:
+            # Initialize the queue for BFS: (vertex, depth)
+            queue = deque([(start_vertex, 0)])
+
+            # Use a set to keep track of visited vertices
+            visited = set([start_vertex])
+
+            while queue:
+                # depth is saved in queue -> no tracking in loop
+                vertex, depth = queue.popleft()
+
+                # do not track vertex identity in neighbors; new vertices will not be duplicates due
+                # to visited set tracking
+                if vertex != start_vertex:
+                    # add found neighbor to start_vertex's neighbors
+                    neighbors_at_depth[start_vertex][depth].append(vertex)
+
+                # Check if we've reached the maximum depth; if not look for next level neighbors
+                # of found neighbor
+                if depth < max_distance:
+                    vtx_id = self.id_conversion[vertex]
+                    # Add unvisited neighbors to the queue; these are already in our dictionary
+                    # ATTENTION: Some vertices do not have neighbors and thus might NOT be in dict as key
+                    if vtx_id in hyper_edges_idx.keys():
+                        neighbors = set(hyper_edges_idx[vtx_id]) - visited
+                        queue.extend((neighbor, depth + 1) for neighbor in neighbors)
+                        visited.update(neighbors)
+
+        self.adjacency_matrix_powers_exclusive = neighbors_at_depth
+        self.set_matrices(neighbors_at_depth, neighbors_at_depth)
+
+        # constructing an inclusive neighbor matrix/ dictionary would be expensive; use get_neighbors_inclusive
+        # to get inclusive neighbors for specific vertex. This avoids computational overhead
+        return neighbors_at_depth, neighbors_at_depth

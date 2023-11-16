@@ -90,6 +90,8 @@ class Mesh2VecBase:
         if calc_strategy is None:
             calc_strategy = MatMulAdjacency()
         self._calc_strategy = calc_strategy
+        self._calc_strategy.set_idx_conversion(self._vtx_ids_to_idx)
+        self._calc_strategy.set_id_conversion(self._vtx_idx_to_ids)
         (
             self._adjacency_matrix_powers,
             self._adjacency_matrix_powers_exclusive,
@@ -167,11 +169,12 @@ class Mesh2VecBase:
         if dist == 0:
             return [vtx]
 
-        vertices_idx = self._calc_strategy.get_neighbors_exclusive(dist, self._vtx_ids_to_idx[vtx]).indices
-        #vertices_idx = self._adjacency_matrix_powers_exclusive[dist][
+        vertices_ids = self._calc_strategy.get_neighbors_exclusive(dist, vtx)
+        # vertices_idx = self._adjacency_matrix_powers_exclusive[dist][
         #    [self._vtx_ids_to_idx[vtx]], :
-        #].indices
-        return [self._vtx_idx_to_ids[i] for i in vertices_idx]
+        # ].indices
+        # return [self._vtx_idx_to_ids[i] for i in vertices_idx]
+        return vertices_ids
 
     def aggregate_categorical(
         self,
@@ -321,9 +324,10 @@ class Mesh2VecBase:
         if dist == 0:
             return [[feature] for feature in features]
 
+        # no transformation needed
         neighborhoods = [
             # self._adjacency_matrix_powers_exclusive[dist][[i], :].indices
-            self._calc_strategy.get_neighbors_exclusive(dist, i).indices
+            self._calc_strategy.get_neighbors_exclusive(dist, i, transformation=False)
             for i in range(len(self._features))
         ]
         values = [features[neighborhood] for neighborhood in neighborhoods]
