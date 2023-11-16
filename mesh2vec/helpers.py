@@ -242,8 +242,8 @@ class PurePythonBFS(AbstractAdjacencyStrategy):
         vertices = [self.idx_conversion[v_id] for v_id in list(hyper_edges_idx.keys())]
 
         # each vertex has a list of lists where the index of the list corresponds to the depth of its contained neighbors
-        # e.g.: neighbor 300 at depth 2, neighbor 400 at depth 1 with max_distance 3 -> [[400], [300], []]
-        neighbors_at_depth = {vertex: [[] for _ in range(max_distance)] for vertex in vertices}
+        # e.g.: neighbor 300 at depth 2, neighbor 400 at depth 1 with max_distance 3 -> [[], [400], [300], []]
+        neighbors_at_depth = {vertex: [[] for _ in range(max_distance + 1)] for vertex in vertices}
 
         # for each vertex, do bfs separately
         for start_vertex in vertices:
