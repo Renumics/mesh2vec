@@ -19,9 +19,9 @@ def numba_compute(adj_list, depth):
     num_vertices = len(adj_list)
     # "adjacency" list: position in aray -> node id, values: reachable nodes for depth
     # lists instead of sets due to numba compatibility
-    reachable_nodes = [np.empty(0, dtype=np.int64) for _ in prange(num_vertices)]
+    reachable_nodes = [np.empty(0, dtype=np.int64) for _ in range(num_vertices)]
 
-    for start_vertex in prange(num_vertices):
+    for start_vertex in range(num_vertices):
         visited = np.zeros(num_vertices, dtype=np.bool_)
         visited[start_vertex] = True
 
@@ -68,9 +68,6 @@ class AbstractAdjacencyStrategy(ABC):
 
     def set_idx_conversion(self, translation: OrderedDict):
         # key -> vtx_id, value -> index
-        print(
-            list(translation.keys())[0], "translates to", translation[list(translation.keys())[0]]
-        )
         self.idx_conversion = translation
 
     def set_id_conversion(self, translation: OrderedDict):
@@ -231,7 +228,6 @@ class PurePythonBFS(AbstractAdjacencyStrategy):
         self, distance: int, vtx_id: int, transformation: bool = True
     ) -> List[int]:
         row_index = self.idx_conversion[vtx_id]
-        print(self.adjacency_matrix_powers_exclusive[row_index])
         idx_list = self.adjacency_matrix_powers_exclusive[row_index][distance]
         if transformation:
             return [self.id_conversion[idx] for idx in idx_list]
@@ -242,8 +238,9 @@ class PurePythonBFS(AbstractAdjacencyStrategy):
     ) -> List[int]:
         # join all sublists of neighbors into one
         row_index = self.idx_conversion[vtx_id]
-        row_index = vtx_id
-        idx_list = itertools.chain(self.adjacency_matrix_powers_exclusive[row_index][:distance])
+        idx_list = list(
+            itertools.chain(*self.adjacency_matrix_powers_exclusive[row_index][:distance])
+        )
         if transformation:
             return [self.id_conversion[index] for index in idx_list]
         return idx_list
@@ -251,27 +248,25 @@ class PurePythonBFS(AbstractAdjacencyStrategy):
     def calc_adjacencies(
         self, hyper_edges_idx: OrderedDict[str, List[int]], max_distance: int
     ) -> Tuple[List[List[int]], List[List[int]]]:
-        # construct adjacency dict
+        # values in .values(): indices list -> maximum index + 1 is length of unique vertices
         vtx_count = max([vtx_a for vtxs in hyper_edges_idx.values() for vtx_a in vtxs]) + 1
-        adjacency_dict = {self.idx_conversion[vtx]: [] for vtx in hyper_edges_idx}
-
+        adjacency_list = [[] for _ in range(vtx_count)]
         for vtxs in hyper_edges_idx.values():
             for vtx_a in vtxs:
                 for vtx_b in vtxs:
-                    adjacency_dict[vtx_a].append(vtx_b)
-                    adjacency_dict[vtx_b].append(vtx_a)
-        for i in range(len(adjacency_dict.keys())):
-            # eliminate duplicates
-            adjacency_dict[i] = list(set(adjacency_dict[i]))
+                    adjacency_list[vtx_a].append(vtx_b)
+                    adjacency_list[vtx_b].append(vtx_a)
+        for i in range(len(adjacency_list)):
+            adjacency_list[i] = list(set(adjacency_list[i]))
 
         # each vertex has a list of lists where the index of the list corresponds to the depth of its contained neighbors
         # e.g.: neighbor 300 at depth 2, neighbor 400 at depth 1 with max_distance 3 -> [[], [400], [300], []]
         neighbors_at_depth = {
-            vertex: [[] for _ in range(max_distance + 1)] for vertex in adjacency_dict
+            vertex: [[] for _ in range(max_distance + 1)] for vertex in range(vtx_count)
         }
 
         # for each vertex, do bfs separately
-        for start_vertex in adjacency_dict:
+        for start_vertex in range(vtx_count):
             # Initialize the queue for BFS: (vertex, depth)
             queue = deque([(start_vertex, 0)])
 
@@ -291,12 +286,9 @@ class PurePythonBFS(AbstractAdjacencyStrategy):
                 # Check if we've reached the maximum depth; if not look for next level neighbors
                 # of found neighbor
                 if depth < max_distance:
-                    # Add unvisited neighbors to the queue; these are already in our dictionary
-                    # ATTENTION: Some vertices do not have neighbors and thus might NOT be in dict as key
-                    if vertex in adjacency_dict:
-                        neighbors = set(adjacency_dict[vtx]) - visited
-                        queue.extend((neighbor, depth + 1) for neighbor in neighbors)
-                        visited.update(neighbors)
+                    neighbors = set(adjacency_list[vertex]) - visited
+                    queue.extend((neighbor, depth + 1) for neighbor in neighbors)
+                    visited.update(neighbors)
 
         self.adjacency_matrix_powers_exclusive = neighbors_at_depth
         self.set_matrices(neighbors_at_depth, neighbors_at_depth)

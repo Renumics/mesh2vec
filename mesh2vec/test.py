@@ -13,8 +13,6 @@ a = Mesh2VecCae.from_ansa_shell(
 )
 print("MATMUL:", time.time() - start)
 
-print("EXCLUSIVE")
-print(matm.get_neighbors_exclusive(3, "4700000"))
 """
 start = time.time()
 b = Mesh2VecCae.from_ansa_shell(
@@ -34,10 +32,6 @@ d = Mesh2VecCae.from_ansa_shell(
 )
 print("PurePythonBFS:", time.time() - start)
 
-print("EXCLUSIVE")
-print(pbfs.get_neighbors_exclusive(3, "4700000"))
-print("INCLUSIVE")
-print(pbfs.get_neighbors_inclusive(3, "4700000"))
 
 """start = time.time()
 c = Mesh2VecCae.from_ansa_shell(
@@ -47,13 +41,3 @@ c = Mesh2VecCae.from_ansa_shell(
     calc_strategy=BFSNumba(),
 )
 print("NUMBA:", time.time() - start)"""
-
-
-"""ADJACENCY LIST:  [[   0    0]
- [   0    1]
- [   0 2014]
- ...
- [6399 6328]
- [6399 6396]
- [6399 6399]]
-DICT 0:  1002224 [0, 2014, 2016, 2202]"""
