@@ -1,6 +1,6 @@
 """helper functions"""
 from typing import OrderedDict, List, Tuple, Dict
-from numba import njit
+from numba import jit
 import numpy as np
 from collections import deque
 from scipy.sparse import csr_array, coo_array, eye
@@ -12,47 +12,47 @@ from abc import ABC, abstractmethod
 Use strategy to implement multiple adjacency finding algorithms
 """
 
+@jit(parallel=False, fastmath=True, forceobj=True)
+def numba_compute(adj_list, depth, vtx_count):
+    # each vertex has a list of lists where the index of the list corresponds to the depth of its contained neighbors
+    # e.g.: neighbor 300 at depth 2, neighbor 400 at depth 1 with max_distance 3 -> [[], [400], [300], []]
+    neighbors_at_depth = {
+        vertex: [np.array([], dtype=np.int64) for _ in range(depth + 1)] for vertex in range(vtx_count)
+    }
 
-@njit(parallel=True, fastmath=True)
-def numba_compute(adj_list, depth):
-    # prevent recalculating length
-    num_vertices = len(adj_list)
-    # "adjacency" list: position in aray -> node id, values: reachable nodes for depth
-    # lists instead of sets due to numba compatibility
-    reachable_nodes = [np.empty(0, dtype=np.int64) for _ in range(num_vertices)]
+    # for each vertex, do bfs separately
+    for start_vertex in range(vtx_count):
+        # Initialize the queue for BFS: (vertex, depth); numba does not support dequeue
+        queue = [(start_vertex, 0)]
 
-    for start_vertex in range(num_vertices):
-        visited = np.zeros(num_vertices, dtype=np.bool_)
-        visited[start_vertex] = True
+        # Use a set to keep track of visited vertices
+        visited = [start_vertex]
 
-        queue = np.zeros(num_vertices, dtype=np.int64)
-        front, rear = -1, -1
+        # queue not empty
+        while queue:
+            # depth is saved in queue -> no tracking in loop
+            vertex, depth = queue.pop()
 
-        queue[0] = start_vertex
-        rear += 1
+            # do not track vertex identity in neighbors; new vertices will not be duplicates due
+            # to visited set tracking
+            if vertex != start_vertex:
+                # add found neighbor to start_vertex's neighbors
+                neighbors_at_depth[start_vertex][depth] = np.append(neighbors_at_depth[start_vertex][depth], vertex)
 
-        current_depth = 1
+            # Check if we've reached the maximum depth; if not look for next level neighbors
+            # of found neighbor
+            if depth < depth:
+                # remove duplicates manually, as np.setdiff1d and - with lists is not supported
+                neighbors = np.unique(np.array(adj_list[vertex]))
+                removed_neighbors = np.array([neighbor for neighbor in neighbors if neighbor not in visited], dtype=np.int64)
+                        
+                for neighbor in removed_neighbors:
+                    # stack instead of appending
+                    queue.append((neighbor, depth + 1))
+                visited.extend(removed_neighbors)
+        
 
-        while front != rear and current_depth <= depth:
-            front += 1
-            current_vertex = queue[front]
-
-            for neighbor in adj_list[current_vertex]:
-                if not visited[neighbor]:
-                    visited[neighbor] = True
-                    # list in list append not supported in numba
-                    reachable_nodes[start_vertex] = np.append(
-                        reachable_nodes[start_vertex], neighbor
-                    )
-
-                    if current_depth < depth:
-                        queue[rear] = neighbor
-                        rear += 1
-
-            if front == rear - 1:
-                current_depth += 1
-
-    return reachable_nodes
+    return neighbors_at_depth
 
 
 class AbstractAdjacencyStrategy(ABC):
@@ -204,17 +204,25 @@ class BFSNumba(AbstractAdjacencyStrategy):
     def calc_adjacencies(
         self, hyper_edges_idx: OrderedDict[str, List[int]], max_distance: int
     ) -> Tuple[Dict[int, csr_array], Dict[int, csr_array]]:
-        adjacency_list = []
+        # values in .values(): indices list -> maximum index + 1 is length of unique vertices
+        vtx_count = max([vtx_a for vtxs in hyper_edges_idx.values() for vtx_a in vtxs]) + 1
+        adjacency_list = [[] for _ in range(vtx_count)]
         for vtxs in hyper_edges_idx.values():
             for vtx_a in vtxs:
                 for vtx_b in vtxs:
-                    adjacency_list.append([vtx_a, vtx_b])
+                    adjacency_list[vtx_a].append(vtx_b)
+                    adjacency_list[vtx_b].append(vtx_a)
+        for i in range(len(adjacency_list)):
+            adjacency_list[i] = list(set(adjacency_list[i]))
 
-        adjacency_list_np = np.unique(np.array(adjacency_list), axis=0)
-        adjacency_list_inclusive = {1: np.array([1, 2, 3])}
-        adjacency_list_exclusive = adjacency_list_inclusive
-        numba_compute(adjacency_list_np, 20)
-        return adjacency_list_inclusive, adjacency_list_exclusive
+        neighbors_at_depth = numba_compute(adjacency_list, max_distance, vtx_count)
+
+        self.adjacency_matrix_powers_exclusive = neighbors_at_depth
+        self.set_matrices(neighbors_at_depth, neighbors_at_depth)
+
+        # constructing an inclusive neighbor matrix/ dictionary would be expensive; use get_neighbors_inclusive
+        # to get inclusive neighbors for specific vertex. This avoids computational overhead
+        return neighbors_at_depth, neighbors_at_depth
 
 
 class PurePythonBFS(AbstractAdjacencyStrategy):
