@@ -47,7 +47,6 @@ def numba_compute(adj_list, depth, vtx_count):
                 removed_neighbors = np.array([neighbor for neighbor in neighbors if neighbor not in visited], dtype=np.int64)
                         
                 for neighbor in removed_neighbors:
-                    # stack instead of appending
                     queue.append((neighbor, depth + 1))
                 visited.extend(removed_neighbors)
         
