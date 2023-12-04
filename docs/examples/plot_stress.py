@@ -19,11 +19,11 @@ hg = Mesh2VecCae.from_ansa_shell(
     Path("../../data/hat/Hatprofile.k"),
     json_mesh_file=Path("../../data/hat/cached_hat_key.json"),
 )
-hg.add_feature_from_d3plot(
+name = hg.add_feature_from_d3plot(
     ArrayType.element_shell_stress,
     Path("../../data/hat/HAT.d3plot"),
-    timestep=1,
-    shell_layer=0,
+    timestep=-1,
+    shell_layer=np.mean,
 )
 
 
@@ -34,7 +34,7 @@ hg.add_features_from_dataframe(
     pd.DataFrame(
         {
             "vtx_id": hg.vtx_ids(),
-            "y-stress": [v[1] for v in hg.features()[ArrayType.element_shell_stress + "_1_0"]],
+            "y-stress": [v for v in hg.features()[name]],
         }
     )
 )
@@ -49,7 +49,7 @@ fig
 name = hg.aggregate("y-stress", 1, np.mean)
 fig = hg.get_visualization_plotly(str(name))
 fig.update_layout(title=name)
-fig
+fig.show()
 
 
 # %%

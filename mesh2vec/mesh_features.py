@@ -235,3 +235,62 @@ class CaeShellMesh:
             [[pnt_idx[element[f"N{i}"]] for i in range(1, 5)] for element in elements]
         )  # duplicate ids allowed?
         return CaeShellMesh(point_coordinates, pnt_ids, elem_ids, elem_node_idxs)
+
+    @staticmethod
+    def from_keyfile(keyfile: str) -> "CaeShellMesh":
+        """create CaeShellMesh from keyfile"""
+
+        def parse_contents(file_contents):
+            lines = file_contents.split("\n")
+            current_section = ""
+
+            point_coordinates = []
+            pnt_ids = []
+
+            elem_ids = []
+            elem_node_ids = []
+
+            for line in lines:
+                if line.startswith("*"):
+                    current_section = line.split()[0].upper()
+                    continue
+                if line.startswith("$#"):  # comment
+                    continue
+
+                if current_section == "*NODE":
+                    data = line.split()
+                    if data:
+                        point_coordinates.append([float(data[1]), float(data[2]), float(data[3])])
+                        pnt_ids.append(data[0])
+
+                elif "*ELEMENT_SHELL" in current_section:
+                    data = line.split()
+                    if data:
+                        # check for floats - floats are a hint of options like THICKNESS
+                        if (
+                            not data[2].isdigit()
+                            or not data[3].isdigit()
+                            or not data[4].isdigit()
+                            or not data[5].isdigit()
+                        ):
+                            continue
+                        elem_node_ids.append([data[2], data[3], data[4], data[5]])
+                        elem_ids.append(data[0])
+            pnt_idx = {pnt_id: i for i, pnt_id in enumerate(pnt_ids)}
+
+            elem_node_idx = np.array(
+                [[pnt_idx[elem_node_id[i]] for i in range(4)] for elem_node_id in elem_node_ids]
+            )
+
+            return point_coordinates, pnt_ids, elem_ids, elem_node_idx
+
+        with open(keyfile, "r", encoding="utf-8") as file:
+            file_contents = file.read()
+        point_coordinates, pnt_ids, elem_ids, elem_node_idx = parse_contents(file_contents)
+
+        return CaeShellMesh(
+            np.array(point_coordinates),
+            np.array(pnt_ids),
+            np.array(elem_ids),
+            np.array(elem_node_idx),
+        )

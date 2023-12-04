@@ -2,6 +2,7 @@
 from pathlib import Path
 from functools import partial
 
+from tempfile import TemporaryDirectory
 import numpy as np
 import pandas as pd
 from scipy.sparse import csr_matrix
@@ -93,6 +94,36 @@ def test_shell_from_ansa() -> None:
     assert len(m2v.vtx_ids()) == 6400
 
 
+def test_from_keyfile_shell() -> None:
+    """test ansa shell is loaded"""
+    m2v = Mesh2VecCae.from_keyfile_shell(
+        4,
+        Path("data/hat/Hatprofile.k"),
+    )
+
+    m2v_ansa = Mesh2VecCae.from_ansa_shell(
+        4,
+        Path("data/hat/Hatprofile.k"),
+        json_mesh_file=Path("data/hat/cached_hat_key.json"),
+    )
+    all(
+        [
+            sorted(m2v._hyper_edges[k]) == sorted(m2v_ansa._hyper_edges[k])
+            for k in m2v._hyper_edges.keys()
+        ]
+    )
+    set(m2v.vtx_ids()) == set(m2v_ansa.vtx_ids())
+
+
+def test_patch2vec() -> None:
+    m2v = Mesh2VecCae.from_keyfile_shell(
+        4,
+        Path("/home/markus/Downloads/Patch2.key"),
+    )
+    name = m2v.add_features_from_ansa(["num_border"])[0]
+    name = m2v.aggregate(name, 2, np.mean)
+
+
 def test_shell_from_ansa_partid() -> None:
     """test ansa shell is loaded with and without partid"""
     m2v1 = Mesh2VecCae.from_ansa_shell(
@@ -169,6 +200,22 @@ def test_add_feature_from_d3plot_accumulated() -> None:
         m2v.add_feature_from_d3plot(
             feature, d3plot_data, timestep=1, shell_layer=axis_0_sum, history_var_index=1
         )
+
+
+def test_save_load() -> None:
+    """test saving and loading works"""
+    m2v = Mesh2VecCae.from_d3plot_shell(3, Path("data/hat/HAT.d3plot"))
+    d3plot_data = D3plot(Path("data/hat/HAT.d3plot").as_posix())
+    axis_0_sum = partial(np.sum, axis=0)
+    axis_0_sum.__name__ = "axis0sum"  # type: ignore
+    for feature in features_reduced:
+        m2v.add_feature_from_d3plot(
+            feature, d3plot_data, timestep=1, shell_layer=axis_0_sum, history_var_index=1
+        )
+    with TemporaryDirectory() as tmpdir:
+        m2v.save(Path(tmpdir) / "test.h5")
+        m2v_loaded = Mesh2VecCae.load(Path(tmpdir) / "test.h5")
+        assert m2v_loaded._features.equals(m2v._features)
 
 
 def test_add_feature_from_d3plot_to_ansa_shell() -> None:

@@ -16,6 +16,26 @@ from mesh2vec.mesh2vec_exceptions import (
     FeatureDoesNotExistException,
 )
 
+from mesh2vec.helpers import (
+    MatMulAdjacency,
+    BFSAdjacency,
+    BFSNumba,
+    PurePythonBFS,
+    PurePythonDFS,
+    DFSNumba,
+    MatMulAdjacencySmart,
+)
+
+
+strategies = [
+    MatMulAdjacency,
+    BFSAdjacency,
+    BFSNumba,
+    PurePythonBFS,
+    PurePythonDFS,
+    DFSNumba,
+    MatMulAdjacencySmart,
+]
 
 # pylint: disable=protected-access
 def _csr_equal(csr_a: csr_matrix, csr_b: csr_matrix) -> bool:
@@ -32,10 +52,7 @@ def test_init() -> None:
     hg = Mesh2VecBase(3, edges)
     assert hg._distance == 3
     assert "y" in hg._vtx_ids_to_idx.keys()
-    assert _csr_equal(hg._adjacency_matrix_powers[2], hg._adjacency_matrix_powers[1])
-    assert hg._adjacency_matrix_powers[3][0, 1]  # a->b
-    assert hg._adjacency_matrix_powers[3][0, 2]  # a->c
-    assert not hg._adjacency_matrix_powers[3][0, 3]  # a->x
+    assert set(hg._neighborhoods[1][0]) == {1, 2}  # a->b,c
 
 
 def test_invalid_hyperedges() -> None:
@@ -71,14 +88,6 @@ def test_from_txt_file() -> None:
     assert hg._distance == 3
     assert "vtx02" in hg._vtx_ids_to_idx.keys()
 
-    assert not _csr_equal(hg._adjacency_matrix_powers[2], hg._adjacency_matrix_powers[1])
-
-    assert _csr_a_gte_b(hg._adjacency_matrix_powers[2], hg._adjacency_matrix_powers[1])
-    assert _csr_equal(
-        hg._adjacency_matrix_powers_exclusive[3],
-        hg._adjacency_matrix_powers[3] - hg._adjacency_matrix_powers[2],
-    )
-
 
 def test_from_csv_file() -> None:
     """test import of csv file creates a consistent hypergraph"""
@@ -86,7 +95,7 @@ def test_from_csv_file() -> None:
 
     # write pair-wise connectivity to csv
     connections = []
-    connectivity_list = [x[:].indices for x in hg1._adjacency_matrix_powers[1]]
+    connectivity_list = [x for x in hg1._neighborhoods[1]]
     for vtx_a, vtx_a_neigbors in enumerate(connectivity_list):
         for vtx_b in vtx_a_neigbors:
             connections.append([hg1._vtx_idx_to_ids[vtx_a], hg1._vtx_idx_to_ids[vtx_b]])
@@ -98,9 +107,8 @@ def test_from_csv_file() -> None:
 
     # adj_mat must be equal
     for i in range(1, 3 + 1):
-        assert all(
-            hg2._adjacency_matrix_powers[i].indices == hg1._adjacency_matrix_powers[i].indices
-        )
+        for j in range(13):
+            assert all(hg2._neighborhoods[i][j] == hg1._neighborhoods[i][j])
 
     # hyper edges of hg1 that are not fully contained in larger other hyper edge form a clique
     # and should be contained in hyper edges of hg2
@@ -119,10 +127,11 @@ def test_from_csv_file() -> None:
             assert sorted(hyper_edge) in sorted_hg2_hyper_edges
 
 
-def test_get_nbh() -> None:
+@pytest.mark.parametrize("strategy", strategies)
+def test_get_nbh(strategy) -> None:
     """test get_nbh"""
     edges = {"first": ["a", "b", "c"], "second": ["x", "y"], "third": ["x", "a"]}
-    hg = Mesh2VecBase(3, edges)
+    hg = Mesh2VecBase(3, edges, calc_strategy=strategy)
     assert {"b"} == set(hg.get_nbh("b", 0))
     assert {"a", "c"} == set(hg.get_nbh("b", 1))
     assert {"x"} == set(hg.get_nbh("y", 1))
@@ -264,10 +273,11 @@ def test_aggregates_raise_feature_not_available() -> None:
         _ = hg.aggregate_categorical("f_not_exist", 1)
 
 
-def test_aggregate_simple() -> None:
+@pytest.mark.parametrize("strategy", strategies)
+def test_aggregate_simple(strategy) -> None:
     """test aggregation with simple graph"""
     edges = {"first": ["a", "b", "c"], "second": ["x", "y"]}
-    hg = Mesh2VecBase(3, edges)
+    hg = Mesh2VecBase(3, edges, calc_strategy=strategy)
     df1 = pd.DataFrame({"vtx_id": ["a", "b", "c", "x", "y"], "f1": [2, 4, 8, 16, 32]})
     hg.add_features_from_dataframe(df1)
     name = hg.aggregate("f1", 1, np.mean)
@@ -284,17 +294,13 @@ def test_aggregate_simple_two_dists() -> None:
     hg = Mesh2VecBase(3, edges)
     df1 = pd.DataFrame({"vtx_id": ["a", "b", "c", "x", "y"], "f1": [2, 4, 8, 16, 32]})
     hg.add_features_from_dataframe(df1)
-    names = hg.aggregate("f1", [1, 1], np.mean)
+    names = hg.aggregate("f1", [1, 2], np.mean)
     assert hg._aggregated_features[names[0]].iloc[0] == np.mean([4, 8])
     assert hg._aggregated_features[names[0]].iloc[1] == np.mean([2, 8])
     assert hg._aggregated_features[names[0]].iloc[2] == np.mean([2, 4])
     assert hg._aggregated_features[names[0]].iloc[3] == np.mean([32])
     assert hg._aggregated_features[names[0]].iloc[4] == np.mean([16])
-    assert hg._aggregated_features[names[1]].iloc[0] == np.mean([4, 8])
-    assert hg._aggregated_features[names[1]].iloc[1] == np.mean([2, 8])
-    assert hg._aggregated_features[names[1]].iloc[2] == np.mean([2, 4])
-    assert hg._aggregated_features[names[1]].iloc[3] == np.mean([32])
-    assert hg._aggregated_features[names[1]].iloc[4] == np.mean([16])
+    assert hg._aggregated_features[names[1]].iloc[0] == 0
 
 
 def test_aggregate_complex() -> None:

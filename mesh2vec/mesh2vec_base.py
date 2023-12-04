@@ -6,7 +6,7 @@ from typing import List, Optional, Callable, OrderedDict, Dict, Union, Iterable
 import networkx
 import numpy as np
 import pandas as pd
-from scipy.sparse import csr_array
+import joblib
 
 # noinspection PyProtectedMember
 from pandas.api.types import is_string_dtype
@@ -89,13 +89,23 @@ class Mesh2VecBase:
         )
         if calc_strategy is None:
             calc_strategy = MatMulAdjacency()
-        self._calc_strategy = calc_strategy
-        self._calc_strategy.set_idx_conversion(self._vtx_ids_to_idx)
-        self._calc_strategy.set_id_conversion(self._vtx_idx_to_ids)
-        (
-            self._adjacency_matrix_powers,
-            self._adjacency_matrix_powers_exclusive,
-        ) = self._calc_strategy.calc_adjacencies(hyper_edges_idx, distance)
+        elif isinstance(calc_strategy, type):
+            calc_strategy = calc_strategy()
+
+        self._neighborhoods = calc_strategy.calc_adjacencies(hyper_edges_idx, distance)
+
+    def save(self, path: Path):
+        """
+        Save the Mesh2Vec object to a file with joblib
+        """
+        joblib.dump(self, path)
+
+    @staticmethod
+    def load(path: Path):
+        """
+        Load the Mesh2Vec object from a file with joblib
+        """
+        return joblib.load(path)
 
     @staticmethod
     def from_file(hg_file: Path, distance: int) -> "Mesh2VecBase":
@@ -169,12 +179,10 @@ class Mesh2VecBase:
         if dist == 0:
             return [vtx]
 
-        vertices_ids = self._calc_strategy.get_neighbors_exclusive(dist, vtx)
-        # vertices_idx = self._adjacency_matrix_powers_exclusive[dist][
-        #    [self._vtx_ids_to_idx[vtx]], :
-        # ].indices
-        # return [self._vtx_idx_to_ids[i] for i in vertices_idx]
-        return vertices_ids
+        vtx_idx = self._vtx_ids_to_idx[vtx]
+        neighbors_idx = self._neighborhoods[dist][vtx_idx]
+        neighbors_ids = [self._vtx_idx_to_ids[i] for i in neighbors_idx]
+        return neighbors_ids
 
     def aggregate_categorical(
         self,
@@ -220,7 +228,7 @@ class Mesh2VecBase:
             feature_categories = np.unique(self._features[feature])
 
         for distance in dist_list:
-            values = self._collect_feature_values(feature, distance, default_value)
+            values = self._collect_feature_values(feature, distance, default_value, aggr=np.array)
 
             for category in feature_categories:
                 feature_name = f"{feature}-cat-{category}-{distance}"
@@ -289,49 +297,132 @@ class Mesh2VecBase:
         if aggr_name is None:
             aggr_name = aggr.__name__
 
-        feature_names = []
+        agg_values_to_add = OrderedDict()
         for distance in dist_list:
-            values = self._collect_feature_values(feature, distance, default_value)
             if agg_add_ref:
-                ref_values = self._collect_feature_values(feature, 0, default_value)
-                agg_values = np.nan_to_num(
-                    [aggr(value, ref_value) for value, ref_value in zip(values, ref_values)],
-                    nan=default_value,
+                ref_values = self._collect_feature_values(feature, 0, default_value, aggr=None)
+            else:
+                values = self._collect_feature_values(feature, distance, default_value, aggr)
+
+            if agg_add_ref:
+                agg_values = self._collect_feature_values(
+                    feature, distance, default_value, aggr, ref_values
                 )
             else:
-                agg_values = np.nan_to_num([aggr(value) for value in values], nan=default_value)
+                agg_values = values
 
             feature_name = f"{feature}-{aggr_name}-{distance}"
-            self._aggregated_features[feature_name] = agg_values
-            feature_names.append(feature_name)
-        if len(feature_names) == 1:
-            return feature_names[0]
-        return feature_names
+            agg_values_to_add[feature_name] = agg_values
+
+        self._aggregated_features = self._aggregated_features.assign(
+            **agg_values_to_add,
+        )
+        if len(agg_values_to_add) == 1:
+            return list(agg_values_to_add.keys())[0]
+        return list(agg_values_to_add.keys())
+
+    # # pylint: disable=too-many-arguments
+    # def aggregate_many(
+    #     self,
+    #     feature_list: List[str],
+    #     dist_list: List[int],
+    #     aggr_list: Callable,
+    #     aggr_name_list: str = None,
+    #     agg_add_ref: bool = False,
+    #     default_value: float = 0.0,
+    # ) -> Union[str, List[str]]:
+    #     # pylint: disable=line-too-long
+
+    #     for feature in feature_list:
+    #         check_feature_available(feature, self)
+
+    #     for dist_to_check in dist_list:
+    #         check_distance_arg(dist_to_check, self)
+
+    #     if aggr_name_list is None:
+    #         aggr_name_list = [aggr.__name__ for aggr in aggr_list]
+
+    #     agg_values_to_add = OrderedDict()
+    #     for distance in dist_list:
+    #         values = self._collect_feature_list_values(feature_list, distance, default_value)
+    #         if agg_add_ref:
+    #             ref_values = self._collect_feature_list_values(feature_list, 0, default_value)
+    #             agg_values = np.nan_to_num(
+    #                 [aggr(value, ref_value) for value, ref_value in zip(values, ref_values)],
+    #                 nan=default_value,
+    #             )
+    #         else:
+    #             agg_values = values
+    #             # agg_values = np.nan_to_num([np.mean(value) for value in values], nan=default_value)
+
+    #         feature_name = f"{feature}-all-{distance}"
+    #         agg_values_to_add["all"] = agg_values
+
+    #     # self._aggregated_features = self._aggregated_features.assign(
+    #     #    **agg_values_to_add,
+    #     # )
+    #     if len(agg_values_to_add) == 1:
+    #         return list(agg_values_to_add.keys())[0]
+    #     return list(agg_values_to_add.keys())
+
+    # def _collect_feature_list_values(
+    #     self,
+    #     feature_list: str,
+    #     dist: int,
+    #     default_value: Optional[Union[float, int, str]],
+    # ) -> List[List[Union[float, int, str]]]:
+    #     """helper method to collect data from all hyper nodes during aggregation"""
+    #     check_distance_arg(dist, self)
+
+    #     if default_value is None:
+    #         default_value = "NONE" if is_string_dtype(self._features[feature]) else np.nan
+    #     features = self._features[feature_list].fillna(default_value).to_numpy()
+
+    #     if dist == 0:
+    #         return features
+
+    #     values = [
+    #         [np.mean(feature[neighborhood]) for neighborhood in self._neighborhoods[dist]]
+    #         for feature in features.T
+    #     ]
+    #     return values
 
     def _collect_feature_values(
         self,
-        feature: str,
+        feature_name: str,
         dist: int,
         default_value: Optional[Union[float, int, str]],
+        aggr: Optional[Callable] = None,
+        ref_values: Optional[List[Union[float, int, str]]] = None,
     ) -> List[List[Union[float, int, str]]]:
-        """helper method to collect data from all hyper nodes during aggregation"""
+        """helper method to collect and aggregate data from all hyper nodes"""
         check_distance_arg(dist, self)
 
         if default_value is None:
-            default_value = "NONE" if is_string_dtype(self._features[feature]) else np.nan
-        features = self._features[feature].fillna(default_value).to_numpy()
+            default_value = "NONE" if is_string_dtype(self._features[feature_name]) else np.nan
+        feature = self._features[feature_name].fillna(default_value).to_numpy()
 
         if dist == 0:
-            return [[feature] for feature in features]
+            return feature
 
-        # no transformation needed
-        neighborhoods = [
-            # self._adjacency_matrix_powers_exclusive[dist][[i], :].indices
-            self._calc_strategy.get_neighbors_exclusive(dist, i, transformation=False)
-            for i in range(len(self._features))
+        if ref_values is None:
+            try:  # fast: use nan_to_num over the whole array
+                return np.nan_to_num(
+                    [aggr(feature[neighborhood]) for neighborhood in self._neighborhoods[dist]],
+                    default_value,
+                ).tolist()
+            except ValueError:  # slow: use nan_to_num for each element (different dimensions)
+                return [
+                    np.nan_to_num(aggr(feature[neighborhood]), default_value)
+                    for neighborhood in self._neighborhoods[dist]
+                ]
+
+        # compare to reference value is needed
+        ref_values_list = ref_values.tolist()
+        return [
+            np.nan_to_num(aggr(feature[neighborhood], ref_values_list[i]), default_value)
+            for i, neighborhood in enumerate(self._neighborhoods[dist])
         ]
-        values = [features[neighborhood] for neighborhood in neighborhoods]
-        return values
 
     def add_features_from_csv(
         self,
@@ -422,9 +513,3 @@ class Mesh2VecBase:
         Returns a Pandas dataframe with all feature columns.
         """
         return self._features.copy()
-
-    def ajacency_matrix_powers_exclusive(self) -> Dict[int, csr_array]:
-        """
-        Return the adjacency_matrix of different max distances
-        """
-        return self._adjacency_matrix_powers_exclusive

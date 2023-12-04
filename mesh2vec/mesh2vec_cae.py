@@ -17,7 +17,11 @@ from mesh2vec import mesh_features
 from mesh2vec.helpers import AbstractAdjacencyStrategy
 from mesh2vec.mesh_features import CaeShellMesh, is_tri, num_border, midpoint
 from mesh2vec.mesh2vec_base import Mesh2VecBase
-from mesh2vec.mesh2vec_exceptions import check_feature_available, AnsaNotFoundException
+from mesh2vec.mesh2vec_exceptions import (
+    check_feature_available,
+    AnsaNotFoundException,
+    check_vtx_id_match,
+)
 
 
 class Mesh2VecCae(Mesh2VecBase):
@@ -100,9 +104,7 @@ class Mesh2VecCae(Mesh2VecBase):
             }
         )
 
-        assert all(
-            x in mesh_info.keys() for x in ["part_name", "part_id", "file_path", "element_id"]
-        )
+        assert all(x in mesh_info.keys() for x in ["file_path", "element_id"])
         assert len(mesh_info) == len(self._element_info)
         assert all(mesh_info["element_id"] == self._element_info["element_id"])
         mesh_info = mesh_info.drop(["element_id"], axis=1)
@@ -223,6 +225,17 @@ class Mesh2VecCae(Mesh2VecBase):
 
         return Mesh2VecCae(distance, mesh, element_info)
 
+    @staticmethod
+    def from_keyfile_shell(distance: int, keyfile: Path) -> "Mesh2VecCae":
+        """
+        Read the given keyfile and use the shell elements to generate a hypergraph, using mesh
+        nodes as hyperedges, and adjacent elements as hypervertices.
+        """
+        mesh = CaeShellMesh.from_keyfile(keyfile)
+        element_info = pd.DataFrame({"element_id": mesh.element_ids})
+        element_info["file_path"] = str(keyfile)
+        return Mesh2VecCae(distance, mesh, element_info)
+
     def get_elements_info(self) -> pd.DataFrame:
         """
         Return a Pandas dataframe containing a row for each element in the hypergraph
@@ -240,12 +253,12 @@ class Mesh2VecCae(Mesh2VecBase):
     def add_features_from_ansa(
         self,
         features: List[str],
-        ansafile: Optional[Path],
+        ansafile: Optional[Path] = None,
         json_mesh_file: Optional[Path] = None,
         ansa_executable: Optional[Path] = None,
         ansa_script: Optional[Path] = None,
         verbose: bool = False,
-    ) -> None:
+    ) -> List[str]:
         """
         Add values derived or calculated from ANSA shell elements (currently restricted to
         LSDYNA models) for each element.
@@ -260,7 +273,7 @@ class Mesh2VecCae(Mesh2VecBase):
 
             * aspect: The aspect ratio of each element (ansafile is required)
             * warpage: (ansafile is required)
-            * num_borders: number of border edges
+            * num_border: number of border edges
             * is_tria
             * midpoint x,y,z
             * normal vector x,y,z (ansafile is required)
@@ -340,6 +353,7 @@ class Mesh2VecCae(Mesh2VecBase):
                     ["vtx_id"] + [feature for feature in features if feature in okay_inplace]
                 ]
             )
+        return features
 
     # pylint: disable=too-many-arguments, too-many-branches. too-many-statements
     def get_feature_from_d3plot(
@@ -359,7 +373,7 @@ class Mesh2VecCae(Mesh2VecBase):
             >>> from lasso.dyna import ArrayType, D3plot
             >>> from mesh2vec.mesh2vec_cae import Mesh2VecCae
             >>> m2v =  Mesh2VecCae.from_d3plot_shell(3, Path("data/hat/HAT.d3plot"))
-            >>> names, values = m2v.get_feature_from_d3plot(
+            >>> names, values, ids = m2v.get_feature_from_d3plot(
             ...    ArrayType.element_shell_strain,
             ...    D3plot(Path("data/hat/HAT.d3plot").as_posix()),
             ...    timestep=1, shell_layer=0)
@@ -471,7 +485,11 @@ class Mesh2VecCae(Mesh2VecBase):
             ]
             feature_name = feature
 
-        return feature_name, new_feature
+        return (
+            feature_name,
+            new_feature,
+            [str(x) for x in d3plot_data.arrays["element_shell_ids"]],
+        )
 
     def add_feature_from_d3plot(
         self,
@@ -510,14 +528,17 @@ class Mesh2VecCae(Mesh2VecBase):
 
         d3plot_data = D3plot(d3plot.as_posix()) if not isinstance(d3plot, D3plot) else d3plot
 
-        feature_name, feature_values = self.get_feature_from_d3plot(
+        feature_name, feature_values, element_shell_ids = self.get_feature_from_d3plot(
             feature=feature,
             d3plot_data=d3plot_data,
             timestep=timestep,
             shell_layer=shell_layer,
             history_var_index=history_var_index,
         )
-        new_features = pd.DataFrame({"vtx_id": self._mesh.element_ids})
+
+        check_vtx_id_match(self._mesh.element_ids, element_shell_ids)
+
+        new_features = pd.DataFrame({"vtx_id": element_shell_ids})
         new_features[feature_name] = feature_values
         self._features = self._features.merge(  # type: ignore
             new_features, how="left", on="vtx_id", validate="1:1"
@@ -531,6 +552,7 @@ class Mesh2VecCae(Mesh2VecBase):
         aggr: Optional[Callable] = None,
         agg_add_ref: bool = True,
         default_value: float = 0.0,
+        skip_arcos: bool = False,
     ) -> Union[str, List[str]]:
         # pylint: disable=line-too-long
 
@@ -551,6 +573,7 @@ class Mesh2VecCae(Mesh2VecBase):
                 reference as 2nd argument. (default is True)
             default_value:  value to use in aggregation when a feature is missing for a neighbor
                 or no neighor with the given dist exist.
+            skip_arcos: if True, the angle difference is not calculated, but the dot product of the normal vectors is used.
 
         Example:
             >>> from pathlib import Path
@@ -577,12 +600,23 @@ class Mesh2VecCae(Mesh2VecBase):
 
         def _mean_dir_diff(values: List[List[float]], ref_value: List[float]) -> float:
             """direction difference of values to ref_value (in radian)"""
-            assert aggr is not None
-            angle_diff = [
-                np.arccos(np.clip(np.dot(np.array(value), np.array(ref_value[0])), -1.0, 1.0))
-                for value in values
-            ]
-            return aggr(angle_diff)
+
+            def vectorize_angle_diff(values, ref_value):
+                try:
+                    values_array = np.array(values.tolist())
+                except AttributeError:
+                    values_array = np.array(values)
+
+                ref_value_array = np.array(ref_value)
+                dot_products = np.dot(values_array, ref_value_array)
+                if skip_arcos:
+                    return dot_products
+                angle_diff = np.arccos(np.clip(dot_products, -1.0, 1.0))
+                return angle_diff
+
+            angle_diff_b = vectorize_angle_diff(values, ref_value)
+
+            return aggr(angle_diff_b)
 
         return self.aggregate(
             "normal",
