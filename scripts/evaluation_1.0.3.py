@@ -36,7 +36,7 @@ start = time.time()
 a.add_features_from_ansa(
     ["warpage", "aspect", "normal", "area"],
     Path("data/hat/Hatprofile.k"),
-    json_mesh_file=Path(PATH)
+    json_mesh_file=Path(PATH),
 )
 print(f"   add_features_from_ansa:", time.time() - start)
 if PROFILE_MEM:
@@ -70,7 +70,7 @@ if PROFILE_MEM:
     print(f"Current memory usage is {current / 10**6}MB; Peak was {peak / 10**6}MB")
     tracemalloc.stop()
 
-### aggregate_angle_diff 
+### aggregate_angle_diff
 if PROFILE_MEM:
     tracemalloc.start()
 start = time.time()
@@ -82,7 +82,6 @@ if PROFILE_MEM:
     current, peak = tracemalloc.get_traced_memory()
     print(f"Current memory usage is {current / 10**6}MB; Peak was {peak / 10**6}MB")
     tracemalloc.stop()
-
 
 
 # calc_adjacencies: 41.01193881034851
