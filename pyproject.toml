@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "mesh2vec"
 version = "0.0.2"
-authors = ["Markus Stoll <markus.stoll@renumics.com>"]
+authors = ["Renumics GmbH <info@renumics.com>"]
 packages = [
     { include = "mesh2vec" }
 ]
