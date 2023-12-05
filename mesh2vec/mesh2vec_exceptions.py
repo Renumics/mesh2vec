@@ -12,7 +12,7 @@ def check_distance_init_arg(distance: int) -> None:
     """check argument to rise exception or log warning if needed."""
     if distance < 0:
         raise InvalidDistanceArgumentException("distance must be > 0")
-    if distance > 10:
+    if distance > 30:
         logger.warning("Calculating neighborhoods for distances > 10 can take much time")
 
 
@@ -102,3 +102,15 @@ def check_vtx_ids_column(vtx_ids_column: List[str]) -> None:
     """check argument to rise exception or log warning if needed."""
     if not all(isinstance(v, str) for v in vtx_ids_column):
         raise InvalidVtxIdArgument("All values in vtx_id column must be of type str")
+
+
+def check_vtx_id_match(vtx_ids_stored, new_vtx_ids):
+    """
+    Exception raised when the vtx_ids of the d3plot do not match the vtx_ids of
+    the loaded mesh
+    """
+    if not set(vtx_ids_stored) == set(new_vtx_ids):
+        raise InvalidVtxIdsArgument(
+            "The element_shell_ids of the d3plot must contain exactly all of "
+            "the elements ids of the loaded mesh."
+        )

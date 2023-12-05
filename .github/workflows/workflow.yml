@@ -59,7 +59,7 @@ jobs:
         python-version: "3.9"
     - name: check
       run: |
-        poetry run pylint mesh2vec tests scripts docs/examples
+        poetry run pylint mesh2vec tests docs/examples
 
   audit:
     needs: [prepare-linux, prepare-win]
@@ -95,7 +95,7 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: test
       run: |
-        poetry run sphinx-build docs/source build/documentation/ -W -b html # autodocs contain tests && poetry run sphinx-build docs/source build/documentation/ -W -b doctest
+        poetry run sphinx-build docs/source build/documentation/ -W -b html && poetry run sphinx-build docs/source build/documentation/ -W -b doctest
 
   unit-tests:
     needs: [prepare-linux, prepare-win]

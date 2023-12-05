@@ -6,7 +6,6 @@ Aggregate Y-Stress
 # pylint: disable=pointless-statement
 from pathlib import Path
 import numpy as np
-import pandas as pd
 from lasso.dyna import ArrayType
 from mesh2vec.mesh2vec_cae import Mesh2VecCae
 
@@ -19,34 +18,25 @@ hg = Mesh2VecCae.from_ansa_shell(
     Path("../../data/hat/Hatprofile.k"),
     json_mesh_file=Path("../../data/hat/cached_hat_key.json"),
 )
-hg.add_feature_from_d3plot(
+
+
+def mean_over_components_all_layers(v):
+    """get mean over all components and all layers"""
+    return np.mean(v, axis=-1)
+
+
+fature_name = hg.add_feature_from_d3plot(
     ArrayType.element_shell_stress,
     Path("../../data/hat/HAT.d3plot"),
-    timestep=1,
-    shell_layer=0,
+    timestep=-1,
+    shell_layer=mean_over_components_all_layers,
 )
 
-
-# %%
-# Plot Feature locally
-# ------------------------
-hg.add_features_from_dataframe(
-    pd.DataFrame(
-        {
-            "vtx_id": hg.vtx_ids(),
-            "y-stress": [v[1] for v in hg.features()[ArrayType.element_shell_stress + "_1_0"]],
-        }
-    )
-)
-name = hg.aggregate("y-stress", 0, np.mean)
-fig = hg.get_visualization_plotly(str(name))
-fig.update_layout(title=name)
-fig
 
 # %%
 # Aggregate Feature and plot
 # ---------------------------
-name = hg.aggregate("y-stress", 1, np.mean)
+name = hg.aggregate(fature_name, 1, lambda x: np.mean(np.mean(x)))
 fig = hg.get_visualization_plotly(str(name))
 fig.update_layout(title=name)
 fig
