@@ -94,7 +94,7 @@
 <h1><code class="xref py py-mod docutils literal notranslate"><span class="pre">mesh2vec.mesh2vec_cae</span></code>.Mesh2VecCae<a class="headerlink" href="#mesh2vec-mesh2vec-cae-mesh2veccae" title="Permalink to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="mesh2vec.mesh2vec_cae.Mesh2VecCae">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mesh2vec.mesh2vec_cae.</span></span><span class="sig-name descname"><span class="pre">Mesh2VecCae</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mesh</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mesh_info</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_cae.Mesh2VecCae" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mesh2vec.mesh2vec_cae.</span></span><span class="sig-name descname"><span class="pre">Mesh2VecCae</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mesh</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mesh_info</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_cae.Mesh2VecCae" title="Permalink to this definition"></a></dt>
 <dd><p>Class to use finite element meshes as hypergraphs. Provide methods to add features
 from common CAE tools (for now: ANSA meshes, LSDYNA binout and d3plot information
 from lasso-cae) Inherits from Mesh2VecBase</p>
@@ -103,13 +103,13 @@ from lasso-cae) Inherits from Mesh2VecBase</p>
 <p class="rubric">Methods</p>
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#mesh2vec.mesh2vec_cae.Mesh2VecCae.__init__" title="mesh2vec.mesh2vec_cae.Mesh2VecCae.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(distance, mesh, mesh_info)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mesh2vec.mesh2vec_cae.Mesh2VecCae.__init__" title="mesh2vec.mesh2vec_cae.Mesh2VecCae.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(distance, mesh, mesh_info[, ...])</p></td>
 <td><p>Create a Mesh2VecCae instance</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#mesh2vec.mesh2vec_cae.Mesh2VecCae.add_feature_from_d3plot" title="mesh2vec.mesh2vec_cae.Mesh2VecCae.add_feature_from_d3plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_feature_from_d3plot</span></code></a>(feature, d3plot[, ...])</p></td>
 <td><p>Map feature from a d3plot to the CAE elements which are the vertices of the hg.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#mesh2vec.mesh2vec_cae.Mesh2VecCae.add_features_from_ansa" title="mesh2vec.mesh2vec_cae.Mesh2VecCae.add_features_from_ansa"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_features_from_ansa</span></code></a>(features, ansafile[, ...])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mesh2vec.mesh2vec_cae.Mesh2VecCae.add_features_from_ansa" title="mesh2vec.mesh2vec_cae.Mesh2VecCae.add_features_from_ansa"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_features_from_ansa</span></code></a>(features[, ansafile, ...])</p></td>
 <td><p>Add values derived or calculated from ANSA shell elements (currently restricted to LSDYNA models) for each element.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_features_from_csv</span></code>(csv_file[, ...])</p></td>
@@ -127,26 +127,26 @@ from lasso-cae) Inherits from Mesh2VecBase</p>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">aggregate_categorical</span></code>(feature, dist[, ...])</p></td>
 <td><p>For categorical features, aggregate the numbers of occurrences of each categorical value.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ajacency_matrix_powers_exclusive</span></code>()</p></td>
-<td><p>Return the adjacency_matrix of different max distances</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">available_aggregated_features</span></code>()</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">available_aggregated_features</span></code>()</p></td>
 <td><p>returns a list the names of all aggregated features</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">available_features</span></code>()</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">available_features</span></code>()</p></td>
 <td><p>returns a list the names of all features</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">features</span></code>()</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">features</span></code>()</p></td>
 <td><p>Returns a Pandas dataframe with all feature columns.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#mesh2vec.mesh2vec_cae.Mesh2VecCae.from_ansa_shell" title="mesh2vec.mesh2vec_cae.Mesh2VecCae.from_ansa_shell"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_ansa_shell</span></code></a>(distance, ansafile[, ...])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#mesh2vec.mesh2vec_cae.Mesh2VecCae.from_ansa_shell" title="mesh2vec.mesh2vec_cae.Mesh2VecCae.from_ansa_shell"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_ansa_shell</span></code></a>(distance, ansafile[, ...])</p></td>
 <td><p>Read the given ANSA file and use the shell elements corresponding with <code class="docutils literal notranslate"><span class="pre">partid</span></code> to generate a hypergraph, using CAE nodes as hyperedges, and adjacent elements as hypervertices.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#mesh2vec.mesh2vec_cae.Mesh2VecCae.from_d3plot_shell" title="mesh2vec.mesh2vec_cae.Mesh2VecCae.from_d3plot_shell"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_d3plot_shell</span></code></a>(distance, d3plot[, partid])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mesh2vec.mesh2vec_cae.Mesh2VecCae.from_d3plot_shell" title="mesh2vec.mesh2vec_cae.Mesh2VecCae.from_d3plot_shell"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_d3plot_shell</span></code></a>(distance, d3plot[, partid])</p></td>
 <td><p>Read the given d3plot file and use the shell elements corresponding with <code class="docutils literal notranslate"><span class="pre">partid</span></code> to generate a hypergraph, using CAE nodes as hyperedges, and adjacent elements as hypervertices.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_file</span></code>(hg_file, distance)</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_file</span></code>(hg_file, distance)</p></td>
 <td><p>Read a hypergraph (hg) from a text file.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mesh2vec.mesh2vec_cae.Mesh2VecCae.from_keyfile_shell" title="mesh2vec.mesh2vec_cae.Mesh2VecCae.from_keyfile_shell"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_keyfile_shell</span></code></a>(distance, keyfile)</p></td>
+<td><p>Read the given keyfile and use the shell elements to generate a hypergraph, using mesh nodes as hyperedges, and adjacent elements as hypervertices.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#mesh2vec.mesh2vec_cae.Mesh2VecCae.from_stl_shell" title="mesh2vec.mesh2vec_cae.Mesh2VecCae.from_stl_shell"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_stl_shell</span></code></a>(distance, stlfile)</p></td>
 <td><p>Read the given stl file and use the shell elements to generate a hypergraph, using mesh nodes as hyperedges, and adjacent elements as  hypervertices.</p></td>
@@ -169,8 +169,14 @@ from lasso-cae) Inherits from Mesh2VecBase</p>
 <tr class="row-even"><td><p><a class="reference internal" href="#mesh2vec.mesh2vec_cae.Mesh2VecCae.get_visualization_trimesh" title="mesh2vec.mesh2vec_cae.Mesh2VecCae.get_visualization_trimesh"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_visualization_trimesh</span></code></a>(feature)</p></td>
 <td><p>Get a trimesh with face colored by feature values Use trimesh_mesh.show(smooth=False, flags={&quot;cull&quot;: False}) to visualize.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#mesh2vec.mesh2vec_cae.Mesh2VecCae.mesh" title="mesh2vec.mesh2vec_cae.Mesh2VecCae.mesh"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mesh</span></code></a>()</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">load</span></code>(path)</p></td>
+<td><p>Load the Mesh2Vec object from a file with joblib :param path: path to the file</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mesh2vec.mesh2vec_cae.Mesh2VecCae.mesh" title="mesh2vec.mesh2vec_cae.Mesh2VecCae.mesh"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mesh</span></code></a>()</p></td>
 <td><p>return the FE mesh</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">save</span></code>(path)</p></td>
+<td><p>Save the Mesh2Vec object to a file with joblib :param path: path to the file</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_array</span></code>([vertices])</p></td>
 <td><p>Returns a numpy array with all the beforehand aggregated feature columns.</p></td>
@@ -189,12 +195,13 @@ from lasso-cae) Inherits from Mesh2VecBase</p>
 <li><p><strong>distance</strong> (<em>int</em>) – </p></li>
 <li><p><strong>mesh</strong> (<em>CaeShellMesh</em>) – </p></li>
 <li><p><strong>mesh_info</strong> (<em>DataFrame</em>) – </p></li>
+<li><p><strong>calc_strategy</strong> (<em>AbstractAdjacencyStrategy</em>) – </p></li>
 </ul>
 </dd>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="mesh2vec.mesh2vec_cae.Mesh2VecCae.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mesh</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mesh_info</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_cae.Mesh2VecCae.__init__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mesh</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mesh_info</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_cae.Mesh2VecCae.__init__" title="Permalink to this definition"></a></dt>
 <dd><p>Create a Mesh2VecCae instance</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -203,6 +210,7 @@ from lasso-cae) Inherits from Mesh2VecBase</p>
 <li><p><strong>mesh</strong> (<em>CaeShellMesh</em>) – points, point_ids/uids, connectivity and element_ids/uids</p></li>
 <li><p><strong>mesh_info</strong> (<em>DataFrame</em>) – additional info about the elements in mesh (same order is required)
 columns “part_name”, “part_id”, “file_path”, “element_id” are required</p></li>
+<li><p><strong>calc_strategy</strong> (<em>Optional</em><em>[</em><em>AbstractAdjacencyStrategy</em><em>]</em>) – choose the algorithm to calculate adjacencies</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -250,7 +258,7 @@ nodes as hyperedges, and adjacent elements as  hypervertices.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="mesh2vec.mesh2vec_cae.Mesh2VecCae.from_ansa_shell">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_ansa_shell</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ansafile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">partid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">json_mesh_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ansa_executable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ansa_script</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_cae.Mesh2VecCae.from_ansa_shell" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_ansa_shell</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ansafile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">partid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">json_mesh_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ansa_executable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ansa_script</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_cae.Mesh2VecCae.from_ansa_shell" title="Permalink to this definition"></a></dt>
 <dd><p>Read the given ANSA file and use the shell elements corresponding with <code class="docutils literal notranslate"><span class="pre">partid</span></code> to
 generate a hypergraph, using CAE nodes as hyperedges, and adjacent elements as
 hypervertices. This is a simple wrapper around an ANSA Python script that generates
@@ -283,6 +291,7 @@ of its element ID (which may be not unique), and a unique hash value.</p>
 <li><p><strong>ansa_executable</strong> (<em>Optional</em><em>[</em><em>Path</em><em>]</em>) – </p></li>
 <li><p><strong>ansa_script</strong> (<em>Optional</em><em>[</em><em>Path</em><em>]</em>) – </p></li>
 <li><p><strong>verbose</strong> (<em>bool</em>) – </p></li>
+<li><p><strong>calc_strategy</strong> (<em>Optional</em><em>[</em><em>AbstractAdjacencyStrategy</em><em>]</em>) – </p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -320,6 +329,34 @@ hypervertices.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="mesh2vec.mesh2vec_cae.Mesh2VecCae.from_keyfile_shell">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_keyfile_shell</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keyfile</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_cae.Mesh2VecCae.from_keyfile_shell" title="Permalink to this definition"></a></dt>
+<dd><p>Read the given keyfile and use the shell elements to generate a hypergraph, using mesh
+nodes as hyperedges, and adjacent elements as hypervertices.
+:param distance: the maximum distance for neighborhood generation and feature aggregation
+:param keyfile: path to keyfile</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">mesh2vec.mesh2vec_cae</span> <span class="kn">import</span> <span class="n">Mesh2VecCae</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m2v</span> <span class="o">=</span> <span class="n">Mesh2VecCae</span><span class="o">.</span><span class="n">from_keyfile_shell</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;data/hat/Hatprofile.k&quot;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">m2v</span><span class="o">.</span><span class="n">_hyper_edges</span><span class="p">)</span>
+<span class="go">6666</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>distance</strong> (<em>int</em>) – </p></li>
+<li><p><strong>keyfile</strong> (<em>Path</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#mesh2vec.mesh2vec_cae.Mesh2VecCae" title="mesh2vec.mesh2vec_cae.Mesh2VecCae"><em>Mesh2VecCae</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="mesh2vec.mesh2vec_cae.Mesh2VecCae.get_elements_info">
 <span class="sig-name descname"><span class="pre">get_elements_info</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_cae.Mesh2VecCae.get_elements_info" title="Permalink to this definition"></a></dt>
 <dd><p>Return a Pandas dataframe containing a row for each element in the hypergraph
@@ -340,7 +377,7 @@ vertices with</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="mesh2vec.mesh2vec_cae.Mesh2VecCae.add_features_from_ansa">
-<span class="sig-name descname"><span class="pre">add_features_from_ansa</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">features</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ansafile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">json_mesh_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ansa_executable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ansa_script</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_cae.Mesh2VecCae.add_features_from_ansa" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">add_features_from_ansa</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">features</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ansafile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">json_mesh_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ansa_executable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ansa_script</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allow_addtional_ansa_features</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_cae.Mesh2VecCae.add_features_from_ansa" title="Permalink to this definition"></a></dt>
 <dd><p>Add values derived or calculated from ANSA shell elements (currently restricted to
 LSDYNA models) for each element.</p>
 <p>Path to ANSA executable can also be provided in environment var: ANSA_EXECUTABLE</p>
@@ -351,11 +388,16 @@ LSDYNA models) for each element.</p>
 <div><ul class="simple">
 <li><p>aspect: The aspect ratio of each element (ansafile is required)</p></li>
 <li><p>warpage: (ansafile is required)</p></li>
-<li><p>num_borders: number of border edges</p></li>
+<li><p>num_border: number of border edges</p></li>
 <li><p>is_tria</p></li>
 <li><p>midpoint x,y,z</p></li>
 <li><p>normal vector x,y,z (ansafile is required)</p></li>
 <li><p>area (ansafile is required)</p></li>
+<li><dl class="simple">
+<dt>custom features from your customized ansa_script (scalar values only,</dt><dd><p>allow_addtional_ansa_features must be True)</p>
+</dd>
+</dl>
+</li>
 </ul>
 </div></blockquote>
 <p class="rubric">Example</p>
@@ -369,6 +411,7 @@ LSDYNA models) for each element.</p>
 <span class="gp">... </span>   <span class="p">[</span><span class="s2">&quot;aspect&quot;</span><span class="p">,</span> <span class="s2">&quot;warpage&quot;</span><span class="p">],</span>
 <span class="gp">... </span>   <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;data/hat/Hatprofile.k&quot;</span><span class="p">),</span>
 <span class="gp">... </span>   <span class="n">json_mesh_file</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;data/hat/cached_hat_key.json&quot;</span><span class="p">))</span>
+<span class="go">[&#39;aspect&#39;, &#39;warpage&#39;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">m2v</span><span class="o">.</span><span class="n">_features</span><span class="p">[</span><span class="s2">&quot;warpage&quot;</span><span class="p">][</span><span class="mi">14</span><span class="p">]</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 <span class="go">0.0188</span>
 </pre></div>
@@ -382,10 +425,11 @@ LSDYNA models) for each element.</p>
 <li><p><strong>ansa_executable</strong> (<em>Optional</em><em>[</em><em>Path</em><em>]</em>) – </p></li>
 <li><p><strong>ansa_script</strong> (<em>Optional</em><em>[</em><em>Path</em><em>]</em>) – </p></li>
 <li><p><strong>verbose</strong> (<em>bool</em>) – </p></li>
+<li><p><strong>allow_addtional_ansa_features</strong> (<em>bool</em>) – </p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
+<dd class="field-even"><p><em>List</em>[str]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -400,7 +444,7 @@ of the hg. Restricted to arrays available from lasso-cae.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">lasso.dyna</span> <span class="kn">import</span> <span class="n">ArrayType</span><span class="p">,</span> <span class="n">D3plot</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">mesh2vec.mesh2vec_cae</span> <span class="kn">import</span> <span class="n">Mesh2VecCae</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">m2v</span> <span class="o">=</span>  <span class="n">Mesh2VecCae</span><span class="o">.</span><span class="n">from_d3plot_shell</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;data/hat/HAT.d3plot&quot;</span><span class="p">))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">names</span><span class="p">,</span> <span class="n">values</span> <span class="o">=</span> <span class="n">m2v</span><span class="o">.</span><span class="n">get_feature_from_d3plot</span><span class="p">(</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">names</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">ids</span> <span class="o">=</span> <span class="n">m2v</span><span class="o">.</span><span class="n">get_feature_from_d3plot</span><span class="p">(</span>
 <span class="gp">... </span>   <span class="n">ArrayType</span><span class="o">.</span><span class="n">element_shell_strain</span><span class="p">,</span>
 <span class="gp">... </span>   <span class="n">D3plot</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;data/hat/HAT.d3plot&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">as_posix</span><span class="p">()),</span>
 <span class="gp">... </span>   <span class="n">timestep</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">shell_layer</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
@@ -435,7 +479,7 @@ of the hg. Restricted to arrays available from lasso-cae.</p>
 <li><p><strong>feature</strong> (<em>str</em>) – name of the feature to add (a shell_array name of lasso.dyna.ArrayType)</p></li>
 <li><p><strong>d3plot</strong> (<em>Union</em><em>[</em><em>Path</em><em>, </em><em>D3plot</em><em>]</em>) – path to d3plot file or loaded d3plot data</p></li>
 <li><p><strong>timestep</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – timestep to extract (required for time dependend arrays, ignored otherwise)</p></li>
-<li><p><strong>shell_layer</strong> (<em>Optional</em><em>[</em><em>Union</em><em>[</em><em>int</em><em>, </em><em>Callable</em><em>]</em><em>]</em>) – integration point index or function to accumulate over all integration
+<li><p><strong>shell_layer</strong> (<em>Optional</em><em>[</em><em>Union</em><em>[</em><em>int</em><em>, </em><em>Callable</em><em>]</em><em>]</em>) – integration point index or callabe to accumulate over all integration
 points (required for layerd arrays, ignored otherwise)</p></li>
 <li><p><strong>history_var_index</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – index of the history variable to extract (required for
 element_shell_history_vars, ignored otherwise)</p></li>
@@ -454,15 +498,32 @@ element_shell_history_vars, ignored otherwise)</p></li>
 <span class="gp">... </span>   <span class="n">ArrayType</span><span class="o">.</span><span class="n">element_shell_strain</span><span class="p">,</span>
 <span class="gp">... </span>   <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;data/hat/HAT.d3plot&quot;</span><span class="p">),</span>
 <span class="gp">... </span>   <span class="n">timestep</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">shell_layer</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># print eps_xx, eps_yy, eps_zz, eps_xy, eps_yz, eps_xz of layer 0</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">([</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">v</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">m2v</span><span class="o">.</span><span class="n">features</span><span class="p">()[</span><span class="n">name</span><span class="p">][</span><span class="mi">42</span><span class="p">]])</span>
 <span class="go">[&#39;0.0010&#39;, &#39;-0.0003&#39;, &#39;-0.0000&#39;, &#39;-0.0012&#39;, &#39;-0.0000&#39;, &#39;-0.0003&#39;]</span>
+</pre></div>
+</div>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">lasso.dyna</span> <span class="kn">import</span> <span class="n">ArrayType</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">mesh2vec.mesh2vec_cae</span> <span class="kn">import</span> <span class="n">Mesh2VecCae</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">m2v</span> <span class="o">=</span>  <span class="n">Mesh2VecCae</span><span class="o">.</span><span class="n">from_d3plot_shell</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;data/hat/HAT.d3plot&quot;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">mean_over_components_all_layers</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+<span class="gp">... </span>   <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">name</span> <span class="o">=</span> <span class="n">m2v</span><span class="o">.</span><span class="n">add_feature_from_d3plot</span><span class="p">(</span>
+<span class="gp">... </span>   <span class="n">ArrayType</span><span class="o">.</span><span class="n">element_shell_strain</span><span class="p">,</span>
+<span class="gp">... </span>   <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;data/hat/HAT.d3plot&quot;</span><span class="p">),</span>
+<span class="gp">... </span>   <span class="n">timestep</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">shell_layer</span><span class="o">=</span><span class="n">mean_over_components_all_layers</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># print mean of all components for each layer (0,1)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">([</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">v</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">m2v</span><span class="o">.</span><span class="n">features</span><span class="p">()[</span><span class="n">name</span><span class="p">][</span><span class="mi">42</span><span class="p">]])</span>
+<span class="go">[&#39;0.0002&#39;, &#39;0.0001&#39;]</span>
 </pre></div>
 </div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="mesh2vec.mesh2vec_cae.Mesh2VecCae.aggregate_angle_diff">
-<span class="sig-name descname"><span class="pre">aggregate_angle_diff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aggr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">agg_add_ref</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_cae.Mesh2VecCae.aggregate_angle_diff" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">aggregate_angle_diff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aggr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">agg_add_ref</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_arcos</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_cae.Mesh2VecCae.aggregate_angle_diff" title="Permalink to this definition"></a></dt>
 <dd><p>Aggregate angle differences</p>
 <p>Aggregate a new feature calculated from the angle difference of each element’s normal vector
 to the reference vector given by the center element  (in radian).</p>
@@ -480,6 +541,7 @@ to the reference vector given by the center element  (in radian).</p>
 reference as 2nd argument. (default is True)</p></li>
 <li><p><strong>default_value</strong> (<em>float</em>) – value to use in aggregation when a feature is missing for a neighbor
 or no neighor with the given dist exist.</p></li>
+<li><p><strong>skip_arcos</strong> (<em>bool</em>) – if True, the angle difference is not calculated, but the dot product of the normal vectors is used.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -498,6 +560,7 @@ or no neighor with the given dist exist.</p></li>
 <span class="gp">... </span>   <span class="p">[</span><span class="s2">&quot;normal&quot;</span><span class="p">],</span>
 <span class="gp">... </span>   <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;data/hat/Hatprofile.k&quot;</span><span class="p">),</span>
 <span class="gp">... </span>   <span class="n">json_mesh_file</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;data/hat/cached_hat_key.json&quot;</span><span class="p">))</span>
+<span class="go">[&#39;normal&#39;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">name</span> <span class="o">=</span> <span class="n">m2v</span><span class="o">.</span><span class="n">aggregate_angle_diff</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="w"> </span><span class="n">m2v</span><span class="o">.</span><span class="n">_aggregated_features</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="mi">14</span><span class="p">]</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 <span class="go">0.6275</span>
