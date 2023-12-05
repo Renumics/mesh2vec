@@ -97,6 +97,13 @@ class Mesh2VecBase:
     def save(self, path: Path):
         """
         Save the Mesh2Vec object to a file with joblib
+        Args:
+            path: path to the file
+        Example:
+            >>> from pathlib import Path
+            >>> from mesh2vec.mesh2vec_base import Mesh2VecBase
+            >>> hg = Mesh2VecBase(3, {"first": ["a", "b", "c"], "second": ["x", "y"]})
+            >>> hg.save(Path("/tmp/hg.joblib"))
         """
         joblib.dump(self, path)
 
@@ -104,6 +111,13 @@ class Mesh2VecBase:
     def load(path: Path):
         """
         Load the Mesh2Vec object from a file with joblib
+        Args:
+            path: path to the file
+        Example:
+            >>> from pathlib import Path
+            >>> from mesh2vec.mesh2vec_base import Mesh2VecBase
+            >>> hg.save(Path("/tmp/hg.joblib"))
+            >>> hg = Mesh2VecBase.load(Path("/tmp/hg.joblib"))
         """
         return joblib.load(path)
 

@@ -10,9 +10,6 @@ import pandas as pd
 from lasso.dyna import ArrayType
 from mesh2vec.mesh2vec_cae import Mesh2VecCae
 
-import os
-
-os.chdir(os.path.dirname(__file__))
 
 # %%
 # Load Shell from ANSA, simulation results from d3plot
@@ -24,16 +21,16 @@ hg = Mesh2VecCae.from_ansa_shell(
 )
 
 
-def y_all_layers(v):
-    """get y stress component of all layers"""
-    return v[:, 1]
+def mean_over_components_all_layers(v):
+    """get mean over all components and all layers"""
+    return np.mean(v, axis=-1)
 
 
 fature_name = hg.add_feature_from_d3plot(
     ArrayType.element_shell_stress,
     Path("../../data/hat/HAT.d3plot"),
-    timestep=1,
-    shell_layer=y_all_layers,
+    timestep=-1,
+    shell_layer=mean_over_components_all_layers,
 )
 
 

@@ -230,6 +230,15 @@ class Mesh2VecCae(Mesh2VecBase):
         """
         Read the given keyfile and use the shell elements to generate a hypergraph, using mesh
         nodes as hyperedges, and adjacent elements as hypervertices.
+        Args:
+            distance: the maximum distance for neighborhood generation and feature aggregation
+            keyfile: path to keyfile
+        Example:
+            >>> from pathlib import Path
+            >>> from mesh2vec.mesh2vec_cae import Mesh2VecCae
+            >>> m2v = Mesh2VecCae.from_keyfile_shell(4, Path("data/hat/Hatprofile.k"))
+            >>> len(m2v._hyper_edges)
+            6666
         """
         mesh = CaeShellMesh.from_keyfile(keyfile)
         element_info = pd.DataFrame({"element_id": mesh.element_ids})
@@ -293,6 +302,7 @@ class Mesh2VecCae(Mesh2VecBase):
             ...    ["aspect", "warpage"],
             ...    Path("data/hat/Hatprofile.k"),
             ...    json_mesh_file=Path("data/hat/cached_hat_key.json"))
+            ['aspect', 'warpage']
             >>> print(f'{m2v._features["warpage"][14]:.4f}')
             0.0188
         """
@@ -508,7 +518,7 @@ class Mesh2VecCae(Mesh2VecBase):
             feature: name of the feature to add (a shell_array name of lasso.dyna.ArrayType)
             d3plot: path to d3plot file or loaded d3plot data
             timestep: timestep to extract (required for time dependend arrays, ignored otherwise)
-            shell_layer: integration point index or function to accumulate over all integration
+            shell_layer: integration point index or callabe to accumulate over all integration
                 points (required for layerd arrays, ignored otherwise)
             history_var_index: index of the history variable to extract (required for
                 element_shell_history_vars, ignored otherwise)
@@ -523,8 +533,24 @@ class Mesh2VecCae(Mesh2VecBase):
             ...    ArrayType.element_shell_strain,
             ...    Path("data/hat/HAT.d3plot"),
             ...    timestep=1, shell_layer=0)
+            >>> # print eps_xx, eps_yy, eps_zz, eps_xy, eps_yz, eps_xz of layer 0
             >>> print([f'{v:.4f}' for v in m2v.features()[name][42]])
             ['0.0010', '-0.0003', '-0.0000', '-0.0012', '-0.0000', '-0.0003']
+
+        Example:
+            >>> from pathlib import Path
+            >>> from lasso.dyna import ArrayType
+            >>> from mesh2vec.mesh2vec_cae import Mesh2VecCae
+            >>> m2v =  Mesh2VecCae.from_d3plot_shell(3, Path("data/hat/HAT.d3plot"))
+            >>> def mean_over_components_all_layers(v):
+            ...    return np.mean(v, axis=-1)
+            >>> name = m2v.add_feature_from_d3plot(
+            ...    ArrayType.element_shell_strain,
+            ...    Path("data/hat/HAT.d3plot"),
+            ...    timestep=-1, shell_layer=mean_over_components_all_layers)
+            >>> # print mean of all components for each layer (0,1)
+            >>> print([f'{v:.4f}' for v in m2v.features()[name][42]])
+            ['0.0002', '0.0001']
         """
 
         d3plot_data = D3plot(d3plot.as_posix()) if not isinstance(d3plot, D3plot) else d3plot
@@ -588,6 +614,7 @@ class Mesh2VecCae(Mesh2VecBase):
             ...    ["normal"],
             ...    Path("data/hat/Hatprofile.k"),
             ...    json_mesh_file=Path("data/hat/cached_hat_key.json"))
+            ['normal']
             >>> name = m2v.aggregate_angle_diff(2)
             >>> print(f'{ m2v._aggregated_features[name][14]:.4f}')
             0.6275
