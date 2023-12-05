@@ -95,7 +95,7 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: test
       run: |
-        poetry run sphinx-build docs/source build/documentation/ -W -b html # autodocs contain tests && poetry run sphinx-build docs/source build/documentation/ -W -b doctest
+        poetry run sphinx-build docs/source build/documentation/ -W -b html && poetry run sphinx-build docs/source build/documentation/ -W -b doctest
 
   unit-tests:
     needs: [prepare-linux, prepare-win]
