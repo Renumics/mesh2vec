@@ -95,7 +95,7 @@ def test_from_csv_file() -> None:
 
     # write pair-wise connectivity to csv
     connections = []
-    connectivity_list = [x for x in hg1._neighborhoods[1]]
+    connectivity_list = hg1._neighborhoods[1].copy()
     for vtx_a, vtx_a_neigbors in enumerate(connectivity_list):
         for vtx_b in vtx_a_neigbors:
             connections.append([hg1._vtx_idx_to_ids[vtx_a], hg1._vtx_idx_to_ids[vtx_b]])

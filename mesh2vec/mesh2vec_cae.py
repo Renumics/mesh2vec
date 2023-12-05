@@ -258,6 +258,7 @@ class Mesh2VecCae(Mesh2VecBase):
         ansa_executable: Optional[Path] = None,
         ansa_script: Optional[Path] = None,
         verbose: bool = False,
+        allow_addtional_ansa_features: bool = False,
     ) -> List[str]:
         """
         Add values derived or calculated from ANSA shell elements (currently restricted to
@@ -278,6 +279,8 @@ class Mesh2VecCae(Mesh2VecBase):
             * midpoint x,y,z
             * normal vector x,y,z (ansafile is required)
             * area (ansafile is required)
+            * custom features from your customized ansa_script (scalar values only,
+                allow_addtional_ansa_features must be True)
 
         Example:
             >>> from pathlib import Path
@@ -293,15 +296,19 @@ class Mesh2VecCae(Mesh2VecBase):
             >>> print(f'{m2v._features["warpage"][14]:.4f}')
             0.0188
         """
-        okay_ansa = ["aspect", "warpage", "normal", "area"]
+        # pylint: disable=too-many-locals
+        okay_ansa = ["aspect", "warpage", "normal", "area", "skew"]
         okay_inplace = ["num_border", "is_tria", "midpoint"]
 
         for feature in features:
             if not feature in okay_ansa + okay_inplace:
-                raise ValueError(
-                    f"Feature {feature} is unknown. "
-                    f"All features must be in {okay_ansa+okay_inplace}"
-                )
+                if not allow_addtional_ansa_features:
+                    okay_ansa.append(feature)
+                else:
+                    raise ValueError(
+                        f"Feature {feature} is unknown and allow_addtional_ansa_features is False"
+                        f"All features must be in {okay_ansa+okay_inplace}"
+                    )
 
         if ansa_executable is not None:
             os.environ["ANSA_EXECUTABLE"] = str(ansa_executable)
@@ -321,10 +328,7 @@ class Mesh2VecCae(Mesh2VecBase):
             element_metrics = pd.DataFrame(
                 {
                     "vtx_id": mesh.element_uid.tolist(),
-                    "warpage": _err_to_nan(elements, "warpage"),
-                    "skew": _err_to_nan(elements, "skew"),
-                    "aspect": _err_to_nan(elements, "aspect"),
-                    "area": _err_to_nan(elements, "area"),
+                    **{k: _err_to_nan(elements, k) for k in okay_ansa if k != "normal"},
                     "normal": [e["normal"] for e in elements],
                 }
             )
@@ -438,11 +442,8 @@ class Mesh2VecCae(Mesh2VecBase):
                 ArrayType.element_shell_strain,
             ]:
                 if callable(shell_layer):
-                    new_feature = [
-                        v.tolist()
-                        for v in np.squeeze(d3plot_data.arrays[feature][timestep, :, :, :])
-                    ]
-                    new_feature = [shell_layer(x) for x in new_feature]
+                    new_feature = np.squeeze(d3plot_data.arrays[feature][timestep, :, :, :])
+                    new_feature = [shell_layer(x).tolist() for x in new_feature]
                 else:
                     new_feature = [
                         v.tolist()
@@ -632,7 +633,6 @@ class Mesh2VecCae(Mesh2VecBase):
         Get a trimesh with face colored by feature values
         Use trimesh_mesh.show(smooth=False, flags={"cull": False}) to visualize.
         """
-        max_v = 1 / max(self._aggregated_features[feature])
 
         df = self._element_info.merge(self._aggregated_features[["vtx_id", feature]], on="vtx_id")
         assert len(df) == len(self._mesh.element_node_idxs)
@@ -644,14 +644,18 @@ class Mesh2VecCae(Mesh2VecBase):
             element_node_idxs, feature_values
         )
 
+        omin = tri_features.min()
+        omax = tri_features.max()
+        tri_features_scaled = (tri_features - omin) / (omax - omin)
+
         trimeh_mesh = trimesh.Trimesh(
             vertices=self._mesh.point_coordinates / np.max(self._mesh.point_coordinates),
             faces=tri_faces,
         )
 
-        trimeh_mesh.visual.face_colors = [
-            [254 - 254 * x * max_v, 254 * x * max_v, 0, 254] for x in tri_features
-        ]
+        trimeh_mesh.visual.face_colors = np.array(
+            [np.array([254 - 254 * x, 254 * x, 0, 254]) for x in tri_features_scaled]
+        )
 
         return trimeh_mesh
 

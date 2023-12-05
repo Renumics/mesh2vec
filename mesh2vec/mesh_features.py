@@ -238,7 +238,13 @@ class CaeShellMesh:
 
     @staticmethod
     def from_keyfile(keyfile: str) -> "CaeShellMesh":
-        """create CaeShellMesh from keyfile"""
+        """create CaeShellMesh from keyfile
+            Example:
+        >>> from mesh2vec.mesh_features import CaeShellMesh
+        >>> mesh = CaeShellMesh.from_keyfile("data/hat/Hatprofile.k")
+        >>> print(mesh.point_coordinates.shape)
+        (6400, 3)
+        """
 
         def parse_contents(file_contents):
             lines = file_contents.split("\n")

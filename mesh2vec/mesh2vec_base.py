@@ -228,7 +228,7 @@ class Mesh2VecBase:
             feature_categories = np.unique(self._features[feature])
 
         for distance in dist_list:
-            values = self._collect_feature_values(feature, distance, default_value, aggr=np.array)
+            values = self._collect_feature_values(feature, distance, default_value, aggr=None)
 
             for category in feature_categories:
                 feature_name = f"{feature}-cat-{category}-{distance}"
@@ -406,16 +406,16 @@ class Mesh2VecBase:
             return feature
 
         if ref_values is None:
-            try:  # fast: use nan_to_num over the whole array
+            if not aggr is None:  # fast: use nan_to_num over the whole array
                 return np.nan_to_num(
                     [aggr(feature[neighborhood]) for neighborhood in self._neighborhoods[dist]],
                     default_value,
                 ).tolist()
-            except ValueError:  # slow: use nan_to_num for each element (different dimensions)
-                return [
-                    np.nan_to_num(aggr(feature[neighborhood]), default_value)
-                    for neighborhood in self._neighborhoods[dist]
-                ]
+            # slow: use nan_to_num for each neighborhood (not aggregatted - different length)
+            return [
+                np.nan_to_num((feature[neighborhood]), default_value)
+                for neighborhood in self._neighborhoods[dist]
+            ]
 
         # compare to reference value is needed
         ref_values_list = ref_values.tolist()

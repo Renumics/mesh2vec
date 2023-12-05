@@ -106,22 +106,8 @@ def test_from_keyfile_shell() -> None:
         Path("data/hat/Hatprofile.k"),
         json_mesh_file=Path("data/hat/cached_hat_key.json"),
     )
-    all(
-        [
-            sorted(m2v._hyper_edges[k]) == sorted(m2v_ansa._hyper_edges[k])
-            for k in m2v._hyper_edges.keys()
-        ]
-    )
-    set(m2v.vtx_ids()) == set(m2v_ansa.vtx_ids())
-
-
-def test_patch2vec() -> None:
-    m2v = Mesh2VecCae.from_keyfile_shell(
-        4,
-        Path("/home/markus/Downloads/Patch2.key"),
-    )
-    name = m2v.add_features_from_ansa(["num_border"])[0]
-    name = m2v.aggregate(name, 2, np.mean)
+    all(sorted(v) == sorted(m2v_ansa._hyper_edges[k]) for k, v in m2v._hyper_edges.items())
+    assert set(m2v.vtx_ids()) == set(m2v_ansa.vtx_ids())
 
 
 def test_shell_from_ansa_partid() -> None:
@@ -228,12 +214,29 @@ def test_add_feature_from_d3plot_to_ansa_shell() -> None:
         ansafile,
         json_mesh_file=json_mesh_file,
     )
-    m2v.add_feature_from_d3plot(
+
+    m2v.add_features_from_ansa(
+        ["normal"],
+        Path("data/hat/Hatprofile.k"),
+        json_mesh_file=Path("data/hat/cached_hat_key.json"),
+    )
+    name = m2v.aggregate_angle_diff(2)
+    assert isinstance(name, str)
+    assert m2v._aggregated_features[name][4] == pytest.approx(0.41053, 0.001)
+    # m2v.get_visualization_trimesh(name).show()
+
+    axis_0_sum = partial(np.sum, axis=0)
+    axis_0_sum.__name__ = "axis0sum"  # type: ignore
+
+    name_strain = m2v.add_feature_from_d3plot(
         ArrayType.element_shell_strain,
         Path("data/hat/HAT.d3plot"),
         timestep=1,
-        shell_layer=0,
+        shell_layer=axis_0_sum,
     )
+    print(m2v._features[name_strain].shape)
+    name = m2v.aggregate(name_strain, 1, lambda x: np.mean(np.mean(x)))
+    print(m2v._aggregated_features[name].shape)
 
 
 def test_aggregate_angle_diff() -> None:
