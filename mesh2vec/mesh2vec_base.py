@@ -103,7 +103,7 @@ class Mesh2VecBase:
             >>> from pathlib import Path
             >>> from mesh2vec.mesh2vec_base import Mesh2VecBase
             >>> hg = Mesh2VecBase(3, {"first": ["a", "b", "c"], "second": ["x", "y"]})
-            >>> hg.save(Path("/tmp/hg.joblib"))
+            >>> hg.save(Path("data/temp_hg.joblib"))
         """
         joblib.dump(self, path)
 
@@ -116,8 +116,8 @@ class Mesh2VecBase:
         Example:
             >>> from pathlib import Path
             >>> from mesh2vec.mesh2vec_base import Mesh2VecBase
-            >>> hg.save(Path("/tmp/hg.joblib"))
-            >>> hg = Mesh2VecBase.load(Path("/tmp/hg.joblib"))
+            >>> hg.save(Path("data/temp_hg.joblib"))
+            >>> hg = Mesh2VecBase.load(Path("data/temp_hg.joblib"))
         """
         return joblib.load(path)
 

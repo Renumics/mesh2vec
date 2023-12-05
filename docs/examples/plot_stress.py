@@ -6,7 +6,6 @@ Aggregate Y-Stress
 # pylint: disable=pointless-statement
 from pathlib import Path
 import numpy as np
-import pandas as pd
 from lasso.dyna import ArrayType
 from mesh2vec.mesh2vec_cae import Mesh2VecCae
 
