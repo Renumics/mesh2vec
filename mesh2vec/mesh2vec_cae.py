@@ -14,7 +14,6 @@ from lasso.dyna import D3plot, ArrayType
 import plotly.graph_objects as go
 
 from mesh2vec import mesh_features
-from mesh2vec.helpers import AbstractAdjacencyStrategy
 from mesh2vec.mesh_features import CaeShellMesh, is_tri, num_border, midpoint
 from mesh2vec.mesh2vec_base import Mesh2VecBase
 from mesh2vec.mesh2vec_exceptions import (
@@ -39,7 +38,7 @@ class Mesh2VecCae(Mesh2VecBase):
         distance: int,
         mesh: CaeShellMesh,
         mesh_info: pd.DataFrame,
-        calc_strategy: AbstractAdjacencyStrategy = None,
+        calc_strategy: str = "dfs",
     ) -> None:
         # pylint: disable=line-too-long
         """
@@ -50,7 +49,10 @@ class Mesh2VecCae(Mesh2VecBase):
             mesh: points, point_ids/uids, connectivity and element_ids/uids
             mesh_info: additional info about the elements in mesh (same order is required)
                 columns "part_name", "part_id", "file_path", "element_id" are required
-            calc_strategy: choose the algorithm to calculate adjacencies
+                calc_strategy: choose the algorithm to calculate adjacencies
+                 * "dfs": depth first search (defaultl fast)
+                 * "bfs": breadth first search (low memory consumption)
+                 * "matmul": matrix multiplication (deprecated, for compatibility only)
 
         Example:
             >>> import numpy as np
@@ -137,7 +139,7 @@ class Mesh2VecCae(Mesh2VecBase):
         ansa_executable: Optional[Path] = None,
         ansa_script: Optional[Path] = None,
         verbose: bool = False,
-        calc_strategy: AbstractAdjacencyStrategy = None,
+        calc_strategy: str = "dfs",
     ) -> "Mesh2VecCae":
         """
         Read the given ANSA file and use the shell elements corresponding with ``partid`` to
@@ -150,11 +152,23 @@ class Mesh2VecCae(Mesh2VecBase):
         to work with shell meshes for LSDYNA. Each element gets a unique internal ID consisting
         of its element ID (which may be not unique), and a unique hash value.
 
-        Path to ANSA executable can also be provided in environment var: ANSA_EXECUTABLE
 
-        You can use a customized script to include more features ansa_script
-        (see :ref:`Customize Ansa script<customize_ansa_script>`)
-
+        Args:
+            distance: the maximum distance for neighborhood generation and feature aggregation
+            ansafile: path to ansa file
+            partid: part id to use for hypergraph generation
+            json_mesh_file: path to json mesh file,
+                if exists, it will be loaded instead of the ansafile else it will be generated.
+            ansa_executable: path to ansa executable
+                Path to ANSA executable can also be provided in environment var: ANSA_EXECUTABLE
+            ansa_script: path to ansa script
+                You can use a customized script to include more features ansa_script
+                (see :ref:`Customize Ansa script<customize_ansa_script>`)
+            verbose: print additional information
+            calc_strategy: choose the algorithm to calculate adjacencies
+                * "dfs": depth first search (defaultl fast)
+                * "bfs": breadth first search (low memory consumption)
+                * "matmul": matrix multiplication (deprecated, for compatibility only)
 
         Example:
             >>> from pathlib import Path
@@ -184,11 +198,22 @@ class Mesh2VecCae(Mesh2VecBase):
         return Mesh2VecCae(distance, mesh, element_info, calc_strategy)
 
     @staticmethod
-    def from_d3plot_shell(distance: int, d3plot: Path, partid: str = None) -> "Mesh2VecCae":
+    def from_d3plot_shell(
+        distance: int, d3plot: Path, partid: str = None, calc_strategy="dfs"
+    ) -> "Mesh2VecCae":
         """
         Read the given d3plot file and use the shell elements corresponding with ``partid`` to
         generate a hypergraph, using CAE nodes as hyperedges, and adjacent elements as
         hypervertices.
+
+        Args:
+            distance: the maximum distance for neighborhood generation and feature aggregation
+            d3plot: path to d3plot file
+            partid: part id to use
+            calc_strategy: choose the algorithm to calculate adjacencies
+                * "dfs": depth first search (defaultl fast)
+                * "bfs": breadth first search (low memory consumption)
+                * "matmul": matrix multiplication (deprecated, for compatibility only)
 
         Example:
             >>> from pathlib import Path
@@ -223,16 +248,21 @@ class Mesh2VecCae(Mesh2VecBase):
         ]
         element_info["file_path"] = str(d3plot)
 
-        return Mesh2VecCae(distance, mesh, element_info)
+        return Mesh2VecCae(distance, mesh, element_info, calc_strategy=calc_strategy)
 
     @staticmethod
-    def from_keyfile_shell(distance: int, keyfile: Path) -> "Mesh2VecCae":
+    def from_keyfile_shell(distance: int, keyfile: Path, calc_strategy) -> "Mesh2VecCae":
         """
         Read the given keyfile and use the shell elements to generate a hypergraph, using mesh
         nodes as hyperedges, and adjacent elements as hypervertices.
         Args:
             distance: the maximum distance for neighborhood generation and feature aggregation
             keyfile: path to keyfile
+            calc_strategy: choose the algorithm to calculate adjacencies
+                * "dfs": depth first search (defaultl fast)
+                * "bfs": breadth first search (low memory consumption)
+                * "matmul": matrix multiplication (deprecated, for compatibility only)
+
         Example:
             >>> from pathlib import Path
             >>> from mesh2vec.mesh2vec_cae import Mesh2VecCae
@@ -243,7 +273,7 @@ class Mesh2VecCae(Mesh2VecBase):
         mesh = CaeShellMesh.from_keyfile(keyfile)
         element_info = pd.DataFrame({"element_id": mesh.element_ids})
         element_info["file_path"] = str(keyfile)
-        return Mesh2VecCae(distance, mesh, element_info)
+        return Mesh2VecCae(distance, mesh, element_info, calc_strategy=calc_strategy)
 
     def get_elements_info(self) -> pd.DataFrame:
         """

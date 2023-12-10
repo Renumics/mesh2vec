@@ -11,7 +11,7 @@ import joblib
 # noinspection PyProtectedMember
 from pandas.api.types import is_string_dtype
 
-from mesh2vec.helpers import MatMulAdjacency, AbstractAdjacencyStrategy
+from mesh2vec.helpers import MatMulAdjacency, PurePythonBFS, PurePythonDFS
 from mesh2vec.mesh2vec_exceptions import (
     check_distance_init_arg,
     check_distance_arg,
@@ -20,6 +20,7 @@ from mesh2vec.mesh2vec_exceptions import (
     check_vtx_arg,
     check_feature_available,
     check_vtx_ids_column,
+    check_adjacency_calc_strategy,
 )
 
 
@@ -36,7 +37,7 @@ class Mesh2VecBase:
         distance: int,
         hyper_edges: Dict[str, List[str]],
         vtx_ids: Optional[List[str]] = None,
-        calc_strategy: AbstractAdjacencyStrategy = None,
+        calc_strategy: str = "dfs",
     ):
         r"""
         Create neighborhood sets on a hypergraph.
@@ -51,6 +52,9 @@ class Mesh2VecBase:
             vtx_ids: provide a list of all vertices to control inernal order of vertices
                 (features, aggregated feature)
             calc_strategy: choose the algorithm to calculate adjacencies
+                 * "dfs": depth first search (defaultl fast)
+                 * "bfs": breadth first search (low memory consumption)
+                 * "matmul": matrix multiplication (deprecated, for compatibility only)
 
         Example:
             >>> from mesh2vec.mesh2vec_base import Mesh2VecBase
@@ -62,6 +66,7 @@ class Mesh2VecBase:
         """
         check_distance_init_arg(distance)
         check_hyper_edges(hyper_edges)
+        check_adjacency_calc_strategy(calc_strategy)
 
         if vtx_ids is None:
             vtx_ids = np.unique(
@@ -87,10 +92,14 @@ class Mesh2VecBase:
             )
             for h_edge_id, vtx_ids in self._hyper_edges.items()
         )
-        if calc_strategy is None:
+        if calc_strategy == "dfs":
+            calc_strategy = PurePythonDFS()
+        elif calc_strategy == "bfs":
+            calc_strategy = PurePythonBFS()
+        elif calc_strategy == "matmul":
             calc_strategy = MatMulAdjacency()
-        elif isinstance(calc_strategy, type):
-            calc_strategy = calc_strategy()
+        else:
+            raise ValueError(f"Unknown adjacency_calc_strategy: {calc_strategy}")
 
         self._neighborhoods = calc_strategy.calc_adjacencies(hyper_edges_idx, distance)
 
@@ -122,7 +131,7 @@ class Mesh2VecBase:
         return joblib.load(path)
 
     @staticmethod
-    def from_file(hg_file: Path, distance: int) -> "Mesh2VecBase":
+    def from_file(hg_file: Path, distance: int, calc_strategy="dfs") -> "Mesh2VecBase":
         # pylint: disable=line-too-long
         r"""
         Read a hypergraph (hg) from a text file.
@@ -133,6 +142,10 @@ class Mesh2VecBase:
                 * a CSV files of pairs of alphanumerical vertex identifiers defining an undirected graph. Multiple edges are ignored. The initial hypergraph is given by the cliques of the graph. Since the CLIQUE problem is NP-complete, use this for small graphs only.
                 * a hypergraph file (text). Each line of the file contains an alphanumerical edge identifier, followed by a list of vertex identifiers the edge is containing, in the form 'DGEID: VTXID1,VTXID2,...'
             distance: the maximum distance for neighborhood generation and feature aggregation
+            calc_strategy: choose the algorithm to calculate adjacencies
+                 * "dfs": depth first search (defaultl fast)
+                 * "bfs": breadth first search (low memory consumption)
+                 * "matmul": matrix multiplication (deprecated, for compatibility only)
 
         Example:
             >>> from pathlib import Path
@@ -165,6 +178,7 @@ class Mesh2VecBase:
                     f"clique_{i}": [vtx_idx_to_ids[v] for v in clique]
                     for i, clique in enumerate(cliques)
                 },
+                calc_strategy=calc_strategy,
             )
 
         # txt file

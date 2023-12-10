@@ -133,7 +133,8 @@ class MatMulAdjacency(AbstractAdjacencyStrategy):
         neighborhoods = {}
         for dist in range(1, max_distance + 1):
             neighborhoods[dist] = [
-                adjacency_matrix_powers_exclusive[dist][[i], :].indices for i in range(n_vtx)
+                adjacency_matrix_powers_exclusive[dist][[i], :].indices.tolist()
+                for i in range(n_vtx)
             ]
         return neighborhoods
 
