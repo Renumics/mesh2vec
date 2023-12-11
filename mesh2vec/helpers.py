@@ -27,7 +27,8 @@ class AbstractAdjacencyStrategy(ABC):
         """
 
 
-def _hyper_edges_to_adj_np(hyper_edges_idx):
+def _hyper_edges_to_adj_pairs_np(hyper_edges_idx):
+    """create adjacency list of connection pairs as numpy array (shape (?, 2)) from hyper edges"""
     adjacency_list = []
     for vtxs in hyper_edges_idx.values():
         for vtx_a in vtxs:
@@ -38,6 +39,7 @@ def _hyper_edges_to_adj_np(hyper_edges_idx):
 
 
 def _hyper_edges_to_adj_list(vtx_count, hyper_edges_idx, include_self=False):
+    """create adjacency list as list of lists  (jagged shape (vtx_count, ?)) from hyper edges"""
     adjacency_list = [[] for _ in range(vtx_count)]
     for vtxs in hyper_edges_idx.values():
         for vtx_a in vtxs:
@@ -57,15 +59,15 @@ class MatMulAdjacency(AbstractAdjacencyStrategy):
         self, hyper_edges_idx: OrderedDict[str, List[int]], max_distance: int
     ) -> Dict[int, List[List[int]]]:
         """calc adjacencies using matrix multiplication"""
-        # vtx_connectivity: holds for each vtx all connected vtx
 
-        adjacency_list_np = _hyper_edges_to_adj_np(hyper_edges_idx)
+        adjacency_pair_list_np = _hyper_edges_to_adj_pairs_np(hyper_edges_idx)
 
         # adjacency matrix
         n_vtx = max(max(v) for v in hyper_edges_idx.values()) + 1
-        data = np.array([1] * len(adjacency_list_np))
+        data = np.array([1] * len(adjacency_pair_list_np))
         adjacency_matrix = coo_array(
-            (data, (adjacency_list_np[:, 1], adjacency_list_np[:, 0])), shape=(n_vtx, n_vtx)
+            (data, (adjacency_pair_list_np[:, 1], adjacency_pair_list_np[:, 0])),
+            shape=(n_vtx, n_vtx),
         ).tocsr()
 
         # neighbors
@@ -98,14 +100,10 @@ class PurePythonBFS(AbstractAdjacencyStrategy):
         self, hyper_edges_idx: OrderedDict[str, List[int]], max_distance: int
     ) -> Dict[int, List[List[int]]]:
         """calc adjacencies using BFS in pure python"""
-        # values in .values(): indices list -> maximum index + 1 is length of unique vertices
         vtx_count = max(vtx_a for vtxs in hyper_edges_idx.values() for vtx_a in vtxs) + 1
         adjacency_list = _hyper_edges_to_adj_list(vtx_count, hyper_edges_idx)
 
-        # each vertex has a list of lists where the index of the list corresponds
-        #   to the depth of its contained neighbors
-        # e.g.: neighbor 300 at depth 2, neighbor 400 at depth 1 with
-        #    max_distance 3 -> [[], [400], [300], []]
+        # neighbors_at_depth: dict of lists of lists (distance, vertex, neighbors)
         neighbors_at_depth = {
             dist: [[] for vertex in range(vtx_count)] for dist in range(max_distance + 1)
         }
@@ -134,10 +132,8 @@ class PurePythonBFS(AbstractAdjacencyStrategy):
                     neighbors = set(adjacency_list[vertex]) - visited
                     queue.extend((neighbor, depth + 1) for neighbor in neighbors)
                     visited.update(neighbors)
-        connectivity = {}
-        for d in range(1, max_distance + 1):
-            connectivity[d] = [list(neighbors_at_depth[d][i]) for i in range(vtx_count)]
-        return connectivity
+
+        return neighbors_at_depth
 
 
 class PurePythonDFS(AbstractAdjacencyStrategy):
@@ -149,17 +145,21 @@ class PurePythonDFS(AbstractAdjacencyStrategy):
     ) -> Dict[int, List[List[int]]]:
         """calc adjacencies using DFS in pure python"""
         # pylint: disable=too-many-locals
-        # values in .values(): indices list -> maximum index + 1 is length of unique vertices
         vtx_count = max(vtx_a for vtxs in hyper_edges_idx.values() for vtx_a in vtxs) + 1
         adjacency_list = _hyper_edges_to_adj_list(vtx_count, hyper_edges_idx)
 
+        # neighbors_at_depth: dict of lists of lists (distance, vertex, neighbors)
         neighbors_at_depth = {
             dist: [[] for vertex in range(vtx_count)] for dist in range(max_distance + 1)
         }
+
+        # neighbors_at_depth of dist-1 will be used to find neighbors of dist
+        # here its initialized with dist=1 and dist=0
         for vertex in range(vtx_count):
             neighbors_at_depth[1][vertex] = adjacency_list[vertex].copy()
             neighbors_at_depth[0][vertex] = [vertex]
 
+        # neighbors: list of sets of neighbors for each vertex all distances up to current
         neighbors = [set(adjacency_list[vertex] + [vertex]) for vertex in range(vtx_count)]
 
         for dist in range(2, max_distance + 1):
