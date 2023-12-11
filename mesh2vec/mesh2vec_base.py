@@ -52,6 +52,7 @@ class Mesh2VecBase:
             vtx_ids: provide a list of all vertices to control inernal order of vertices
                 (features, aggregated feature)
             calc_strategy: choose the algorithm to calculate adjacencies
+
                  * "dfs": depth first search (defaultl fast)
                  * "bfs": breadth first search (low memory consumption)
                  * "matmul": matrix multiplication (deprecated, for compatibility only)
@@ -143,6 +144,7 @@ class Mesh2VecBase:
                 * a hypergraph file (text). Each line of the file contains an alphanumerical edge identifier, followed by a list of vertex identifiers the edge is containing, in the form 'DGEID: VTXID1,VTXID2,...'
             distance: the maximum distance for neighborhood generation and feature aggregation
             calc_strategy: choose the algorithm to calculate adjacencies
+
                  * "dfs": depth first search (defaultl fast)
                  * "bfs": breadth first search (low memory consumption)
                  * "matmul": matrix multiplication (deprecated, for compatibility only)

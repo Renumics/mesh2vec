@@ -50,9 +50,10 @@ class Mesh2VecCae(Mesh2VecBase):
             mesh_info: additional info about the elements in mesh (same order is required)
                 columns "part_name", "part_id", "file_path", "element_id" are required
                 calc_strategy: choose the algorithm to calculate adjacencies
-                 * "dfs": depth first search (defaultl fast)
-                 * "bfs": breadth first search (low memory consumption)
-                 * "matmul": matrix multiplication (deprecated, for compatibility only)
+
+                * "dfs": depth first search (defaultl fast)
+                * "bfs": breadth first search (low memory consumption)
+                * "matmul": matrix multiplication (deprecated, for compatibility only)
 
         Example:
             >>> import numpy as np
@@ -166,6 +167,7 @@ class Mesh2VecCae(Mesh2VecBase):
                 (see :ref:`Customize Ansa script<customize_ansa_script>`)
             verbose: print additional information
             calc_strategy: choose the algorithm to calculate adjacencies
+
                 * "dfs": depth first search (defaultl fast)
                 * "bfs": breadth first search (low memory consumption)
                 * "matmul": matrix multiplication (deprecated, for compatibility only)
@@ -211,6 +213,7 @@ class Mesh2VecCae(Mesh2VecBase):
             d3plot: path to d3plot file
             partid: part id to use
             calc_strategy: choose the algorithm to calculate adjacencies
+
                 * "dfs": depth first search (defaultl fast)
                 * "bfs": breadth first search (low memory consumption)
                 * "matmul": matrix multiplication (deprecated, for compatibility only)
@@ -251,7 +254,7 @@ class Mesh2VecCae(Mesh2VecBase):
         return Mesh2VecCae(distance, mesh, element_info, calc_strategy=calc_strategy)
 
     @staticmethod
-    def from_keyfile_shell(distance: int, keyfile: Path, calc_strategy) -> "Mesh2VecCae":
+    def from_keyfile_shell(distance: int, keyfile: Path, calc_strategy="bfs") -> "Mesh2VecCae":
         """
         Read the given keyfile and use the shell elements to generate a hypergraph, using mesh
         nodes as hyperedges, and adjacent elements as hypervertices.
@@ -259,9 +262,10 @@ class Mesh2VecCae(Mesh2VecBase):
             distance: the maximum distance for neighborhood generation and feature aggregation
             keyfile: path to keyfile
             calc_strategy: choose the algorithm to calculate adjacencies
-                * "dfs": depth first search (defaultl fast)
-                * "bfs": breadth first search (low memory consumption)
-                * "matmul": matrix multiplication (deprecated, for compatibility only)
+
+            * "dfs": depth first search (defaultl fast)
+            * "bfs": breadth first search (low memory consumption)
+            * "matmul": matrix multiplication (deprecated, for compatibility only)
 
         Example:
             >>> from pathlib import Path
