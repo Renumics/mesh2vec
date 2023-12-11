@@ -258,14 +258,15 @@ class Mesh2VecCae(Mesh2VecBase):
         """
         Read the given keyfile and use the shell elements to generate a hypergraph, using mesh
         nodes as hyperedges, and adjacent elements as hypervertices.
+
         Args:
             distance: the maximum distance for neighborhood generation and feature aggregation
             keyfile: path to keyfile
             calc_strategy: choose the algorithm to calculate adjacencies
 
-            * "dfs": depth first search (defaultl fast)
-            * "bfs": breadth first search (low memory consumption)
-            * "matmul": matrix multiplication (deprecated, for compatibility only)
+                * "dfs": depth first search (defaultl fast)
+                * "bfs": breadth first search (low memory consumption)
+                * "matmul": matrix multiplication (deprecated, for compatibility only)
 
         Example:
             >>> from pathlib import Path
@@ -622,7 +623,6 @@ class Mesh2VecCae(Mesh2VecBase):
 
         Aggregate a new feature calculated from the angle difference of each element's normal vector
         to the reference vector given by the center element  (in radian).
-
 
         Args:
             dist: either

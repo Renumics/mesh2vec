@@ -107,8 +107,10 @@ class Mesh2VecBase:
     def save(self, path: Path):
         """
         Save the Mesh2Vec object to a file with joblib
+
         Args:
             path: path to the file
+
         Example:
             >>> from pathlib import Path
             >>> from mesh2vec.mesh2vec_base import Mesh2VecBase
@@ -121,8 +123,10 @@ class Mesh2VecBase:
     def load(path: Path):
         """
         Load the Mesh2Vec object from a file with joblib
+
         Args:
             path: path to the file
+
         Example:
             >>> from pathlib import Path
             >>> from mesh2vec.mesh2vec_base import Mesh2VecBase
