@@ -45,7 +45,7 @@ jobs:
           python-version: "3.9"
       - name: check
         run: |
-          poetry run black --check mesh2vec tests scripts docs docs/examples
+          poetry run black --check mesh2vec tests scripts docs docs/examples scripts
 
   pylint:
     needs: prepare-linux
@@ -59,7 +59,7 @@ jobs:
         python-version: "3.9"
     - name: check
       run: |
-        poetry run pylint mesh2vec tests docs/examples
+        poetry run pylint mesh2vec tests docs/examples scripts
 
   audit:
     needs: [prepare-linux, prepare-win]

@@ -8,10 +8,18 @@ class InvalidDistanceArgumentException(Exception):
     """Exception raised when an invalid distance was provided"""
 
 
+def check_adjacency_calc_strategy(adjacency_calc_strategy: str) -> None:
+    """check argument to rise exception or log warning if needed."""
+    if adjacency_calc_strategy not in ["matmul", "dfs", "bfs"]:
+        raise InvalidDistanceArgumentException(
+            "adjacency_calc_strategy must be one of ['matmul', 'dfs', 'bfs']"
+        )
+
+
 def check_distance_init_arg(distance: int) -> None:
     """check argument to rise exception or log warning if needed."""
-    if distance < 0:
-        raise InvalidDistanceArgumentException("distance must be > 0")
+    if distance < 1:
+        raise InvalidDistanceArgumentException("distance must be >= 1")
     if distance > 30:
         logger.warning("Calculating neighborhoods for distances > 10 can take much time")
 

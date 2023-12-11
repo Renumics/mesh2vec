@@ -5,7 +5,6 @@ from functools import partial
 from tempfile import TemporaryDirectory
 import numpy as np
 import pandas as pd
-from scipy.sparse import csr_matrix
 from lasso.dyna import ArrayType, D3plot
 
 import pytest
@@ -14,6 +13,7 @@ from mesh2vec.mesh2vec_cae import (
     Mesh2VecCae,
 )
 
+strategies = ["matmul", "bfs", "dfs"]
 
 # pylint: disable=protected-access
 features_reduced = [
@@ -30,14 +30,6 @@ features_reduced = [
 ]
 
 
-def _csr_equal(csr_a: csr_matrix, csr_b: csr_matrix) -> bool:
-    return all(x == y for x, y in zip(csr_a.todok().items(), csr_b.todok().items()))
-
-
-def _csr_a_gte_b(csr_a: csr_matrix, csr_b: csr_matrix) -> bool:
-    return all(y in csr_a.todok().items() for y in csr_b.todok().items())
-
-
 def _make_mesh_info(elem_ids: np.ndarray) -> pd.DataFrame:
     element_info = pd.DataFrame({"element_id": elem_ids})
     element_info["part_name"] = "part_name"
@@ -46,7 +38,8 @@ def _make_mesh_info(elem_ids: np.ndarray) -> pd.DataFrame:
     return element_info
 
 
-def test_init_tri_unique_ids() -> None:
+@pytest.mark.parametrize("strategy", strategies)
+def test_init_tri_unique_ids(strategy) -> None:
     """test init with triangles having unique ids"""
     point_coordinates = np.array([[v, v, v] for v in range(6)])
     pnt_ids = np.array(["0", "1", "2", "3x", "4", "5"])
@@ -54,24 +47,25 @@ def test_init_tri_unique_ids() -> None:
     elem_node_idxs = np.array([[0, 1, 2], [1, 2, 3], [2, 3, 4], [3, 4, 5]])
 
     mesh = CaeShellMesh(point_coordinates, pnt_ids, elem_ids, elem_node_idxs)
-    m2v = Mesh2VecCae(2, mesh, _make_mesh_info(elem_ids))
+    m2v = Mesh2VecCae(2, mesh, _make_mesh_info(elem_ids), calc_strategy=strategy)
     assert ["1", "2"] == m2v.get_nbh("0", 1)
 
 
-def test_init_tri_overlapping_ids() -> None:
-    """test init with triangles having overlapping ids - OPEN TODO"""
+@pytest.mark.parametrize("strategy", strategies)
+def test_init_tri_overlapping_ids(strategy) -> None:
+    """test init with triangles having overlapping ids"""
     point_coordinates = np.array([[v, v, v] for v in range(6)])
     pnt_ids = np.array(["0", "1", "2x", "3x", "4x", "5"])
     elem_ids = np.array(["0", "1", "0", "1"])
     elem_node_idxs = np.array([[0, 1, 2], [1, 2, 3], [2, 3, 4], [3, 4, 5]])
 
     mesh = CaeShellMesh(point_coordinates, pnt_ids, elem_ids, elem_node_idxs)
-    m2v = Mesh2VecCae(2, mesh, _make_mesh_info(elem_ids))
+    m2v = Mesh2VecCae(2, mesh, _make_mesh_info(elem_ids), calc_strategy=strategy)
     assert ["1", "0_2x_3x_4x_4x"] == m2v.get_nbh("0", 1)
-    # 2DO: check mesh_point ids
 
 
-def test_init_quad_overlapping_ids() -> None:
+@pytest.mark.parametrize("strategy", strategies)
+def test_init_quad_overlapping_ids(strategy) -> None:
     """test init with quads having overlapping ids"""
     point_coordinates = np.array([[v, v, v] for v in range(6)])
     pnt_ids = np.array(["0", "1", "2", "3x", "4x", "5x"])
@@ -79,43 +73,50 @@ def test_init_quad_overlapping_ids() -> None:
     elem_node_idxs = np.array([[0, 1, 2, 2], [1, 2, 3, 3], [3, 4, 5, 5]])
 
     mesh = CaeShellMesh(point_coordinates, pnt_ids, elem_ids, elem_node_idxs)
-    m2v = Mesh2VecCae(2, mesh, _make_mesh_info(elem_ids))
+    m2v = Mesh2VecCae(2, mesh, _make_mesh_info(elem_ids), calc_strategy=strategy)
     assert ["1"] == m2v.get_nbh("0", 1)
     assert ["0", "0_3x_4x_5x_5x"] == m2v.get_nbh("1", 1)
 
 
-def test_shell_from_ansa() -> None:
+@pytest.mark.parametrize("strategy", strategies)
+def test_shell_from_ansa(strategy) -> None:
     """test ansa shell is loaded"""
     m2v = Mesh2VecCae.from_ansa_shell(
         4,
         Path("data/hat/Hatprofile.k"),
         json_mesh_file=Path("data/hat/cached_hat_key.json"),
+        calc_strategy=strategy,
     )
     assert len(m2v.vtx_ids()) == 6400
 
 
-def test_from_keyfile_shell() -> None:
+@pytest.mark.parametrize("strategy", strategies)
+def test_from_keyfile_shell(strategy) -> None:
     """test ansa shell is loaded"""
     m2v = Mesh2VecCae.from_keyfile_shell(
         4,
         Path("data/hat/Hatprofile.k"),
+        calc_strategy=strategy,
     )
 
     m2v_ansa = Mesh2VecCae.from_ansa_shell(
         4,
         Path("data/hat/Hatprofile.k"),
         json_mesh_file=Path("data/hat/cached_hat_key.json"),
+        calc_strategy=strategy,
     )
     all(sorted(v) == sorted(m2v_ansa._hyper_edges[k]) for k, v in m2v._hyper_edges.items())
     assert set(m2v.vtx_ids()) == set(m2v_ansa.vtx_ids())
 
 
-def test_shell_from_ansa_partid() -> None:
+@pytest.mark.parametrize("strategy", strategies)
+def test_shell_from_ansa_partid(strategy) -> None:
     """test ansa shell is loaded with and without partid"""
     m2v1 = Mesh2VecCae.from_ansa_shell(
         4,
         Path("data/hat/Hatprofile.k"),
         json_mesh_file=Path("data/hat/cached_hat_key.json"),
+        calc_strategy=strategy,
     )
 
     m2v2 = Mesh2VecCae.from_ansa_shell(
@@ -123,23 +124,29 @@ def test_shell_from_ansa_partid() -> None:
         Path("data/hat/Hatprofile.k"),
         json_mesh_file=Path("data/hat/cached_hat_key_partid.json"),
         partid="1",
+        calc_strategy=strategy,
     )
     assert all(x in m2v1.vtx_ids() for x in m2v2.vtx_ids())
 
 
-def test_shell_from_d3plot() -> None:
+@pytest.mark.parametrize("strategy", strategies)
+def test_shell_from_d3plot(strategy) -> None:
     """test d3plot is loaded"""
-    m2v = Mesh2VecCae.from_d3plot_shell(3, Path("data/hat/HAT.d3plot"))
+    m2v = Mesh2VecCae.from_d3plot_shell(3, Path("data/hat/HAT.d3plot"), calc_strategy=strategy)
     assert len(m2v.vtx_ids()) > 2000
 
 
-def test_shell_from_d3plot_partid() -> None:
+@pytest.mark.parametrize("strategy", strategies)
+def test_shell_from_d3plot_partid(strategy) -> None:
     """test d3plot is loaded with and without partid"""
-    m2v = Mesh2VecCae.from_d3plot_shell(3, Path("data/hat/HAT.d3plot"), partid="1")
+    m2v = Mesh2VecCae.from_d3plot_shell(
+        3, Path("data/hat/HAT.d3plot"), partid="1", calc_strategy=strategy
+    )
     assert len(m2v.vtx_ids()) < 35000
 
 
-def test_add_features_from_ansa() -> None:
+@pytest.mark.parametrize("strategy", strategies)
+def test_add_features_from_ansa(strategy) -> None:
     """test adding features from ansa works"""
     ansafile = Path("data/hat/Hatprofile.k")
     json_mesh_file = Path("data/hat/cached_hat_key.json")
@@ -148,6 +155,7 @@ def test_add_features_from_ansa() -> None:
         4,
         ansafile,
         json_mesh_file=json_mesh_file,
+        calc_strategy=strategy,
     )
     elements, nodes = Mesh2VecCae._read_ansafile(ansafile, json_mesh_file, verbose=True)
     assert len(elements) == len(m2v._features)
@@ -162,9 +170,10 @@ def test_add_features_from_ansa() -> None:
     assert all(feature in m2v._features.keys().values for feature in features)
 
 
-def test_add_features_from_d3plot() -> None:
+@pytest.mark.parametrize("strategy", strategies)
+def test_add_features_from_d3plot(strategy) -> None:
     """test adding features from d3plot works"""
-    m2v = Mesh2VecCae.from_d3plot_shell(3, Path("data/hat/HAT.d3plot"))
+    m2v = Mesh2VecCae.from_d3plot_shell(3, Path("data/hat/HAT.d3plot"), calc_strategy=strategy)
 
     for feature in features_reduced:
         m2v.add_feature_from_d3plot(
@@ -176,9 +185,10 @@ def test_add_features_from_d3plot() -> None:
         )
 
 
-def test_add_feature_from_d3plot_accumulated() -> None:
+@pytest.mark.parametrize("strategy", strategies)
+def test_add_feature_from_d3plot_accumulated(strategy) -> None:
     """test adding features from d3plot with shell_layer accumulation works"""
-    m2v = Mesh2VecCae.from_d3plot_shell(3, Path("data/hat/HAT.d3plot"))
+    m2v = Mesh2VecCae.from_d3plot_shell(3, Path("data/hat/HAT.d3plot"), calc_strategy=strategy)
     d3plot_data = D3plot(Path("data/hat/HAT.d3plot").as_posix())
     axis_0_sum = partial(np.sum, axis=0)
     axis_0_sum.__name__ = "axis0sum"  # type: ignore
@@ -188,9 +198,10 @@ def test_add_feature_from_d3plot_accumulated() -> None:
         )
 
 
-def test_save_load() -> None:
+@pytest.mark.parametrize("strategy", strategies)
+def test_save_load(strategy) -> None:
     """test saving and loading works"""
-    m2v = Mesh2VecCae.from_d3plot_shell(3, Path("data/hat/HAT.d3plot"))
+    m2v = Mesh2VecCae.from_d3plot_shell(3, Path("data/hat/HAT.d3plot"), calc_strategy=strategy)
     d3plot_data = D3plot(Path("data/hat/HAT.d3plot").as_posix())
     axis_0_sum = partial(np.sum, axis=0)
     axis_0_sum.__name__ = "axis0sum"  # type: ignore
@@ -204,7 +215,8 @@ def test_save_load() -> None:
         assert m2v_loaded._features.equals(m2v._features)
 
 
-def test_add_feature_from_d3plot_to_ansa_shell() -> None:
+@pytest.mark.parametrize("strategy", strategies)
+def test_add_feature_from_d3plot_to_ansa_shell(strategy) -> None:
     """test adding features from ansa works"""
     ansafile = Path("data/hat/Hatprofile.k")
     json_mesh_file = Path("data/hat/cached_hat_key.json")
@@ -213,6 +225,7 @@ def test_add_feature_from_d3plot_to_ansa_shell() -> None:
         4,
         ansafile,
         json_mesh_file=json_mesh_file,
+        calc_strategy=strategy,
     )
 
     m2v.add_features_from_ansa(
@@ -239,10 +252,14 @@ def test_add_feature_from_d3plot_to_ansa_shell() -> None:
     print(m2v._aggregated_features[name].shape)
 
 
-def test_aggregate_angle_diff() -> None:
+@pytest.mark.parametrize("strategy", strategies)
+def test_aggregate_angle_diff(strategy) -> None:
     """test aggregating angel difference works"""
     m2v = Mesh2VecCae.from_ansa_shell(
-        4, Path("data/hat/Hatprofile.k"), json_mesh_file=Path("data/hat/cached_hat_key.json")
+        4,
+        Path("data/hat/Hatprofile.k"),
+        json_mesh_file=Path("data/hat/cached_hat_key.json"),
+        calc_strategy=strategy,
     )
     m2v.add_features_from_ansa(
         ["normal"],

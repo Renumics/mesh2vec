@@ -21,7 +21,7 @@ def test_area() -> None:
     """test calculated face area is same as in ansa"""
 
     hg = Mesh2VecCae.from_ansa_shell(
-        0,
+        1,
         Path("data/hat/Hatprofile.k"),
         json_mesh_file=Path("data/hat/cached_hat_key.json"),
     )
