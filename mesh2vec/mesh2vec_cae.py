@@ -351,8 +351,8 @@ class Mesh2VecCae(Mesh2VecBase):
                     okay_ansa.append(feature)
                 else:
                     raise ValueError(
-                        f"Feature {feature} is unknown and allow_additional_ansa_features is False"
-                        f"All features must be in {okay_ansa+okay_inplace}"
+                        f"Feature {feature} is unknown and allow_additional_ansa_features "
+                        f"is False. All features must be in {okay_ansa+okay_inplace}"
                     )
 
         if ansa_executable is not None:
