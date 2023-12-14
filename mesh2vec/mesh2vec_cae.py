@@ -302,7 +302,7 @@ class Mesh2VecCae(Mesh2VecBase):
         ansa_executable: Optional[Path] = None,
         ansa_script: Optional[Path] = None,
         verbose: bool = False,
-        allow_addtional_ansa_features: bool = False,
+        allow_additional_ansa_features: bool = False,
     ) -> List[str]:
         """
         Add values derived or calculated from ANSA shell elements (currently restricted to
@@ -324,7 +324,7 @@ class Mesh2VecCae(Mesh2VecBase):
             * normal vector x,y,z (ansafile is required)
             * area (ansafile is required)
             * custom features from your customized ansa_script (scalar values only,
-                allow_addtional_ansa_features must be True)
+                allow_additional_ansa_features must be True)
 
         Example:
             >>> from pathlib import Path
@@ -347,11 +347,11 @@ class Mesh2VecCae(Mesh2VecBase):
 
         for feature in features:
             if not feature in okay_ansa + okay_inplace:
-                if not allow_addtional_ansa_features:
+                if not allow_additional_ansa_features:
                     okay_ansa.append(feature)
                 else:
                     raise ValueError(
-                        f"Feature {feature} is unknown and allow_addtional_ansa_features is False"
+                        f"Feature {feature} is unknown and allow_additional_ansa_features is False"
                         f"All features must be in {okay_ansa+okay_inplace}"
                     )
 
