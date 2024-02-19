@@ -237,10 +237,15 @@ class CaeShellMesh:
         return CaeShellMesh(point_coordinates, pnt_ids, elem_ids, elem_node_idxs)
 
     @staticmethod
-    def from_keyfile(keyfile: str) -> "CaeShellMesh":
+    def from_keyfile(keyfile: str, partid: str = "") -> "CaeShellMesh":
         """
         create CaeShellMesh from keyfile
-            Example:
+
+        Args:
+            keyfile: path to LSDYNA keyfile in fixed column format
+            partid: part id to use for hypergraph generation
+
+        Example:
         >>> from mesh2vec.mesh_features import CaeShellMesh
         >>> mesh = CaeShellMesh.from_keyfile("data/hat/Hatprofile.k")
         >>> print(mesh.point_coordinates.shape)
@@ -256,33 +261,40 @@ class CaeShellMesh:
 
             elem_ids = []
             elem_node_ids = []
-
+            thickcard_options_set = set(["THICKNESS", "BETA", "MCID"])
             for line in lines:
                 if line.startswith("*"):
                     current_section = line.split()[0].upper()
+                    current_section_options = set(current_section.split('_')[1:])
+                    current_section_lines_per_entry = 1
+                    current_section_lineno = 0
                     continue
-                if line.startswith("$#"):  # comment
+                if line.startswith("$"):  # comment
                     continue
-
                 if current_section == "*NODE":
-                    data = line.split()
-                    if data:
-                        point_coordinates.append([float(data[1]), float(data[2]), float(data[3])])
-                        pnt_ids.append(data[0])
+                    try:
+                        point_coordinates.append([float(line[8+i*16:8+(i+1)*16]) for i in range(3)])
+                        pnt_ids.append(line[:8].strip())
+                    except:
+                        pass
+                elif current_section.startswith("*ELEMENT_SHELL"):
+                    if current_section_lineno == 0:
+                        if partid == "" or partid == line[8:16].strip():
+                            node_ids = [line[16+i*8:16+(i+1)*8].strip() for i in range(8)]
+                            node_ids = [node_id for node_id in node_ids if len(node_id) > 0]
+                            # TODO: Check for unhandled options, e.g. COMPOSITE, DOF
+                            if len(current_section_options & thickcard_options_set) > 0:
+                                current_section_lines_per_entry += 1 # skip thickness card
+                                if len(node_ids) > 4:
+                                    current_section_lines_per_entry += 1 # skip additional thickness card for mid-side nodes
+                            if "OFFSET" in current_section_options:
+                                    current_section_lines_per_entry += 1 # skip offset card
 
-                elif "*ELEMENT_SHELL" in current_section:
-                    data = line.split()
-                    if data:
-                        # check for floats - floats are a hint of options like THICKNESS
-                        if (
-                            not data[2].isdigit()
-                            or not data[3].isdigit()
-                            or not data[4].isdigit()
-                            or not data[5].isdigit()
-                        ):
-                            continue
-                        elem_node_ids.append([data[2], data[3], data[4], data[5]])
-                        elem_ids.append(data[0])
+
+                            elem_node_ids.append([node_id for node_id in node_ids if len(node_id) > 0])
+                            elem_ids.append(line[:8].strip())
+                    current_section_lineno = (current_section_lineno + 1) % current_section_lines_per_entry
+
             pnt_idx = {pnt_id: i for i, pnt_id in enumerate(pnt_ids)}
 
             elem_node_idx = np.array(
