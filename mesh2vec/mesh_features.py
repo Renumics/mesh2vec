@@ -278,22 +278,25 @@ class CaeShellMesh:
                     except:
                         pass
                 elif current_section.startswith("*ELEMENT_SHELL"):
-                    if current_section_lineno == 0:
+                    
+
+                    if current_section_lineno % current_section_lines_per_entry == 0:
                         if partid == "" or partid == line[8:16].strip():
                             node_ids = [line[16+i*8:16+(i+1)*8].strip() for i in range(8)]
-                            node_ids = [node_id for node_id in node_ids if len(node_id) > 0]
+                            node_ids = [node_id for node_id in node_ids if len(node_id) > 0 and node_id != "0"]
                             # TODO: Check for unhandled options, e.g. COMPOSITE, DOF
-                            if len(current_section_options & thickcard_options_set) > 0:
-                                current_section_lines_per_entry += 1 # skip thickness card
-                                if len(node_ids) > 4:
-                                    current_section_lines_per_entry += 1 # skip additional thickness card for mid-side nodes
-                            if "OFFSET" in current_section_options:
-                                    current_section_lines_per_entry += 1 # skip offset card
-
-
+                            if current_section_lineno == 0:
+                                if len(current_section_options & thickcard_options_set) > 0:
+                                    current_section_lines_per_entry += 1 # skip thickness card
+                                    if len(node_ids) > 4:
+                                        current_section_lines_per_entry += 1 # skip additional thickness card for mid-side nodes
+                                if "OFFSET" in current_section_options:
+                                        current_section_lines_per_entry += 1 # skip offset card
                             elem_node_ids.append([node_id for node_id in node_ids if len(node_id) > 0])
+                            if node_ids[0] == 1.0:
+                                print("HERE")
                             elem_ids.append(line[:8].strip())
-                    current_section_lineno = (current_section_lineno + 1) % current_section_lines_per_entry
+                    current_section_lineno += 1
 
             pnt_idx = {pnt_id: i for i, pnt_id in enumerate(pnt_ids)}
 
