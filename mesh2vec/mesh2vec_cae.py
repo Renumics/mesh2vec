@@ -348,7 +348,7 @@ class Mesh2VecCae(Mesh2VecBase):
 
         for feature in features:
             if not feature in okay_ansa + okay_inplace:
-                if not allow_additional_ansa_features:
+                if allow_additional_ansa_features:
                     okay_ansa.append(feature)
                 else:
                     raise ValueError(
