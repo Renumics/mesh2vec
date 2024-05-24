@@ -5,16 +5,16 @@
 
 Computation times
 =================
-**00:05.092** total execution time for **generated_examples** files:
+**00:05.026** total execution time for **generated_examples** files:
 
 +------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_generated_examples_plot_stress.py` (``plot_stress.py``)                         | 00:01.523 | 0.0 MB |
+| :ref:`sphx_glr_generated_examples_plot_stress.py` (``plot_stress.py``)                         | 00:01.491 | 0.0 MB |
 +------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_generated_examples_plot_neighbor_distances.py` (``plot_neighbor_distances.py``) | 00:01.328 | 0.0 MB |
+| :ref:`sphx_glr_generated_examples_plot_neighbor_distances.py` (``plot_neighbor_distances.py``) | 00:01.318 | 0.0 MB |
 +------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_generated_examples_quickstart.py` (``quickstart.py``)                           | 00:00.852 | 0.0 MB |
+| :ref:`sphx_glr_generated_examples_quickstart.py` (``quickstart.py``)                           | 00:00.858 | 0.0 MB |
 +------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_generated_examples_aggregate_warpage.py` (``aggregate_warpage.py``)             | 00:00.742 | 0.0 MB |
+| :ref:`sphx_glr_generated_examples_aggregate_warpage.py` (``aggregate_warpage.py``)             | 00:00.714 | 0.0 MB |
 +------------------------------------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_generated_examples_aggregate_categorical.py` (``aggregate_categorical.py``)     | 00:00.647 | 0.0 MB |
+| :ref:`sphx_glr_generated_examples_aggregate_categorical.py` (``aggregate_categorical.py``)     | 00:00.646 | 0.0 MB |
 +------------------------------------------------------------------------------------------------+-----------+--------+

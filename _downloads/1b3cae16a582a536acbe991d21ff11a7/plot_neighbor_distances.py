@@ -3,6 +3,7 @@ Plot Neighbor Distances
 ========================
 This example shows ho to plot the distances of nearby elements to a specific element (d<10)
 """
+
 # pylint: disable=pointless-statement
 from pathlib import Path
 import numpy as np

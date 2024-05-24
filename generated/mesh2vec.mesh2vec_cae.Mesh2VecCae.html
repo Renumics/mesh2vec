@@ -351,7 +351,7 @@ hypervertices.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="mesh2vec.mesh2vec_cae.Mesh2VecCae.from_keyfile_shell">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_keyfile_shell</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keyfile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'bfs'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_cae.Mesh2VecCae.from_keyfile_shell" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_keyfile_shell</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keyfile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">partid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'bfs'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_cae.Mesh2VecCae.from_keyfile_shell" title="Permalink to this definition"></a></dt>
 <dd><p>Read the given keyfile and use the shell elements to generate a hypergraph, using mesh
 nodes as hyperedges, and adjacent elements as hypervertices.</p>
 <dl class="field-list simple">
@@ -359,6 +359,8 @@ nodes as hyperedges, and adjacent elements as hypervertices.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>distance</strong> (<em>int</em>) – the maximum distance for neighborhood generation and feature aggregation</p></li>
 <li><p><strong>keyfile</strong> (<em>Path</em>) – path to keyfile</p></li>
+<li><p><strong>partid</strong> – part id to use for hypergraph generation
+(default empty string, use all shell parts)</p></li>
 <li><p><strong>calc_strategy</strong> – <p>choose the algorithm to calculate adjacencies</p>
 <ul>
 <li><p>”dfs”: depth first search (defaultl fast)</p></li>
