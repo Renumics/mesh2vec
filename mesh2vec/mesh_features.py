@@ -1,4 +1,5 @@
 """calculation of mesh based features"""
+
 from typing import Tuple, List, Any, Optional
 
 import numpy as np
@@ -34,17 +35,21 @@ def _quad_to_tris(element_node_idxs: np.ndarray) -> Tuple[List[bool], np.ndarray
     if len(element_node_idxs.shape) == 3:  # points
         is_quads = [any(element[3] != element[2]) for element in element_node_idxs]
         tri_faces_nested = [
-            [element[:3].tolist(), element[[0, 2, 3]].tolist()]
-            if is_quad
-            else [element[:3].tolist()]
+            (
+                [element[:3].tolist(), element[[0, 2, 3]].tolist()]
+                if is_quad
+                else [element[:3].tolist()]
+            )
             for is_quad, element in zip(is_quads, element_node_idxs)
         ]
     else:
         is_quads = [element[3] != element[2] for element in element_node_idxs]
         tri_faces_nested = [
-            [element[:3].tolist(), element[[0, 2, 3]].tolist()]
-            if is_quad
-            else [element[:3].tolist()]
+            (
+                [element[:3].tolist(), element[[0, 2, 3]].tolist()]
+                if is_quad
+                else [element[:3].tolist()]
+            )
             for is_quad, element in zip(is_quads, element_node_idxs)
         ]
     tri_faces = np.array([tri_face for tri_faces in tri_faces_nested for tri_face in tri_faces])
@@ -125,10 +130,12 @@ def _make_ids_unique(
     cumcounts = pd.DataFrame(array, columns=["ids"]).groupby("ids").cumcount().values
     return np.array(
         [
-            old_id
-            if postfix == 0
-            else f"{old_id}_{point_uid[e[0]]}_{point_uid[e[1]]}_"
-            f"{point_uid[e[2]]}_{point_uid[e[3]]}"
+            (
+                old_id
+                if postfix == 0
+                else f"{old_id}_{point_uid[e[0]]}_{point_uid[e[1]]}_"
+                f"{point_uid[e[2]]}_{point_uid[e[3]]}"
+            )
             for old_id, e, postfix in zip(array, element_node_idxs, cumcounts)
         ]
     )
@@ -251,6 +258,7 @@ class CaeShellMesh:
         >>> print(mesh.point_coordinates.shape)
         (6400, 3)
         """
+
         # pylint: disable=too-many-branches, too-many-nested-blocks
         def parse_contents(file_contents):
             lines = file_contents.split("\n")

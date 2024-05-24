@@ -1,4 +1,5 @@
 """tests for mesh2vec_hyper_cae"""
+
 from pathlib import Path
 from functools import partial
 

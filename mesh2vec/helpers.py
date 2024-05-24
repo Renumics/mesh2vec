@@ -1,10 +1,12 @@
 """helper functions"""
+
 from typing import OrderedDict, List, Dict
 from collections import deque
 from abc import ABC, abstractmethod
 
 import numpy as np
 from scipy.sparse import csr_array, coo_array, eye
+
 
 # pylint: disable=invalid-name
 class AbstractAdjacencyStrategy(ABC):

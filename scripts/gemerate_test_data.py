@@ -1,4 +1,5 @@
 """script code to generate test data"""
+
 import math
 
 if __name__ == "__main__":
