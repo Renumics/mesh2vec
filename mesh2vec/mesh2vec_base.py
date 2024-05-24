@@ -1,4 +1,5 @@
 """Mesh2VecBase"""
+
 import collections
 from pathlib import Path
 from typing import List, Optional, Callable, OrderedDict, Dict, Union, Iterable

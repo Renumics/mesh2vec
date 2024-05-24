@@ -2,6 +2,7 @@
 Quick Start Example
 ====================
 """
+
 # pylint: disable=pointless-statement
 from pathlib import Path
 import numpy as np

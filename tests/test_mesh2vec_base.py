@@ -1,4 +1,5 @@
 """tests for mesh2vec_hyper"""
+
 from pathlib import Path
 from typing import List, Any
 

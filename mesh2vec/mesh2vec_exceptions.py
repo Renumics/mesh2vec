@@ -1,4 +1,5 @@
 """Exceptions for mesh2vec"""
+
 from typing import Any, Dict, List
 from loguru import logger
 import numpy as np

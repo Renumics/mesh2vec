@@ -1,4 +1,5 @@
 """Mesh2VecCae"""
+
 import json
 import os
 import subprocess
@@ -254,7 +255,9 @@ class Mesh2VecCae(Mesh2VecBase):
         return Mesh2VecCae(distance, mesh, element_info, calc_strategy=calc_strategy)
 
     @staticmethod
-    def from_keyfile_shell(distance: int, keyfile: Path, partid="", calc_strategy="bfs") -> "Mesh2VecCae":
+    def from_keyfile_shell(
+        distance: int, keyfile: Path, partid="", calc_strategy="bfs"
+    ) -> "Mesh2VecCae":
         """
         Read the given keyfile and use the shell elements to generate a hypergraph, using mesh
         nodes as hyperedges, and adjacent elements as hypervertices.
@@ -262,7 +265,8 @@ class Mesh2VecCae(Mesh2VecBase):
         Args:
             distance: the maximum distance for neighborhood generation and feature aggregation
             keyfile: path to keyfile
-            partid: part id to use for hypergraph generation (default empty string, use all shell parts)
+            partid: part id to use for hypergraph generation
+                (default empty string, use all shell parts)
             calc_strategy: choose the algorithm to calculate adjacencies
 
                 * "dfs": depth first search (defaultl fast)
