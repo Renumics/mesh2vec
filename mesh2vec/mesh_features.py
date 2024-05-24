@@ -251,7 +251,7 @@ class CaeShellMesh:
         >>> print(mesh.point_coordinates.shape)
         (6400, 3)
         """
-
+        # pylint: disable=too-many-branches, too-many-nested-blocks
         def parse_contents(file_contents):
             lines = file_contents.split("\n")
             current_section = ""
@@ -277,7 +277,7 @@ class CaeShellMesh:
                             [float(line[8 + i * 16 : 8 + (i + 1) * 16]) for i in range(3)]
                         )
                         pnt_ids.append(line[:8].strip())
-                    except:
+                    except [ValueError, IndexError]:
                         pass
                 elif current_section.startswith("*ELEMENT_SHELL"):
 
@@ -291,6 +291,7 @@ class CaeShellMesh:
                                 for node_id in node_ids
                                 if len(node_id) > 0 and node_id != "0"
                             ]
+                            # pylint: disable=fixme
                             # TODO: Check for unhandled options, e.g. COMPOSITE, DOF
                             if current_section_lineno == 0:
                                 if len(current_section_options & thickcard_options_set) > 0:

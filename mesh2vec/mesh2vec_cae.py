@@ -264,7 +264,8 @@ class Mesh2VecCae(Mesh2VecBase):
         Args:
             distance: the maximum distance for neighborhood generation and feature aggregation
             keyfile: path to keyfile
-            partid: part id to use for hypergraph generation (default empty string, use all shell parts)
+            partid: part id to use for hypergraph generation
+                (default empty string, use all shell parts)
             calc_strategy: choose the algorithm to calculate adjacencies
 
                 * "dfs": depth first search (defaultl fast)
