@@ -265,7 +265,7 @@ class CaeShellMesh:
             for line in lines:
                 if line.startswith("*"):
                     current_section = line.split()[0].upper()
-                    current_section_options = set(current_section.split('_')[1:])
+                    current_section_options = set(current_section.split("_")[1:])
                     current_section_lines_per_entry = 1
                     current_section_lineno = 0
                     continue
@@ -273,26 +273,37 @@ class CaeShellMesh:
                     continue
                 if current_section == "*NODE":
                     try:
-                        point_coordinates.append([float(line[8+i*16:8+(i+1)*16]) for i in range(3)])
+                        point_coordinates.append(
+                            [float(line[8 + i * 16 : 8 + (i + 1) * 16]) for i in range(3)]
+                        )
                         pnt_ids.append(line[:8].strip())
                     except:
                         pass
                 elif current_section.startswith("*ELEMENT_SHELL"):
-                    
 
                     if current_section_lineno % current_section_lines_per_entry == 0:
                         if partid == "" or partid == line[8:16].strip():
-                            node_ids = [line[16+i*8:16+(i+1)*8].strip() for i in range(8)]
-                            node_ids = [node_id for node_id in node_ids if len(node_id) > 0 and node_id != "0"]
+                            node_ids = [
+                                line[16 + i * 8 : 16 + (i + 1) * 8].strip() for i in range(8)
+                            ]
+                            node_ids = [
+                                node_id
+                                for node_id in node_ids
+                                if len(node_id) > 0 and node_id != "0"
+                            ]
                             # TODO: Check for unhandled options, e.g. COMPOSITE, DOF
                             if current_section_lineno == 0:
                                 if len(current_section_options & thickcard_options_set) > 0:
-                                    current_section_lines_per_entry += 1 # skip thickness card
+                                    current_section_lines_per_entry += 1  # skip thickness card
                                     if len(node_ids) > 4:
-                                        current_section_lines_per_entry += 1 # skip additional thickness card for mid-side nodes
+                                        current_section_lines_per_entry += (
+                                            1  # skip additional thickness card for mid-side nodes
+                                        )
                                 if "OFFSET" in current_section_options:
-                                        current_section_lines_per_entry += 1 # skip offset card
-                            elem_node_ids.append([node_id for node_id in node_ids if len(node_id) > 0])
+                                    current_section_lines_per_entry += 1  # skip offset card
+                            elem_node_ids.append(
+                                [node_id for node_id in node_ids if len(node_id) > 0]
+                            )
                             if node_ids[0] == 1.0:
                                 print("HERE")
                             elem_ids.append(line[:8].strip())

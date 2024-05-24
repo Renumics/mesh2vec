@@ -254,7 +254,9 @@ class Mesh2VecCae(Mesh2VecBase):
         return Mesh2VecCae(distance, mesh, element_info, calc_strategy=calc_strategy)
 
     @staticmethod
-    def from_keyfile_shell(distance: int, keyfile: Path, partid="", calc_strategy="bfs") -> "Mesh2VecCae":
+    def from_keyfile_shell(
+        distance: int, keyfile: Path, partid="", calc_strategy="bfs"
+    ) -> "Mesh2VecCae":
         """
         Read the given keyfile and use the shell elements to generate a hypergraph, using mesh
         nodes as hyperedges, and adjacent elements as hypervertices.
