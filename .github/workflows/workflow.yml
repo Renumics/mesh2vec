@@ -7,7 +7,7 @@ jobs:
   prepare-linux:
     strategy:
       matrix:
-        python-version: ["3.8", "3.11"]
+        python-version: ["3.9", "3.11"]
         os-version: ["ubuntu-latest" ]
     runs-on: ${{ matrix.os-version }}
     steps:
@@ -21,7 +21,7 @@ jobs:
   prepare-win:
     strategy:
       matrix:
-        python-version: [ "3.8", "3.11" ]
+        python-version: [ "3.9", "3.11" ]
         os-version: [ "windows-latest" ]
     runs-on: ${{ matrix.os-version }}
     steps:
@@ -65,7 +65,7 @@ jobs:
     needs: [prepare-linux, prepare-win]
     strategy:
       matrix:
-        python-version: ["3.8", "3.11"]
+        python-version: ["3.9", "3.11"]
         os-version: ["windows-latest", "ubuntu-latest"]
     runs-on: ${{ matrix.os-version }}
     steps:
@@ -83,7 +83,7 @@ jobs:
     needs: [prepare-linux, prepare-win]
     strategy:
       matrix:
-        python-version: ["3.8", "3.11"]
+        python-version: ["3.9", "3.11"]
         os-version: [ "windows-latest", "ubuntu-latest" ]
     runs-on: ${{ matrix.os-version }}
     steps:
@@ -101,7 +101,7 @@ jobs:
     needs: [prepare-linux, prepare-win]
     strategy:
       matrix:
-        python-version: ["3.8", "3.11"]
+        python-version: ["3.9", "3.11"]
         os-version: [ "windows-latest", "ubuntu-latest" ]
     runs-on: ${{ matrix.os-version }}
     steps:
@@ -129,7 +129,7 @@ jobs:
       run: |
         poetry run sphinx-build docs/source build/documentation/ -W -b html
     - name: Store docs
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: docs
         path: build/documentation/
@@ -148,7 +148,7 @@ jobs:
       run: |
         poetry build -f wheel -vvv && poetry run check-wheel-contents dist/
     - name: Store wheels
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: dist
         path: dist/
@@ -166,7 +166,7 @@ jobs:
         os: "ubuntu-latest"
         python-version: "3.9"
     - name: Download docs
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: docs
         path: build/documentation/
@@ -188,7 +188,7 @@ jobs:
         os: "ubuntu-latest"
         python-version: "3.9"
     - name: Download wheels
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: dist
         path: dist/
