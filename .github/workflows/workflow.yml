@@ -7,7 +7,7 @@ jobs:
   prepare-linux:
     strategy:
       matrix:
-        python-version: ["3.8", "3.11"]
+        python-version: ["3.9", "3.11"]
         os-version: ["ubuntu-latest" ]
     runs-on: ${{ matrix.os-version }}
     steps:
@@ -21,7 +21,7 @@ jobs:
   prepare-win:
     strategy:
       matrix:
-        python-version: [ "3.8", "3.11" ]
+        python-version: [ "3.9", "3.11" ]
         os-version: [ "windows-latest" ]
     runs-on: ${{ matrix.os-version }}
     steps:
@@ -65,7 +65,7 @@ jobs:
     needs: [prepare-linux, prepare-win]
     strategy:
       matrix:
-        python-version: ["3.8", "3.11"]
+        python-version: ["3.9", "3.11"]
         os-version: ["windows-latest", "ubuntu-latest"]
     runs-on: ${{ matrix.os-version }}
     steps:
@@ -83,7 +83,7 @@ jobs:
     needs: [prepare-linux, prepare-win]
     strategy:
       matrix:
-        python-version: ["3.8", "3.11"]
+        python-version: ["3.9", "3.11"]
         os-version: [ "windows-latest", "ubuntu-latest" ]
     runs-on: ${{ matrix.os-version }}
     steps:
@@ -101,7 +101,7 @@ jobs:
     needs: [prepare-linux, prepare-win]
     strategy:
       matrix:
-        python-version: ["3.8", "3.11"]
+        python-version: ["3.9", "3.11"]
         os-version: [ "windows-latest", "ubuntu-latest" ]
     runs-on: ${{ matrix.os-version }}
     steps:
