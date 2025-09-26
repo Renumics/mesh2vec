@@ -10,7 +10,7 @@ description = "mesh2vec"
 
 
 [tool.poetry.dependencies]
-python = ">=3.8, <3.12"
+python = ">=3.9, <3.12"
 scipy = "^1.9.1"
 pandas = "^1.4.4"
 trimesh = "^3.14.1"
