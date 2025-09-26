@@ -225,10 +225,10 @@ calc_strategy: choose the algorithm to calculate adjacencies</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">mesh2vec.mesh2vec_cae</span> <span class="kn">import</span> <span class="n">Mesh2VecCae</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">mesh2vec.mesh_features</span> <span class="kn">import</span> <span class="n">CaeShellMesh</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">mesh2vec.mesh2vec_cae</span><span class="w"> </span><span class="kn">import</span> <span class="n">Mesh2VecCae</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">mesh2vec.mesh_features</span><span class="w"> </span><span class="kn">import</span> <span class="n">CaeShellMesh</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">point_coordinates</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">v</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">v</span><span class="p">]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">)])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pnt_ids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="s2">&quot;4&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">elem_ids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;3&quot;</span><span class="p">])</span>
@@ -303,8 +303,8 @@ You can use a customized script to include more features ansa_script
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">mesh2vec.mesh2vec_cae</span> <span class="kn">import</span> <span class="n">Mesh2VecCae</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">mesh2vec.mesh2vec_cae</span><span class="w"> </span><span class="kn">import</span> <span class="n">Mesh2VecCae</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">m2v</span> <span class="o">=</span> <span class="n">Mesh2VecCae</span><span class="o">.</span><span class="n">from_ansa_shell</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span>
 <span class="gp">... </span>    <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;data/hat/Hatprofile.k&quot;</span><span class="p">),</span>
 <span class="gp">... </span>    <span class="n">json_mesh_file</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;data/hat/cached_hat_key.json&quot;</span><span class="p">))</span>
@@ -340,8 +340,8 @@ hypervertices.</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">mesh2vec.mesh2vec_cae</span> <span class="kn">import</span> <span class="n">Mesh2VecCae</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">mesh2vec.mesh2vec_cae</span><span class="w"> </span><span class="kn">import</span> <span class="n">Mesh2VecCae</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">m2v</span> <span class="o">=</span> <span class="n">Mesh2VecCae</span><span class="o">.</span><span class="n">from_d3plot_shell</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;data/hat/HAT.d3plot&quot;</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">m2v</span><span class="o">.</span><span class="n">_hyper_edges</span><span class="p">)</span>
 <span class="go">6666</span>
@@ -375,8 +375,8 @@ nodes as hyperedges, and adjacent elements as hypervertices.</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">mesh2vec.mesh2vec_cae</span> <span class="kn">import</span> <span class="n">Mesh2VecCae</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">mesh2vec.mesh2vec_cae</span><span class="w"> </span><span class="kn">import</span> <span class="n">Mesh2VecCae</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">m2v</span> <span class="o">=</span> <span class="n">Mesh2VecCae</span><span class="o">.</span><span class="n">from_keyfile_shell</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;data/hat/Hatprofile.k&quot;</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">m2v</span><span class="o">.</span><span class="n">_hyper_edges</span><span class="p">)</span>
 <span class="go">6666</span>
@@ -429,8 +429,8 @@ LSDYNA models) for each element.</p>
 </ul>
 </div></blockquote>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">mesh2vec.mesh2vec_cae</span> <span class="kn">import</span> <span class="n">Mesh2VecCae</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">mesh2vec.mesh2vec_cae</span><span class="w"> </span><span class="kn">import</span> <span class="n">Mesh2VecCae</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">m2v</span> <span class="o">=</span> <span class="n">Mesh2VecCae</span><span class="o">.</span><span class="n">from_ansa_shell</span><span class="p">(</span>
 <span class="gp">... </span>   <span class="mi">4</span><span class="p">,</span>
 <span class="gp">... </span>   <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;data/hat/Hatprofile.k&quot;</span><span class="p">),</span>
@@ -468,9 +468,9 @@ LSDYNA models) for each element.</p>
 <dd><p>Map a single feature from a d3plot to the CAE elements which are the vertices
 of the hg. Restricted to arrays available from lasso-cae.</p>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">lasso.dyna</span> <span class="kn">import</span> <span class="n">ArrayType</span><span class="p">,</span> <span class="n">D3plot</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">mesh2vec.mesh2vec_cae</span> <span class="kn">import</span> <span class="n">Mesh2VecCae</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">lasso.dyna</span><span class="w"> </span><span class="kn">import</span> <span class="n">ArrayType</span><span class="p">,</span> <span class="n">D3plot</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">mesh2vec.mesh2vec_cae</span><span class="w"> </span><span class="kn">import</span> <span class="n">Mesh2VecCae</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">m2v</span> <span class="o">=</span>  <span class="n">Mesh2VecCae</span><span class="o">.</span><span class="n">from_d3plot_shell</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;data/hat/HAT.d3plot&quot;</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">names</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">ids</span> <span class="o">=</span> <span class="n">m2v</span><span class="o">.</span><span class="n">get_feature_from_d3plot</span><span class="p">(</span>
 <span class="gp">... </span>   <span class="n">ArrayType</span><span class="o">.</span><span class="n">element_shell_strain</span><span class="p">,</span>
@@ -518,9 +518,9 @@ element_shell_history_vars, ignored otherwise)</p></li>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">lasso.dyna</span> <span class="kn">import</span> <span class="n">ArrayType</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">mesh2vec.mesh2vec_cae</span> <span class="kn">import</span> <span class="n">Mesh2VecCae</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">lasso.dyna</span><span class="w"> </span><span class="kn">import</span> <span class="n">ArrayType</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">mesh2vec.mesh2vec_cae</span><span class="w"> </span><span class="kn">import</span> <span class="n">Mesh2VecCae</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">m2v</span> <span class="o">=</span>  <span class="n">Mesh2VecCae</span><span class="o">.</span><span class="n">from_d3plot_shell</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;data/hat/HAT.d3plot&quot;</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">name</span> <span class="o">=</span> <span class="n">m2v</span><span class="o">.</span><span class="n">add_feature_from_d3plot</span><span class="p">(</span>
 <span class="gp">... </span>   <span class="n">ArrayType</span><span class="o">.</span><span class="n">element_shell_strain</span><span class="p">,</span>
@@ -532,11 +532,11 @@ element_shell_history_vars, ignored otherwise)</p></li>
 </pre></div>
 </div>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">lasso.dyna</span> <span class="kn">import</span> <span class="n">ArrayType</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">mesh2vec.mesh2vec_cae</span> <span class="kn">import</span> <span class="n">Mesh2VecCae</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">lasso.dyna</span><span class="w"> </span><span class="kn">import</span> <span class="n">ArrayType</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">mesh2vec.mesh2vec_cae</span><span class="w"> </span><span class="kn">import</span> <span class="n">Mesh2VecCae</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">m2v</span> <span class="o">=</span>  <span class="n">Mesh2VecCae</span><span class="o">.</span><span class="n">from_d3plot_shell</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;data/hat/HAT.d3plot&quot;</span><span class="p">))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">mean_over_components_all_layers</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span><span class="w"> </span><span class="nf">mean_over_components_all_layers</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
 <span class="gp">... </span>   <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">name</span> <span class="o">=</span> <span class="n">m2v</span><span class="o">.</span><span class="n">add_feature_from_d3plot</span><span class="p">(</span>
 <span class="gp">... </span>   <span class="n">ArrayType</span><span class="o">.</span><span class="n">element_shell_strain</span><span class="p">,</span>
@@ -577,9 +577,9 @@ or no neighor with the given dist exist.</p></li>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">lasso.dyna</span> <span class="kn">import</span> <span class="n">ArrayType</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">mesh2vec.mesh2vec_cae</span> <span class="kn">import</span> <span class="n">Mesh2VecCae</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">lasso.dyna</span><span class="w"> </span><span class="kn">import</span> <span class="n">ArrayType</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">mesh2vec.mesh2vec_cae</span><span class="w"> </span><span class="kn">import</span> <span class="n">Mesh2VecCae</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">m2v</span> <span class="o">=</span> <span class="n">Mesh2VecCae</span><span class="o">.</span><span class="n">from_ansa_shell</span><span class="p">(</span>
 <span class="gp">... </span>   <span class="mi">4</span><span class="p">,</span>
 <span class="gp">... </span>   <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;data/hat/Hatprofile.k&quot;</span><span class="p">),</span>
