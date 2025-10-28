@@ -41,6 +41,7 @@ check-wheel-contents = "^0.6.0"
 pip-audit = "^2.8.0"
 pytest = "^8.4.2"
 black = "^25.9.0"
+matplotlib = "^3.9.0"
 
 [tool.poetry-dynamic-versioning]
 enable = true
