@@ -8,14 +8,13 @@ packages = [
 readme = "README.md"
 description = "mesh2vec"
 
-
 [tool.poetry.dependencies]
 python = ">=3.9, <3.12"
 scipy = "^1.9.1"
 pandas = "^1.4.4"
 trimesh = "^3.14.1"
 pyglet = "^1.5.26"
-lasso-python = "^1.5.2.post1"
+lasso-python = "^2.0.2"
 networkx = "^2.8.6"
 loguru = "^0.6.0"
 notebook = "^6.5.2"
@@ -30,10 +29,6 @@ numba = "^0.58.1"
 igraph = "^0.11.3"
 jupyter-server = "^2.11.2"
 
-[tool.poetry.dev-dependencies]
-pytest = "^7.2"
-black = "^24.3.0"
-
 [tool.poetry.group.dev.dependencies]
 sphinx = "^5.1.1"
 sphinx-autobuild = "^2021.3.14"
@@ -43,6 +38,8 @@ pylint = "^2.15.2"
 mypy = "^0.971"
 check-wheel-contents = "^0.3.4"
 pip-audit = "^2.4.4"
+pytest = "^8.4.2"
+black = "^25.9.0"
 
 [tool.poetry-dynamic-versioning]
 enable = true
@@ -57,7 +54,7 @@ good-names = "f,i,j,k,x,y,z,w,up,ex,db,df,v1,v2,e,v,hg,N"
 
 [tool.pylint.similarities]
 ignore-imports = true
-min-similarity-lines= 4
+min-similarity-lines = 4
 
 [tool.mypy]
 ignore_missing_imports = true
