@@ -7,6 +7,9 @@ inputs:
   python-version:
     description: "The python version to install and setup"
     required: true
+  poetry-version:
+    description: "The poetry version to install and setup"
+    default: "2.2.1"
 
 runs:
   using: composite
@@ -15,12 +18,12 @@ runs:
       uses: actions/setup-python@v4
       with:
         python-version: ${{ inputs.python-version }}
-    - name: Install Poetry
+    - name: Install Poetry ${{ inputs.poetry-version }}
       uses: snok/install-poetry@v1
       with:
         virtualenvs-create: true
         virtualenvs-in-project: true
-        version: "2.2.1"
+        version: ${{ inputs.poetry-version }}
     - name: add poetry to windows path
       if: runner.os == 'Windows'
       run: echo "C:/Users/runneradmin/.local/bin" >> $GITHUB_PATH
