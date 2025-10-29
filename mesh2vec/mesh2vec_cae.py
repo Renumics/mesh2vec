@@ -350,7 +350,7 @@ class Mesh2VecCae(Mesh2VecBase):
         okay_inplace = ["num_border", "is_tria", "midpoint"]
 
         for feature in features:
-            if not feature in okay_ansa + okay_inplace:
+            if feature not in okay_ansa + okay_inplace:
                 if allow_additional_ansa_features:
                     okay_ansa.append(feature)
                 else:

@@ -4,7 +4,7 @@ import os
 from typing import Tuple, List, Any, Optional, Union
 
 import numpy as np
-import numpy.typing
+import numpy.typing as npt
 import pandas as pd
 import trimesh
 from lasso.dyna import D3plot, ArrayType
@@ -123,8 +123,8 @@ def midpoint(
 
 
 def _make_ids_unique(
-    array: numpy.typing.NDArray[np.string_], element_node_idxs: np.ndarray, point_uid: np.ndarray
-) -> numpy.typing.NDArray[np.string_]:
+    array: npt.NDArray[np.string_], element_node_idxs: np.ndarray, point_uid: np.ndarray
+) -> npt.NDArray[np.string_]:
     """replace overlapping values in array by adding nodes ids to element id"""
     if len(array) == len(np.unique(array)):
         return array
@@ -145,22 +145,22 @@ def _make_ids_unique(
 class CaeShellMesh:
     """dataclass for points and elements"""
 
-    point_coordinates: numpy.typing.NDArray[np.float_]  # (n_nodes, x_y_z)
-    point_ids: numpy.typing.NDArray[np.string_]  # (n_nodes)
-    element_ids: numpy.typing.NDArray[np.string_]  # (n_elements)
+    point_coordinates: npt.NDArray[np.float_]  # (n_nodes, x_y_z)
+    point_ids: npt.NDArray[np.string_]  # (n_nodes)
+    element_ids: npt.NDArray[np.string_]  # (n_elements)
 
     # (n_elements, 4) - triangles have same value at 2 and 3
-    element_node_idxs: numpy.typing.NDArray[np.int_]
+    element_node_idxs: npt.NDArray[np.int_]
 
-    point_uid: numpy.typing.NDArray[np.string_]
-    element_uid: numpy.typing.NDArray[np.string_]
+    point_uid: npt.NDArray[np.string_]
+    element_uid: npt.NDArray[np.string_]
 
     def __init__(
         self,
-        point_coordinates: numpy.typing.NDArray[np.float_],
-        point_ids: numpy.typing.NDArray[np.string_],
-        element_ids: numpy.typing.NDArray[np.string_],
-        element_node_idxs: numpy.typing.NDArray[np.int_],
+        point_coordinates: npt.NDArray[np.float_],
+        point_ids: npt.NDArray[np.string_],
+        element_ids: npt.NDArray[np.string_],
+        element_node_idxs: npt.NDArray[np.int_],
     ):
         assert len(point_coordinates) == len(point_ids)
 
@@ -262,7 +262,7 @@ class CaeShellMesh:
 
         def parse_contents(
             file_contents: str,
-        ) -> Tuple[List[List[float]], List[str], List[str], numpy.typing.NDArray[np.string_]]:
+        ) -> Tuple[List[List[float]], List[str], List[str], npt.NDArray[np.string_]]:
             # pylint: disable=too-many-nested-blocks,too-many-branches,fixme
             # TODO: check initialization and usage order of `current_section_lines_per_entry` and
             # `current_section_options`, can be used before assignment
@@ -325,7 +325,7 @@ class CaeShellMesh:
 
             pnt_idx = {pnt_id: i for i, pnt_id in enumerate(pnt_ids)}
 
-            elem_node_idx: numpy.typing.NDArray[np.string_] = np.array(
+            elem_node_idx: npt.NDArray[np.string_] = np.array(
                 [[pnt_idx[elem_node_id[i]] for i in range(4)] for elem_node_id in elem_node_ids]
             )
 
