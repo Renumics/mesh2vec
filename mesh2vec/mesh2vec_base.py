@@ -346,7 +346,7 @@ class Mesh2VecBase:
 
             if agg_add_ref:
                 agg_values = self._collect_feature_values(
-                    feature, distance, default_value, aggr, ref_values
+                    feature, distance, default_value, aggr, ref_values  # type: ignore[arg-type]
                 )
             else:
                 agg_values = values
@@ -382,20 +382,20 @@ class Mesh2VecBase:
 
         if ref_values is None:
             if aggr is not None:  # fast: use nan_to_num over the whole array
-                return np.nan_to_num(
+                return np.nan_to_num(  # type: ignore[call-overload]
                     [aggr(feature[neighborhood]) for neighborhood in self._neighborhoods[dist]],
                     default_value,
                 ).tolist()
             # slow: use nan_to_num for each neighborhood (not aggregatted - different length)
             return [
-                np.nan_to_num((feature[neighborhood]), default_value)
+                np.nan_to_num((feature[neighborhood]), default_value)  # type: ignore[call-overload]
                 for neighborhood in self._neighborhoods[dist]
             ]
 
         # compare to reference value is needed
-        ref_values_list = ref_values.tolist()
+        ref_values_list = ref_values.tolist()  # type: ignore[attr-defined]
         return [
-            np.nan_to_num(aggr(feature[neighborhood], ref_values_list[i]), default_value)
+            np.nan_to_num(aggr(feature[neighborhood], ref_values_list[i]), default_value)  # type: ignore[call-overload,misc]
             for i, neighborhood in enumerate(self._neighborhoods[dist])
         ]
 

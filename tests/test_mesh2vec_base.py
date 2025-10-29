@@ -37,15 +37,15 @@ def test_invalid_hyperedges(strategy: str) -> None:
 
     with pytest.raises(InvalidHyperEdgesArgument):
         edges_0 = {"first": ["a", 0.1, "c"], "second": ["x", "y"], "third": ["x", "a"]}
-        _ = Mesh2VecBase(3, edges_0, calc_strategy=strategy)
+        _ = Mesh2VecBase(3, edges_0, calc_strategy=strategy)  # type: ignore[arg-type]
 
     with pytest.raises(InvalidHyperEdgesArgument):
         edges_1 = {"first": ["a", "b", "c"], "second": ["x", "y"], "third": ["x", 123]}
-        _ = Mesh2VecBase(3, edges_1, calc_strategy=strategy)
+        _ = Mesh2VecBase(3, edges_1, calc_strategy=strategy)  # type: ignore[arg-type]
 
     with pytest.raises(InvalidHyperEdgesArgument):
         edges_2 = [[1, 2, 3], [2, 3, 4]]
-        _ = Mesh2VecBase(3, edges_2, calc_strategy=strategy)
+        _ = Mesh2VecBase(3, edges_2, calc_strategy=strategy)  # type: ignore[arg-type]
 
 
 @pytest.mark.parametrize("strategy", strategies)
@@ -53,7 +53,7 @@ def test_invalid_vtx_ids_argument(strategy: str) -> None:
     """test that InvalidVtxIdsArgument is raised"""
     with pytest.raises(InvalidVtxIdsArgument):
         edges_0 = {"first": ["a", "b", "c"], "second": ["x", "y"], "third": ["x", "a"]}
-        _ = Mesh2VecBase(3, edges_0, vtx_ids=[1, "b", "x", "y"], calc_strategy=strategy)
+        _ = Mesh2VecBase(3, edges_0, vtx_ids=[1, "b", "x", "y"], calc_strategy=strategy)  # type: ignore[list-item]
 
     with pytest.raises(InvalidVtxIdsArgument):
         edges_1 = {"first": ["a", "b", "c"], "second": ["x", "y"], "third": ["x", "a"]}
@@ -142,7 +142,7 @@ def test_invalidvtx_id_exception(strategy: str) -> None:
 
     with pytest.raises(InvalidVtxIdArgument):
         hg = Mesh2VecBase(3, edges, calc_strategy=strategy)
-        hg.get_nbh(42, 3)
+        hg.get_nbh(42, 3)  # type: ignore[arg-type]
 
     with pytest.raises(InvalidVtxIdArgument):
         hg = Mesh2VecBase(3, edges, calc_strategy=strategy)

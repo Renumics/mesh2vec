@@ -415,7 +415,7 @@ class Mesh2VecCae(Mesh2VecBase):
         timestep: Optional[int] = None,
         shell_layer: Optional[Union[int, Callable]] = None,
         history_var_index: Optional[int] = None,
-    ) -> Tuple[str, List[str]]:
+    ) -> Tuple[str, List, List[str]]:
         # pylint: disable=too-many-arguments,too-many-positional-arguments,too-many-branches,too-many-statements
         """
         Map a single feature from a d3plot to the CAE elements which are the vertices
@@ -667,9 +667,11 @@ class Mesh2VecCae(Mesh2VecBase):
         def _mean_dir_diff(values: List[List[float]], ref_value: List[float]) -> float:
             """direction difference of values to ref_value (in radian)"""
 
-            def vectorize_angle_diff(values, ref_value):
+            def vectorize_angle_diff(
+                values: List[List[float]], ref_value: List[float]
+            ) -> np.ndarray:
                 try:
-                    values_array = np.array(values.tolist())
+                    values_array = np.array(values.tolist())  # type: ignore[attr-defined]
                 except AttributeError:
                     values_array = np.array(values)
 
@@ -796,7 +798,7 @@ class Mesh2VecCae(Mesh2VecBase):
                 )
         else:
             src_folder = os.path.abspath(os.path.dirname(__file__))
-            ansa_script = f"{src_folder}/templates/ansa.py"
+            ansa_script = Path(f"{src_folder}/templates/ansa.py")
 
         with TemporaryDirectory() as tmp_folder:
             if json_mesh_file is None:
@@ -816,7 +818,7 @@ class Mesh2VecCae(Mesh2VecBase):
                     "-b",
                     "-foregr",
                     "-execpy",
-                    f"load_script: '{ansa_script}",
+                    f"load_script: '{ansa_script}'",
                     "-execpy",
                     f"make_hg('{ansafile}', '{output_path}', '{partid}')",
                 ]

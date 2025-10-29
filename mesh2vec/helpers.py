@@ -43,9 +43,11 @@ def _hyper_edges_to_adj_pairs_np(
     return adjacency_list_np
 
 
-def _hyper_edges_to_adj_list(vtx_count, hyper_edges_idx, include_self=False):
+def _hyper_edges_to_adj_list(
+    vtx_count: int, hyper_edges_idx: OrderedDict[str, List[int]], include_self: bool = False
+) -> List[List[int]]:
     """create adjacency list as list of lists  (jagged shape (vtx_count, ?)) from hyper edges"""
-    adjacency_list = [[] for _ in range(vtx_count)]
+    adjacency_list: List[List[int]] = [[] for _ in range(vtx_count)]
     for vtxs in hyper_edges_idx.values():
         for vtx_a in vtxs:
             for vtx_b in vtxs:
@@ -109,8 +111,8 @@ class PurePythonBFS(AbstractAdjacencyStrategy):
         adjacency_list = _hyper_edges_to_adj_list(vtx_count, hyper_edges_idx)
 
         # neighbors_at_depth: dict of lists of lists (distance, vertex, neighbors)
-        neighbors_at_depth = {
-            dist: [[] for vertex in range(vtx_count)] for dist in range(max_distance + 1)
+        neighbors_at_depth: Dict[int, List[List[int]]] = {
+            dist: [[] for _ in range(vtx_count)] for dist in range(max_distance + 1)
         }
 
         # for each vertex, do bfs separately
@@ -153,8 +155,8 @@ class PurePythonDFS(AbstractAdjacencyStrategy):
         adjacency_list = _hyper_edges_to_adj_list(vtx_count, hyper_edges_idx)
 
         # neighbors_at_depth: dict of lists of lists (distance, vertex, neighbors)
-        neighbors_at_depth = {
-            dist: [[] for vertex in range(vtx_count)] for dist in range(max_distance + 1)
+        neighbors_at_depth: Dict[int, List[List[int]]] = {
+            dist: [[] for _ in range(vtx_count)] for dist in range(max_distance + 1)
         }
 
         # neighbors_at_depth of dist-1 will be used to find neighbors of dist
