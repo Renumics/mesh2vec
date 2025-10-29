@@ -7,8 +7,9 @@ jobs:
   prepare-linux:
     strategy:
       matrix:
-        python-version: ["3.9", "3.11", "3.13"]
+        python-version: ["3.9", "3.11", "3.12", "3.13"]
         os-version: ["ubuntu-latest"]
+      fail-fast: false
     runs-on: ${{ matrix.os-version }}
     steps:
       - uses: actions/checkout@v5
@@ -21,8 +22,9 @@ jobs:
   prepare-win:
     strategy:
       matrix:
-        python-version: ["3.9", "3.11", "3.13"]
+        python-version: ["3.9", "3.11", "3.12", "3.13"]
         os-version: ["windows-latest"]
+      fail-fast: false
     runs-on: ${{ matrix.os-version }}
     steps:
       - uses: actions/checkout@v5
@@ -78,8 +80,9 @@ jobs:
     needs: [prepare-linux, prepare-win]
     strategy:
       matrix:
-        python-version: ["3.9", "3.11", "3.13"]
+        python-version: ["3.9", "3.11", "3.12", "3.13"]
         os-version: ["windows-latest", "ubuntu-latest"]
+      fail-fast: false
     runs-on: ${{ matrix.os-version }}
     steps:
       - uses: actions/checkout@v5
@@ -96,8 +99,9 @@ jobs:
     needs: [prepare-linux, prepare-win]
     strategy:
       matrix:
-        python-version: ["3.9", "3.11", "3.13"]
+        python-version: ["3.9", "3.11", "3.12", "3.13"]
         os-version: ["windows-latest", "ubuntu-latest"]
+      fail-fast: false
     runs-on: ${{ matrix.os-version }}
     steps:
       - uses: actions/checkout@v5
@@ -115,8 +119,9 @@ jobs:
     needs: [prepare-linux, prepare-win]
     strategy:
       matrix:
-        python-version: ["3.9", "3.11", "3.13"]
+        python-version: ["3.9", "3.11", "3.12", "3.13"]
         os-version: ["windows-latest", "ubuntu-latest"]
+      fail-fast: false
     runs-on: ${{ matrix.os-version }}
     steps:
       - uses: actions/checkout@v5
