@@ -443,7 +443,7 @@ class Mesh2VecCae(Mesh2VecBase):
 
         # validate
         okay = [
-            name for name in ArrayType.__dict__ if "element_shell" in name and not "__" in name
+            name for name in ArrayType.__dict__ if "element_shell" in name and "__" not in name
         ]
 
         if feature not in okay:
