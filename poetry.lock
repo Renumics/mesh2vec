@@ -5211,6 +5211,19 @@ pure-eval = "*"
 tests = ["cython", "littleutils", "pygments", "pytest", "typeguard"]
 
 [[package]]
+name = "standard-imghdr"
+version = "3.13.0"
+description = "Standard library imghdr redistribution. \"dead battery\"."
+optional = false
+python-versions = "*"
+groups = ["dev"]
+markers = "python_version >= \"3.13\""
+files = [
+    {file = "standard_imghdr-3.13.0-py3-none-any.whl", hash = "sha256:30a1bff5465605bb496f842a6ac3cc1f2131bf3025b0da28d4877d6d4b7cc8e9"},
+    {file = "standard_imghdr-3.13.0.tar.gz", hash = "sha256:8d9c68058d882f6fc3542a8d39ef9ff94d2187dc90bd0c851e0902776b7b7a42"},
+]
+
+[[package]]
 name = "tenacity"
 version = "9.1.2"
 description = "Retry code until it succeeds"
@@ -5593,4 +5606,4 @@ type = ["pytest-mypy"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.9, <3.15"
-content-hash = "d2386157f2e9b3386e0df4b1bb9e4d1c2ad7aa7a20096e4945808679c95f2c13"
+content-hash = "695bda13ea0f74d3a8d6fcb7f1298cf32ab91670d3a5cbbbfddb82f97ee16e50"
