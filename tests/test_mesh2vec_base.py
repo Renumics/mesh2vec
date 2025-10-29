@@ -50,6 +50,7 @@ def test_invalid_hyperedges(strategy: str) -> None:
 
 @pytest.mark.parametrize("strategy", strategies)
 def test_invalid_vtx_ids_argument(strategy: str) -> None:
+    # pylint: disable=line-too-long
     """test that InvalidVtxIdsArgument is raised"""
     with pytest.raises(InvalidVtxIdsArgument):
         edges_0 = {"first": ["a", "b", "c"], "second": ["x", "y"], "third": ["x", "a"]}

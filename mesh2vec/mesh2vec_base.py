@@ -370,7 +370,7 @@ class Mesh2VecBase:
         ref_values: Optional[List[Union[float, int, str]]] = None,
     ) -> List[List[Union[float, int, str]]]:
         """helper method to collect and aggregate data from all hyper nodes"""
-        # pylint: disable=too-many-arguments,too-many-positional-arguments
+        # pylint: disable=too-many-arguments,too-many-positional-arguments,line-too-long
         check_distance_arg(dist, self)
 
         if default_value is None:
