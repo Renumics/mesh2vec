@@ -67,8 +67,8 @@ class Mesh2VecBase:
             >>> from mesh2vec.mesh2vec_base import Mesh2VecBase
             >>> edges = {"first": ["a", "b", "c"], "second": ["x", "y"]}
             >>> hg = Mesh2VecBase(3, edges)
-            >>> hg._hyper_edges
-            OrderedDict([('first', ['a', 'b', 'c']), ('second', ['x', 'y'])])
+            >>> list(hg._hyper_edges.items())
+            [('first', ['a', 'b', 'c']), ('second', ['x', 'y'])]
 
         """
         check_distance_init_arg(distance)
