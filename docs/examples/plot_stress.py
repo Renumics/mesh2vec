@@ -7,7 +7,7 @@ Aggregate Y-Stress
 # pylint: disable=pointless-statement
 
 from pathlib import Path
-from typing import List
+from typing import List, Union
 import numpy as np
 from lasso.dyna import ArrayType
 from mesh2vec.mesh2vec_cae import Mesh2VecCae
@@ -23,7 +23,7 @@ hg = Mesh2VecCae.from_ansa_shell(
 )
 
 
-def mean_over_components_all_layers(v: List | np.ndarray) -> np.ndarray:
+def mean_over_components_all_layers(v: Union[List, np.ndarray]) -> np.ndarray:
     """get mean over all components and all layers"""
     return np.mean(v, axis=-1)
 

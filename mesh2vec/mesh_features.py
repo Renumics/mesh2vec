@@ -1,7 +1,7 @@
 """calculation of mesh based features"""
 
 import os
-from typing import Tuple, List, Any, Optional
+from typing import Tuple, List, Any, Optional, Union
 
 import numpy as np
 import numpy.typing
@@ -245,7 +245,7 @@ class CaeShellMesh:
         return CaeShellMesh(point_coordinates, pnt_ids, elem_ids, elem_node_idxs)
 
     @staticmethod
-    def from_keyfile(keyfile: str | os.PathLike, partid: str = "") -> "CaeShellMesh":
+    def from_keyfile(keyfile: Union[str, os.PathLike], partid: str = "") -> "CaeShellMesh":
         """
         create CaeShellMesh from keyfile
 
