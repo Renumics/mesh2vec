@@ -1,4 +1,4 @@
-name: mesh2vev
+name: CI/CD
 on: push
 permissions:
   contents: write
