@@ -44,7 +44,7 @@ doctest: ## Run doctests
 
 .PHONY: unit-test
 unit-test: ## Run unit tests
-	poetry run pytest tests
+	poetry run pytest -s tests
 
 .PHONY: test
 test: ## Run all tests

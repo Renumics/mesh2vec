@@ -132,7 +132,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: test
         run: |
-          poetry run pytest tests
+          poetry run pytest -s tests
 
   docs:
     needs: prepare-linux
