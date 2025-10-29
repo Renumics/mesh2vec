@@ -7,7 +7,7 @@ jobs:
   prepare-linux:
     strategy:
       matrix:
-        python-version: ["3.9", "3.11"]
+        python-version: ["3.9", "3.11", "3.13"]
         os-version: ["ubuntu-latest"]
     runs-on: ${{ matrix.os-version }}
     steps:
@@ -21,7 +21,7 @@ jobs:
   prepare-win:
     strategy:
       matrix:
-        python-version: ["3.9", "3.11"]
+        python-version: ["3.9", "3.11", "3.13"]
         os-version: ["windows-latest"]
     runs-on: ${{ matrix.os-version }}
     steps:
@@ -78,7 +78,7 @@ jobs:
     needs: [prepare-linux, prepare-win]
     strategy:
       matrix:
-        python-version: ["3.9", "3.11"]
+        python-version: ["3.9", "3.11", "3.13"]
         os-version: ["windows-latest", "ubuntu-latest"]
     runs-on: ${{ matrix.os-version }}
     steps:
@@ -96,7 +96,7 @@ jobs:
     needs: [prepare-linux, prepare-win]
     strategy:
       matrix:
-        python-version: ["3.9", "3.11"]
+        python-version: ["3.9", "3.11", "3.13"]
         os-version: ["windows-latest", "ubuntu-latest"]
     runs-on: ${{ matrix.os-version }}
     steps:
@@ -115,7 +115,7 @@ jobs:
     needs: [prepare-linux, prepare-win]
     strategy:
       matrix:
-        python-version: ["3.9", "3.11"]
+        python-version: ["3.9", "3.11", "3.13"]
         os-version: ["windows-latest", "ubuntu-latest"]
     runs-on: ${{ matrix.os-version }}
     steps:
@@ -138,7 +138,7 @@ jobs:
         uses: "./.github/actions/ci-setup"
         with:
           os: "ubuntu-latest"
-          python-version: "3.9"
+          python-version: "3.13"
       - name: build docs
         run: |
           poetry run sphinx-build docs/source build/documentation/ -W -b html
@@ -157,7 +157,7 @@ jobs:
         uses: "./.github/actions/ci-setup"
         with:
           os: "ubuntu-latest"
-          python-version: "3.9"
+          python-version: "3.13"
       - name: build wheels
         run: |
           poetry build -f wheel -vvv
@@ -174,11 +174,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - name: Setup CI
-        uses: "./.github/actions/ci-setup"
-        with:
-          os: "ubuntu-latest"
-          python-version: "3.9"
       - name: Download docs
         uses: actions/download-artifact@v6
         with:
@@ -196,17 +191,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - name: Setup CI
-        uses: "./.github/actions/ci-setup"
-        with:
-          os: "ubuntu-latest"
-          python-version: "3.9"
       - name: Download wheels
         uses: actions/download-artifact@v6
         with:
           name: dist
           path: dist/
-      - name: Publish package to TestPyPI
+      - name: Publish package to PyPI
         uses: pypa/gh-action-pypi-publish@ed0c53931b1dc9bd32cbe73a98c7f6766f8a527e
         with:
           password: ${{ secrets.PYPI_API_TOKEN }}
