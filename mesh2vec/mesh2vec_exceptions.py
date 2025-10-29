@@ -78,7 +78,7 @@ def check_vtx_arg(vtx: str, hg: Any) -> None:
     """check argument to rise exception or log warning if needed."""
     if not isinstance(vtx, str):
         raise InvalidVtxIdArgument("vtx id must be of type str")
-    if not vtx in hg.vtx_ids():
+    if vtx not in hg.vtx_ids():
         raise InvalidVtxIdArgument(f"vtx id ({vtx}) was not found in hyper edges dict")
 
 
@@ -88,7 +88,7 @@ class FeatureDoesNotExistException(Exception):
 
 def check_feature_available(feature_name: str, hg: Any) -> None:
     """check argument to rise exception or log warning if needed."""
-    if not feature_name in hg.available_features():
+    if feature_name not in hg.available_features():
         raise FeatureDoesNotExistException(
             f"Feature {feature_name} is not defined. "
             f"Available feature are {hg.available_features()}"

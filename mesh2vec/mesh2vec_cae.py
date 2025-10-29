@@ -131,7 +131,6 @@ class Mesh2VecCae(Mesh2VecBase):
 
         return Mesh2VecCae(distance, mesh, element_info)
 
-    # pylint: disable=too-many-arguments
     @staticmethod
     def from_ansa_shell(
         distance: int,
@@ -143,6 +142,7 @@ class Mesh2VecCae(Mesh2VecBase):
         verbose: bool = False,
         calc_strategy: str = "dfs",
     ) -> "Mesh2VecCae":
+        # pylint: disable=too-many-arguments,too-many-positional-arguments
         """
         Read the given ANSA file and use the shell elements corresponding with ``partid`` to
         generate a hypergraph, using CAE nodes as hyperedges, and adjacent elements as
@@ -202,7 +202,7 @@ class Mesh2VecCae(Mesh2VecBase):
 
     @staticmethod
     def from_d3plot_shell(
-        distance: int, d3plot: Path, partid: str = None, calc_strategy="dfs"
+        distance: int, d3plot: Path, partid: Optional[str] = None, calc_strategy: str = "dfs"
     ) -> "Mesh2VecCae":
         """
         Read the given d3plot file and use the shell elements corresponding with ``partid`` to
@@ -256,7 +256,7 @@ class Mesh2VecCae(Mesh2VecBase):
 
     @staticmethod
     def from_keyfile_shell(
-        distance: int, keyfile: Path, partid="", calc_strategy="bfs"
+        distance: int, keyfile: Path, partid: str = "", calc_strategy: str = "bfs"
     ) -> "Mesh2VecCae":
         """
         Read the given keyfile and use the shell elements to generate a hypergraph, using mesh
@@ -298,7 +298,6 @@ class Mesh2VecCae(Mesh2VecBase):
         """
         return self._element_info.copy()
 
-    # pylint: disable=too-many-arguments
     def add_features_from_ansa(
         self,
         features: List[str],
@@ -309,6 +308,7 @@ class Mesh2VecCae(Mesh2VecBase):
         verbose: bool = False,
         allow_additional_ansa_features: bool = False,
     ) -> List[str]:
+        # pylint: disable=too-many-arguments,too-many-positional-arguments,too-many-locals
         """
         Add values derived or calculated from ANSA shell elements (currently restricted to
         LSDYNA models) for each element.
@@ -346,7 +346,6 @@ class Mesh2VecCae(Mesh2VecBase):
             >>> print(f'{m2v._features["warpage"][14]:.4f}')
             0.0188
         """
-        # pylint: disable=too-many-locals
         okay_ansa = ["aspect", "warpage", "normal", "area", "skew"]
         okay_inplace = ["num_border", "is_tria", "midpoint"]
 
@@ -409,15 +408,15 @@ class Mesh2VecCae(Mesh2VecBase):
             )
         return features
 
-    # pylint: disable=too-many-arguments, too-many-branches. too-many-statements
     def get_feature_from_d3plot(
         self,
         feature: str,
         d3plot_data: D3plot,
-        timestep: int = None,
-        shell_layer: Union[int, Callable] = None,
-        history_var_index: int = None,
-    ) -> Tuple[str, List[Any]]:
+        timestep: Optional[int] = None,
+        shell_layer: Optional[Union[int, Callable]] = None,
+        history_var_index: Optional[int] = None,
+    ) -> Tuple[str, List[str]]:
+        # pylint: disable=too-many-arguments,too-many-positional-arguments,too-many-branches,too-many-statements
         """
         Map a single feature from a d3plot to the CAE elements which are the vertices
         of the hg. Restricted to arrays available from lasso-cae.
@@ -447,7 +446,7 @@ class Mesh2VecCae(Mesh2VecBase):
             name for name in ArrayType.__dict__ if "element_shell" in name and not "__" in name
         ]
 
-        if not feature in okay:
+        if feature not in okay:
             raise ValueError(
                 f"Feature {feature} is unknown. features argument must be one of {okay}."
             )
@@ -546,10 +545,11 @@ class Mesh2VecCae(Mesh2VecBase):
         self,
         feature: str,
         d3plot: Union[Path, D3plot],
-        timestep: int = None,
-        shell_layer: Union[int, Callable] = None,
-        history_var_index: int = None,
+        timestep: Optional[int] = None,
+        shell_layer: Optional[Union[int, Callable]] = None,
+        history_var_index: Optional[int] = None,
     ) -> str:
+        # pylint: disable=too-many-arguments,too-many-positional-arguments
         """
         Map feature from a d3plot to the CAE elements which are the vertices
         of the hg. Restricted to arrays available from lasso-cae.
@@ -612,7 +612,6 @@ class Mesh2VecCae(Mesh2VecBase):
         )
         return feature_name
 
-    # pylint:disable=too-many-arguments
     def aggregate_angle_diff(
         self,
         dist: Union[List[int], int],
@@ -621,8 +620,7 @@ class Mesh2VecCae(Mesh2VecBase):
         default_value: float = 0.0,
         skip_arcos: bool = False,
     ) -> Union[str, List[str]]:
-        # pylint: disable=line-too-long
-
+        # pylint: disable=line-too-long,too-many-arguments,too-many-positional-arguments
         """
         Aggregate angle differences
 
@@ -660,6 +658,7 @@ class Mesh2VecCae(Mesh2VecBase):
 
 
         """
+
         check_feature_available("normal", self)
 
         if aggr is None:

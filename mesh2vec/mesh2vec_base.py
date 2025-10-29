@@ -12,7 +12,12 @@ import joblib
 # noinspection PyProtectedMember
 from pandas.api.types import is_string_dtype
 
-from mesh2vec.helpers import MatMulAdjacency, PurePythonBFS, PurePythonDFS
+from mesh2vec.helpers import (
+    AbstractAdjacencyStrategy,
+    MatMulAdjacency,
+    PurePythonBFS,
+    PurePythonDFS,
+)
 from mesh2vec.mesh2vec_exceptions import (
     check_distance_init_arg,
     check_distance_arg,
@@ -26,7 +31,6 @@ from mesh2vec.mesh2vec_exceptions import (
 
 
 class Mesh2VecBase:
-    # pylint: disable=line-too-long,too-many-instance-attributes
     """
     Class to derive hypergraph neighborhoods from ordinary, undirected graphs, map numerical
     features to vertices, and provide aggregation methods that result in fixed sized vectors
@@ -40,6 +44,7 @@ class Mesh2VecBase:
         vtx_ids: Optional[List[str]] = None,
         calc_strategy: str = "dfs",
     ):
+        # pylint: disable=line-too-long
         r"""
         Create neighborhood sets on a hypergraph.
         For each vertex in the  hg, create sets of neighbors in distance d for each d up to a given
@@ -94,18 +99,19 @@ class Mesh2VecBase:
             )
             for h_edge_id, vtx_ids in self._hyper_edges.items()
         )
+        calc_strategy_obj: AbstractAdjacencyStrategy
         if calc_strategy == "dfs":
-            calc_strategy = PurePythonDFS()
+            calc_strategy_obj = PurePythonDFS()
         elif calc_strategy == "bfs":
-            calc_strategy = PurePythonBFS()
+            calc_strategy_obj = PurePythonBFS()
         elif calc_strategy == "matmul":
-            calc_strategy = MatMulAdjacency()
+            calc_strategy_obj = MatMulAdjacency()
         else:
             raise ValueError(f"Unknown adjacency_calc_strategy: {calc_strategy}")
 
-        self._neighborhoods = calc_strategy.calc_adjacencies(hyper_edges_idx, distance)
+        self._neighborhoods = calc_strategy_obj.calc_adjacencies(hyper_edges_idx, distance)
 
-    def save(self, path: Path):
+    def save(self, path: Path) -> None:
         """
         Save the Mesh2Vec object to a file with joblib
 
@@ -121,7 +127,7 @@ class Mesh2VecBase:
         joblib.dump(self, path)
 
     @staticmethod
-    def load(path: Path):
+    def load(path: Path) -> "Mesh2VecBase":
         """
         Load the Mesh2Vec object from a file with joblib
 
@@ -137,7 +143,7 @@ class Mesh2VecBase:
         return joblib.load(path)
 
     @staticmethod
-    def from_file(hg_file: Path, distance: int, calc_strategy="dfs") -> "Mesh2VecBase":
+    def from_file(hg_file: Path, distance: int, calc_strategy: str = "dfs") -> "Mesh2VecBase":
         # pylint: disable=line-too-long
         r"""
         Read a hypergraph (hg) from a text file.
@@ -275,17 +281,16 @@ class Mesh2VecBase:
             return feature_names[0]
         return feature_names
 
-    # pylint: disable=too-many-arguments
     def aggregate(
         self,
         feature: str,
         dist: Union[List[int], int],
         aggr: Callable,
-        aggr_name: str = None,
+        aggr_name: Optional[str] = None,
         agg_add_ref: bool = False,
         default_value: float = 0.0,
     ) -> Union[str, List[str]]:
-        # pylint: disable=line-too-long
+        # pylint: disable=line-too-long,too-many-arguments,too-many-positional-arguments
         """
         Aggregate features from neighborhoods for each distance in ``dist``
 
@@ -365,6 +370,7 @@ class Mesh2VecBase:
         ref_values: Optional[List[Union[float, int, str]]] = None,
     ) -> List[List[Union[float, int, str]]]:
         """helper method to collect and aggregate data from all hyper nodes"""
+        # pylint: disable=too-many-arguments,too-many-positional-arguments
         check_distance_arg(dist, self)
 
         if default_value is None:
@@ -375,7 +381,7 @@ class Mesh2VecBase:
             return feature
 
         if ref_values is None:
-            if not aggr is None:  # fast: use nan_to_num over the whole array
+            if aggr is not None:  # fast: use nan_to_num over the whole array
                 return np.nan_to_num(
                     [aggr(feature[neighborhood]) for neighborhood in self._neighborhoods[dist]],
                     default_value,
