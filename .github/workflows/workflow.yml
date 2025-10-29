@@ -60,6 +60,20 @@ jobs:
         run: |
           poetry run pylint mesh2vec tests docs/examples scripts
 
+  mypy:
+    needs: prepare-linux
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup CI
+        uses: "./.github/actions/ci-setup"
+        with:
+          os: "ubuntu-latest"
+          python-version: "3.9"
+      - name: check
+        run: |
+          poetry run mypy mesh2vec tests docs/examples scripts
+
   audit:
     needs: [prepare-linux, prepare-win]
     strategy:
@@ -154,7 +168,7 @@ jobs:
 
   release-docs:
     if: startsWith(github.ref, 'refs/tags/v')
-    needs: [check-format, build, unit-tests, doctest, docs, audit, pylint]
+    needs: [check-format, build, unit-tests, doctest, docs, audit, pylint, mypy]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -176,7 +190,7 @@ jobs:
 
   release:
     if: startsWith(github.ref, 'refs/tags/v')
-    needs: [check-format, build, unit-tests, doctest, docs, audit, pylint]
+    needs: [check-format, build, unit-tests, doctest, docs, audit, pylint, mypy]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
