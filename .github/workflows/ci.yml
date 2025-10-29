@@ -5,6 +5,7 @@ permissions:
 
 jobs:
   prepare-linux:
+    name: "🐧 Prepare Linux"
     strategy:
       matrix:
         python-version: ["3.9", "3.11", "3.12", "3.13"]
@@ -20,6 +21,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
   prepare-win:
+    name: "🪟 Prepare Windows"
     strategy:
       matrix:
         python-version: ["3.9", "3.11", "3.12", "3.13"]
@@ -35,6 +37,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
   check-format:
+    name: "🕵️ Check Code Format"
     needs: prepare-linux
     runs-on: ubuntu-latest
     steps:
@@ -49,6 +52,7 @@ jobs:
           poetry run black --check docs mesh2vec scripts tests
 
   pylint:
+    name: "🕵️ Lint Code"
     needs: prepare-linux
     runs-on: ubuntu-latest
     steps:
@@ -63,6 +67,7 @@ jobs:
           poetry run pylint docs/examples mesh2vec scripts tests
 
   mypy:
+    name: "🕵️ Check Code Types"
     needs: prepare-linux
     runs-on: ubuntu-latest
     steps:
@@ -77,6 +82,7 @@ jobs:
           poetry run mypy docs/examples mesh2vec scripts tests
 
   audit:
+    name: "🕵️ Audit Dependencies"
     needs: [prepare-linux, prepare-win]
     strategy:
       matrix:
@@ -96,6 +102,7 @@ jobs:
           poetry run pip-audit
 
   doctest:
+    name: "🧪 Run Doctests"
     needs: [prepare-linux, prepare-win]
     strategy:
       matrix:
@@ -115,7 +122,8 @@ jobs:
           poetry run sphinx-build docs/source build/documentation/ -W -b html
           poetry run sphinx-build docs/source build/documentation/ -W -b doctest
 
-  unit-tests:
+  unit-test:
+    name: "🧪 Run Unit Tests"
     needs: [prepare-linux, prepare-win]
     strategy:
       matrix:
@@ -134,7 +142,8 @@ jobs:
         run: |
           poetry run pytest -s tests
 
-  docs:
+  build-docs:
+    name: "🧱 Build Documentation"
     needs: prepare-linux
     runs-on: ubuntu-latest
     steps:
@@ -153,7 +162,8 @@ jobs:
           name: docs
           path: build/documentation/
 
-  build:
+  build-wheel:
+    name: "🧱 Build Wheel"
     needs: prepare-linux
     runs-on: ubuntu-latest
     steps:
@@ -163,19 +173,45 @@ jobs:
         with:
           os: "ubuntu-latest"
           python-version: "3.13"
-      - name: build wheels
-        run: |
-          poetry build -f wheel -vvv
-          poetry run check-wheel-contents dist/
-      - name: Store wheels
+      - name: build wheel
+        run: poetry build -f wheel -vvv
+      - name: Store wheel
         uses: actions/upload-artifact@v5
         with:
           name: dist
           path: dist/
 
+  check-wheel:
+    name: "🕵️ Check Wheel"
+    needs: [prepare-linux, build-wheel]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Setup CI
+        uses: "./.github/actions/ci-setup"
+        with:
+          os: "ubuntu-latest"
+          python-version: "3.9"
+      - name: Download wheels
+        uses: actions/download-artifact@v6
+        with:
+          name: dist
+          path: dist/
+      - name: check wheel contents
+        run: poetry run check-wheel-contents dist/
+
   release-docs:
+    name: "🚀 Release Documentation"
     if: startsWith(github.ref, 'refs/tags/v')
-    needs: [check-format, build, unit-tests, doctest, docs, audit, pylint, mypy]
+    needs:
+      - check-format
+      - audit
+      - pylint
+      - mypy
+      - unit-test
+      - doctest
+      - build-wheel
+      - build-docs
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
@@ -191,8 +227,17 @@ jobs:
           publish_dir: ./build/documentation/
 
   release:
+    name: "🚀 Release"
     if: startsWith(github.ref, 'refs/tags/v')
-    needs: [check-format, build, unit-tests, doctest, docs, audit, pylint, mypy]
+    needs:
+      - check-format
+      - audit
+      - pylint
+      - mypy
+      - unit-test
+      - doctest
+      - build-wheel
+      - build-docs
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5

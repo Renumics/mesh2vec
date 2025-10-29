@@ -53,6 +53,10 @@ test: unit-test doctest
 .PHONY: wheel
 wheel: ## Build the project wheel
 	poetry build -f wheel -vvv
+
+.PHONY: check-wheel
+check-wheel: ## Build and check the project wheel
+check-wheel: wheel
 	poetry run check-wheel-contents dist/
 
 .PHONY: docs
