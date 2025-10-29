@@ -729,7 +729,7 @@ class Mesh2VecCae(Mesh2VecBase):
     def get_visualization_plotly(self, feature: str) -> go.Figure:
         """
         visualize an aggregated feature on mesh
-        Useage in Notebook
+        Usage in Notebook
         import plotly.io as pio
         pio.renderers.default = 'sphinx_gallery'
         fig = m2v.get_visualization_plotly(name)
