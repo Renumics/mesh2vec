@@ -44,7 +44,7 @@ jobs:
           python-version: "3.9"
       - name: check
         run: |
-          poetry run black --check mesh2vec tests scripts docs docs/examples scripts
+          poetry run black --check docs mesh2vec scripts tests
 
   pylint:
     needs: prepare-linux
@@ -58,7 +58,7 @@ jobs:
           python-version: "3.9"
       - name: check
         run: |
-          poetry run pylint mesh2vec tests docs/examples scripts
+          poetry run pylint docs/examples mesh2vec scripts tests
 
   mypy:
     needs: prepare-linux
@@ -72,7 +72,7 @@ jobs:
           python-version: "3.9"
       - name: check
         run: |
-          poetry run mypy mesh2vec tests docs/examples scripts
+          poetry run mypy docs/examples mesh2vec scripts tests
 
   audit:
     needs: [prepare-linux, prepare-win]
@@ -90,7 +90,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: check
         run: |
-          poetry run pip-audit --ignore-vuln GHSA-w596-4wvx-j9j6
+          poetry run pip-audit
 
   doctest:
     needs: [prepare-linux, prepare-win]
@@ -108,7 +108,8 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: test
         run: |
-          poetry run sphinx-build docs/source build/documentation/ -W -b html && poetry run sphinx-build docs/source build/documentation/ -W -b doctest
+          poetry run sphinx-build docs/source build/documentation/ -W -b html
+          poetry run sphinx-build docs/source build/documentation/ -W -b doctest
 
   unit-tests:
     needs: [prepare-linux, prepare-win]
@@ -159,7 +160,8 @@ jobs:
           python-version: "3.9"
       - name: build wheels
         run: |
-          poetry build -f wheel -vvv && poetry run check-wheel-contents dist/
+          poetry build -f wheel -vvv
+          poetry run check-wheel-contents dist/
       - name: Store wheels
         uses: actions/upload-artifact@v5
         with:
