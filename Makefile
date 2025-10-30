@@ -43,7 +43,7 @@ doctest: ## Run doctests
 
 .PHONY: unit-test
 unit-test: ## Run unit tests
-	poetry run pytest -s tests
+	poetry run pytest -vv -s --tb=long tests
 
 .PHONY: test
 test: ## Run all tests
