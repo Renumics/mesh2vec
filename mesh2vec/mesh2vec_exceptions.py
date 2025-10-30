@@ -3,6 +3,7 @@
 from typing import Any, Dict, List
 from loguru import logger
 import numpy as np
+import numpy.typing as npt
 
 
 class InvalidDistanceArgumentException(Exception):
@@ -78,7 +79,7 @@ def check_vtx_arg(vtx: str, hg: Any) -> None:
     """check argument to rise exception or log warning if needed."""
     if not isinstance(vtx, str):
         raise InvalidVtxIdArgument("vtx id must be of type str")
-    if not vtx in hg.vtx_ids():
+    if vtx not in hg.vtx_ids():
         raise InvalidVtxIdArgument(f"vtx id ({vtx}) was not found in hyper edges dict")
 
 
@@ -88,7 +89,7 @@ class FeatureDoesNotExistException(Exception):
 
 def check_feature_available(feature_name: str, hg: Any) -> None:
     """check argument to rise exception or log warning if needed."""
-    if not feature_name in hg.available_features():
+    if feature_name not in hg.available_features():
         raise FeatureDoesNotExistException(
             f"Feature {feature_name} is not defined. "
             f"Available feature are {hg.available_features()}"
@@ -113,12 +114,12 @@ def check_vtx_ids_column(vtx_ids_column: List[str]) -> None:
         raise InvalidVtxIdArgument("All values in vtx_id column must be of type str")
 
 
-def check_vtx_id_match(vtx_ids_stored, new_vtx_ids):
+def check_vtx_id_match(vtx_ids_stored: npt.NDArray[np.string_], new_vtx_ids: List[str]) -> None:
     """
     Exception raised when the vtx_ids of the d3plot do not match the vtx_ids of
     the loaded mesh
     """
-    if not set(vtx_ids_stored) == set(new_vtx_ids):
+    if set(vtx_ids_stored) != set(new_vtx_ids):
         raise InvalidVtxIdsArgument(
             "The element_shell_ids of the d3plot must contain exactly all of "
             "the elements ids of the loaded mesh."

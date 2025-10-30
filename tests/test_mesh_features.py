@@ -1,5 +1,7 @@
 """tests for mesh_features"""
 
+# pylint: disable=protected-access
+
 from pathlib import Path
 
 import numpy as np
@@ -12,9 +14,6 @@ from mesh2vec.mesh_features import (
     is_tri,
 )
 from mesh2vec.mesh2vec_cae import Mesh2VecCae
-
-
-# pylint: disable=protected-access
 
 
 def test_area() -> None:

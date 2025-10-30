@@ -1,5 +1,7 @@
 """tests for mesh2vec_hyper"""
 
+# pylint: disable=protected-access
+
 from pathlib import Path
 from typing import List, Any
 
@@ -18,11 +20,9 @@ from mesh2vec.mesh2vec_exceptions import (
 
 strategies = ["matmul", "bfs", "dfs"]
 
-# pylint: disable=protected-access
-
 
 @pytest.mark.parametrize("strategy", strategies)
-def test_init(strategy) -> None:
+def test_init(strategy: str) -> None:
     """test init"""
     edges = {"first": ["a", "b", "c"], "second": ["x", "y"]}
     hg = Mesh2VecBase(3, edges, calc_strategy=strategy)
@@ -32,28 +32,29 @@ def test_init(strategy) -> None:
 
 
 @pytest.mark.parametrize("strategy", strategies)
-def test_invalid_hyperedges(strategy) -> None:
+def test_invalid_hyperedges(strategy: str) -> None:
     """test that InvalidDistanceArgument is raised"""
 
     with pytest.raises(InvalidHyperEdgesArgument):
         edges_0 = {"first": ["a", 0.1, "c"], "second": ["x", "y"], "third": ["x", "a"]}
-        _ = Mesh2VecBase(3, edges_0, calc_strategy=strategy)
+        _ = Mesh2VecBase(3, edges_0, calc_strategy=strategy)  # type: ignore[arg-type]
 
     with pytest.raises(InvalidHyperEdgesArgument):
         edges_1 = {"first": ["a", "b", "c"], "second": ["x", "y"], "third": ["x", 123]}
-        _ = Mesh2VecBase(3, edges_1, calc_strategy=strategy)
+        _ = Mesh2VecBase(3, edges_1, calc_strategy=strategy)  # type: ignore[arg-type]
 
     with pytest.raises(InvalidHyperEdgesArgument):
         edges_2 = [[1, 2, 3], [2, 3, 4]]
-        _ = Mesh2VecBase(3, edges_2, calc_strategy=strategy)
+        _ = Mesh2VecBase(3, edges_2, calc_strategy=strategy)  # type: ignore[arg-type]
 
 
 @pytest.mark.parametrize("strategy", strategies)
-def test_invalid_vtx_ids_argument(strategy) -> None:
+def test_invalid_vtx_ids_argument(strategy: str) -> None:
+    # pylint: disable=line-too-long
     """test that InvalidVtxIdsArgument is raised"""
     with pytest.raises(InvalidVtxIdsArgument):
         edges_0 = {"first": ["a", "b", "c"], "second": ["x", "y"], "third": ["x", "a"]}
-        _ = Mesh2VecBase(3, edges_0, vtx_ids=[1, "b", "x", "y"], calc_strategy=strategy)
+        _ = Mesh2VecBase(3, edges_0, vtx_ids=[1, "b", "x", "y"], calc_strategy=strategy)  # type: ignore[list-item]
 
     with pytest.raises(InvalidVtxIdsArgument):
         edges_1 = {"first": ["a", "b", "c"], "second": ["x", "y"], "third": ["x", "a"]}
@@ -61,7 +62,7 @@ def test_invalid_vtx_ids_argument(strategy) -> None:
 
 
 @pytest.mark.parametrize("strategy", strategies)
-def test_from_txt_file(strategy) -> None:
+def test_from_txt_file(strategy: str) -> None:
     """test import of txt file creates a consistent hypergraph"""
     hg = Mesh2VecBase.from_file(Path("data/hyper_02.txt"), 3, calc_strategy=strategy)
     assert hg._distance == 3
@@ -69,7 +70,7 @@ def test_from_txt_file(strategy) -> None:
 
 
 @pytest.mark.parametrize("strategy", strategies)
-def test_from_csv_file(strategy) -> None:
+def test_from_csv_file(strategy: str) -> None:
     """test import of csv file creates a consistent hypergraph"""
     hg1 = Mesh2VecBase.from_file(Path("data/hyper_02.txt"), 3, calc_strategy=strategy)
 
@@ -108,7 +109,7 @@ def test_from_csv_file(strategy) -> None:
 
 
 @pytest.mark.parametrize("strategy", strategies)
-def test_get_nbh(strategy) -> None:
+def test_get_nbh(strategy: str) -> None:
     """test get_nbh"""
     edges = {"first": ["a", "b", "c"], "second": ["x", "y"], "third": ["x", "a"]}
     hg = Mesh2VecBase(3, edges, calc_strategy=strategy)
@@ -124,7 +125,7 @@ def test_get_nbh(strategy) -> None:
 
 
 @pytest.mark.parametrize("strategy", strategies)
-def test_invalid_distance_exception(strategy) -> None:
+def test_invalid_distance_exception(strategy: str) -> None:
     """test that InvalidDistanceArgument is raised"""
     edges = {"first": ["a", "b", "c"], "second": ["x", "y"], "third": ["x", "a"]}
 
@@ -136,13 +137,13 @@ def test_invalid_distance_exception(strategy) -> None:
 
 
 @pytest.mark.parametrize("strategy", strategies)
-def test_invalidvtx_id_exception(strategy) -> None:
+def test_invalidvtx_id_exception(strategy: str) -> None:
     """test that InvalidDistanceArgument is raised"""
     edges = {"first": ["a", "b", "c"], "second": ["x", "y"], "third": ["x", "a"]}
 
     with pytest.raises(InvalidVtxIdArgument):
         hg = Mesh2VecBase(3, edges, calc_strategy=strategy)
-        hg.get_nbh(42, 3)
+        hg.get_nbh(42, 3)  # type: ignore[arg-type]
 
     with pytest.raises(InvalidVtxIdArgument):
         hg = Mesh2VecBase(3, edges, calc_strategy=strategy)
@@ -150,7 +151,7 @@ def test_invalidvtx_id_exception(strategy) -> None:
 
 
 @pytest.mark.parametrize("strategy", strategies)
-def test_aggregate_categorical_disjunctive(strategy) -> None:
+def test_aggregate_categorical_disjunctive(strategy: str) -> None:
     """test categorical aggregation with simple with disjunctive feature values"""
     edges = {"first": ["a", "b", "c"], "second": ["x", "y"]}
     hg = Mesh2VecBase(3, edges, calc_strategy=strategy)
@@ -167,7 +168,9 @@ def test_aggregate_categorical_disjunctive(strategy) -> None:
 
 @pytest.mark.parametrize("feature_values", [[2, 4, 8, 16, 32], ["2", "4", "8", "16", "32"]])
 @pytest.mark.parametrize("strategy", strategies)
-def test_aggregate_categorical_disjunctive_complex(feature_values: List[Any], strategy) -> None:
+def test_aggregate_categorical_disjunctive_complex(
+    feature_values: List[Any], strategy: str
+) -> None:
     """test categorical aggregation with complex graph but disjunctive values"""
     edges = {"first": ["a", "b", "c"], "second": ["x", "y"], "third": ["x", "a"]}
     hg = Mesh2VecBase(3, edges, calc_strategy=strategy)
@@ -198,7 +201,7 @@ def test_aggregate_categorical_disjunctive_complex(feature_values: List[Any], st
 
 @pytest.mark.parametrize("feature_values", [[2, 4, 8, 2, 4], ["2", "4", "8", "2", "4"]])
 @pytest.mark.parametrize("strategy", strategies)
-def test_aggregate_categorical_ones(feature_values: List[Any], strategy) -> None:
+def test_aggregate_categorical_ones(feature_values: List[Any], strategy: str) -> None:
     """test categorical aggregation with complex graph but only ones in sums"""
     edges = {"first": ["a", "b", "c"], "second": ["x", "y"], "third": ["x", "a"]}
     hg = Mesh2VecBase(3, edges, calc_strategy=strategy)
@@ -223,7 +226,7 @@ def test_aggregate_categorical_ones(feature_values: List[Any], strategy) -> None
 
 @pytest.mark.parametrize("feature_values", [[2, 4, 2, 2, 4], ["2", "4", "2", "2", "4"]])
 @pytest.mark.parametrize("strategy", strategies)
-def test_aggregate_categorical_mores(feature_values: List[Any], strategy) -> None:
+def test_aggregate_categorical_mores(feature_values: List[Any], strategy: str) -> None:
     """test categorical aggregation with complex graph and sums > 1"""
     edges = {"first": ["a", "b", "c"], "second": ["x", "y"], "third": ["x", "a"]}
     hg = Mesh2VecBase(3, edges, calc_strategy=strategy)
@@ -248,7 +251,7 @@ def test_aggregate_categorical_mores(feature_values: List[Any], strategy) -> Non
 
 
 @pytest.mark.parametrize("strategy", strategies)
-def test_aggregates_raise_feature_not_available(strategy) -> None:
+def test_aggregates_raise_feature_not_available(strategy: str) -> None:
     """test that FeatureDoesNotExistException is raised"""
     edges = {"first": ["a", "b", "c"], "second": ["x", "y"]}
     hg = Mesh2VecBase(3, edges, calc_strategy=strategy)
@@ -261,7 +264,7 @@ def test_aggregates_raise_feature_not_available(strategy) -> None:
 
 
 @pytest.mark.parametrize("strategy", strategies)
-def test_aggregate_simple(strategy) -> None:
+def test_aggregate_simple(strategy: str) -> None:
     """test aggregation with simple graph"""
     edges = {"first": ["a", "b", "c"], "second": ["x", "y"]}
     hg = Mesh2VecBase(3, edges, calc_strategy=strategy)
@@ -276,7 +279,7 @@ def test_aggregate_simple(strategy) -> None:
 
 
 @pytest.mark.parametrize("strategy", strategies)
-def test_aggregate_simple_two_dists(strategy) -> None:
+def test_aggregate_simple_two_dists(strategy: str) -> None:
     """test aggregation with simple graph"""
     edges = {"first": ["a", "b", "c"], "second": ["x", "y"]}
     hg = Mesh2VecBase(3, edges, calc_strategy=strategy)
@@ -292,7 +295,7 @@ def test_aggregate_simple_two_dists(strategy) -> None:
 
 
 @pytest.mark.parametrize("strategy", strategies)
-def test_aggregate_complex(strategy) -> None:
+def test_aggregate_complex(strategy: str) -> None:
     """test aggregation with complex graph"""
     edges = {"first": ["a", "b", "c"], "second": ["x", "y"], "third": ["x", "a"]}
     hg = Mesh2VecBase(3, edges, calc_strategy=strategy)
@@ -329,7 +332,7 @@ def test_aggregate_complex(strategy) -> None:
 
 
 @pytest.mark.parametrize("strategy", strategies)
-def test_add_features_from_csv(strategy) -> None:
+def test_add_features_from_csv(strategy: str) -> None:
     """test add_features_from_csv with and without header"""
     hg_01 = Mesh2VecBase.from_file(Path("data/hyper_02.txt"), 3, calc_strategy=strategy)
     hg_01.add_features_from_csv(Path("data/hyper_02_features.csv"), with_header=True)
@@ -352,7 +355,7 @@ def test_add_features_from_csv(strategy) -> None:
 
 
 @pytest.mark.parametrize("strategy", strategies)
-def test_add_features_from_dataframe(strategy) -> None:
+def test_add_features_from_dataframe(strategy: str) -> None:
     """test add_features_from_dataframe"""
     edges = {"first": ["a", "b", "c"], "second": ["x", "y"], "third": ["x", "a"]}
     hg = Mesh2VecBase(3, edges, calc_strategy=strategy)

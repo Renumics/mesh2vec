@@ -1,9 +1,10 @@
 """calculation of mesh based features"""
 
-from typing import Tuple, List, Any, Optional
+import os
+from typing import Tuple, List, Any, Optional, Union
 
 import numpy as np
-import numpy.typing
+import numpy.typing as npt
 import pandas as pd
 import trimesh
 from lasso.dyna import D3plot, ArrayType
@@ -122,8 +123,8 @@ def midpoint(
 
 
 def _make_ids_unique(
-    array: numpy.typing.NDArray[np.string_], element_node_idxs: np.ndarray, point_uid: np.ndarray
-) -> numpy.typing.NDArray[np.string_]:
+    array: npt.NDArray[np.string_], element_node_idxs: np.ndarray, point_uid: np.ndarray
+) -> npt.NDArray[np.string_]:
     """replace overlapping values in array by adding nodes ids to element id"""
     if len(array) == len(np.unique(array)):
         return array
@@ -144,22 +145,22 @@ def _make_ids_unique(
 class CaeShellMesh:
     """dataclass for points and elements"""
 
-    point_coordinates: numpy.typing.NDArray[np.float_]  # (n_nodes, x_y_z)
-    point_ids: numpy.typing.NDArray[np.string_]  # (n_nodes)
-    element_ids: numpy.typing.NDArray[np.string_]  # (n_elements)
+    point_coordinates: npt.NDArray[np.float_]  # (n_nodes, x_y_z)
+    point_ids: npt.NDArray[np.string_]  # (n_nodes)
+    element_ids: npt.NDArray[np.string_]  # (n_elements)
 
     # (n_elements, 4) - triangles have same value at 2 and 3
-    element_node_idxs: numpy.typing.NDArray[np.int_]
+    element_node_idxs: npt.NDArray[np.int_]
 
-    point_uid: numpy.typing.NDArray[np.string_]
-    element_uid: numpy.typing.NDArray[np.string_]
+    point_uid: npt.NDArray[np.string_]
+    element_uid: npt.NDArray[np.string_]
 
     def __init__(
         self,
-        point_coordinates: numpy.typing.NDArray[np.float_],
-        point_ids: numpy.typing.NDArray[np.string_],
-        element_ids: numpy.typing.NDArray[np.string_],
-        element_node_idxs: numpy.typing.NDArray[np.int_],
+        point_coordinates: npt.NDArray[np.float_],
+        point_ids: npt.NDArray[np.string_],
+        element_ids: npt.NDArray[np.string_],
+        element_node_idxs: npt.NDArray[np.int_],
     ):
         assert len(point_coordinates) == len(point_ids)
 
@@ -244,7 +245,7 @@ class CaeShellMesh:
         return CaeShellMesh(point_coordinates, pnt_ids, elem_ids, elem_node_idxs)
 
     @staticmethod
-    def from_keyfile(keyfile: str, partid: str = "") -> "CaeShellMesh":
+    def from_keyfile(keyfile: Union[str, os.PathLike], partid: str = "") -> "CaeShellMesh":
         """
         create CaeShellMesh from keyfile
 
@@ -259,16 +260,20 @@ class CaeShellMesh:
         (6400, 3)
         """
 
-        # pylint: disable=too-many-branches, too-many-nested-blocks
-        def parse_contents(file_contents):
+        def parse_contents(
+            file_contents: str,
+        ) -> Tuple[List[List[float]], List[str], List[str], npt.NDArray[np.string_]]:
+            # pylint: disable=too-many-nested-blocks,too-many-branches,fixme
+            # TODO: check initialization and usage order of `current_section_lines_per_entry` and
+            # `current_section_options`, can be used before assignment
             lines = file_contents.split("\n")
             current_section = ""
 
-            point_coordinates = []
-            pnt_ids = []
+            point_coordinates: List[List[float]] = []
+            pnt_ids: List[str] = []
 
-            elem_ids = []
-            elem_node_ids = []
+            elem_ids: List[str] = []
+            elem_node_ids: List[List[str]] = []
             thickcard_options_set = set(["THICKNESS", "BETA", "MCID"])
             for line in lines:
                 if line.startswith("*"):
@@ -285,10 +290,10 @@ class CaeShellMesh:
                             [float(line[8 + i * 16 : 8 + (i + 1) * 16]) for i in range(3)]
                         )
                         pnt_ids.append(line[:8].strip())
-                    except [ValueError, IndexError]:
+                    except (ValueError, IndexError):
                         pass
                 elif current_section.startswith("*ELEMENT_SHELL"):
-
+                    # pylint: disable=used-before-assignment
                     if current_section_lineno % current_section_lines_per_entry == 0:
                         if partid == "" or partid == line[8:16].strip():
                             node_ids = [
@@ -299,9 +304,9 @@ class CaeShellMesh:
                                 for node_id in node_ids
                                 if len(node_id) > 0 and node_id != "0"
                             ]
-                            # pylint: disable=fixme
                             # TODO: Check for unhandled options, e.g. COMPOSITE, DOF
                             if current_section_lineno == 0:
+                                # pylint: disable=possibly-used-before-assignment
                                 if len(current_section_options & thickcard_options_set) > 0:
                                     current_section_lines_per_entry += 1  # skip thickness card
                                     if len(node_ids) > 4:
@@ -320,7 +325,7 @@ class CaeShellMesh:
 
             pnt_idx = {pnt_id: i for i, pnt_id in enumerate(pnt_ids)}
 
-            elem_node_idx = np.array(
+            elem_node_idx: npt.NDArray[np.string_] = np.array(
                 [[pnt_idx[elem_node_id[i]] for i in range(4)] for elem_node_id in elem_node_ids]
             )
 

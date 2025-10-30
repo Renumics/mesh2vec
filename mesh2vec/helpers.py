@@ -5,15 +5,16 @@ from collections import deque
 from abc import ABC, abstractmethod
 
 import numpy as np
+import numpy.typing as npt
 from scipy.sparse import csr_array, coo_array, eye
 
 
-# pylint: disable=invalid-name
 class AbstractAdjacencyStrategy(ABC):
-    # pylint: disable=too-few-public-methods
     """
     Abstract class for adjacency finding strategies
     """
+
+    # pylint: disable=too-few-public-methods
 
     @abstractmethod
     def calc_adjacencies(
@@ -29,7 +30,9 @@ class AbstractAdjacencyStrategy(ABC):
         """
 
 
-def _hyper_edges_to_adj_pairs_np(hyper_edges_idx):
+def _hyper_edges_to_adj_pairs_np(
+    hyper_edges_idx: OrderedDict[str, List[int]],
+) -> npt.NDArray[np.int_]:
     """create adjacency list of connection pairs as numpy array (shape (?, 2)) from hyper edges"""
     adjacency_list = []
     for vtxs in hyper_edges_idx.values():
@@ -40,9 +43,11 @@ def _hyper_edges_to_adj_pairs_np(hyper_edges_idx):
     return adjacency_list_np
 
 
-def _hyper_edges_to_adj_list(vtx_count, hyper_edges_idx, include_self=False):
+def _hyper_edges_to_adj_list(
+    vtx_count: int, hyper_edges_idx: OrderedDict[str, List[int]], include_self: bool = False
+) -> List[List[int]]:
     """create adjacency list as list of lists  (jagged shape (vtx_count, ?)) from hyper edges"""
-    adjacency_list = [[] for _ in range(vtx_count)]
+    adjacency_list: List[List[int]] = [[] for _ in range(vtx_count)]
     for vtxs in hyper_edges_idx.values():
         for vtx_a in vtxs:
             for vtx_b in vtxs:
@@ -106,8 +111,8 @@ class PurePythonBFS(AbstractAdjacencyStrategy):
         adjacency_list = _hyper_edges_to_adj_list(vtx_count, hyper_edges_idx)
 
         # neighbors_at_depth: dict of lists of lists (distance, vertex, neighbors)
-        neighbors_at_depth = {
-            dist: [[] for vertex in range(vtx_count)] for dist in range(max_distance + 1)
+        neighbors_at_depth: Dict[int, List[List[int]]] = {
+            dist: [[] for _ in range(vtx_count)] for dist in range(max_distance + 1)
         }
 
         # for each vertex, do bfs separately
@@ -146,13 +151,12 @@ class PurePythonDFS(AbstractAdjacencyStrategy):
         self, hyper_edges_idx: OrderedDict[str, List[int]], max_distance: int
     ) -> Dict[int, List[List[int]]]:
         """calc adjacencies using DFS in pure python"""
-        # pylint: disable=too-many-locals
         vtx_count = max(vtx_a for vtxs in hyper_edges_idx.values() for vtx_a in vtxs) + 1
         adjacency_list = _hyper_edges_to_adj_list(vtx_count, hyper_edges_idx)
 
         # neighbors_at_depth: dict of lists of lists (distance, vertex, neighbors)
-        neighbors_at_depth = {
-            dist: [[] for vertex in range(vtx_count)] for dist in range(max_distance + 1)
+        neighbors_at_depth: Dict[int, List[List[int]]] = {
+            dist: [[] for _ in range(vtx_count)] for dist in range(max_distance + 1)
         }
 
         # neighbors_at_depth of dist-1 will be used to find neighbors of dist

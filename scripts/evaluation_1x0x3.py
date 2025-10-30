@@ -14,7 +14,6 @@ PATH = "data/hat/cached_hat_key.json"
 
 PROFILE_MEM = True
 
-# pylint: disable=f-string-without-interpolation
 ### create neighbors
 start = time.time()
 if PROFILE_MEM:
@@ -25,7 +24,7 @@ a = Mesh2VecCae.from_ansa_shell(
     Path("data/hat/Hatprofile.k"),
     json_mesh_file=Path(PATH),
 )
-print(f"   calc_adjacencies:", time.time() - start)
+print("   calc_adjacencies:", time.time() - start)
 if PROFILE_MEM:
     current, peak = tracemalloc.get_traced_memory()
     print(f"Current memory usage is {current / 10**6}MB; Peak was {peak / 10**6}MB")
@@ -41,7 +40,7 @@ a.add_features_from_ansa(
     Path("data/hat/Hatprofile.k"),
     json_mesh_file=Path(PATH),
 )
-print(f"   add_features_from_ansa:", time.time() - start)
+print("   add_features_from_ansa:", time.time() - start)
 if PROFILE_MEM:
     current, peak = tracemalloc.get_traced_memory()
     print(f"Current memory usage is {current / 10**6}MB; Peak was {peak / 10**6}MB")
@@ -53,8 +52,8 @@ if PROFILE_MEM:
     tracemalloc.start()
 start = time.time()
 
-a.aggregate("warpage", range(DIST), np.mean)
-print(f"   1 aggregate:", time.time() - start)
+a.aggregate("warpage", list(range(DIST)), np.mean)
+print("   1 aggregate:", time.time() - start)
 if PROFILE_MEM:
     current, peak = tracemalloc.get_traced_memory()
     print(f"Current memory usage is {current / 10**6}MB; Peak was {peak / 10**6}MB")
@@ -65,9 +64,9 @@ if PROFILE_MEM:
     tracemalloc.start()
 start = time.time()
 
-a.aggregate("warpage", range(DIST), np.mean)
-a.aggregate("aspect", range(DIST), np.mean)
-print(f"   2 aggregate:", time.time() - start)
+a.aggregate("warpage", list(range(DIST)), np.mean)
+a.aggregate("aspect", list(range(DIST)), np.mean)
+print("   2 aggregate:", time.time() - start)
 if PROFILE_MEM:
     current, peak = tracemalloc.get_traced_memory()
     print(f"Current memory usage is {current / 10**6}MB; Peak was {peak / 10**6}MB")
@@ -78,9 +77,9 @@ if PROFILE_MEM:
     tracemalloc.start()
 start = time.time()
 
-a.aggregate_angle_diff(range(DIST), np.mean)
+a.aggregate_angle_diff(list(range(DIST)), np.mean)
 
-print(f"   aggregate_angle_diff:", time.time() - start)
+print("   aggregate_angle_diff:", time.time() - start)
 if PROFILE_MEM:
     current, peak = tracemalloc.get_traced_memory()
     print(f"Current memory usage is {current / 10**6}MB; Peak was {peak / 10**6}MB")
