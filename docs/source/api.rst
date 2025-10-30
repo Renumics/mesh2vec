@@ -8,7 +8,7 @@ Mesh2VecBase
    :toctree: generated/
    :template: class.rst
 
-    mesh2vec.mesh2vec_base.Mesh2VecBase
+    mesh2vec_base.Mesh2VecBase
 
 Mesh2VecCae
 ~~~~~~~~~~~~~~~~
@@ -17,5 +17,5 @@ Mesh2VecCae
    :toctree: generated/
    :template: class.rst
 
-    mesh2vec.mesh2vec_cae.Mesh2VecCae
+    mesh2vec_cae.Mesh2VecCae
 

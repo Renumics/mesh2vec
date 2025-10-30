@@ -9,7 +9,6 @@
 project = "Mesh2vec"
 copyright = "2023, Renumics GmbH"
 author = "Renumics GmbH"
-from sphinx_gallery.sorting import FileNameSortKey
 
 
 # -- General configuration ---------------------------------------------------
@@ -40,7 +39,7 @@ sphinx_gallery_conf = {
     "gallery_dirs": [
         "generated_examples",
     ],  # path to where to save gallery generated output
-    "within_subsection_order": FileNameSortKey,
+    "within_subsection_order": "FileNameSortKey",
     "filename_pattern": "/",
     # directory where function/class granular galleries are stored
     "backreferences_dir": "generated_backreferences",
@@ -57,7 +56,7 @@ exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 html_static_path = ["_static"]
 
 html_theme = "sphinx_rtd_theme"
-html_theme_options = {"logo_only": True, "display_version": False}
+html_theme_options = {"logo_only": True}
 html_css_files = ["custom.css"]
 
 import plotly.io as pio

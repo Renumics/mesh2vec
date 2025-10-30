@@ -120,8 +120,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: test
         run: |
-          poetry run sphinx-build docs/source build/documentation/ -W -b html
-          poetry run sphinx-build docs/source build/documentation/ -W -b doctest
+          poetry run sphinx-build docs/source build/documentation/ -W -vvv -b doctest
 
   unit-test:
     name: "🧪 Run Unit Tests"
@@ -157,7 +156,7 @@ jobs:
           python-version: "3.13"
       - name: build docs
         run: |
-          poetry run sphinx-build docs/source build/documentation/ -W -b html
+          poetry run sphinx-build docs/source build/documentation/ -W -vvv -b html
       - name: Store docs
         uses: actions/upload-artifact@v5
         with:
