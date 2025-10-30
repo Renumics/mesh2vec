@@ -250,7 +250,7 @@ def test_add_feature_from_d3plot_to_ansa_shell(strategy: str) -> None:
         shell_layer=axis_0_sum,
     )
     print(m2v._features[name_strain].shape)
-    name = m2v.aggregate(name_strain, 1, lambda x: np.mean(np.mean(x)))
+    name = m2v.aggregate(name_strain, 1, np.mean)
     print(m2v._aggregated_features[name].shape)
 
 
