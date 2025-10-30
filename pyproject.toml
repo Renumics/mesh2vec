@@ -10,14 +10,14 @@ description = "mesh2vec"
 
 [tool.poetry.dependencies]
 python = "^3.9"
-scipy = "^1.9.1"
-pandas = "^2.0.0"
+scipy = "^1.13.0"
+pandas = "^2.3.0"
 trimesh = "^3.14.1"
 lasso-python = "^2.0.3"
 networkx = "^2.8.6"
 loguru = "^0.7.0"
 plotly = "^5.11.0"
-joblib = "^1.2.0"
+joblib = "^1.5.0"
 numpy = "^1.26.4"
 
 [tool.poetry.group.dev.dependencies]
