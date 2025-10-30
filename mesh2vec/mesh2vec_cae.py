@@ -121,7 +121,7 @@ class Mesh2VecCae(Mesh2VecBase):
         Read the given stl file and use the shell elements to generate a hypergraph, using mesh
         nodes as hyperedges, and adjacent elements as  hypervertices.
         """
-        trimesh_mesh: trimesh.Trimesh = trimesh.load(stlfile)
+        trimesh_mesh: trimesh.Trimesh = trimesh.load_mesh(stlfile)
         mesh = CaeShellMesh.from_trimesh(trimesh_mesh)
 
         element_info = pd.DataFrame({"element_id": mesh.element_ids})
@@ -715,16 +715,15 @@ class Mesh2VecCae(Mesh2VecBase):
         omax = tri_features.max()
         tri_features_scaled = (tri_features - omin) / (omax - omin)
 
-        trimeh_mesh = trimesh.Trimesh(
+        trimesh_mesh = trimesh.Trimesh(
             vertices=self._mesh.point_coordinates / np.max(self._mesh.point_coordinates),
             faces=tri_faces,
+            face_colors=np.array(
+                [np.array([254 - 254 * x, 254 * x, 0, 254]) for x in tri_features_scaled]
+            ),
         )
 
-        trimeh_mesh.visual.face_colors = np.array(
-            [np.array([254 - 254 * x, 254 * x, 0, 254]) for x in tri_features_scaled]
-        )
-
-        return trimeh_mesh
+        return trimesh_mesh
 
     def get_visualization_plotly(self, feature: str) -> go.Figure:
         """
