@@ -8,7 +8,7 @@ jobs:
     name: "🐧 Prepare Linux"
     strategy:
       matrix:
-        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
+        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13", "3.14"]
         os-version: ["ubuntu-latest"]
       fail-fast: false
     runs-on: ${{ matrix.os-version }}
@@ -24,7 +24,7 @@ jobs:
     name: "🪟 Prepare Windows"
     strategy:
       matrix:
-        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
+        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13", "3.14"]
         os-version: ["windows-latest"]
       fail-fast: false
     runs-on: ${{ matrix.os-version }}
@@ -86,7 +86,7 @@ jobs:
     needs: [prepare-linux, prepare-win]
     strategy:
       matrix:
-        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
+        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13", "3.14"]
         os-version: ["windows-latest", "ubuntu-latest"]
       fail-fast: false
     runs-on: ${{ matrix.os-version }}
@@ -106,7 +106,7 @@ jobs:
     needs: [prepare-linux, prepare-win]
     strategy:
       matrix:
-        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
+        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13", "3.14"]
         os-version: ["windows-latest", "ubuntu-latest"]
       fail-fast: false
     continue-on-error: ${{ matrix.os-version == 'windows-latest' && matrix.python-version == '3.13' }}
@@ -128,7 +128,7 @@ jobs:
     needs: [prepare-linux, prepare-win]
     strategy:
       matrix:
-        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
+        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13", "3.14"]
         os-version: ["windows-latest", "ubuntu-latest"]
       fail-fast: false
     continue-on-error: ${{ matrix.os-version == 'windows-latest' && matrix.python-version == '3.13' }}
