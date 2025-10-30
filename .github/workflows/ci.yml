@@ -109,6 +109,7 @@ jobs:
         python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
         os-version: ["windows-latest", "ubuntu-latest"]
       fail-fast: false
+    continue-on-error: ${{ matrix.os-version == 'windows-latest' && matrix.python-version == '3.13' }}
     runs-on: ${{ matrix.os-version }}
     steps:
       - uses: actions/checkout@v5
@@ -118,7 +119,6 @@ jobs:
           os: ${{ matrix.os-version }}
           python-version: ${{ matrix.python-version }}
       - name: test
-        continue-on-error: ${{ matrix.os-version == 'windows-latest' && matrix.python-version == '3.13' }}
         run: |
           poetry run sphinx-build docs/source build/documentation/ -W -b html
           poetry run sphinx-build docs/source build/documentation/ -W -b doctest
@@ -131,6 +131,7 @@ jobs:
         python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
         os-version: ["windows-latest", "ubuntu-latest"]
       fail-fast: false
+    continue-on-error: ${{ matrix.os-version == 'windows-latest' && matrix.python-version == '3.13' }}
     runs-on: ${{ matrix.os-version }}
     steps:
       - uses: actions/checkout@v5
@@ -140,7 +141,6 @@ jobs:
           os: ${{ matrix.os-version }}
           python-version: ${{ matrix.python-version }}
       - name: test
-        continue-on-error: ${{ matrix.os-version == 'windows-latest' && matrix.python-version == '3.13' }}
         run: |
           poetry run pytest -s tests
 
