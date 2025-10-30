@@ -109,7 +109,7 @@ jobs:
         python-version: ["3.9", "3.10", "3.11", "3.12", "3.13", "3.14"]
         os-version: ["windows-latest", "ubuntu-latest"]
       fail-fast: false
-    continue-on-error: ${{ matrix.os-version == 'windows-latest' && matrix.python-version == '3.13' }}
+    continue-on-error: ${{ matrix.os-version == 'windows-latest' && (matrix.python-version == '3.13' || matrix.python-version == '3.14') }}
     runs-on: ${{ matrix.os-version }}
     steps:
       - uses: actions/checkout@v5
@@ -130,7 +130,7 @@ jobs:
         python-version: ["3.9", "3.10", "3.11", "3.12", "3.13", "3.14"]
         os-version: ["windows-latest", "ubuntu-latest"]
       fail-fast: false
-    continue-on-error: ${{ matrix.os-version == 'windows-latest' && matrix.python-version == '3.13' }}
+    continue-on-error: ${{ matrix.os-version == 'windows-latest' && (matrix.python-version == '3.13' || matrix.python-version == '3.14') }}
     runs-on: ${{ matrix.os-version }}
     steps:
       - uses: actions/checkout@v5

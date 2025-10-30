@@ -39,7 +39,7 @@ check: check-format lint typecheck audit
 
 .PHONY: doctest
 doctest: ## Run doctests
-	poetry run sphinx-build docs/source build/documentation/ -W -b doctest
+	poetry run sphinx-build docs/source build/documentation/ -W -vvv -b doctest
 
 .PHONY: unit-test
 unit-test: ## Run unit tests
