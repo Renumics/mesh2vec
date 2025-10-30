@@ -41,5 +41,5 @@ runs:
         key: poetry-${{ inputs.os }}-${{ inputs.python-version }}-${{ hashFiles('**/poetry.lock') }}-${{ hashFiles('.github/workflows/*.yml') }}
     - name: Install dependencies
       if: steps.poetry-cache.outputs.cache-hit != 'true'
-      run: poetry install
+      run: poetry sync --no-interaction
       shell: bash
