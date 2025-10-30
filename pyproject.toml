@@ -9,7 +9,7 @@ readme = "README.md"
 description = "mesh2vec"
 
 [tool.poetry.dependencies]
-python = ">=3.9, <3.15"
+python = "^3.9"
 scipy = "^1.9.1"
 pandas = "^2.0.0"
 trimesh = "^3.14.1"
