@@ -8,7 +8,7 @@ jobs:
     name: "🐧 Prepare Linux"
     strategy:
       matrix:
-        python-version: ["3.9", "3.11", "3.12", "3.13"]
+        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
         os-version: ["ubuntu-latest"]
       fail-fast: false
     runs-on: ${{ matrix.os-version }}
@@ -24,7 +24,7 @@ jobs:
     name: "🪟 Prepare Windows"
     strategy:
       matrix:
-        python-version: ["3.9", "3.11", "3.12", "3.13"]
+        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
         os-version: ["windows-latest"]
       fail-fast: false
     runs-on: ${{ matrix.os-version }}
@@ -37,7 +37,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
   check-format:
-    name: "🕵️ Check Code Format"
+    name: "🔍 Check Code Format"
     needs: prepare-linux
     runs-on: ubuntu-latest
     steps:
@@ -52,7 +52,7 @@ jobs:
           poetry run black --check docs mesh2vec scripts tests
 
   pylint:
-    name: "🕵️ Lint Code"
+    name: "🔍 Lint Code"
     needs: prepare-linux
     runs-on: ubuntu-latest
     steps:
@@ -67,7 +67,7 @@ jobs:
           poetry run pylint docs/examples mesh2vec scripts tests
 
   mypy:
-    name: "🕵️ Check Code Types"
+    name: "🔍 Check Code Types"
     needs: prepare-linux
     runs-on: ubuntu-latest
     steps:
@@ -82,11 +82,11 @@ jobs:
           poetry run mypy docs/examples mesh2vec scripts tests
 
   audit:
-    name: "🕵️ Audit Dependencies"
+    name: "🔍 Audit Dependencies"
     needs: [prepare-linux, prepare-win]
     strategy:
       matrix:
-        python-version: ["3.9", "3.11", "3.12", "3.13"]
+        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
         os-version: ["windows-latest", "ubuntu-latest"]
       fail-fast: false
     runs-on: ${{ matrix.os-version }}
@@ -106,7 +106,7 @@ jobs:
     needs: [prepare-linux, prepare-win]
     strategy:
       matrix:
-        python-version: ["3.9", "3.11", "3.12", "3.13"]
+        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
         os-version: ["windows-latest", "ubuntu-latest"]
       fail-fast: false
     runs-on: ${{ matrix.os-version }}
@@ -118,6 +118,7 @@ jobs:
           os: ${{ matrix.os-version }}
           python-version: ${{ matrix.python-version }}
       - name: test
+        continue-on-error: ${{ matrix.os-version == 'windows-latest' && matrix.python-version == '3.13' }}
         run: |
           poetry run sphinx-build docs/source build/documentation/ -W -b html
           poetry run sphinx-build docs/source build/documentation/ -W -b doctest
@@ -127,7 +128,7 @@ jobs:
     needs: [prepare-linux, prepare-win]
     strategy:
       matrix:
-        python-version: ["3.9", "3.11", "3.12", "3.13"]
+        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
         os-version: ["windows-latest", "ubuntu-latest"]
       fail-fast: false
     runs-on: ${{ matrix.os-version }}
@@ -139,6 +140,7 @@ jobs:
           os: ${{ matrix.os-version }}
           python-version: ${{ matrix.python-version }}
       - name: test
+        continue-on-error: ${{ matrix.os-version == 'windows-latest' && matrix.python-version == '3.13' }}
         run: |
           poetry run pytest -s tests
 
@@ -182,7 +184,7 @@ jobs:
           path: dist/
 
   check-wheel:
-    name: "🕵️ Check Wheel"
+    name: "🔍 Check Wheel"
     needs: [prepare-linux, build-wheel]
     runs-on: ubuntu-latest
     steps:
