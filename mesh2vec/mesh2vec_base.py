@@ -6,6 +6,7 @@ from typing import List, Optional, Callable, OrderedDict, Dict, Union, Iterable,
 
 import networkx
 import numpy as np
+import numpy.typing as npt
 import pandas as pd
 import joblib
 
@@ -263,6 +264,7 @@ class Mesh2VecBase:
             check_distance_arg(dist_to_check, self)
         check_feature_available(feature, self)
         feature_names = []
+        feature_categories: List[str] | npt.NDArray[np.str_]
         if categories is not None:
             feature_categories = [str(category) for category in categories] + ["NONE"]
         else:

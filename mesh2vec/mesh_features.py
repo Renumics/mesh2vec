@@ -123,8 +123,8 @@ def midpoint(
 
 
 def _make_ids_unique(
-    array: npt.NDArray[np.string_], element_node_idxs: np.ndarray, point_uid: np.ndarray
-) -> npt.NDArray[np.string_]:
+    array: npt.NDArray[np.str_], element_node_idxs: np.ndarray, point_uid: np.ndarray
+) -> npt.NDArray[np.str_]:
     """replace overlapping values in array by adding nodes ids to element id"""
     if len(array) == len(np.unique(array)):
         return array
@@ -145,21 +145,21 @@ def _make_ids_unique(
 class CaeShellMesh:
     """dataclass for points and elements"""
 
-    point_coordinates: npt.NDArray[np.float_]  # (n_nodes, x_y_z)
-    point_ids: npt.NDArray[np.string_]  # (n_nodes)
-    element_ids: npt.NDArray[np.string_]  # (n_elements)
+    point_coordinates: npt.NDArray[np.floating]  # (n_nodes, x_y_z)
+    point_ids: npt.NDArray[np.str_]  # (n_nodes)
+    element_ids: npt.NDArray[np.str_]  # (n_elements)
 
     # (n_elements, 4) - triangles have same value at 2 and 3
     element_node_idxs: npt.NDArray[np.int_]
 
-    point_uid: npt.NDArray[np.string_]
-    element_uid: npt.NDArray[np.string_]
+    point_uid: npt.NDArray[np.str_]
+    element_uid: npt.NDArray[np.str_]
 
     def __init__(
         self,
-        point_coordinates: npt.NDArray[np.float_],
-        point_ids: npt.NDArray[np.string_],
-        element_ids: npt.NDArray[np.string_],
+        point_coordinates: npt.NDArray[np.floating],
+        point_ids: npt.NDArray[np.str_],
+        element_ids: npt.NDArray[np.str_],
         element_node_idxs: npt.NDArray[np.int_],
     ):
         assert len(point_coordinates) == len(point_ids)
@@ -262,7 +262,7 @@ class CaeShellMesh:
 
         def parse_contents(
             file_contents: str,
-        ) -> Tuple[List[List[float]], List[str], List[str], npt.NDArray[np.string_]]:
+        ) -> Tuple[List[List[float]], List[str], List[str], npt.NDArray[np.str_]]:
             # pylint: disable=too-many-nested-blocks,too-many-branches,fixme
             # TODO: check initialization and usage order of `current_section_lines_per_entry` and
             # `current_section_options`, can be used before assignment
@@ -325,7 +325,7 @@ class CaeShellMesh:
 
             pnt_idx = {pnt_id: i for i, pnt_id in enumerate(pnt_ids)}
 
-            elem_node_idx: npt.NDArray[np.string_] = np.array(
+            elem_node_idx: npt.NDArray[np.str_] = np.array(
                 [[pnt_idx[elem_node_id[i]] for i in range(4)] for elem_node_id in elem_node_ids]
             )
 
