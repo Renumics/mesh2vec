@@ -39,7 +39,7 @@ feature_name = hg.add_feature_from_d3plot(
 # %%
 # Aggregate Feature and plot
 # ---------------------------
-name = hg.aggregate(feature_name, 1, np.mean)
+name = hg.aggregate(feature_name, 1, lambda x: np.mean(np.mean(x)))
 fig = hg.get_visualization_plotly(str(name))
 fig.update_layout(title=name)
 fig
