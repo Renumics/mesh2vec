@@ -18,6 +18,7 @@ runs:
       run: |
         pipx install 'poetry==${{ inputs.poetry-version }}'
         pipx inject poetry poetry-dynamic-versioning
+        poetry config virtualenvs.in-project true
       shell: bash
     - name: Set up Python ${{ inputs.python-version }}
       id: setup-python
