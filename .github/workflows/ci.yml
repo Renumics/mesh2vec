@@ -8,7 +8,7 @@ jobs:
     name: "🐧 Prepare Linux"
     strategy:
       matrix:
-        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13", "3.14"]
+        python-version: ["3.11", "3.12", "3.13", "3.14"]
         os-version: ["ubuntu-latest"]
       fail-fast: false
     runs-on: ${{ matrix.os-version }}
@@ -24,7 +24,7 @@ jobs:
     name: "🪟 Prepare Windows"
     strategy:
       matrix:
-        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13", "3.14"]
+        python-version: ["3.11", "3.12", "3.13", "3.14"]
         os-version: ["windows-latest"]
       fail-fast: false
     runs-on: ${{ matrix.os-version }}
@@ -46,7 +46,7 @@ jobs:
         uses: "./.github/actions/ci-setup"
         with:
           os: "ubuntu-latest"
-          python-version: "3.9"
+          python-version: "3.11"
       - name: check
         run: |
           poetry run black --check docs mesh2vec scripts tests
@@ -61,7 +61,7 @@ jobs:
         uses: "./.github/actions/ci-setup"
         with:
           os: "ubuntu-latest"
-          python-version: "3.9"
+          python-version: "3.11"
       - name: check
         run: |
           poetry run pylint docs/examples mesh2vec scripts tests
@@ -76,7 +76,7 @@ jobs:
         uses: "./.github/actions/ci-setup"
         with:
           os: "ubuntu-latest"
-          python-version: "3.9"
+          python-version: "3.11"
       - name: check
         run: |
           poetry run mypy docs/examples mesh2vec scripts tests
@@ -86,7 +86,7 @@ jobs:
     needs: [prepare-linux, prepare-win]
     strategy:
       matrix:
-        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13", "3.14"]
+        python-version: ["3.11", "3.12", "3.13", "3.14"]
         os-version: ["windows-latest", "ubuntu-latest"]
       fail-fast: false
     runs-on: ${{ matrix.os-version }}
@@ -106,7 +106,7 @@ jobs:
     needs: [prepare-linux, prepare-win]
     strategy:
       matrix:
-        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13", "3.14"]
+        python-version: ["3.11", "3.12", "3.13", "3.14"]
         os-version: ["windows-latest", "ubuntu-latest"]
       fail-fast: false
     continue-on-error: ${{ matrix.os-version == 'windows-latest' && (matrix.python-version == '3.13' || matrix.python-version == '3.14') }}
@@ -127,7 +127,7 @@ jobs:
     needs: [prepare-linux, prepare-win]
     strategy:
       matrix:
-        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13", "3.14"]
+        python-version: ["3.11", "3.12", "3.13", "3.14"]
         os-version: ["windows-latest", "ubuntu-latest"]
       fail-fast: false
     continue-on-error: ${{ matrix.os-version == 'windows-latest' && (matrix.python-version == '3.13' || matrix.python-version == '3.14') }}
@@ -192,7 +192,7 @@ jobs:
         uses: "./.github/actions/ci-setup"
         with:
           os: "ubuntu-latest"
-          python-version: "3.9"
+          python-version: "3.11"
       - name: Download wheels
         uses: actions/download-artifact@v6
         with:
