@@ -72,7 +72,7 @@ class Mesh2VecCae(Mesh2VecBase):
             >>> mesh_info["file_path"] = "file_path"
             >>> m2v = Mesh2VecCae(2, mesh, mesh_info)
             >>> list(m2v._hyper_edges.items())
-            [('0', ['0']), ('1', ['0', '1']), ('2', ['0', '1', '2']), ('3', ['1', '2', '3']), ('4', ['2', '3']), ('5', ['3'])]
+            [(np.str_('0'), ['0']), (np.str_('1'), ['0', '1']), (np.str_('2'), ['0', '1', '2']), (np.str_('3'), ['1', '2', '3']), (np.str_('4'), ['2', '3']), (np.str_('5'), ['3'])]
         """
         assert len(mesh.element_node_idxs) == len(mesh.element_ids)
         assert len(mesh.point_ids) == len(mesh.point_coordinates)
