@@ -1,45 +1,32 @@
-name: CI setup
-
+name: Setup Python and Poetry
+author: Renumics GmbH
+description: Set up Python and Poetry environment, cache/restore dependencies
 inputs:
   os:
     description: "OS"
     required: true
   python-version:
-    description: "The python version to install and setup"
+    description: "Python version to set up"
     required: true
   poetry-version:
-    description: "The poetry version to install and setup"
+    description: "Poetry version to set up"
     default: "2.2.1"
-
 runs:
   using: composite
   steps:
+    - name: Set up Poetry ${{ inputs.poetry-version }}
+      run: |
+        pipx install 'poetry==${{ inputs.poetry-version }}'
+        pipx inject poetry poetry-dynamic-versioning
+        poetry config virtualenvs.in-project true
+      shell: bash
     - name: Set up Python ${{ inputs.python-version }}
+      id: setup-python
       uses: actions/setup-python@v6
       with:
         python-version: ${{ inputs.python-version }}
-    - name: Install Poetry ${{ inputs.poetry-version }}
-      uses: snok/install-poetry@76e04a911780d5b312d89783f7b1cd627778900a
-      with:
-        virtualenvs-create: true
-        virtualenvs-in-project: true
-        version: ${{ inputs.poetry-version }}
-    - name: add poetry to windows path
-      if: runner.os == 'Windows'
-      run: echo "C:/Users/runneradmin/.local/bin" >> $GITHUB_PATH
-      shell: bash
-    - name: add dynamic versioning
-      run: poetry self add "poetry-dynamic-versioning[plugin]"
-      shell: bash
-    - name: Cache Packages
-      id: poetry-cache
-      uses: actions/cache@v4
-      with:
-        path: |
-          .venv
-          poetry.lock
-        key: poetry-${{ inputs.os }}-${{ inputs.python-version }}-${{ hashFiles('**/poetry.lock') }}-${{ hashFiles('.github/workflows/*.yml') }}
+        cache: poetry
     - name: Install dependencies
-      if: steps.poetry-cache.outputs.cache-hit != 'true'
+      if: steps.setup-python.outputs.cache-hit != 'true'
       run: poetry sync --no-interaction
       shell: bash

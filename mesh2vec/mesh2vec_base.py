@@ -2,7 +2,7 @@
 
 import collections
 from pathlib import Path
-from typing import List, Optional, Callable, OrderedDict, Dict, Union, Iterable
+from typing import List, Optional, Callable, OrderedDict, Dict, Union, Iterable, cast
 
 import networkx
 import numpy as np
@@ -285,7 +285,10 @@ class Mesh2VecBase:
         self,
         feature: str,
         dist: Union[List[int], int],
-        aggr: Callable,
+        aggr: Union[
+            Callable[[np.ndarray], Union[float, int, str]],
+            Callable[[np.ndarray, Union[float, int, str]], Union[float, int, str]],
+        ],
         aggr_name: Optional[str] = None,
         agg_add_ref: bool = False,
         default_value: float = 0.0,
@@ -341,15 +344,11 @@ class Mesh2VecBase:
         for distance in dist_list:
             if agg_add_ref:
                 ref_values = self._collect_feature_values(feature, 0, default_value, aggr=None)
-            else:
-                values = self._collect_feature_values(feature, distance, default_value, aggr)
-
-            if agg_add_ref:
                 agg_values = self._collect_feature_values(
-                    feature, distance, default_value, aggr, ref_values  # type: ignore[arg-type]
+                    feature, distance, default_value, aggr, ref_values
                 )
             else:
-                agg_values = values
+                agg_values = self._collect_feature_values(feature, distance, default_value, aggr)
 
             feature_name = f"{feature}-{aggr_name}-{distance}"
             agg_values_to_add[feature_name] = agg_values
@@ -366,9 +365,14 @@ class Mesh2VecBase:
         feature_name: str,
         dist: int,
         default_value: Optional[Union[float, int, str]],
-        aggr: Optional[Callable] = None,
+        aggr: Optional[
+            Union[
+                Callable[[np.ndarray], Union[float, int, str]],
+                Callable[[np.ndarray, Union[float, int, str]], Union[float, int, str]],
+            ]
+        ] = None,
         ref_values: Optional[List[Union[float, int, str]]] = None,
-    ) -> List[List[Union[float, int, str]]]:
+    ) -> List[Union[float, int, str]]:
         """helper method to collect and aggregate data from all hyper nodes"""
         # pylint: disable=too-many-arguments,too-many-positional-arguments,line-too-long
         check_distance_arg(dist, self)
@@ -380,22 +384,34 @@ class Mesh2VecBase:
         if dist == 0:
             return feature
 
+        # `aggr` and `default_value` are explicitly defined in method's signature, so we just
+        # ignore typing here and let it fail in case of wrong usage.
         if ref_values is None:
             if aggr is not None:  # fast: use nan_to_num over the whole array
-                return np.nan_to_num(  # type: ignore[call-overload]
+                aggr = cast(Callable[[np.ndarray], Union[float, int, str]], aggr)
+                return np.nan_to_num(
                     [aggr(feature[neighborhood]) for neighborhood in self._neighborhoods[dist]],
-                    default_value,
+                    nan=default_value,  # type: ignore[arg-type]
                 ).tolist()
             # slow: use nan_to_num for each neighborhood (not aggregatted - different length)
             return [
-                np.nan_to_num((feature[neighborhood]), default_value)  # type: ignore[call-overload]
+                np.nan_to_num(
+                    (feature[neighborhood]),
+                    nan=default_value,  # type: ignore[arg-type]
+                )
                 for neighborhood in self._neighborhoods[dist]
             ]
 
+        if aggr is None:
+            raise TypeError("When `ref_values` is given, `aggr` function to compare is needed.")
+
         # compare to reference value is needed
-        ref_values_list = ref_values.tolist()  # type: ignore[attr-defined]
+        aggr = cast(Callable[[np.ndarray, Union[float, int, str]], Union[float, int, str]], aggr)
         return [
-            np.nan_to_num(aggr(feature[neighborhood], ref_values_list[i]), default_value)  # type: ignore[call-overload,misc]
+            np.nan_to_num(
+                aggr(feature[neighborhood], ref_values[i]),
+                nan=default_value,  # type: ignore[arg-type]
+            )
             for i, neighborhood in enumerate(self._neighborhoods[dist])
         ]
 

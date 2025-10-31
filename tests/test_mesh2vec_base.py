@@ -332,6 +332,43 @@ def test_aggregate_complex(strategy: str) -> None:
 
 
 @pytest.mark.parametrize("strategy", strategies)
+def test_aggregate_with_nans(strategy: str) -> None:
+    """test aggregation with default_value replacement"""
+    edges = {"first": ["a", "b", "c"], "second": ["x", "y"], "third": ["x", "a"]}
+    hg = Mesh2VecBase(3, edges, calc_strategy=strategy)
+    df1 = pd.DataFrame({"vtx_id": ["a", "b", "c", "x", "y"], "f1": [2, 4, 8, 16, 32]})
+    hg.add_features_from_dataframe(df1)
+
+    name = hg.aggregate("f1", 1, lambda _: np.nan)
+    assert hg._aggregated_features[name].iloc[0] == 0
+    assert hg._aggregated_features[name].iloc[1] == 0
+    assert hg._aggregated_features[name].iloc[2] == 0
+    assert hg._aggregated_features[name].iloc[3] == 0
+    assert hg._aggregated_features[name].iloc[4] == 0
+
+    name = hg.aggregate("f1", 1, lambda _: np.nan, default_value=42)
+    assert hg._aggregated_features[name].iloc[0] == 42
+    assert hg._aggregated_features[name].iloc[1] == 42
+    assert hg._aggregated_features[name].iloc[2] == 42
+    assert hg._aggregated_features[name].iloc[3] == 42
+    assert hg._aggregated_features[name].iloc[4] == 42
+
+    name = hg.aggregate("f1", 2, lambda _: np.nan)
+    assert hg._aggregated_features[name].iloc[0] == 0
+    assert hg._aggregated_features[name].iloc[1] == 0
+    assert hg._aggregated_features[name].iloc[2] == 0
+    assert hg._aggregated_features[name].iloc[3] == 0
+    assert hg._aggregated_features[name].iloc[4] == 0
+
+    name = hg.aggregate("f1", 2, lambda _: np.nan, default_value=42)
+    assert hg._aggregated_features[name].iloc[0] == 42
+    assert hg._aggregated_features[name].iloc[1] == 42
+    assert hg._aggregated_features[name].iloc[2] == 42
+    assert hg._aggregated_features[name].iloc[3] == 42
+    assert hg._aggregated_features[name].iloc[4] == 42
+
+
+@pytest.mark.parametrize("strategy", strategies)
 def test_add_features_from_csv(strategy: str) -> None:
     """test add_features_from_csv with and without header"""
     hg_01 = Mesh2VecBase.from_file(Path("data/hyper_02.txt"), 3, calc_strategy=strategy)

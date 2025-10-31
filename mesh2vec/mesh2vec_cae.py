@@ -689,7 +689,7 @@ class Mesh2VecCae(Mesh2VecBase):
         return self.aggregate(
             "normal",
             dist,
-            aggr=_mean_dir_diff,
+            aggr=_mean_dir_diff,  # type: ignore[arg-type]
             aggr_name=aggr.__name__,
             agg_add_ref=agg_add_ref,
             default_value=default_value,
