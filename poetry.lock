@@ -5210,19 +5210,6 @@ pure-eval = "*"
 tests = ["cython", "littleutils", "pygments", "pytest", "typeguard"]
 
 [[package]]
-name = "standard-imghdr"
-version = "3.13.0"
-description = "Standard library imghdr redistribution. \"dead battery\"."
-optional = false
-python-versions = "*"
-groups = ["dev"]
-markers = "python_version >= \"3.13\""
-files = [
-    {file = "standard_imghdr-3.13.0-py3-none-any.whl", hash = "sha256:30a1bff5465605bb496f842a6ac3cc1f2131bf3025b0da28d4877d6d4b7cc8e9"},
-    {file = "standard_imghdr-3.13.0.tar.gz", hash = "sha256:8d9c68058d882f6fc3542a8d39ef9ff94d2187dc90bd0c851e0902776b7b7a42"},
-]
-
-[[package]]
 name = "starlette"
 version = "0.49.1"
 description = "The little ASGI library that shines."
@@ -5861,4 +5848,4 @@ type = ["pytest-mypy"]
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.9"
-content-hash = "6131411eca9e337e1ca35322ea9a1f8dcaaf121ef0ba9f4bebac02555a7f187d"
+content-hash = "8740fe3805133ab126a4688454998e2b9e53398d8699561792ff4b74055953e4"
