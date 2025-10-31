@@ -2,7 +2,7 @@
 
 import collections
 from pathlib import Path
-from typing import List, Optional, Callable, OrderedDict, Dict, Union, Iterable, cast, overload
+from typing import List, Optional, Callable, OrderedDict, Dict, Union, Iterable, cast
 
 import networkx
 import numpy as np
