@@ -1,6 +1,6 @@
 """Exceptions for mesh2vec"""
 
-from typing import Any, Dict, List
+from typing import Any
 from loguru import logger
 import numpy as np
 import numpy.typing as npt
@@ -41,7 +41,7 @@ class InvalidHyperEdgesArgument(Exception):
 
 
 def check_hyper_edges(
-    hyper_edges: Dict[str, List[str]],
+    hyper_edges: dict[str, list[str]],
 ) -> None:
     """check argument to rise exception or log warning if needed."""
     for hyper_edge in hyper_edges:
@@ -59,7 +59,7 @@ class InvalidVtxIdsArgument(Exception):
     """Exception raised when an invalid vtx ids list was provided"""
 
 
-def check_vtx_ids(vtx_ids: List[str], hyper_edges: Dict[str, List[str]]) -> None:
+def check_vtx_ids(vtx_ids: list[str], hyper_edges: dict[str, list[str]]) -> None:
     """check argument to rise exception or log warning if needed."""
     if not all(isinstance(vtx_id, str) for vtx_id in vtx_ids):
         raise InvalidVtxIdsArgument("All vtx_ids must be of type str")
@@ -108,13 +108,13 @@ class InvalidVtxIdsColumn(Exception):
     """Exception raised when the provided vtx_ids column contains invalid values"""
 
 
-def check_vtx_ids_column(vtx_ids_column: List[str]) -> None:
+def check_vtx_ids_column(vtx_ids_column: list[str]) -> None:
     """check argument to rise exception or log warning if needed."""
     if not all(isinstance(v, str) for v in vtx_ids_column):
         raise InvalidVtxIdArgument("All values in vtx_id column must be of type str")
 
 
-def check_vtx_id_match(vtx_ids_stored: npt.NDArray[np.str_], new_vtx_ids: List[str]) -> None:
+def check_vtx_id_match(vtx_ids_stored: npt.NDArray[np.str_], new_vtx_ids: list[str]) -> None:
     """
     Exception raised when the vtx_ids of the d3plot do not match the vtx_ids of
     the loaded mesh
