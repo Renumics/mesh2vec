@@ -13,6 +13,7 @@ Below is a gallery of examples.
 
     <div class="sphx-glr-thumbnails">
 
+.. thumbnail-parent-div-open
 
 .. raw:: html
 
@@ -21,7 +22,7 @@ Below is a gallery of examples.
 .. only:: html
 
   .. image:: /generated_examples/images/thumb/sphx_glr_aggregate_categorical_thumb.png
-    :alt: Aggregate Number of Borders Categorical
+    :alt:
 
   :ref:`sphx_glr_generated_examples_aggregate_categorical.py`
 
@@ -38,7 +39,7 @@ Below is a gallery of examples.
 .. only:: html
 
   .. image:: /generated_examples/images/thumb/sphx_glr_aggregate_warpage_thumb.png
-    :alt: Aggregate Warpage
+    :alt:
 
   :ref:`sphx_glr_generated_examples_aggregate_warpage.py`
 
@@ -55,7 +56,7 @@ Below is a gallery of examples.
 .. only:: html
 
   .. image:: /generated_examples/images/thumb/sphx_glr_plot_neighbor_distances_thumb.png
-    :alt: Plot Neighbor Distances
+    :alt:
 
   :ref:`sphx_glr_generated_examples_plot_neighbor_distances.py`
 
@@ -72,7 +73,7 @@ Below is a gallery of examples.
 .. only:: html
 
   .. image:: /generated_examples/images/thumb/sphx_glr_plot_stress_thumb.png
-    :alt: Aggregate Y-Stress
+    :alt:
 
   :ref:`sphx_glr_generated_examples_plot_stress.py`
 
@@ -89,7 +90,7 @@ Below is a gallery of examples.
 .. only:: html
 
   .. image:: /generated_examples/images/thumb/sphx_glr_quickstart_thumb.png
-    :alt: Quick Start Example
+    :alt:
 
   :ref:`sphx_glr_generated_examples_quickstart.py`
 
@@ -98,6 +99,8 @@ Below is a gallery of examples.
       <div class="sphx-glr-thumbnail-title">Quick Start Example</div>
     </div>
 
+
+.. thumbnail-parent-div-close
 
 .. raw:: html
 

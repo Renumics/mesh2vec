@@ -1,28 +1,27 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>mesh2vec.mesh2vec_base.Mesh2VecBase &mdash; Mesh2vec  documentation</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/sg_gallery.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/sg_gallery-binder.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/sg_gallery-dataframe.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/sg_gallery-rendered-html.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+
   
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/sphinx_highlight.js"></script>
-        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -92,10 +91,10 @@
            <div itemprop="articleBody">
              
   <section id="mesh2vec-mesh2vec-base-mesh2vecbase">
-<h1><code class="xref py py-mod docutils literal notranslate"><span class="pre">mesh2vec.mesh2vec_base</span></code>.Mesh2VecBase<a class="headerlink" href="#mesh2vec-mesh2vec-base-mesh2vecbase" title="Permalink to this heading"></a></h1>
+<h1><code class="xref py py-mod docutils literal notranslate"><span class="pre">mesh2vec.mesh2vec_base</span></code>.Mesh2VecBase<a class="headerlink" href="#mesh2vec-mesh2vec-base-mesh2vecbase" title="Link to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="mesh2vec.mesh2vec_base.Mesh2VecBase">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mesh2vec.mesh2vec_base.</span></span><span class="sig-name descname"><span class="pre">Mesh2VecBase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hyper_edges</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vtx_ids</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'dfs'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_base.Mesh2VecBase" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mesh2vec.mesh2vec_base.</span></span><span class="sig-name descname"><span class="pre">Mesh2VecBase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hyper_edges</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vtx_ids</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'dfs'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_base.Mesh2VecBase" title="Link to this definition"></a></dt>
 <dd><p>Class to derive hypergraph neighborhoods from ordinary, undirected graphs, map numerical
 features to vertices, and provide aggregation methods that result in fixed sized vectors
 suitable for machine learning methods.</p>
@@ -155,16 +154,16 @@ suitable for machine learning methods.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>distance</strong> (<em>int</em>) – </p></li>
-<li><p><strong>hyper_edges</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>List</em><em>[</em><em>str</em><em>]</em><em>]</em>) – </p></li>
-<li><p><strong>vtx_ids</strong> (<em>Optional</em><em>[</em><em>List</em><em>[</em><em>str</em><em>]</em><em>]</em>) – </p></li>
-<li><p><strong>calc_strategy</strong> (<em>str</em>) – </p></li>
+<li><p><strong>distance</strong> (<em>int</em>)</p></li>
+<li><p><strong>hyper_edges</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>List</em><em>[</em><em>str</em><em>]</em><em>]</em>)</p></li>
+<li><p><strong>vtx_ids</strong> (<em>List</em><em>[</em><em>str</em><em>] </em><em>| </em><em>None</em>)</p></li>
+<li><p><strong>calc_strategy</strong> (<em>str</em>)</p></li>
 </ul>
 </dd>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="mesh2vec.mesh2vec_base.Mesh2VecBase.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hyper_edges</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vtx_ids</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'dfs'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_base.Mesh2VecBase.__init__" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hyper_edges</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vtx_ids</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'dfs'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_base.Mesh2VecBase.__init__" title="Link to this definition"></a></dt>
 <dd><p>Create neighborhood sets on a hypergraph.
 For each vertex in the  hg, create sets of neighbors in distance d for each d up to a given
 max distance. A neighborhood set <span class="math notranslate nohighlight">\(N^d_v\)</span> of vertex <span class="math notranslate nohighlight">\(v\)</span> in distance <span class="math notranslate nohighlight">\(d\)</span>
@@ -175,7 +174,7 @@ not <span class="math notranslate nohighlight">\(w \in N^\delta_v,\delta &lt;  d
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>distance</strong> (<em>int</em>) – the maximum distance for neighborhood generation and feature aggregation</p></li>
 <li><p><strong>hyper_edges</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>List</em><em>[</em><em>str</em><em>]</em><em>]</em>) – edge-&gt;connected vertices</p></li>
-<li><p><strong>vtx_ids</strong> (<em>Optional</em><em>[</em><em>List</em><em>[</em><em>str</em><em>]</em><em>]</em>) – provide a list of all vertices to control inernal order of vertices
+<li><p><strong>vtx_ids</strong> (<em>List</em><em>[</em><em>str</em><em>] </em><em>| </em><em>None</em>) – provide a list of all vertices to control inernal order of vertices
 (features, aggregated feature)</p></li>
 <li><p><strong>calc_strategy</strong> (<em>str</em>) – <p>choose the algorithm to calculate adjacencies</p>
 <ul>
@@ -191,19 +190,22 @@ not <span class="math notranslate nohighlight">\(w \in N^\delta_v,\delta &lt;  d
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">mesh2vec.mesh2vec_base</span><span class="w"> </span><span class="kn">import</span> <span class="n">Mesh2VecBase</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">edges</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;first&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">],</span> <span class="s2">&quot;second&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">]}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">hg</span> <span class="o">=</span> <span class="n">Mesh2VecBase</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">edges</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">hg</span><span class="o">.</span><span class="n">_hyper_edges</span>
-<span class="go">OrderedDict([(&#39;first&#39;, [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]), (&#39;second&#39;, [&#39;x&#39;, &#39;y&#39;])])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">hg</span><span class="o">.</span><span class="n">_hyper_edges</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+<span class="go">[(&#39;first&#39;, [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]), (&#39;second&#39;, [&#39;x&#39;, &#39;y&#39;])]</span>
 </pre></div>
 </div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="mesh2vec.mesh2vec_base.Mesh2VecBase.save">
-<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_base.Mesh2VecBase.save" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_base.Mesh2VecBase.save" title="Link to this definition"></a></dt>
 <dd><p>Save the Mesh2Vec object to a file with joblib</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>path</strong> (<em>Path</em>) – path to the file</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
@@ -217,11 +219,14 @@ not <span class="math notranslate nohighlight">\(w \in N^\delta_v,\delta &lt;  d
 
 <dl class="py method">
 <dt class="sig sig-object py" id="mesh2vec.mesh2vec_base.Mesh2VecBase.load">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_base.Mesh2VecBase.load" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_base.Mesh2VecBase.load" title="Link to this definition"></a></dt>
 <dd><p>Load the Mesh2Vec object from a file with joblib</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>path</strong> (<em>Path</em>) – path to the file</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#mesh2vec.mesh2vec_base.Mesh2VecBase" title="mesh2vec.mesh2vec_base.Mesh2VecBase"><em>Mesh2VecBase</em></a></p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
@@ -235,7 +240,7 @@ not <span class="math notranslate nohighlight">\(w \in N^\delta_v,\delta &lt;  d
 
 <dl class="py method">
 <dt class="sig sig-object py" id="mesh2vec.mesh2vec_base.Mesh2VecBase.from_file">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hg_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'dfs'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_base.Mesh2VecBase.from_file" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hg_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'dfs'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_base.Mesh2VecBase.from_file" title="Link to this definition"></a></dt>
 <dd><p>Read a hypergraph (hg) from a text file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -247,7 +252,7 @@ not <span class="math notranslate nohighlight">\(w \in N^\delta_v,\delta &lt;  d
 </ul>
 </p></li>
 <li><p><strong>distance</strong> (<em>int</em>) – the maximum distance for neighborhood generation and feature aggregation</p></li>
-<li><p><strong>calc_strategy</strong> – <p>choose the algorithm to calculate adjacencies</p>
+<li><p><strong>calc_strategy</strong> (<em>str</em>) – <p>choose the algorithm to calculate adjacencies</p>
 <ul>
 <li><p>”dfs”: depth first search (defaultl fast)</p></li>
 <li><p>”bfs”: breadth first search (low memory consumption)</p></li>
@@ -272,7 +277,7 @@ not <span class="math notranslate nohighlight">\(w \in N^\delta_v,\delta &lt;  d
 
 <dl class="py method">
 <dt class="sig sig-object py" id="mesh2vec.mesh2vec_base.Mesh2VecBase.get_nbh">
-<span class="sig-name descname"><span class="pre">get_nbh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vtx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dist</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_base.Mesh2VecBase.get_nbh" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_nbh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vtx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dist</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_base.Mesh2VecBase.get_nbh" title="Link to this definition"></a></dt>
 <dd><p>Get a list of neighbors with the exact distance <code class="docutils literal notranslate"><span class="pre">dist</span></code> of a given vertex <code class="docutils literal notranslate"><span class="pre">vtx</span></code></p>
 <p class="rubric">Example</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">mesh2vec.mesh2vec_base</span><span class="w"> </span><span class="kn">import</span> <span class="n">Mesh2VecBase</span>
@@ -285,8 +290,8 @@ not <span class="math notranslate nohighlight">\(w \in N^\delta_v,\delta &lt;  d
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>vtx</strong> (<em>str</em>) – </p></li>
-<li><p><strong>dist</strong> (<em>int</em>) – </p></li>
+<li><p><strong>vtx</strong> (<em>str</em>)</p></li>
+<li><p><strong>dist</strong> (<em>int</em>)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -297,7 +302,7 @@ not <span class="math notranslate nohighlight">\(w \in N^\delta_v,\delta &lt;  d
 
 <dl class="py method">
 <dt class="sig sig-object py" id="mesh2vec.mesh2vec_base.Mesh2VecBase.aggregate_categorical">
-<span class="sig-name descname"><span class="pre">aggregate_categorical</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">categories</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_base.Mesh2VecBase.aggregate_categorical" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">aggregate_categorical</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">categories</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_base.Mesh2VecBase.aggregate_categorical" title="Link to this definition"></a></dt>
 <dd><p>For categorical features, aggregate the numbers of occurrences of each categorical value.
 This results in a new aggregated <code class="docutils literal notranslate"><span class="pre">feature</span></code> for each categorical value. If <code class="docutils literal notranslate"><span class="pre">feature</span></code> is
 color and dist is 2, and there are 3 categories, e.g. RED, YELLOW, GREEN, the resulting
@@ -311,14 +316,14 @@ not existent in <code class="docutils literal notranslate"><span class="pre">cat
 </dd>
 <dt class="field-even">Parameters<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
-<li><p><strong>feature</strong> (<em>str</em>) – </p></li>
-<li><p><strong>dist</strong> (<em>Union</em><em>[</em><em>List</em><em>[</em><em>int</em><em>]</em><em>, </em><em>int</em><em>]</em>) – </p></li>
-<li><p><strong>categories</strong> (<em>Optional</em><em>[</em><em>Union</em><em>[</em><em>List</em><em>[</em><em>str</em><em>]</em><em>, </em><em>List</em><em>[</em><em>int</em><em>]</em><em>]</em><em>]</em>) – </p></li>
-<li><p><strong>default_value</strong> (<em>Optional</em><em>[</em><em>Union</em><em>[</em><em>int</em><em>, </em><em>str</em><em>]</em><em>]</em>) – </p></li>
+<li><p><strong>feature</strong> (<em>str</em>)</p></li>
+<li><p><strong>dist</strong> (<em>List</em><em>[</em><em>int</em><em>] </em><em>| </em><em>int</em>)</p></li>
+<li><p><strong>categories</strong> (<em>List</em><em>[</em><em>str</em><em>] </em><em>| </em><em>List</em><em>[</em><em>int</em><em>] </em><em>| </em><em>None</em>)</p></li>
+<li><p><strong>default_value</strong> (<em>int</em><em> | </em><em>str</em><em> | </em><em>None</em>)</p></li>
 </ul>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><em>Union</em>[str, <em>List</em>[str]]</p>
+<dd class="field-odd"><p>str | <em>List</em>[str]</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
@@ -340,31 +345,31 @@ not existent in <code class="docutils literal notranslate"><span class="pre">cat
 
 <dl class="py method">
 <dt class="sig sig-object py" id="mesh2vec.mesh2vec_base.Mesh2VecBase.aggregate">
-<span class="sig-name descname"><span class="pre">aggregate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aggr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aggr_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">agg_add_ref</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_base.Mesh2VecBase.aggregate" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">aggregate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">feature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aggr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aggr_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">agg_add_ref</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_base.Mesh2VecBase.aggregate" title="Link to this definition"></a></dt>
 <dd><p>Aggregate features from neighborhoods for each distance in <code class="docutils literal notranslate"><span class="pre">dist</span></code></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>feature</strong> (<em>str</em>) – name of the feature to aggregate</p></li>
-<li><p><strong>dist</strong> (<em>Union</em><em>[</em><em>List</em><em>[</em><em>int</em><em>]</em><em>, </em><em>int</em><em>]</em>) – <p>either</p>
+<li><p><strong>dist</strong> (<em>List</em><em>[</em><em>int</em><em>] </em><em>| </em><em>int</em>) – <p>either</p>
 <ul>
 <li><p>distance of the maximum neighborhood of vertex for aggregation, 0 &lt;= <code class="docutils literal notranslate"><span class="pre">dist</span></code> &lt;=  <code class="docutils literal notranslate"><span class="pre">self.distance</span></code>, or</p></li>
 <li><p>a list of distances, e.g. <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">2,</span> <span class="pre">5]</span></code>.</p></li>
 </ul>
 </p></li>
-<li><p><strong>aggr</strong> (<em>Callable</em>) – aggregation function, e.g. np.min, np.mean, np.median</p></li>
+<li><p><strong>aggr</strong> (<em>Callable</em><em>[</em><em>[</em><em>ndarray</em><em>]</em><em>, </em><em>float</em><em> | </em><em>int</em><em> | </em><em>str</em><em>] </em><em>| </em><em>Callable</em><em>[</em><em>[</em><em>ndarray</em><em>, </em><em>float</em><em> | </em><em>int</em><em> | </em><em>str</em><em>]</em><em>, </em><em>float</em><em> | </em><em>int</em><em> | </em><em>str</em><em>]</em>) – aggregation function, e.g. np.min, np.mean, np.median</p></li>
 <li><p><strong>agg_add_ref</strong> (<em>bool</em>) – the aggregation callable needs the feature value of the center element as
 reference as 2nd argument.</p></li>
 <li><p><strong>default_value</strong> (<em>float</em>) – value to use in aggregation when a feature is missing for a neighbor
 or no neighor with the given dist exist.</p></li>
-<li><p><strong>aggr_name</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – </p></li>
+<li><p><strong>aggr_name</strong> (<em>str</em><em> | </em><em>None</em>)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>aggregated feature name(s)</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><em>Union</em>[str, <em>List</em>[str]]</p>
+<dd class="field-odd"><p>str | <em>List</em>[str]</p>
 </dd>
 </dl>
 <p>The resulting aggregated features are named feature-aggr-dist for each distance in dist,
@@ -391,7 +396,7 @@ each vertex.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="mesh2vec.mesh2vec_base.Mesh2VecBase.add_features_from_csv">
-<span class="sig-name descname"><span class="pre">add_features_from_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">csv_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_header</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_base.Mesh2VecBase.add_features_from_csv" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">add_features_from_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">csv_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_header</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_base.Mesh2VecBase.add_features_from_csv" title="Link to this definition"></a></dt>
 <dd><p>Map the content of a CSV file to the vertices of the hypergraph.</p>
 <p>The column ‘vtx_id’ must contain the vertex IDs. if <code class="docutils literal notranslate"><span class="pre">with_header</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>, use the
 first line as column headers. If <code class="docutils literal notranslate"><span class="pre">columns</span></code> is list-like, its values are taken as column
@@ -409,9 +414,9 @@ Otherwise, all other columns starting with the 2nd are added by the name
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>csv_file</strong> (<em>Path</em>) – </p></li>
-<li><p><strong>with_header</strong> (<em>bool</em>) – </p></li>
-<li><p><strong>columns</strong> (<em>Optional</em><em>[</em><em>List</em><em>[</em><em>str</em><em>]</em><em>]</em>) – </p></li>
+<li><p><strong>csv_file</strong> (<em>Path</em>)</p></li>
+<li><p><strong>with_header</strong> (<em>bool</em>)</p></li>
+<li><p><strong>columns</strong> (<em>List</em><em>[</em><em>str</em><em>] </em><em>| </em><em>None</em>)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -422,7 +427,7 @@ Otherwise, all other columns starting with the 2nd are added by the name
 
 <dl class="py method">
 <dt class="sig sig-object py" id="mesh2vec.mesh2vec_base.Mesh2VecBase.add_features_from_dataframe">
-<span class="sig-name descname"><span class="pre">add_features_from_dataframe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_base.Mesh2VecBase.add_features_from_dataframe" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">add_features_from_dataframe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_base.Mesh2VecBase.add_features_from_dataframe" title="Link to this definition"></a></dt>
 <dd><p>Map the content of a Pandas dataframe to the vertices of the hypergraph. The column
 ‘vtx_id’ of the dataframe is expected to contain vertex IDs as strings.</p>
 <p class="rubric">Example</p>
@@ -438,7 +443,7 @@ Otherwise, all other columns starting with the 2nd are added by the name
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>df</strong> (<em>DataFrame</em>) – </p>
+<dd class="field-odd"><p><strong>df</strong> (<em>DataFrame</em>)</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
@@ -448,13 +453,13 @@ Otherwise, all other columns starting with the 2nd are added by the name
 
 <dl class="py method">
 <dt class="sig sig-object py" id="mesh2vec.mesh2vec_base.Mesh2VecBase.to_dataframe">
-<span class="sig-name descname"><span class="pre">to_dataframe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vertices</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_base.Mesh2VecBase.to_dataframe" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">to_dataframe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vertices</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_base.Mesh2VecBase.to_dataframe" title="Link to this definition"></a></dt>
 <dd><p>Returns a Pandas dataframe with all the beforehand aggregated feature columns. If
 <code class="docutils literal notranslate"><span class="pre">vertices</span></code> is not <code class="docutils literal notranslate"><span class="pre">None</span></code> and iterable, the dataframe is only generated for vertices
 in <code class="docutils literal notranslate"><span class="pre">vertices</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>vertices</strong> (<em>Optional</em><em>[</em><em>Iterable</em><em>[</em><em>str</em><em>]</em><em>]</em>) – </p>
+<dd class="field-odd"><p><strong>vertices</strong> (<em>Iterable</em><em>[</em><em>str</em><em>] </em><em>| </em><em>None</em>)</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><em>DataFrame</em></p>
@@ -464,13 +469,13 @@ in <code class="docutils literal notranslate"><span class="pre">vertices</span><
 
 <dl class="py method">
 <dt class="sig sig-object py" id="mesh2vec.mesh2vec_base.Mesh2VecBase.to_array">
-<span class="sig-name descname"><span class="pre">to_array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vertices</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_base.Mesh2VecBase.to_array" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">to_array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vertices</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_base.Mesh2VecBase.to_array" title="Link to this definition"></a></dt>
 <dd><p>Returns a numpy array with all the beforehand aggregated feature columns. If
 <code class="docutils literal notranslate"><span class="pre">vertices</span></code> is not <code class="docutils literal notranslate"><span class="pre">None</span></code> and iterable, the array is only generated for vertices
 in <code class="docutils literal notranslate"><span class="pre">vertices</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>vertices</strong> (<em>Optional</em><em>[</em><em>Iterable</em><em>[</em><em>str</em><em>]</em><em>]</em>) – </p>
+<dd class="field-odd"><p><strong>vertices</strong> (<em>Iterable</em><em>[</em><em>str</em><em>] </em><em>| </em><em>None</em>)</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><em>ndarray</em></p>
@@ -480,7 +485,7 @@ in <code class="docutils literal notranslate"><span class="pre">vertices</span><
 
 <dl class="py method">
 <dt class="sig sig-object py" id="mesh2vec.mesh2vec_base.Mesh2VecBase.get_max_distance">
-<span class="sig-name descname"><span class="pre">get_max_distance</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_base.Mesh2VecBase.get_max_distance" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_max_distance</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_base.Mesh2VecBase.get_max_distance" title="Link to this definition"></a></dt>
 <dd><p>returns the distance value used to generate the hypergraph neighborhood</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
@@ -491,7 +496,7 @@ in <code class="docutils literal notranslate"><span class="pre">vertices</span><
 
 <dl class="py method">
 <dt class="sig sig-object py" id="mesh2vec.mesh2vec_base.Mesh2VecBase.available_features">
-<span class="sig-name descname"><span class="pre">available_features</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_base.Mesh2VecBase.available_features" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">available_features</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_base.Mesh2VecBase.available_features" title="Link to this definition"></a></dt>
 <dd><p>returns a list the names of all features</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
@@ -502,7 +507,7 @@ in <code class="docutils literal notranslate"><span class="pre">vertices</span><
 
 <dl class="py method">
 <dt class="sig sig-object py" id="mesh2vec.mesh2vec_base.Mesh2VecBase.available_aggregated_features">
-<span class="sig-name descname"><span class="pre">available_aggregated_features</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_base.Mesh2VecBase.available_aggregated_features" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">available_aggregated_features</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_base.Mesh2VecBase.available_aggregated_features" title="Link to this definition"></a></dt>
 <dd><p>returns a list the names of all aggregated features</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
@@ -513,7 +518,7 @@ in <code class="docutils literal notranslate"><span class="pre">vertices</span><
 
 <dl class="py method">
 <dt class="sig sig-object py" id="mesh2vec.mesh2vec_base.Mesh2VecBase.vtx_ids">
-<span class="sig-name descname"><span class="pre">vtx_ids</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_base.Mesh2VecBase.vtx_ids" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">vtx_ids</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_base.Mesh2VecBase.vtx_ids" title="Link to this definition"></a></dt>
 <dd><p>returns a list the ids of all hyper vertices</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
@@ -524,7 +529,7 @@ in <code class="docutils literal notranslate"><span class="pre">vertices</span><
 
 <dl class="py method">
 <dt class="sig sig-object py" id="mesh2vec.mesh2vec_base.Mesh2VecBase.features">
-<span class="sig-name descname"><span class="pre">features</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_base.Mesh2VecBase.features" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">features</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_base.Mesh2VecBase.features" title="Link to this definition"></a></dt>
 <dd><p>Returns a Pandas dataframe with all feature columns.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>

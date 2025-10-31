@@ -1,27 +1,26 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Customize Ansa Script &mdash; Mesh2vec  documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="_static/sg_gallery.css" type="text/css" />
-      <link rel="stylesheet" href="_static/sg_gallery-binder.css" type="text/css" />
-      <link rel="stylesheet" href="_static/sg_gallery-dataframe.css" type="text/css" />
-      <link rel="stylesheet" href="_static/sg_gallery-rendered-html.css" type="text/css" />
-      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery.css?v=d2d258e8" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery-binder.css?v=f4aeca0c" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery-dataframe.css?v=2082cf3c" />
+      <link rel="stylesheet" type="text/css" href="_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="_static/doctools.js"></script>
-        <script src="_static/sphinx_highlight.js"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9a2dae69"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -82,12 +81,12 @@
            <div itemprop="articleBody">
              
   <section id="customize-ansa-script">
-<h1>Customize Ansa Script<a class="headerlink" href="#customize-ansa-script" title="Permalink to this heading"></a></h1>
+<h1>Customize Ansa Script<a class="headerlink" href="#customize-ansa-script" title="Link to this heading"></a></h1>
 <p id="id1">You can modify the original ansa data extraction script in <a class="reference internal" href="generated/mesh2vec.mesh2vec_cae.Mesh2VecCae.html#mesh2vec.mesh2vec_cae.Mesh2VecCae.from_ansa_shell" title="mesh2vec.mesh2vec_cae.Mesh2VecCae.from_ansa_shell"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mesh2vec.mesh2vec_cae.Mesh2VecCae.from_ansa_shell()</span></code></a> and
 <a class="reference internal" href="generated/mesh2vec.mesh2vec_cae.Mesh2VecCae.html#mesh2vec.mesh2vec_cae.Mesh2VecCae.add_features_from_ansa" title="mesh2vec.mesh2vec_cae.Mesh2VecCae.add_features_from_ansa"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mesh2vec.mesh2vec_cae.Mesh2VecCae.add_features_from_ansa()</span></code></a> to include more features.
 Make sure you provide also all required fields for nodes and elements (see original script below).</p>
 <section id="original-ansa-script-as-template">
-<h2>Original Ansa Script as Template:<a class="headerlink" href="#original-ansa-script-as-template" title="Permalink to this heading"></a></h2>
+<h2>Original Ansa Script as Template:<a class="headerlink" href="#original-ansa-script-as-template" title="Link to this heading"></a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># PYTHON script</span>
 <span class="c1"># type: ignore</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
