@@ -6,7 +6,7 @@ import subprocess
 from collections import defaultdict
 from pathlib import Path
 from tempfile import TemporaryDirectory
-from typing import List, DefaultDict, Optional, Callable, Union, Tuple, Dict, Any
+from typing import DefaultDict, Callable
 
 import numpy as np
 import pandas as pd
@@ -72,14 +72,14 @@ class Mesh2VecCae(Mesh2VecBase):
             >>> mesh_info["file_path"] = "file_path"
             >>> m2v = Mesh2VecCae(2, mesh, mesh_info)
             >>> list(m2v._hyper_edges.items())
-            [('0', ['0']), ('1', ['0', '1']), ('2', ['0', '1', '2']), ('3', ['1', '2', '3']), ('4', ['2', '3']), ('5', ['3'])]
+            [(np.str_('0'), ['0']), (np.str_('1'), ['0', '1']), (np.str_('2'), ['0', '1', '2']), (np.str_('3'), ['1', '2', '3']), (np.str_('4'), ['2', '3']), (np.str_('5'), ['3'])]
         """
         assert len(mesh.element_node_idxs) == len(mesh.element_ids)
         assert len(mesh.point_ids) == len(mesh.point_coordinates)
         assert mesh.element_ids.dtype.type is np.str_
         assert mesh.point_ids.dtype.type is np.str_
 
-        points_to_faces: DefaultDict[int, List[int]] = defaultdict(list)
+        points_to_faces: DefaultDict[int, list[int]] = defaultdict(list)
         for face_idx, face_pts in enumerate(mesh.element_node_idxs):
             points_to_faces[face_pts[0]].append(face_idx)
             points_to_faces[face_pts[1]].append(face_idx)
@@ -136,9 +136,9 @@ class Mesh2VecCae(Mesh2VecBase):
         distance: int,
         ansafile: Path,
         partid: str = "",
-        json_mesh_file: Optional[Path] = None,
-        ansa_executable: Optional[Path] = None,
-        ansa_script: Optional[Path] = None,
+        json_mesh_file: Path | None = None,
+        ansa_executable: Path | None = None,
+        ansa_script: Path | None = None,
         verbose: bool = False,
         calc_strategy: str = "dfs",
     ) -> "Mesh2VecCae":
@@ -202,7 +202,7 @@ class Mesh2VecCae(Mesh2VecBase):
 
     @staticmethod
     def from_d3plot_shell(
-        distance: int, d3plot: Path, partid: Optional[str] = None, calc_strategy: str = "dfs"
+        distance: int, d3plot: Path, partid: str | None = None, calc_strategy: str = "dfs"
     ) -> "Mesh2VecCae":
         """
         Read the given d3plot file and use the shell elements corresponding with ``partid`` to
@@ -300,14 +300,14 @@ class Mesh2VecCae(Mesh2VecBase):
 
     def add_features_from_ansa(
         self,
-        features: List[str],
-        ansafile: Optional[Path] = None,
-        json_mesh_file: Optional[Path] = None,
-        ansa_executable: Optional[Path] = None,
-        ansa_script: Optional[Path] = None,
+        features: list[str],
+        ansafile: Path | None = None,
+        json_mesh_file: Path | None = None,
+        ansa_executable: Path | None = None,
+        ansa_script: Path | None = None,
         verbose: bool = False,
         allow_additional_ansa_features: bool = False,
-    ) -> List[str]:
+    ) -> list[str]:
         # pylint: disable=too-many-arguments,too-many-positional-arguments,too-many-locals
         """
         Add values derived or calculated from ANSA shell elements (currently restricted to
@@ -368,7 +368,7 @@ class Mesh2VecCae(Mesh2VecBase):
             )
             mesh = CaeShellMesh.from_ansa_json(elements, nodes)
 
-            def _err_to_nan(elements: List[Dict[Any, Any]], name: str) -> np.ndarray:
+            def _err_to_nan(elements: list[dict], name: str) -> np.ndarray:
                 return np.array(
                     [np.nan if e[name] == "error" else e[name] for e in elements],
                     dtype=float,
@@ -412,10 +412,10 @@ class Mesh2VecCae(Mesh2VecBase):
         self,
         feature: str,
         d3plot_data: D3plot,
-        timestep: Optional[int] = None,
-        shell_layer: Optional[Union[int, Callable]] = None,
-        history_var_index: Optional[int] = None,
-    ) -> Tuple[str, List, List[str]]:
+        timestep: int | None = None,
+        shell_layer: int | Callable | None = None,
+        history_var_index: int | None = None,
+    ) -> tuple[str, list, list[str]]:
         # pylint: disable=too-many-arguments,too-many-positional-arguments,too-many-branches,too-many-statements
         """
         Map a single feature from a d3plot to the CAE elements which are the vertices
@@ -434,7 +434,7 @@ class Mesh2VecCae(Mesh2VecBase):
             ['0.0010', '-0.0003', '-0.0000', '-0.0012', '-0.0000', '-0.0003']
         """
 
-        def _get_d3plot_layer_array_names() -> List[str]:
+        def _get_d3plot_layer_array_names() -> list[str]:
             return [
                 ArrayType.element_shell_stress,
                 ArrayType.element_shell_effective_plastic_strain,
@@ -544,10 +544,10 @@ class Mesh2VecCae(Mesh2VecBase):
     def add_feature_from_d3plot(
         self,
         feature: str,
-        d3plot: Union[Path, D3plot],
-        timestep: Optional[int] = None,
-        shell_layer: Optional[Union[int, Callable]] = None,
-        history_var_index: Optional[int] = None,
+        d3plot: Path | D3plot,
+        timestep: int | None = None,
+        shell_layer: int | Callable | None = None,
+        history_var_index: int | None = None,
     ) -> str:
         # pylint: disable=too-many-arguments,too-many-positional-arguments
         """
@@ -614,12 +614,12 @@ class Mesh2VecCae(Mesh2VecBase):
 
     def aggregate_angle_diff(
         self,
-        dist: Union[List[int], int],
-        aggr: Optional[Callable] = None,
+        dist: list[int] | int,
+        aggr: Callable | None = None,
         agg_add_ref: bool = True,
         default_value: float = 0.0,
         skip_arcos: bool = False,
-    ) -> Union[str, List[str]]:
+    ) -> str | list[str]:
         # pylint: disable=line-too-long,too-many-arguments,too-many-positional-arguments
         """
         Aggregate angle differences
@@ -664,11 +664,11 @@ class Mesh2VecCae(Mesh2VecBase):
         if aggr is None:
             aggr = np.mean
 
-        def _mean_dir_diff(values: List[List[float]], ref_value: List[float]) -> float:
+        def _mean_dir_diff(values: list[list[float]], ref_value: list[float]) -> float:
             """direction difference of values to ref_value (in radian)"""
 
             def vectorize_angle_diff(
-                values: List[List[float]], ref_value: List[float]
+                values: list[list[float]], ref_value: list[float]
             ) -> np.ndarray:
                 try:
                     values_array = np.array(values.tolist())  # type: ignore[attr-defined]
@@ -754,7 +754,7 @@ class Mesh2VecCae(Mesh2VecBase):
             )
             return lines
 
-        def _faces(feature: str, feature_values: List[Any]) -> go.Mesh3d:
+        def _faces(feature: str, feature_values: list) -> go.Mesh3d:
             element_node_idxs = self._mesh.element_node_idxs
             tri_faces, tri_features = mesh_features.quads_to_tris_feature_list(
                 element_node_idxs, feature_values
@@ -781,12 +781,12 @@ class Mesh2VecCae(Mesh2VecBase):
 
     @staticmethod
     def _read_ansafile(
-        ansafile: Optional[Path],
-        json_mesh_file: Optional[Path],
+        ansafile: Path | None,
+        json_mesh_file: Path | None,
         verbose: bool,
         partid: str = "",
-        ansa_script: Optional[Path] = None,
-    ) -> Tuple[List[Dict], List[Dict]]:
+        ansa_script: Path | None = None,
+    ) -> tuple[list[dict], list[dict]]:
         ansa_path = os.getenv("ANSA_EXECUTABLE")
 
         if ansa_script is not None:

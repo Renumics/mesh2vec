@@ -2,10 +2,11 @@
 
 import collections
 from pathlib import Path
-from typing import List, Optional, Callable, OrderedDict, Dict, Union, Iterable, cast
+from typing import Callable, OrderedDict, Iterable, cast
 
 import networkx
 import numpy as np
+import numpy.typing as npt
 import pandas as pd
 import joblib
 
@@ -40,8 +41,8 @@ class Mesh2VecBase:
     def __init__(
         self,
         distance: int,
-        hyper_edges: Dict[str, List[str]],
-        vtx_ids: Optional[List[str]] = None,
+        hyper_edges: dict[str, list[str]],
+        vtx_ids: list[str] | None = None,
         calc_strategy: str = "dfs",
     ):
         # pylint: disable=line-too-long
@@ -82,7 +83,7 @@ class Mesh2VecBase:
         check_vtx_ids(vtx_ids, hyper_edges)
 
         self._distance: int = distance
-        self._hyper_edges: OrderedDict[str, List[str]] = collections.OrderedDict(hyper_edges)
+        self._hyper_edges: OrderedDict[str, list[str]] = collections.OrderedDict(hyper_edges)
 
         self._vtx_idx_to_ids = collections.OrderedDict(enumerate(vtx_ids))  # type: ignore
         self._vtx_ids_to_idx = {vtx_ids: i for i, vtx_ids in enumerate(vtx_ids)}
@@ -203,7 +204,7 @@ class Mesh2VecBase:
         hyper_edges_ids_to_vtx_ids = {line_split[0]: line_split[1:] for line_split in lines_split}
         return Mesh2VecBase(distance=distance, hyper_edges=hyper_edges_ids_to_vtx_ids)
 
-    def get_nbh(self, vtx: str, dist: int) -> List[str]:
+    def get_nbh(self, vtx: str, dist: int) -> list[str]:
         """
         Get a list of neighbors with the exact distance ``dist`` of a given vertex ``vtx``
 
@@ -228,10 +229,10 @@ class Mesh2VecBase:
     def aggregate_categorical(
         self,
         feature: str,
-        dist: Union[List[int], int],
-        categories: Optional[Union[List[str], List[int]]] = None,
-        default_value: Optional[Union[int, str]] = None,
-    ) -> Union[str, List[str]]:
+        dist: list[int] | int,
+        categories: list[str] | list[int] | None = None,
+        default_value: int | str | None = None,
+    ) -> str | list[str]:
         """
         For categorical features, aggregate the numbers of occurrences of each categorical value.
         This results in a new aggregated ``feature`` for each categorical value. If ``feature`` is
@@ -263,6 +264,7 @@ class Mesh2VecBase:
             check_distance_arg(dist_to_check, self)
         check_feature_available(feature, self)
         feature_names = []
+        feature_categories: list[str] | npt.NDArray[np.str_]
         if categories is not None:
             feature_categories = [str(category) for category in categories] + ["NONE"]
         else:
@@ -284,15 +286,15 @@ class Mesh2VecBase:
     def aggregate(
         self,
         feature: str,
-        dist: Union[List[int], int],
-        aggr: Union[
-            Callable[[np.ndarray], Union[float, int, str]],
-            Callable[[np.ndarray, Union[float, int, str]], Union[float, int, str]],
-        ],
-        aggr_name: Optional[str] = None,
+        dist: list[int] | int,
+        aggr: (
+            Callable[[np.ndarray], float | int | str]
+            | Callable[[np.ndarray, float | int | str], float | int | str]
+        ),
+        aggr_name: str | None = None,
         agg_add_ref: bool = False,
         default_value: float = 0.0,
-    ) -> Union[str, List[str]]:
+    ) -> str | list[str]:
         # pylint: disable=line-too-long,too-many-arguments,too-many-positional-arguments
         """
         Aggregate features from neighborhoods for each distance in ``dist``
@@ -364,15 +366,14 @@ class Mesh2VecBase:
         self,
         feature_name: str,
         dist: int,
-        default_value: Optional[Union[float, int, str]],
-        aggr: Optional[
-            Union[
-                Callable[[np.ndarray], Union[float, int, str]],
-                Callable[[np.ndarray, Union[float, int, str]], Union[float, int, str]],
-            ]
-        ] = None,
-        ref_values: Optional[List[Union[float, int, str]]] = None,
-    ) -> List[Union[float, int, str]]:
+        default_value: float | int | str | None,
+        aggr: (
+            Callable[[np.ndarray], float | int | str]
+            | Callable[[np.ndarray, float | int | str], float | int | str]
+            | None
+        ) = None,
+        ref_values: list[float | int | str] | None = None,
+    ) -> list[float | int | str]:
         """helper method to collect and aggregate data from all hyper nodes"""
         # pylint: disable=too-many-arguments,too-many-positional-arguments,line-too-long
         check_distance_arg(dist, self)
@@ -384,11 +385,10 @@ class Mesh2VecBase:
         if dist == 0:
             return feature
 
-        # `aggr` and `default_value` are explicitly defined in method's signature, so we just
-        # ignore typing here and let it fail in case of wrong usage.
+        # Ignore typing here and let it fail in case of wrong usage.
         if ref_values is None:
             if aggr is not None:  # fast: use nan_to_num over the whole array
-                aggr = cast(Callable[[np.ndarray], Union[float, int, str]], aggr)
+                aggr = cast(Callable[[np.ndarray], float | int | str], aggr)
                 return np.nan_to_num(
                     [aggr(feature[neighborhood]) for neighborhood in self._neighborhoods[dist]],
                     nan=default_value,  # type: ignore[arg-type]
@@ -406,7 +406,7 @@ class Mesh2VecBase:
             raise TypeError("When `ref_values` is given, `aggr` function to compare is needed.")
 
         # compare to reference value is needed
-        aggr = cast(Callable[[np.ndarray, Union[float, int, str]], Union[float, int, str]], aggr)
+        aggr = cast(Callable[[np.ndarray, float | int | str], float | int | str], aggr)
         return [
             np.nan_to_num(
                 aggr(feature[neighborhood], ref_values[i]),
@@ -419,7 +419,7 @@ class Mesh2VecBase:
         self,
         csv_file: Path,
         with_header: bool = False,
-        columns: Optional[List[str]] = None,
+        columns: list[str] | None = None,
     ) -> None:
         """Map the content of a CSV file to the vertices of the hypergraph.
 
@@ -465,7 +465,7 @@ class Mesh2VecBase:
                 raise ValueError(f"Feature {new_columns_name} already exists")
         self._features = self._features.merge(df, how="left", on="vtx_id", validate="1:1")
 
-    def to_dataframe(self, vertices: Optional[Iterable[str]] = None) -> pd.DataFrame:
+    def to_dataframe(self, vertices: Iterable[str] | None = None) -> pd.DataFrame:
         """
         Returns a Pandas dataframe with all the beforehand aggregated feature columns. If
         ``vertices`` is not ``None`` and iterable, the dataframe is only generated for vertices
@@ -475,7 +475,7 @@ class Mesh2VecBase:
             return self._aggregated_features[self._features in vertices].copy()
         return self._aggregated_features.copy()
 
-    def to_array(self, vertices: Optional[Iterable[str]] = None) -> np.ndarray:
+    def to_array(self, vertices: Iterable[str] | None = None) -> np.ndarray:
         """
         Returns a numpy array with all the beforehand aggregated feature columns. If
         ``vertices`` is not ``None`` and iterable, the array is only generated for vertices
@@ -487,15 +487,15 @@ class Mesh2VecBase:
         """returns the distance value used to generate the hypergraph neighborhood"""
         return self._distance
 
-    def available_features(self) -> List[str]:
+    def available_features(self) -> list[str]:
         """returns a list the names of all features"""
         return self._features.drop("vtx_id", axis=1).keys().tolist()
 
-    def available_aggregated_features(self) -> List[str]:
+    def available_aggregated_features(self) -> list[str]:
         """returns a list the names of all aggregated features"""
         return self._aggregated_features.drop("vtx_id", axis=1).keys().tolist()
 
-    def vtx_ids(self) -> List[str]:
+    def vtx_ids(self) -> list[str]:
         """returns a list the ids of all hyper vertices"""
         return list(self._vtx_ids_to_idx.keys())
 

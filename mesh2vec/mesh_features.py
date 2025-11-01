@@ -1,7 +1,6 @@
 """calculation of mesh based features"""
 
 import os
-from typing import Tuple, List, Any, Optional, Union
 
 import numpy as np
 import numpy.typing as npt
@@ -13,8 +12,8 @@ from mesh2vec.mesh2vec_exceptions import PointIdsMustBeUnqiueException
 
 
 def quads_to_tris_feature_list(
-    element_node_idxs: np.ndarray, feature_values: List[Any]
-) -> Tuple[np.ndarray, np.ndarray]:
+    element_node_idxs: np.ndarray, feature_values: list
+) -> tuple[np.ndarray, np.ndarray]:
     """
     convert 4-node elements to 3-node elements
     works on node ids and on point positions
@@ -32,7 +31,7 @@ def quads_to_tris_feature_list(
     return tri_faces, tri_features
 
 
-def _quad_to_tris(element_node_idxs: np.ndarray) -> Tuple[List[bool], np.ndarray]:
+def _quad_to_tris(element_node_idxs: np.ndarray) -> tuple[list[bool], np.ndarray]:
     if len(element_node_idxs.shape) == 3:  # points
         is_quads = [any(element[3] != element[2]) for element in element_node_idxs]
         tri_faces_nested = [
@@ -59,7 +58,7 @@ def _quad_to_tris(element_node_idxs: np.ndarray) -> Tuple[List[bool], np.ndarray
 
 def quads_to_tris_df(
     element_node_idxs: np.ndarray, features: pd.DataFrame
-) -> Tuple[np.ndarray, pd.DataFrame]:
+) -> tuple[np.ndarray, pd.DataFrame]:
     """
     convert 4-node elements to 3-node elements
     works on node ids and on point positions
@@ -94,7 +93,7 @@ def area(element_node_idxs: np.ndarray, point_coordinates: np.ndarray) -> np.nda
     return quad_areas
 
 
-def is_tri(element_node_idxs: np.ndarray) -> List[bool]:
+def is_tri(element_node_idxs: np.ndarray) -> list[bool]:
     """
     check if type is triangle for all elements
     """
@@ -123,8 +122,8 @@ def midpoint(
 
 
 def _make_ids_unique(
-    array: npt.NDArray[np.string_], element_node_idxs: np.ndarray, point_uid: np.ndarray
-) -> npt.NDArray[np.string_]:
+    array: npt.NDArray[np.str_], element_node_idxs: np.ndarray, point_uid: np.ndarray
+) -> npt.NDArray[np.str_]:
     """replace overlapping values in array by adding nodes ids to element id"""
     if len(array) == len(np.unique(array)):
         return array
@@ -145,21 +144,21 @@ def _make_ids_unique(
 class CaeShellMesh:
     """dataclass for points and elements"""
 
-    point_coordinates: npt.NDArray[np.float_]  # (n_nodes, x_y_z)
-    point_ids: npt.NDArray[np.string_]  # (n_nodes)
-    element_ids: npt.NDArray[np.string_]  # (n_elements)
+    point_coordinates: npt.NDArray[np.floating]  # (n_nodes, x_y_z)
+    point_ids: npt.NDArray[np.str_]  # (n_nodes)
+    element_ids: npt.NDArray[np.str_]  # (n_elements)
 
     # (n_elements, 4) - triangles have same value at 2 and 3
     element_node_idxs: npt.NDArray[np.int_]
 
-    point_uid: npt.NDArray[np.string_]
-    element_uid: npt.NDArray[np.string_]
+    point_uid: npt.NDArray[np.str_]
+    element_uid: npt.NDArray[np.str_]
 
     def __init__(
         self,
-        point_coordinates: npt.NDArray[np.float_],
-        point_ids: npt.NDArray[np.string_],
-        element_ids: npt.NDArray[np.string_],
+        point_coordinates: npt.NDArray[np.floating],
+        point_ids: npt.NDArray[np.str_],
+        element_ids: npt.NDArray[np.str_],
         element_node_idxs: npt.NDArray[np.int_],
     ):
         assert len(point_coordinates) == len(point_ids)
@@ -183,7 +182,7 @@ class CaeShellMesh:
         )
 
     @staticmethod
-    def from_d3plot(d3plot_data: D3plot, partid: Optional[int] = None) -> "CaeShellMesh":
+    def from_d3plot(d3plot_data: D3plot, partid: int | None = None) -> "CaeShellMesh":
         """create CaeShellMesh from lasso D3plot"""
         if partid is not None:
             part_index = np.where(d3plot_data.arrays["part_ids"] == partid)[0]
@@ -229,7 +228,7 @@ class CaeShellMesh:
         return CaeShellMesh(point_coordinates, pnt_ids, elem_ids, elem_node_idxs)
 
     @staticmethod
-    def from_ansa_json(elements: List[Any], nodes: List[Any]) -> "CaeShellMesh":
+    def from_ansa_json(elements: list, nodes: list) -> "CaeShellMesh":
         """create CaeShellMesh from ansa exported json"""
         pnt_ids = np.array([str(node["__id__"]) for node in nodes])
         pnt_idx = {node["__id__"]: i for i, node in enumerate(nodes)}
@@ -245,7 +244,7 @@ class CaeShellMesh:
         return CaeShellMesh(point_coordinates, pnt_ids, elem_ids, elem_node_idxs)
 
     @staticmethod
-    def from_keyfile(keyfile: Union[str, os.PathLike], partid: str = "") -> "CaeShellMesh":
+    def from_keyfile(keyfile: str | os.PathLike, partid: str = "") -> "CaeShellMesh":
         """
         create CaeShellMesh from keyfile
 
@@ -262,18 +261,18 @@ class CaeShellMesh:
 
         def parse_contents(
             file_contents: str,
-        ) -> Tuple[List[List[float]], List[str], List[str], npt.NDArray[np.string_]]:
+        ) -> tuple[list[list[float]], list[str], list[str], npt.NDArray[np.str_]]:
             # pylint: disable=too-many-nested-blocks,too-many-branches,fixme
             # TODO: check initialization and usage order of `current_section_lines_per_entry` and
             # `current_section_options`, can be used before assignment
             lines = file_contents.split("\n")
             current_section = ""
 
-            point_coordinates: List[List[float]] = []
-            pnt_ids: List[str] = []
+            point_coordinates: list[list[float]] = []
+            pnt_ids: list[str] = []
 
-            elem_ids: List[str] = []
-            elem_node_ids: List[List[str]] = []
+            elem_ids: list[str] = []
+            elem_node_ids: list[list[str]] = []
             thickcard_options_set = set(["THICKNESS", "BETA", "MCID"])
             for line in lines:
                 if line.startswith("*"):
@@ -325,7 +324,7 @@ class CaeShellMesh:
 
             pnt_idx = {pnt_id: i for i, pnt_id in enumerate(pnt_ids)}
 
-            elem_node_idx: npt.NDArray[np.string_] = np.array(
+            elem_node_idx: npt.NDArray[np.str_] = np.array(
                 [[pnt_idx[elem_node_id[i]] for i in range(4)] for elem_node_id in elem_node_ids]
             )
 

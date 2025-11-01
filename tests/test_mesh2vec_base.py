@@ -3,7 +3,6 @@
 # pylint: disable=protected-access
 
 from pathlib import Path
-from typing import List, Any
 
 import numpy as np
 import pandas as pd
@@ -168,9 +167,7 @@ def test_aggregate_categorical_disjunctive(strategy: str) -> None:
 
 @pytest.mark.parametrize("feature_values", [[2, 4, 8, 16, 32], ["2", "4", "8", "16", "32"]])
 @pytest.mark.parametrize("strategy", strategies)
-def test_aggregate_categorical_disjunctive_complex(
-    feature_values: List[Any], strategy: str
-) -> None:
+def test_aggregate_categorical_disjunctive_complex(feature_values: list, strategy: str) -> None:
     """test categorical aggregation with complex graph but disjunctive values"""
     edges = {"first": ["a", "b", "c"], "second": ["x", "y"], "third": ["x", "a"]}
     hg = Mesh2VecBase(3, edges, calc_strategy=strategy)
@@ -201,7 +198,7 @@ def test_aggregate_categorical_disjunctive_complex(
 
 @pytest.mark.parametrize("feature_values", [[2, 4, 8, 2, 4], ["2", "4", "8", "2", "4"]])
 @pytest.mark.parametrize("strategy", strategies)
-def test_aggregate_categorical_ones(feature_values: List[Any], strategy: str) -> None:
+def test_aggregate_categorical_ones(feature_values: list, strategy: str) -> None:
     """test categorical aggregation with complex graph but only ones in sums"""
     edges = {"first": ["a", "b", "c"], "second": ["x", "y"], "third": ["x", "a"]}
     hg = Mesh2VecBase(3, edges, calc_strategy=strategy)
@@ -226,7 +223,7 @@ def test_aggregate_categorical_ones(feature_values: List[Any], strategy: str) ->
 
 @pytest.mark.parametrize("feature_values", [[2, 4, 2, 2, 4], ["2", "4", "2", "2", "4"]])
 @pytest.mark.parametrize("strategy", strategies)
-def test_aggregate_categorical_mores(feature_values: List[Any], strategy: str) -> None:
+def test_aggregate_categorical_mores(feature_values: list, strategy: str) -> None:
     """test categorical aggregation with complex graph and sums > 1"""
     edges = {"first": ["a", "b", "c"], "second": ["x", "y"], "third": ["x", "a"]}
     hg = Mesh2VecBase(3, edges, calc_strategy=strategy)

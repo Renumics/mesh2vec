@@ -1,6 +1,6 @@
 """helper functions"""
 
-from typing import OrderedDict, List, Dict
+from typing import OrderedDict
 from collections import deque
 from abc import ABC, abstractmethod
 
@@ -18,8 +18,8 @@ class AbstractAdjacencyStrategy(ABC):
 
     @abstractmethod
     def calc_adjacencies(
-        self, hyper_edges_idx: OrderedDict[str, List[int]], max_distance: int
-    ) -> Dict[int, List[List[int]]]:
+        self, hyper_edges_idx: OrderedDict[str, list[int]], max_distance: int
+    ) -> dict[int, list[list[int]]]:
         """
         calculate adjacencies for hyper nodes with a given maximum distance
         Args:
@@ -31,7 +31,7 @@ class AbstractAdjacencyStrategy(ABC):
 
 
 def _hyper_edges_to_adj_pairs_np(
-    hyper_edges_idx: OrderedDict[str, List[int]],
+    hyper_edges_idx: OrderedDict[str, list[int]],
 ) -> npt.NDArray[np.int_]:
     """create adjacency list of connection pairs as numpy array (shape (?, 2)) from hyper edges"""
     adjacency_list = []
@@ -44,10 +44,10 @@ def _hyper_edges_to_adj_pairs_np(
 
 
 def _hyper_edges_to_adj_list(
-    vtx_count: int, hyper_edges_idx: OrderedDict[str, List[int]], include_self: bool = False
-) -> List[List[int]]:
+    vtx_count: int, hyper_edges_idx: OrderedDict[str, list[int]], include_self: bool = False
+) -> list[list[int]]:
     """create adjacency list as list of lists  (jagged shape (vtx_count, ?)) from hyper edges"""
-    adjacency_list: List[List[int]] = [[] for _ in range(vtx_count)]
+    adjacency_list: list[list[int]] = [[] for _ in range(vtx_count)]
     for vtxs in hyper_edges_idx.values():
         for vtx_a in vtxs:
             for vtx_b in vtxs:
@@ -63,8 +63,8 @@ class MatMulAdjacency(AbstractAdjacencyStrategy):
     """calc adjacencies using matrix multiplication"""
 
     def calc_adjacencies(
-        self, hyper_edges_idx: OrderedDict[str, List[int]], max_distance: int
-    ) -> Dict[int, List[List[int]]]:
+        self, hyper_edges_idx: OrderedDict[str, list[int]], max_distance: int
+    ) -> dict[int, list[list[int]]]:
         """calc adjacencies using matrix multiplication"""
 
         adjacency_pair_list_np = _hyper_edges_to_adj_pairs_np(hyper_edges_idx)
@@ -104,14 +104,14 @@ class PurePythonBFS(AbstractAdjacencyStrategy):
     """calc adjacencies using BFS in pure python"""
 
     def calc_adjacencies(
-        self, hyper_edges_idx: OrderedDict[str, List[int]], max_distance: int
-    ) -> Dict[int, List[List[int]]]:
+        self, hyper_edges_idx: OrderedDict[str, list[int]], max_distance: int
+    ) -> dict[int, list[list[int]]]:
         """calc adjacencies using BFS in pure python"""
         vtx_count = max(vtx_a for vtxs in hyper_edges_idx.values() for vtx_a in vtxs) + 1
         adjacency_list = _hyper_edges_to_adj_list(vtx_count, hyper_edges_idx)
 
         # neighbors_at_depth: dict of lists of lists (distance, vertex, neighbors)
-        neighbors_at_depth: Dict[int, List[List[int]]] = {
+        neighbors_at_depth: dict[int, list[list[int]]] = {
             dist: [[] for _ in range(vtx_count)] for dist in range(max_distance + 1)
         }
 
@@ -148,14 +148,14 @@ class PurePythonDFS(AbstractAdjacencyStrategy):
     """calc adjacencies using DFS in pure python"""
 
     def calc_adjacencies(
-        self, hyper_edges_idx: OrderedDict[str, List[int]], max_distance: int
-    ) -> Dict[int, List[List[int]]]:
+        self, hyper_edges_idx: OrderedDict[str, list[int]], max_distance: int
+    ) -> dict[int, list[list[int]]]:
         """calc adjacencies using DFS in pure python"""
         vtx_count = max(vtx_a for vtxs in hyper_edges_idx.values() for vtx_a in vtxs) + 1
         adjacency_list = _hyper_edges_to_adj_list(vtx_count, hyper_edges_idx)
 
         # neighbors_at_depth: dict of lists of lists (distance, vertex, neighbors)
-        neighbors_at_depth: Dict[int, List[List[int]]] = {
+        neighbors_at_depth: dict[int, list[list[int]]] = {
             dist: [[] for _ in range(vtx_count)] for dist in range(max_distance + 1)
         }
 
