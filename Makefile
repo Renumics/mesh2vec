@@ -39,11 +39,11 @@ check: check-format lint typecheck audit
 
 .PHONY: doctest
 doctest: ## Run doctests
-	poetry run sphinx-build docs/source build/documentation/ -W -vvv -b doctest
+	poetry run sphinx-build docs/source build/documentation/ -W -b doctest
 
 .PHONY: unit-test
 unit-test: ## Run unit tests
-	poetry run pytest -vv -s --tb=long tests
+	poetry run pytest -s --tb=long tests
 
 .PHONY: test
 test: ## Run all tests
@@ -60,7 +60,7 @@ check-wheel: wheel
 
 .PHONY: docs
 docs: ## Build documentation
-	poetry run sphinx-build docs/source build/documentation/ -W -vvv -b html
+	poetry run sphinx-build docs/source build/documentation/ -W -b html
 
 .PHONY: build
 build: ## Build all distributables
