@@ -199,6 +199,22 @@ jobs:
       - name: check wheel contents
         run: poetry run check-wheel-contents dist/
 
+  check-version:
+    name: "🔍 Check Version"
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: prepare-linux
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Setup CI
+        uses: "./.github/actions/ci-setup"
+        with:
+          os: "ubuntu-latest"
+          python-version: "3.13"
+      - name: check version
+        run: |
+          [ "${GITHUB_REF_NAME#v}" = "$(poetry version -s)" ] || { echo "ERROR: Package version mismatches the git tag!" >&2; exit 1; }
+
   release-docs:
     name: "🚀 Release Documentation"
     if: startsWith(github.ref, 'refs/tags/v')
@@ -211,6 +227,7 @@ jobs:
       - doctest
       - build-wheel
       - check-wheel
+      - check-version
       - build-docs
     runs-on: ubuntu-latest
     steps:
@@ -238,6 +255,7 @@ jobs:
       - doctest
       - build-wheel
       - check-wheel
+      - check-version
       - build-docs
     runs-on: ubuntu-latest
     steps:
