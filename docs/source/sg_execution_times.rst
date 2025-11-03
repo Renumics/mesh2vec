@@ -6,7 +6,7 @@
 
 Computation times
 =================
-**00:00.000** total execution time for 5 files **from all galleries**:
+**00:00.883** total execution time for 5 files **from all galleries**:
 
 .. container::
 
@@ -32,6 +32,9 @@ Computation times
    * - Example
      - Time
      - Mem (MB)
+   * - :ref:`sphx_glr_generated_examples_plot_stress.py` (``../examples/plot_stress.py``)
+     - 00:00.883
+     - 0.0
    * - :ref:`sphx_glr_generated_examples_aggregate_categorical.py` (``../examples/aggregate_categorical.py``)
      - 00:00.000
      - 0.0
@@ -39,9 +42,6 @@ Computation times
      - 00:00.000
      - 0.0
    * - :ref:`sphx_glr_generated_examples_plot_neighbor_distances.py` (``../examples/plot_neighbor_distances.py``)
-     - 00:00.000
-     - 0.0
-   * - :ref:`sphx_glr_generated_examples_plot_stress.py` (``../examples/plot_stress.py``)
      - 00:00.000
      - 0.0
    * - :ref:`sphx_glr_generated_examples_quickstart.py` (``../examples/quickstart.py``)
