@@ -19,7 +19,7 @@
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="../_static/documentation_options.js?v=5929fcd5"></script>
-      <script src="../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -93,7 +93,7 @@
 <h1><code class="xref py py-mod docutils literal notranslate"><span class="pre">mesh2vec.mesh2vec_cae</span></code>.Mesh2VecCae<a class="headerlink" href="#mesh2vec-mesh2vec-cae-mesh2veccae" title="Link to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="mesh2vec.mesh2vec_cae.Mesh2VecCae">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mesh2vec.mesh2vec_cae.</span></span><span class="sig-name descname"><span class="pre">Mesh2VecCae</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mesh</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mesh_info</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'dfs'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_cae.Mesh2VecCae" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mesh2vec.mesh2vec_cae.</span></span><span class="sig-name descname"><span class="pre">Mesh2VecCae</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mesh</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mesh_info</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'dfs'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_cae.Mesh2VecCae" title="Link to this definition"></a></dt>
 <dd><p>Class to use finite element meshes as hypergraphs. Provide methods to add features
 from common CAE tools (for now: ANSA meshes, LSDYNA binout and d3plot information
 from lasso-cae) Inherits from Mesh2VecBase</p>
@@ -239,14 +239,14 @@ calc_strategy: choose the algorithm to calculate adjacencies</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mesh_info</span><span class="p">[</span><span class="s2">&quot;file_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;file_path&quot;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">m2v</span> <span class="o">=</span> <span class="n">Mesh2VecCae</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">mesh</span><span class="p">,</span> <span class="n">mesh_info</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">m2v</span><span class="o">.</span><span class="n">_hyper_edges</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
-<span class="go">[(&#39;0&#39;, [&#39;0&#39;]), (&#39;1&#39;, [&#39;0&#39;, &#39;1&#39;]), (&#39;2&#39;, [&#39;0&#39;, &#39;1&#39;, &#39;2&#39;]), (&#39;3&#39;, [&#39;1&#39;, &#39;2&#39;, &#39;3&#39;]), (&#39;4&#39;, [&#39;2&#39;, &#39;3&#39;]), (&#39;5&#39;, [&#39;3&#39;])]</span>
+<span class="go">[(np.str_(&#39;0&#39;), [&#39;0&#39;]), (np.str_(&#39;1&#39;), [&#39;0&#39;, &#39;1&#39;]), (np.str_(&#39;2&#39;), [&#39;0&#39;, &#39;1&#39;, &#39;2&#39;]), (np.str_(&#39;3&#39;), [&#39;1&#39;, &#39;2&#39;, &#39;3&#39;]), (np.str_(&#39;4&#39;), [&#39;2&#39;, &#39;3&#39;]), (np.str_(&#39;5&#39;), [&#39;3&#39;])]</span>
 </pre></div>
 </div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="mesh2vec.mesh2vec_cae.Mesh2VecCae.from_stl_shell">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_stl_shell</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stlfile</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_cae.Mesh2VecCae.from_stl_shell" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_stl_shell</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stlfile</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_cae.Mesh2VecCae.from_stl_shell" title="Link to this definition"></a></dt>
 <dd><p>Read the given stl file and use the shell elements to generate a hypergraph, using mesh
 nodes as hyperedges, and adjacent elements as  hypervertices.</p>
 <dl class="field-list simple">
@@ -264,7 +264,7 @@ nodes as hyperedges, and adjacent elements as  hypervertices.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="mesh2vec.mesh2vec_cae.Mesh2VecCae.from_ansa_shell">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_ansa_shell</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ansafile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">partid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">json_mesh_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ansa_executable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ansa_script</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'dfs'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_cae.Mesh2VecCae.from_ansa_shell" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_ansa_shell</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ansafile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">partid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">json_mesh_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ansa_executable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ansa_script</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'dfs'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_cae.Mesh2VecCae.from_ansa_shell" title="Link to this definition"></a></dt>
 <dd><p>Read the given ANSA file and use the shell elements corresponding with <code class="docutils literal notranslate"><span class="pre">partid</span></code> to
 generate a hypergraph, using CAE nodes as hyperedges, and adjacent elements as
 hypervertices. This is a simple wrapper around an ANSA Python script that generates
@@ -315,7 +315,7 @@ You can use a customized script to include more features ansa_script
 
 <dl class="py method">
 <dt class="sig sig-object py" id="mesh2vec.mesh2vec_cae.Mesh2VecCae.from_d3plot_shell">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_d3plot_shell</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d3plot</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">partid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'dfs'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_cae.Mesh2VecCae.from_d3plot_shell" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_d3plot_shell</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d3plot</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">partid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'dfs'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_cae.Mesh2VecCae.from_d3plot_shell" title="Link to this definition"></a></dt>
 <dd><p>Read the given d3plot file and use the shell elements corresponding with <code class="docutils literal notranslate"><span class="pre">partid</span></code> to
 generate a hypergraph, using CAE nodes as hyperedges, and adjacent elements as
 hypervertices.</p>
@@ -350,7 +350,7 @@ hypervertices.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="mesh2vec.mesh2vec_cae.Mesh2VecCae.from_keyfile_shell">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_keyfile_shell</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keyfile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">partid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'bfs'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_cae.Mesh2VecCae.from_keyfile_shell" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_keyfile_shell</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keyfile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">partid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'bfs'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_cae.Mesh2VecCae.from_keyfile_shell" title="Link to this definition"></a></dt>
 <dd><p>Read the given keyfile and use the shell elements to generate a hypergraph, using mesh
 nodes as hyperedges, and adjacent elements as hypervertices.</p>
 <dl class="field-list simple">
@@ -446,7 +446,7 @@ LSDYNA models) for each element.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>features</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>)</p></li>
+<li><p><strong>features</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>)</p></li>
 <li><p><strong>ansafile</strong> (<em>Path</em><em> | </em><em>None</em>)</p></li>
 <li><p><strong>json_mesh_file</strong> (<em>Path</em><em> | </em><em>None</em>)</p></li>
 <li><p><strong>ansa_executable</strong> (<em>Path</em><em> | </em><em>None</em>)</p></li>
@@ -456,7 +456,7 @@ LSDYNA models) for each element.</p>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><em>List</em>[str]</p>
+<dd class="field-even"><p>list[str]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -490,7 +490,7 @@ of the hg. Restricted to arrays available from lasso-cae.</p>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><em>Tuple</em>[str, <em>List</em>, <em>List</em>[str]]</p>
+<dd class="field-even"><p>tuple[str, list, list[str]]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -557,7 +557,7 @@ to the reference vector given by the center element  (in radian).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dist</strong> (<em>List</em><em>[</em><em>int</em><em>] </em><em>| </em><em>int</em>) – <p>either</p>
+<li><p><strong>dist</strong> (<em>list</em><em>[</em><em>int</em><em>] </em><em>| </em><em>int</em>) – <p>either</p>
 <ul>
 <li><p>distance of the maximum neighborhood of vertex for aggregation, 0 &lt;= <code class="docutils literal notranslate"><span class="pre">dist</span></code> &lt;=  <code class="docutils literal notranslate"><span class="pre">self.distance</span></code>, or</p></li>
 <li><p>a list of distances, e.g. <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">2,</span> <span class="pre">5]</span></code>.</p></li>
@@ -572,7 +572,7 @@ or no neighor with the given dist exist.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>str | <em>List</em>[str]</p>
+<dd class="field-even"><p>str | list[str]</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>

@@ -19,7 +19,7 @@
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
       <script src="../_static/documentation_options.js?v=5929fcd5"></script>
-      <script src="../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../_static/js/theme.js"></script>
@@ -94,7 +94,7 @@
 <h1><code class="xref py py-mod docutils literal notranslate"><span class="pre">mesh2vec.mesh2vec_base</span></code>.Mesh2VecBase<a class="headerlink" href="#mesh2vec-mesh2vec-base-mesh2vecbase" title="Link to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="mesh2vec.mesh2vec_base.Mesh2VecBase">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mesh2vec.mesh2vec_base.</span></span><span class="sig-name descname"><span class="pre">Mesh2VecBase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hyper_edges</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vtx_ids</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'dfs'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_base.Mesh2VecBase" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mesh2vec.mesh2vec_base.</span></span><span class="sig-name descname"><span class="pre">Mesh2VecBase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hyper_edges</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vtx_ids</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'dfs'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_base.Mesh2VecBase" title="Link to this definition"></a></dt>
 <dd><p>Class to derive hypergraph neighborhoods from ordinary, undirected graphs, map numerical
 features to vertices, and provide aggregation methods that result in fixed sized vectors
 suitable for machine learning methods.</p>
@@ -155,8 +155,8 @@ suitable for machine learning methods.</p>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>distance</strong> (<em>int</em>)</p></li>
-<li><p><strong>hyper_edges</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>List</em><em>[</em><em>str</em><em>]</em><em>]</em>)</p></li>
-<li><p><strong>vtx_ids</strong> (<em>List</em><em>[</em><em>str</em><em>] </em><em>| </em><em>None</em>)</p></li>
+<li><p><strong>hyper_edges</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>list</em><em>[</em><em>str</em><em>]</em><em>]</em>)</p></li>
+<li><p><strong>vtx_ids</strong> (<em>list</em><em>[</em><em>str</em><em>] </em><em>| </em><em>None</em>)</p></li>
 <li><p><strong>calc_strategy</strong> (<em>str</em>)</p></li>
 </ul>
 </dd>
@@ -173,8 +173,8 @@ not <span class="math notranslate nohighlight">\(w \in N^\delta_v,\delta &lt;  d
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>distance</strong> (<em>int</em>) – the maximum distance for neighborhood generation and feature aggregation</p></li>
-<li><p><strong>hyper_edges</strong> (<em>Dict</em><em>[</em><em>str</em><em>, </em><em>List</em><em>[</em><em>str</em><em>]</em><em>]</em>) – edge-&gt;connected vertices</p></li>
-<li><p><strong>vtx_ids</strong> (<em>List</em><em>[</em><em>str</em><em>] </em><em>| </em><em>None</em>) – provide a list of all vertices to control inernal order of vertices
+<li><p><strong>hyper_edges</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>list</em><em>[</em><em>str</em><em>]</em><em>]</em>) – edge-&gt;connected vertices</p></li>
+<li><p><strong>vtx_ids</strong> (<em>list</em><em>[</em><em>str</em><em>] </em><em>| </em><em>None</em>) – provide a list of all vertices to control inernal order of vertices
 (features, aggregated feature)</p></li>
 <li><p><strong>calc_strategy</strong> (<em>str</em>) – <p>choose the algorithm to calculate adjacencies</p>
 <ul>
@@ -219,7 +219,7 @@ not <span class="math notranslate nohighlight">\(w \in N^\delta_v,\delta &lt;  d
 
 <dl class="py method">
 <dt class="sig sig-object py" id="mesh2vec.mesh2vec_base.Mesh2VecBase.load">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_base.Mesh2VecBase.load" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_base.Mesh2VecBase.load" title="Link to this definition"></a></dt>
 <dd><p>Load the Mesh2Vec object from a file with joblib</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -240,7 +240,7 @@ not <span class="math notranslate nohighlight">\(w \in N^\delta_v,\delta &lt;  d
 
 <dl class="py method">
 <dt class="sig sig-object py" id="mesh2vec.mesh2vec_base.Mesh2VecBase.from_file">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hg_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'dfs'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_base.Mesh2VecBase.from_file" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hg_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">calc_strategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'dfs'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mesh2vec.mesh2vec_base.Mesh2VecBase.from_file" title="Link to this definition"></a></dt>
 <dd><p>Read a hypergraph (hg) from a text file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -295,7 +295,7 @@ not <span class="math notranslate nohighlight">\(w \in N^\delta_v,\delta &lt;  d
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><em>List</em>[str]</p>
+<dd class="field-even"><p>list[str]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -317,13 +317,13 @@ not existent in <code class="docutils literal notranslate"><span class="pre">cat
 <dt class="field-even">Parameters<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
 <li><p><strong>feature</strong> (<em>str</em>)</p></li>
-<li><p><strong>dist</strong> (<em>List</em><em>[</em><em>int</em><em>] </em><em>| </em><em>int</em>)</p></li>
-<li><p><strong>categories</strong> (<em>List</em><em>[</em><em>str</em><em>] </em><em>| </em><em>List</em><em>[</em><em>int</em><em>] </em><em>| </em><em>None</em>)</p></li>
+<li><p><strong>dist</strong> (<em>list</em><em>[</em><em>int</em><em>] </em><em>| </em><em>int</em>)</p></li>
+<li><p><strong>categories</strong> (<em>list</em><em>[</em><em>str</em><em>] </em><em>| </em><em>list</em><em>[</em><em>int</em><em>] </em><em>| </em><em>None</em>)</p></li>
 <li><p><strong>default_value</strong> (<em>int</em><em> | </em><em>str</em><em> | </em><em>None</em>)</p></li>
 </ul>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>str | <em>List</em>[str]</p>
+<dd class="field-odd"><p>str | list[str]</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
@@ -351,7 +351,7 @@ not existent in <code class="docutils literal notranslate"><span class="pre">cat
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>feature</strong> (<em>str</em>) – name of the feature to aggregate</p></li>
-<li><p><strong>dist</strong> (<em>List</em><em>[</em><em>int</em><em>] </em><em>| </em><em>int</em>) – <p>either</p>
+<li><p><strong>dist</strong> (<em>list</em><em>[</em><em>int</em><em>] </em><em>| </em><em>int</em>) – <p>either</p>
 <ul>
 <li><p>distance of the maximum neighborhood of vertex for aggregation, 0 &lt;= <code class="docutils literal notranslate"><span class="pre">dist</span></code> &lt;=  <code class="docutils literal notranslate"><span class="pre">self.distance</span></code>, or</p></li>
 <li><p>a list of distances, e.g. <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">2,</span> <span class="pre">5]</span></code>.</p></li>
@@ -369,7 +369,7 @@ or no neighor with the given dist exist.</p></li>
 <dd class="field-even"><p>aggregated feature name(s)</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>str | <em>List</em>[str]</p>
+<dd class="field-odd"><p>str | list[str]</p>
 </dd>
 </dl>
 <p>The resulting aggregated features are named feature-aggr-dist for each distance in dist,
@@ -416,7 +416,7 @@ Otherwise, all other columns starting with the 2nd are added by the name
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>csv_file</strong> (<em>Path</em>)</p></li>
 <li><p><strong>with_header</strong> (<em>bool</em>)</p></li>
-<li><p><strong>columns</strong> (<em>List</em><em>[</em><em>str</em><em>] </em><em>| </em><em>None</em>)</p></li>
+<li><p><strong>columns</strong> (<em>list</em><em>[</em><em>str</em><em>] </em><em>| </em><em>None</em>)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -500,7 +500,7 @@ in <code class="docutils literal notranslate"><span class="pre">vertices</span><
 <dd><p>returns a list the names of all features</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><em>List</em>[str]</p>
+<dd class="field-odd"><p>list[str]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -511,7 +511,7 @@ in <code class="docutils literal notranslate"><span class="pre">vertices</span><
 <dd><p>returns a list the names of all aggregated features</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><em>List</em>[str]</p>
+<dd class="field-odd"><p>list[str]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -522,7 +522,7 @@ in <code class="docutils literal notranslate"><span class="pre">vertices</span><
 <dd><p>returns a list the ids of all hyper vertices</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><em>List</em>[str]</p>
+<dd class="field-odd"><p>list[str]</p>
 </dd>
 </dl>
 </dd></dl>
