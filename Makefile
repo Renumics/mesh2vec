@@ -31,7 +31,7 @@ typecheck: ## Typecheck source files
 
 .PHONY: audit
 audit: ## Audit project dependencies
-	poetry run pip-audit
+	poetry run pip-audit --ignore-vuln GHSA-xm59-rqc7-hhvf # not yet fixed, dev dependency
 
 .PHONY: check
 check: ## Run all checks

@@ -99,7 +99,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: check
         run: |
-          poetry run pip-audit
+          poetry run pip-audit --ignore-vuln GHSA-xm59-rqc7-hhvf # not yet fixed, dev dependency
 
   doctest:
     name: "🧪 Run Doctests"
