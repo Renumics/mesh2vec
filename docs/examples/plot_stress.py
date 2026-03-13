@@ -11,7 +11,6 @@ import numpy as np
 from lasso.dyna import ArrayType
 from mesh2vec.mesh2vec_cae import Mesh2VecCae
 
-
 # %%
 # Load Shell from ANSA, simulation results from d3plot
 # -----------------------------------------------------

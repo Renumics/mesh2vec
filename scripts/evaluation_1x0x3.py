@@ -8,7 +8,6 @@ import tracemalloc
 import numpy as np
 from mesh2vec.mesh2vec_cae import Mesh2VecCae
 
-
 DIST = 30
 PATH = "data/hat/cached_hat_key.json"
 
