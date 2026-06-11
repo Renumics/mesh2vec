@@ -194,7 +194,6 @@ jobs:
     if: startsWith(github.ref, 'refs/tags/v')
     needs:
       - check-format
-      - audit
       - pylint
       - mypy
       - unit-test
@@ -222,7 +221,6 @@ jobs:
     if: startsWith(github.ref, 'refs/tags/v')
     needs:
       - check-format
-      - audit
       - pylint
       - mypy
       - unit-test

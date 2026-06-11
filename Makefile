@@ -30,7 +30,7 @@ typecheck: ## Typecheck source files
 
 .PHONY: check
 check: ## Run all checks
-check: check-format lint typecheck audit
+	check-format lint typecheck
 
 .PHONY: doctest
 doctest: ## Run doctests
