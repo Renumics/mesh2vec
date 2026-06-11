@@ -48,8 +48,7 @@ jobs:
           os: "ubuntu-latest"
           python-version: "3.11"
       - name: check
-        run: |
-          poetry run black --check docs mesh2vec scripts tests
+        run: poetry run black --check docs mesh2vec scripts tests
 
   pylint:
     name: "🔍 Lint Code"
@@ -63,8 +62,7 @@ jobs:
           os: "ubuntu-latest"
           python-version: "3.11"
       - name: check
-        run: |
-          poetry run pylint docs/examples mesh2vec scripts tests
+        run: poetry run pylint docs/examples mesh2vec scripts tests
 
   mypy:
     name: "🔍 Check Code Types"
@@ -78,8 +76,7 @@ jobs:
           os: "ubuntu-latest"
           python-version: "3.11"
       - name: check
-        run: |
-          poetry run mypy docs/examples mesh2vec scripts tests
+        run: poetry run mypy docs/examples mesh2vec scripts tests
 
   doctest:
     name: "🧪 Run Doctests"
@@ -98,8 +95,7 @@ jobs:
           os: ${{ matrix.os-version }}
           python-version: ${{ matrix.python-version }}
       - name: test
-        run: |
-          poetry run sphinx-build docs/source build/documentation/ -W -b doctest
+        run: poetry run sphinx-build docs/source build/documentation/ -W -b doctest
 
   unit-test:
     name: "🧪 Run Unit Tests"
@@ -118,8 +114,7 @@ jobs:
           os: ${{ matrix.os-version }}
           python-version: ${{ matrix.python-version }}
       - name: test
-        run: |
-          poetry run pytest -s --tb=long tests
+        run: poetry run pytest -s --tb=long tests
 
   build-docs:
     name: "🧱 Build Documentation"
@@ -133,8 +128,7 @@ jobs:
           os: "ubuntu-latest"
           python-version: "3.13"
       - name: build docs
-        run: |
-          poetry run sphinx-build docs/source build/documentation/ -W -b html
+        run: poetry run sphinx-build docs/source build/documentation/ -W -b html
       - name: Store docs
         uses: actions/upload-artifact@v5
         with:
