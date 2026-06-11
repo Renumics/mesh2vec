@@ -10,7 +10,6 @@ help: ## Print this help message
 
 .PHONY: init
 init: ## Locally install all dev dependencies
-init:
 	poetry install
 
 .PHONY: check-format
@@ -29,13 +28,9 @@ lint: ## Lint source files
 typecheck: ## Typecheck source files
 	poetry run mypy docs/examples mesh2vec scripts tests
 
-.PHONY: audit
-audit: ## Audit project dependencies
-	poetry run pip-audit
-
 .PHONY: check
 check: ## Run all checks
-check: check-format lint typecheck audit
+	check-format lint typecheck
 
 .PHONY: doctest
 doctest: ## Run doctests

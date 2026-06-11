@@ -10,3 +10,6 @@ __pycache__
 .ipynb_checkpoints
 data/data/temp_hg.joblib
 data/temp_hg.joblib
+/.mypy_cache/
+/.poetry/
+/.pytest_cache/

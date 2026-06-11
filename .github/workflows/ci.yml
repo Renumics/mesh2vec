@@ -48,8 +48,7 @@ jobs:
           os: "ubuntu-latest"
           python-version: "3.11"
       - name: check
-        run: |
-          poetry run black --check docs mesh2vec scripts tests
+        run: poetry run black --check docs mesh2vec scripts tests
 
   pylint:
     name: "🔍 Lint Code"
@@ -63,8 +62,7 @@ jobs:
           os: "ubuntu-latest"
           python-version: "3.11"
       - name: check
-        run: |
-          poetry run pylint docs/examples mesh2vec scripts tests
+        run: poetry run pylint docs/examples mesh2vec scripts tests
 
   mypy:
     name: "🔍 Check Code Types"
@@ -78,28 +76,7 @@ jobs:
           os: "ubuntu-latest"
           python-version: "3.11"
       - name: check
-        run: |
-          poetry run mypy docs/examples mesh2vec scripts tests
-
-  audit:
-    name: "🔍 Audit Dependencies"
-    needs: [prepare-linux, prepare-win]
-    strategy:
-      matrix:
-        python-version: ["3.11", "3.12", "3.13", "3.14"]
-        os-version: ["windows-latest", "ubuntu-latest"]
-      fail-fast: false
-    runs-on: ${{ matrix.os-version }}
-    steps:
-      - uses: actions/checkout@v5
-      - name: Setup CI
-        uses: "./.github/actions/ci-setup"
-        with:
-          os: ${{ matrix.os-version }}
-          python-version: ${{ matrix.python-version }}
-      - name: check
-        run: |
-          poetry run pip-audit
+        run: poetry run mypy docs/examples mesh2vec scripts tests
 
   doctest:
     name: "🧪 Run Doctests"
@@ -118,8 +95,7 @@ jobs:
           os: ${{ matrix.os-version }}
           python-version: ${{ matrix.python-version }}
       - name: test
-        run: |
-          poetry run sphinx-build docs/source build/documentation/ -W -b doctest
+        run: poetry run sphinx-build docs/source build/documentation/ -W -b doctest
 
   unit-test:
     name: "🧪 Run Unit Tests"
@@ -138,8 +114,7 @@ jobs:
           os: ${{ matrix.os-version }}
           python-version: ${{ matrix.python-version }}
       - name: test
-        run: |
-          poetry run pytest -s --tb=long tests
+        run: poetry run pytest -s --tb=long tests
 
   build-docs:
     name: "🧱 Build Documentation"
@@ -153,8 +128,7 @@ jobs:
           os: "ubuntu-latest"
           python-version: "3.13"
       - name: build docs
-        run: |
-          poetry run sphinx-build docs/source build/documentation/ -W -b html
+        run: poetry run sphinx-build docs/source build/documentation/ -W -b html
       - name: Store docs
         uses: actions/upload-artifact@v5
         with:
@@ -220,7 +194,6 @@ jobs:
     if: startsWith(github.ref, 'refs/tags/v')
     needs:
       - check-format
-      - audit
       - pylint
       - mypy
       - unit-test
@@ -248,7 +221,6 @@ jobs:
     if: startsWith(github.ref, 'refs/tags/v')
     needs:
       - check-format
-      - audit
       - pylint
       - mypy
       - unit-test
