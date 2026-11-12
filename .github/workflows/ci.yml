@@ -241,3 +241,33 @@ jobs:
         uses: pypa/gh-action-pypi-publish@ed0c53931b1dc9bd32cbe73a98c7f6766f8a527e
         with:
           password: ${{ secrets.PYPI_API_TOKEN }}
+
+  # Not a release prerequisite: a missing SBOM must not block the PyPI release.
+  # scan.yml rescans the SBOM of the latest release daily.
+  sbom:
+    name: "📋 Attach SBOM to Release"
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        with:
+          persist-credentials: false
+      - name: Install Trivy
+        uses: aquasecurity/setup-trivy@3fb12ec12f41e471780db15c232d5dd185dcb514 # v0.2.6
+        with:
+          version: v0.71.0
+          cache: "true"
+      # Runtime dependencies from poetry.lock only; Trivy leaves out dev dependencies.
+      - name: Write SBOM
+        run: trivy fs --format cyclonedx --output "$RUNNER_TEMP/sbom-mesh2vec.cdx.json" .
+      - name: Attach SBOM to the GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if ! gh release view "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" > /dev/null; then
+            echo "::error::No GitHub Release '$GITHUB_REF_NAME'. Create the release in the GitHub UI, then rerun this job."
+            exit 1
+          fi
+          gh release upload "$GITHUB_REF_NAME" "$RUNNER_TEMP/sbom-mesh2vec.cdx.json" --clobber --repo "$GITHUB_REPOSITORY"

@@ -263,10 +263,11 @@ class CaeShellMesh:
             file_contents: str,
         ) -> tuple[list[list[float]], list[str], list[str], npt.NDArray[np.str_]]:
             # pylint: disable=too-many-nested-blocks,too-many-branches,fixme
-            # TODO: check initialization and usage order of `current_section_lines_per_entry` and
-            # `current_section_options`, can be used before assignment
             lines = file_contents.split("\n")
             current_section = ""
+            current_section_options: set[str] = set()
+            current_section_lines_per_entry = 1
+            current_section_lineno = 0
 
             point_coordinates: list[list[float]] = []
             pnt_ids: list[str] = []
@@ -292,7 +293,6 @@ class CaeShellMesh:
                     except (ValueError, IndexError):
                         pass
                 elif current_section.startswith("*ELEMENT_SHELL"):
-                    # pylint: disable=used-before-assignment
                     if current_section_lineno % current_section_lines_per_entry == 0:
                         if partid == "" or partid == line[8:16].strip():
                             node_ids = [
@@ -305,7 +305,6 @@ class CaeShellMesh:
                             ]
                             # TODO: Check for unhandled options, e.g. COMPOSITE, DOF
                             if current_section_lineno == 0:
-                                # pylint: disable=possibly-used-before-assignment
                                 if len(current_section_options & thickcard_options_set) > 0:
                                     current_section_lines_per_entry += 1  # skip thickness card
                                     if len(node_ids) > 4:
