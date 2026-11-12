@@ -1,0 +1,23 @@
+name: Scan Release
+
+on:
+  schedule:
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: read
+  security-events: write
+
+jobs:
+  scan-release:
+    name: "🔍 Scan SBOM of Latest Release"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Scan SBOM
+        uses: renumics/actions/scan-sbom@v1
+        with:
+          name: mesh2vec
+          category: trivy-release-pypi-mesh2vec
+          target: pypi/mesh2vec

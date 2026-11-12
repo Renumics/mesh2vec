@@ -241,3 +241,21 @@ jobs:
         uses: pypa/gh-action-pypi-publish@ed0c53931b1dc9bd32cbe73a98c7f6766f8a527e
         with:
           password: ${{ secrets.PYPI_API_TOKEN }}
+
+  # Not a release prerequisite: a missing SBOM must not block the PyPI release.
+  # scan.yml rescans the SBOM of the latest release daily.
+  sbom:
+    name: "📋 Attach SBOM to Release"
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        with:
+          persist-credentials: false
+      - name: Write SBOM and attach it to the GitHub Release
+        uses: renumics/actions/write-sbom@v1
+        with:
+          paths: |
+            mesh2vec=.
