@@ -10,7 +10,7 @@ inputs:
     required: true
   poetry-version:
     description: "Poetry version to set up"
-    default: "2.2.1"
+    default: "2.4.1"
 runs:
   using: composite
   steps:
