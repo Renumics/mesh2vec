@@ -1,0 +1,68 @@
+name: Scan Release
+
+on:
+  schedule:
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: read
+  security-events: write
+
+jobs:
+  scan-release:
+    name: "🔍 Scan SBOM of Latest Release"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Trivy
+        uses: aquasecurity/setup-trivy@3fb12ec12f41e471780db15c232d5dd185dcb514 # v0.2.6
+        with:
+          version: v0.71.0
+          cache: "true"
+
+      - name: Download SBOM of latest release
+        id: download
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          release="$(gh release view --repo "$GITHUB_REPOSITORY" --json tagName -q .tagName)"
+          echo "Using latest release $release"
+          if ! gh release download "$release" --pattern sbom-mesh2vec.cdx.json \
+              --dir "$RUNNER_TEMP" --clobber --repo "$GITHUB_REPOSITORY"; then
+            echo "::error::Release $release has no sbom-mesh2vec.cdx.json. Every release must have an SBOM."
+            exit 1
+          fi
+          echo "release=$release" >> "$GITHUB_OUTPUT"
+
+      - name: Scan SBOM
+        run: |
+          trivy sbom \
+            --exit-code 0 \
+            --format sarif \
+            --output "$RUNNER_TEMP/raw.sarif" \
+            --pkg-types os,library \
+            --scanners vuln \
+            --severity HIGH,CRITICAL \
+            "$RUNNER_TEMP/sbom-mesh2vec.cdx.json"
+
+      # Alerts are matched by location. Trivy's locations contain package versions, so a
+      # finding that survives a release would reopen as a new alert with its age reset.
+      - name: Use stable alert locations
+        env:
+          RELEASE: ${{ steps.download.outputs.release }}
+        run: |
+          jq --arg version "$RELEASE" '
+            .runs[].tool.driver.name = "Trivy (release)"
+            | .runs[].results[] |= (
+                (((.message.text // "") | capture("Package: (?<name>[^\n]+)") | .name) // "unknown") as $package
+                | .locations[0].physicalLocation.artifactLocation = {uri: ("release/pypi/mesh2vec/" + $package)}
+                | .message.text = "Release: " + $version + "\n" + .message.text
+              )
+          ' "$RUNNER_TEMP/raw.sarif" > "$RUNNER_TEMP/release.sarif"
+
+      - name: Upload results
+        uses: github/codeql-action/upload-sarif@7211b7c8077ea37d8641b6271f6a365a22a5fbfa # v4.36.0
+        with:
+          sarif_file: ${{ runner.temp }}/release.sarif
+          category: trivy-release-pypi-mesh2vec
