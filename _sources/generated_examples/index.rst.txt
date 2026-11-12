@@ -8,6 +8,10 @@ Examples
 Below is a gallery of examples.
 
 
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
 
 .. raw:: html
 
@@ -24,7 +28,7 @@ Below is a gallery of examples.
   .. image:: /generated_examples/images/thumb/sphx_glr_aggregate_categorical_thumb.png
     :alt:
 
-  :ref:`sphx_glr_generated_examples_aggregate_categorical.py`
+  :doc:`/generated_examples/aggregate_categorical`
 
 .. raw:: html
 
@@ -41,7 +45,7 @@ Below is a gallery of examples.
   .. image:: /generated_examples/images/thumb/sphx_glr_aggregate_warpage_thumb.png
     :alt:
 
-  :ref:`sphx_glr_generated_examples_aggregate_warpage.py`
+  :doc:`/generated_examples/aggregate_warpage`
 
 .. raw:: html
 
@@ -58,7 +62,7 @@ Below is a gallery of examples.
   .. image:: /generated_examples/images/thumb/sphx_glr_plot_neighbor_distances_thumb.png
     :alt:
 
-  :ref:`sphx_glr_generated_examples_plot_neighbor_distances.py`
+  :doc:`/generated_examples/plot_neighbor_distances`
 
 .. raw:: html
 
@@ -75,7 +79,7 @@ Below is a gallery of examples.
   .. image:: /generated_examples/images/thumb/sphx_glr_plot_stress_thumb.png
     :alt:
 
-  :ref:`sphx_glr_generated_examples_plot_stress.py`
+  :doc:`/generated_examples/plot_stress`
 
 .. raw:: html
 
@@ -92,7 +96,7 @@ Below is a gallery of examples.
   .. image:: /generated_examples/images/thumb/sphx_glr_quickstart_thumb.png
     :alt:
 
-  :ref:`sphx_glr_generated_examples_quickstart.py`
+  :doc:`/generated_examples/quickstart`
 
 .. raw:: html
 

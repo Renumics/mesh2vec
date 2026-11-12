@@ -9,7 +9,6 @@ from pathlib import Path
 import numpy as np
 from mesh2vec.mesh2vec_cae import Mesh2VecCae
 
-
 # %%
 # Load Shell from ANSA
 # -----------------------------------------------------

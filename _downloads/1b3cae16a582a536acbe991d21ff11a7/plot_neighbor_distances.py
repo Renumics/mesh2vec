@@ -11,7 +11,6 @@ import numpy as np
 import pandas as pd
 from mesh2vec.mesh2vec_cae import Mesh2VecCae
 
-
 # %%
 # Load Shell from ANSA
 # ----------------------
